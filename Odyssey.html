@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>Odyssey</title>
+		<!-- Dependencies -->
+		<script type="text/javascript" src="Scripts/Console-Sub.js"></script>
+		<script type="text/javascript" src="Scripts/Matrix.js"></script>
+		<script type="text/javascript" src="Scripts/polyfill-requestanimationframe.js"></script>
+		<script type="text/javascript" src="Scripts/jquery.2.1.1.js"></script>
+		<link rel="stylesheet" href="Styles/styles.css">
+		<link rel="stylesheet" href="Styles/styles-quicklinks.css">
+	</head>
+	<body>
+		<div id="map-quick-links">
+			<div class="title">Menu</div>
+			<ul>
+				<li><a href="/Odyssey.html?x=32309&y=31136&z=7">Svargrond Bank</a></li>
+				<li><a href="/Odyssey.html?x=33161&y=31074&z=7">Souleaters</a></li>
+				<li><a href="/Odyssey.html?x=33193&y=31208&z=7">Temple of Equilibrium</a></li>
+				<li><a href="/Odyssey.html?x=33351&y=31128&z=7">Chosen Dungeon</a></li>
+				<li><a href="/Odyssey.html?x=32743&y=31298&z=7">Yalahar: Foreign Quarter</a></li>
+				<li><a href="/Odyssey.html?x=33118&y=31959&z=15">Warzone 2</a></li>
+				<li><a href="/Odyssey.html?x=33046&y=31955&z=14">Warzone 1</a></li>
+				<li><a href="/Odyssey.html?x=33283&y=31859&z=7">Noodles Academy</a></li>
+				<li><a href="/Odyssey.html?x=33193&y=31791&z=7">Edron Harbor</a></li>
+				<li><a href="/Odyssey.html?x=33427&y=31747&z=12">Magistrate's Dungeon</a></li>
+				<li><a href="/Odyssey.html?x=32374&y=32222&z=7">ExperimentZone</a></li>
+			</ul>
+		</div>
+		<div class="clear"></div>
+		<div id="map-container">
+			<div id="map">
+				<canvas id="canvas-floor-0" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-1" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-2" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-3" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-4" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-5" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-6" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-7" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-8" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-9" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-10" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-11" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-12" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-13" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-14" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				<canvas id="canvas-floor-15" width="480" height="352">Your browser does not support HTML5Canvas</canvas>
+				
+				<div id="map-overlay-controls">
+					<div id="map-crosshairs-horizontal"></div>
+					<div id="map-crosshairs-vertical"></div>
+					<div id="map-tooltip">
+						<div id="map-tooltip-1">
+							<div id="tt-item-1">
+								<canvas id="tt-item-1-canvas"></canvas>
+								<span id="tt-item-1-count"></span>
+							</div>
+						</div>
+					</div>
+					<div id="map-grid">
+						<div data-grid-x="-7" data-grid-y="-5"></div>
+						<div data-grid-x="-6" data-grid-y="-5"></div>
+						<div data-grid-x="-5" data-grid-y="-5"></div>
+						<div data-grid-x="-4" data-grid-y="-5"></div>
+						<div data-grid-x="-3" data-grid-y="-5"></div>
+						<div data-grid-x="-2" data-grid-y="-5"></div>
+						<div data-grid-x="-1" data-grid-y="-5"></div>
+						<div data-grid-x="0" data-grid-y="-5"></div>
+						<div data-grid-x="1" data-grid-y="-5"></div>
+						<div data-grid-x="2" data-grid-y="-5"></div>
+						<div data-grid-x="3" data-grid-y="-5"></div>
+						<div data-grid-x="4" data-grid-y="-5"></div>
+						<div data-grid-x="5" data-grid-y="-5"></div>
+						<div data-grid-x="6" data-grid-y="-5"></div>
+						<div data-grid-x="7" data-grid-y="-5"></div>
+						
+						<div data-grid-x="-7" data-grid-y="-4"></div>
+						<div data-grid-x="-6" data-grid-y="-4"></div>
+						<div data-grid-x="-5" data-grid-y="-4"></div>
+						<div data-grid-x="-4" data-grid-y="-4"></div>
+						<div data-grid-x="-3" data-grid-y="-4"></div>
+						<div data-grid-x="-2" data-grid-y="-4"></div>
+						<div data-grid-x="-1" data-grid-y="-4"></div>
+						<div data-grid-x="0" data-grid-y="-4"></div>
+						<div data-grid-x="1" data-grid-y="-4"></div>
+						<div data-grid-x="2" data-grid-y="-4"></div>
+						<div data-grid-x="3" data-grid-y="-4"></div>
+						<div data-grid-x="4" data-grid-y="-4"></div>
+						<div data-grid-x="5" data-grid-y="-4"></div>
+						<div data-grid-x="6" data-grid-y="-4"></div>
+						<div data-grid-x="7" data-grid-y="-4"></div>
+						
+						<div data-grid-x="-7" data-grid-y="-3"></div>
+						<div data-grid-x="-6" data-grid-y="-3"></div>
+						<div data-grid-x="-5" data-grid-y="-3"></div>
+						<div data-grid-x="-4" data-grid-y="-3"></div>
+						<div data-grid-x="-3" data-grid-y="-3"></div>
+						<div data-grid-x="-2" data-grid-y="-3"></div>
+						<div data-grid-x="-1" data-grid-y="-3"></div>
+						<div data-grid-x="0" data-grid-y="-3"></div>
+						<div data-grid-x="1" data-grid-y="-3"></div>
+						<div data-grid-x="2" data-grid-y="-3"></div>
+						<div data-grid-x="3" data-grid-y="-3"></div>
+						<div data-grid-x="4" data-grid-y="-3"></div>
+						<div data-grid-x="5" data-grid-y="-3"></div>
+						<div data-grid-x="6" data-grid-y="-3"></div>
+						<div data-grid-x="7" data-grid-y="-3"></div>
+						
+						<div data-grid-x="-7" data-grid-y="-2"></div>
+						<div data-grid-x="-6" data-grid-y="-2"></div>
+						<div data-grid-x="-5" data-grid-y="-2"></div>
+						<div data-grid-x="-4" data-grid-y="-2"></div>
+						<div data-grid-x="-3" data-grid-y="-2"></div>
+						<div data-grid-x="-2" data-grid-y="-2"></div>
+						<div data-grid-x="-1" data-grid-y="-2"></div>
+						<div data-grid-x="0" data-grid-y="-2"></div>
+						<div data-grid-x="1" data-grid-y="-2"></div>
+						<div data-grid-x="2" data-grid-y="-2"></div>
+						<div data-grid-x="3" data-grid-y="-2"></div>
+						<div data-grid-x="4" data-grid-y="-2"></div>
+						<div data-grid-x="5" data-grid-y="-2"></div>
+						<div data-grid-x="6" data-grid-y="-2"></div>
+						<div data-grid-x="7" data-grid-y="-2"></div>
+						
+						<div data-grid-x="-7" data-grid-y="-1"></div>
+						<div data-grid-x="-6" data-grid-y="-1"></div>
+						<div data-grid-x="-5" data-grid-y="-1"></div>
+						<div data-grid-x="-4" data-grid-y="-1"></div>
+						<div data-grid-x="-3" data-grid-y="-1"></div>
+						<div data-grid-x="-2" data-grid-y="-1"></div>
+						<div data-grid-x="-1" data-grid-y="-1"></div>
+						<div data-grid-x="0" data-grid-y="-1"></div>
+						<div data-grid-x="1" data-grid-y="-1"></div>
+						<div data-grid-x="2" data-grid-y="-1"></div>
+						<div data-grid-x="3" data-grid-y="-1"></div>
+						<div data-grid-x="4" data-grid-y="-1"></div>
+						<div data-grid-x="5" data-grid-y="-1"></div>
+						<div data-grid-x="6" data-grid-y="-1"></div>
+						<div data-grid-x="7" data-grid-y="-1"></div>
+						
+						<div data-grid-x="-7" data-grid-y="0"></div>
+						<div data-grid-x="-6" data-grid-y="0"></div>
+						<div data-grid-x="-5" data-grid-y="0"></div>
+						<div data-grid-x="-4" data-grid-y="0"></div>
+						<div data-grid-x="-3" data-grid-y="0"></div>
+						<div data-grid-x="-2" data-grid-y="0"></div>
+						<div data-grid-x="-1" data-grid-y="0"></div>
+						<div data-grid-x="0" data-grid-y="0"></div>
+						<div data-grid-x="1" data-grid-y="0"></div>
+						<div data-grid-x="2" data-grid-y="0"></div>
+						<div data-grid-x="3" data-grid-y="0"></div>
+						<div data-grid-x="4" data-grid-y="0"></div>
+						<div data-grid-x="5" data-grid-y="0"></div>
+						<div data-grid-x="6" data-grid-y="0"></div>
+						<div data-grid-x="7" data-grid-y="0"></div>
+						
+						<div data-grid-x="-7" data-grid-y="1"></div>
+						<div data-grid-x="-6" data-grid-y="1"></div>
+						<div data-grid-x="-5" data-grid-y="1"></div>
+						<div data-grid-x="-4" data-grid-y="1"></div>
+						<div data-grid-x="-3" data-grid-y="1"></div>
+						<div data-grid-x="-2" data-grid-y="1"></div>
+						<div data-grid-x="-1" data-grid-y="1"></div>
+						<div data-grid-x="0" data-grid-y="1"></div>
+						<div data-grid-x="1" data-grid-y="1"></div>
+						<div data-grid-x="2" data-grid-y="1"></div>
+						<div data-grid-x="3" data-grid-y="1"></div>
+						<div data-grid-x="4" data-grid-y="1"></div>
+						<div data-grid-x="5" data-grid-y="1"></div>
+						<div data-grid-x="6" data-grid-y="1"></div>
+						<div data-grid-x="7" data-grid-y="1"></div>
+						
+						<div data-grid-x="-7" data-grid-y="2"></div>
+						<div data-grid-x="-6" data-grid-y="2"></div>
+						<div data-grid-x="-5" data-grid-y="2"></div>
+						<div data-grid-x="-4" data-grid-y="2"></div>
+						<div data-grid-x="-3" data-grid-y="2"></div>
+						<div data-grid-x="-2" data-grid-y="2"></div>
+						<div data-grid-x="-1" data-grid-y="2"></div>
+						<div data-grid-x="0" data-grid-y="2"></div>
+						<div data-grid-x="1" data-grid-y="2"></div>
+						<div data-grid-x="2" data-grid-y="2"></div>
+						<div data-grid-x="3" data-grid-y="2"></div>
+						<div data-grid-x="4" data-grid-y="2"></div>
+						<div data-grid-x="5" data-grid-y="2"></div>
+						<div data-grid-x="6" data-grid-y="2"></div>
+						<div data-grid-x="7" data-grid-y="2"></div>
+						
+						<div data-grid-x="-7" data-grid-y="3"></div>
+						<div data-grid-x="-6" data-grid-y="3"></div>
+						<div data-grid-x="-5" data-grid-y="3"></div>
+						<div data-grid-x="-4" data-grid-y="3"></div>
+						<div data-grid-x="-3" data-grid-y="3"></div>
+						<div data-grid-x="-2" data-grid-y="3"></div>
+						<div data-grid-x="-1" data-grid-y="3"></div>
+						<div data-grid-x="0" data-grid-y="3"></div>
+						<div data-grid-x="1" data-grid-y="3"></div>
+						<div data-grid-x="2" data-grid-y="3"></div>
+						<div data-grid-x="3" data-grid-y="3"></div>
+						<div data-grid-x="4" data-grid-y="3"></div>
+						<div data-grid-x="5" data-grid-y="3"></div>
+						<div data-grid-x="6" data-grid-y="3"></div>
+						<div data-grid-x="7" data-grid-y="3"></div>
+						
+						<div data-grid-x="-7" data-grid-y="4"></div>
+						<div data-grid-x="-6" data-grid-y="4"></div>
+						<div data-grid-x="-5" data-grid-y="4"></div>
+						<div data-grid-x="-4" data-grid-y="4"></div>
+						<div data-grid-x="-3" data-grid-y="4"></div>
+						<div data-grid-x="-2" data-grid-y="4"></div>
+						<div data-grid-x="-1" data-grid-y="4"></div>
+						<div data-grid-x="0" data-grid-y="4"></div>
+						<div data-grid-x="1" data-grid-y="4"></div>
+						<div data-grid-x="2" data-grid-y="4"></div>
+						<div data-grid-x="3" data-grid-y="4"></div>
+						<div data-grid-x="4" data-grid-y="4"></div>
+						<div data-grid-x="5" data-grid-y="4"></div>
+						<div data-grid-x="6" data-grid-y="4"></div>
+						<div data-grid-x="7" data-grid-y="4"></div>
+						
+						<div data-grid-x="-7" data-grid-y="5"></div>
+						<div data-grid-x="-6" data-grid-y="5"></div>
+						<div data-grid-x="-5" data-grid-y="5"></div>
+						<div data-grid-x="-4" data-grid-y="5"></div>
+						<div data-grid-x="-3" data-grid-y="5"></div>
+						<div data-grid-x="-2" data-grid-y="5"></div>
+						<div data-grid-x="-1" data-grid-y="5"></div>
+						<div data-grid-x="0" data-grid-y="5"></div>
+						<div data-grid-x="1" data-grid-y="5"></div>
+						<div data-grid-x="2" data-grid-y="5"></div>
+						<div data-grid-x="3" data-grid-y="5"></div>
+						<div data-grid-x="4" data-grid-y="5"></div>
+						<div data-grid-x="5" data-grid-y="5"></div>
+						<div data-grid-x="6" data-grid-y="5"></div>
+						<div data-grid-x="7" data-grid-y="5"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<h3>Information</h3>
+		Items: <span id="info-position-items">?</span><br />
+		Recordings: <span id="info-position-recordings">?</span>
+		<!--
+		<div id="map-widgets">
+			<fieldset id="create-item">
+				<legend>Create Item</legend>
+				
+			</fieldset>
+			<fieldset id="associate-with-item">
+				<legend>Associate Item</legend>
+				<label for="set-item-title">TibiaWiki Title:</label>
+				<input id="set-item-title" type="text" />
+			</fieldset>
+		</div>
+		<div id="map-controls">
+			<fieldset id="map-search">
+				<legend>Search</legend>
+				Search for:
+				<select id="select-type">
+					<option value="tile">Tile</option>
+					<option value="area">Area</option>
+					<option value="item">Item</option>
+					<option value="npc">NPC</option>
+				</select>
+				<fieldset id="search-type-item">
+					<fieldset>
+						<legend>Item Properties</legend>
+						<label for="search-for-item-id">Item ID:
+							<input id="search-for-item-id" type="text" value="0" />
+						</label>
+					</fieldset>
+				</fieldset>
+				<fieldset id="search-type-tile">
+					<fieldset>
+						<legend>Tile Properties</legend>
+						<label for="search-for-tile-walkable">
+							<input id="search-for-tile-walkable" type="checkbox" /> Walkable
+						</label>
+						<label for="search-for-tile-protectionzone">
+							<input id="search-for-tile-protectionzone" type="checkbox" /> Protection Zone
+						</label>
+					</fieldset>
+				</fieldset>
+				<fieldset id="search-type-area">
+					<fieldset>
+						<legend>Area Location</legend>
+						<label for="area-location-name">Name:
+							<input id="area-location-name" type="text" value="" />
+						</label>
+					</fieldset>
+				</fieldset>
+				<fieldset id="search-type-npc">
+					<fieldset>
+						<legend>NPC Location</legend>
+						<label for="npc-location-name">Name:
+							<input id="npc-location-name" type="text" value="" />
+						</label>
+					</fieldset>
+				</fieldset>
+			</fieldset>
+			<h3>Markers</h3>
+			<div id="map-mark-desc">Click the button(s) below to add areas to the map.</div>
+			<input type="button" value="Add Area Name" />
+			<input type="button" value="Add Area NPC" />
+			<input type="button" value="Add Area Item" />
+			<input type="checkbox" />Is Protection Zone?
+			<h3>Settings</h3>
+			<input type="checkbox" />Preload tilemap?
+		</div>
+		-->
+		<script type="text/javascript" src="Scripts/dat.js"></script>
+		<script type="text/javascript" src="Scripts/MapFile.js"></script>
+		<script type="text/javascript" src="Scripts/Odyssey.js"></script>
+		<script type="text/javascript" src="Scripts/load-data.js"></script>
+		<script type="text/javascript" src="Scripts/initialize.js"></script>
+		<script type="text/javascript" src="Scripts/tooltip.js"></script>
+		<script type="text/javascript" src="Scripts/controls.js"></script>
+		<script type="text/javascript" src="Scripts/controls-search.js"></script>
+		<script type="text/javascript" src="Scripts/LinkScript.js"></script>
+	</body>
+</html>

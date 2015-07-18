@@ -1,0 +1,21 @@
+#map-quick-links .title {
+	width: 100%;
+	text-align: center;
+	font-weight: bold;
+}
+#map-quick-links ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#map-quick-links ul li {
+	float: left;
+	width: 33%;
+}
+#map-quick-links a {
+	display: block;
+	text-align: center;
+}
+.clear {
+	clear: both;
+}
