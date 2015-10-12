@@ -67,7 +67,19 @@ var Dat = (function () {
                 }
             });
 		},
+		itemExists: function (id) {
+			return dat[0].hasOwnProperty(id);
+		},
+		itemHasProperty: function (id, property) {
+			return this.itemExists(id) && dat[0][id].hasOwnProperty(id);
+		},
+		getItemProperty: function (id, property) {
+			return (this.itemHasProperty(id, property) && dat[0][id][property]) || null;
+		},
 		isStackable: function (id) {
+			if (!this.itemExists(id)) {
+				throw new Error("Item " + id + " not found.");
+			}
 			return dat[0][id].hasOwnProperty(ATTRIBUTE_ID_STACKABLE);
 		},
 		isSplash: function (id) {

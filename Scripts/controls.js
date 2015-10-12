@@ -6,7 +6,10 @@
 		KEYCODE_ARROW_UP    = 38,
 		KEYCODE_ARROW_RIGHT = 39,
 		KEYCODE_PAGE_UP     = 33,
-		KEYCODE_PAGE_DOWN   = 34;
+		KEYCODE_PAGE_DOWN   = 34,
+		
+		CTRL_MULTIPLIER     = 10,
+		NOCTRL_MULTIPLIER   = 1;
 	// Utility
 	// Create nested objects
 	function createObjectNesting(obj) {
@@ -87,11 +90,11 @@
 		cx = center.x;
 		cy = center.y;
 		cz = center.z;
-		for (x = 0; x < 15; x += 1) {
-			for (y = 0; y < 11; y += 1) {
+		for (x = 0; x < 37; x += 1) {
+			for (y = 0; y < 13; y += 1) {
 				for (z = 0; z < 1; z += 1) {
-					if (isFocused(cx + x - 7, cy + y - 5, cz + z) !== hasFocusedClass(x - 7, y - 5, z)) {
-						toggleFocusedClass(x - 7, y - 5, z);
+					if (isFocused(cx + x - 18, cy + y - 6, cz + z) !== hasFocusedClass(x - 18, y - 6, z)) {
+						toggleFocusedClass(x - 18, y - 6, z);
 					}
 				}
 			}
@@ -113,7 +116,7 @@
 	// Automatically set up the
 	setGridElements();
 	function setMousePosition(x, y, z) {
-		var items = tw.map.getItemsAt(x, y, z), i, len, itemsStr = "", recordings = tw.map.getRecordingsAt(x, y, z), recInfo = '';
+		var items = map.getTileItems(x, y, z), i, len, itemsStr = ""	;
 		// TODO COMPAT textContent
 		if (items === null || items === undefined) {
 			itemsStr = "NONE";
@@ -123,15 +126,7 @@
 			}
 		}
 		
-		if (recordings === null || recordings === undefined) {
-			recInfo = "NONE";
-		} else {
-			for (i = 0, len = recordings.length; i < len; i += 1) {
-				recInfo += (recInfo !== '' ? ', ' : '') + recordings[i];
-			}
-		}
 		elementPositionInfoItems.textContent = itemsStr;
-		elementPositionInfoRecordings.textContent = recInfo;
 	}
 	function handleGridClick(e) {
 		var element = e.target,
@@ -154,9 +149,9 @@
 	document.getElementById("map-grid").addEventListener("mouseover", handleGridOver);
 	requestAnimationFrame(updateFocusedClass);
 	//requestAnimationFrame(updateFocusedItems);
-	function mapShift(e) {
-		var position = tw.map.position,
-			ctrlModifier = e.ctrlKey ? 10 : 1;
+	function handleMapShiftControls(e) {
+		var position = map.position,
+			ctrlModifier = e.ctrlKey ? CTRL_MULTIPLIER : NOCTRL_MULTIPLIER;
 		if (e.keyCode === KEYCODE_ARROW_DOWN) {
 			e.preventDefault();
 			return position.shift(0, 1 * ctrlModifier, 0);
@@ -173,20 +168,32 @@
 			e.preventDefault();
 			return position.shift(1 * ctrlModifier, 0, 0);
 		}
+		// Top floor is 0, so controls are reversed (PgDn = +z)
 		if (e.keyCode === KEYCODE_PAGE_DOWN) {
 			e.preventDefault();
-			if (position.z > 0) {
-				return position.shift(0, 0, -1);
+			// Test if the current position is legal.
+			if (0 <= position.z && position.z <= 15) {
+				if (position.z < 15) {
+					position.shift(0, 0, 1);
+				}
+			} else {
+				// Set the floor to the default of 7.
+				position.set(position.x, position.y, 7);
 			}
 			return false;
 		}
 		if (e.keyCode === KEYCODE_PAGE_UP) {
 			e.preventDefault();
-			if (position.z < 15) {
-				return position.shift(0, 0, 1);
+			if (0 <= position.z && position.z <= 15) {
+				if (position.z > 0) {
+					position.shift(0, 0, -1);
+				}
+			} else {
+				// Set the floor to the default of 7.
+				position.set(position.x, position.y, 7);
 			}
 			return false;
 		}
 	}
-	document.body.addEventListener("keydown", mapShift);
+	document.body.addEventListener("keydown", handleMapShiftControls);
 }(window.tw.Odyssey));

@@ -1,3 +1,6 @@
+/*
+ * ImageLoader.js
+ */
 function ImageLoader() {
 	// 32xN binary flag arrays
 	this.loading = [];
@@ -48,12 +51,5 @@ ImageLoader.prototype.add = function (src) {
 	console.assert(!this.src.hasOwnProperty(src), 'ImageLoader already contains src ' + src);
 	id = this.count;
 	this.count += 1;
-	
 	this.src[src] = id;
 };
-// Test:
-var imgLoader = new ImageLoader();
-ImageLoader.createImages(imgLoader);
-for (var i = 0, len = spritesheets.length; i < len; i += 1) {
-	imgLoader.add(spritesheets[i]);
-}

@@ -3,6 +3,7 @@
 	height: 352px;
 	width: 480px;
 	overflow: hidden;
+	margin: 0 auto;
 }
 #map-active-tile {
 	width: 32px;
@@ -15,15 +16,18 @@
 	width: inherit;
 	height: inherit;
 	position: relative;
+	background-color: #000000;
 }
 #map-viewport > div {
 	position: absolute;
 	height: inherit;
 	width: inherit;
 }
+/*
 #map-viewport #floor-7 {
-	//background: url("water.png") repeat 0 0 transparent;
+	background: url("water.png") repeat 0 0 transparent;
 }
+*/
 #map-viewport #floor-8 {
 	/*background: rgba(0, 0, 0, 0.5);*/
 }
@@ -83,14 +87,13 @@
 [data-sprite-height="2"] { height: 64px; z-index: 10; top: -32px; }
 
 #map-container {
-	width: 480px;
-	height: 352px;
 	background-color: #ffef96;
 	padding: 0.5em;
 	border: 0.1em solid #152214;
 	border-radius: 0.5em;
-	box-shadow: 0 0 0.5em #000;
+	box-shadow: 0 0 0.5em #000000;
 	margin: 0 auto;
+	text-align: center;
 }
 
 /* VIEW OFFSETS */
@@ -126,6 +129,8 @@
 	color: #ffffff;
 	font-weight: bold;
 	padding: 0 1em;
+	left: 0;
+	top: 0;
 }
 #map-tooltip:hover {
 	
@@ -136,8 +141,15 @@
 	display: none;
 }
 
-#map > canvas {
+#map-viewport > canvas {
 	position: absolute;
 	left: 0;
 	top: 0;
+}
+
+
+body {
+    background-color: #1e1e1e;
+    color: #dbdbdb;
+    margin: 0;
 }
