@@ -1,0 +1,71 @@
+body {
+    background-color: #000;
+}
+.clear {
+    clear: both;
+}
+
+#OdysseyToolTip,
+#OdysseyToolTipItemDetails {
+    position: absolute;
+    right: 0px;
+    top: 200px;
+    width: 12em;
+    font-size: 0.9em;
+    border-radius: 1em;
+    border-color: #909090;
+    border-width: 0.1em;
+    border-style: solid;
+    overflow: hidden;
+    z-index: 1000;
+    color: #eaeaea;
+    margin: 1em;
+}
+#OdysseyToolTipBackground,
+#OdysseyToolTipItemDetails {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(81, 81, 81, 0.6);
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+}
+
+#OdysseyToolTipHeader {
+    font-size: 1.2em;
+    text-align: center;
+    border-width: 0px 0px 0.1em;
+    border-style: solid;
+    border-color: #ADADAD;
+    line-height: 2em;
+}
+#OdysseyToolTipItems {
+    margin: 0.5em;
+    position: relative;
+    font-size: 1.1em;
+    font-weight: bold;
+    line-height: 32px;
+}
+.OdysseyToolTipItem {
+    clear: both;
+    margin: 0.1em 0;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 0.5em;
+    padding: 0 0.1em;
+    height: 32px;
+}
+.OdysseyToolTipImage,
+.OdysseyToolTipID,
+.OdysseyToolTipCount {
+    float: left;
+    display: inline-block;
+    margin: 0 0.25em;
+}
+.OdysseyToolTipCount:before {
+    content: "\2715";
+    margin: 0 0.25em;
+    font-size: 0.9em;
+}
+#OdysseyToolTipID {
+}

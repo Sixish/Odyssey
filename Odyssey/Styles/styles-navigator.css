@@ -1,0 +1,48 @@
+/* Hide the Navigator */
+#OdysseyNavigator {
+    display: none;
+}
+.OdysseyNavigatorRow div {
+    height: 2em;
+    width: 2em;
+    border-radius: 0.5em;
+    background-color: #696969;
+    border-style: outset;
+    border-width: 0.2em;
+    border-color: #000000;
+    display: inline-block;
+    margin: 0px 1em;
+    cursor: pointer;
+}
+.OdysseyNavigatorRow {
+    text-align: center;
+    font-weight: bold;
+    color: #000;
+}
+
+#OdysseyNavigatorArrowUp::after {
+    content: "\2191";
+    font-size: 1.5em;
+}
+
+#OdysseyNavigatorArrowRight::after {
+    content: "\2192";
+    font-size: 1.5em;
+}
+
+#OdysseyNavigatorArrowDown::after {
+    content: "\2193";
+    font-size: 1.5em;
+}
+
+#OdysseyNavigatorArrowLeft::after {
+    content: "\2190";
+    font-size: 1.5em;
+}
+
+#OdysseyNavigator {
+    opacity: 0.5;
+}
+#OdysseyNavigator:hover {
+    opacity: 1;
+}

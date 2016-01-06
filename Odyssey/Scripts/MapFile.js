@@ -1,226 +1,71 @@
-"use strict";
-// Utility functions
-function padLeft(str, width, padding) {
-	while (str.length < width) {
-		str = (padding || '0') + str;
-	}
-	return str;
-}
+/*jslint browser: true, bitwise: true, devel:true */
+/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+var MapFile = (function () {
+    "use strict";
+    /**
+     * Pads a string with padding until the string has a certain length.
+     * @param str The string to pad.
+     * @param width The width to pad until.
+     * @param padding Optional. The text to use as padding. Default is "0".
+     * @returns The string with padding applied.
+     */
+    function padLeft(str, width, padding) {
+        while (str.length < width) {
+            str = (padding || '0') + str;
+        }
+        return str;
+    }
 
-// We cannot read bytes in hexadecimal strings,
-// so we use half bytes
-var HALF_BYTES_POSX = 4,
-	HALF_BYTES_POSY = 4,
-	HALF_BYTES_POSZ = 2,
-	HALF_BYTES_ITEMS_ON_TILE = 2,
-	HALF_BYTES_ITEMID = 4,
-	HALF_BYTES_ITEMCOUNT = 2,
-	HALF_BYTES_ITEMSPLASH = 2,
-	HALF_BYTES_ITEMFLUID = 2,
-	HALF_BYTES_ITEMFRAME = 2;
+    /**
+     * Creates a new MapFile corresponding to 16 x 16 x 1 world tiles.
+     * @constructor
+     * @param x The base X value. Use MapFile.getFileX to get the base X value from position.
+     * @param y The base Y value. Use MapFile.getFileY to get the base Y value from position.
+     * @param z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
+     */
+    function MapFile(x, y, z) {
+        // Each MapFile contains (16 x 16 x 1), enforce it.
+        console.assert(x <= 0xFFF, 'MapFile has invalid x. Must be between 0 and 4095. x=' + x);
+        console.assert(y <= 0xFFF, 'MapFile has invalid y. Must be between 0 and 4095. y=' + y);
+        console.assert(z <= 0xF, 'MapFile has invalid z. Must be between 0 and 15. z=' + z);
+        // baseX,Y,Z used for filename resolution
+        this.baseX = (x & 0xFFF);
+        this.baseY = (y & 0xFFF);
+        //this.baseZ = (z & 0xF);
+        this.baseZ = (z & 0xF); //Debug
+    }
 
-function MapFile(x, y, z) {
-	// Each MapFile contains (256 x 256 x 1), enforce it.
-	console.assert(x <= 0xFF, 'MapFile has invalid x. Must be between 0 and 255. x=' + x);
-	console.assert(y <= 0xFF, 'MapFile has invalid y. Must be between 0 and 255. y=' + y);
-	console.assert(z <= 0xF, 'MapFile has invalid z. Must be between 0 and 15. z=' + z);
-	// baseX,Y,Z used for filename resolution
-	this.baseX = (x & 0xFF);
-	this.baseY = (y & 0xFF);
-	//this.baseZ = (z & 0xF);
-	this.baseZ = (z & 0xFF); //Debug
-	
-	// Tile structure (flat array, y << 8 + x)
-	this.structure = [];
-}
-MapFile.getFileX = function (posx) {
-	console.assert(typeof posx === 'number', 'Cannot get filename X-component of a non-number.');
-	return ((posx >> 8) & 0xFF);
-};
-MapFile.getFileY = function (posy) {
-	console.assert(typeof posy === 'number', 'Cannot get filename Y-component of a non-number.');
-	return ((posy >> 8) & 0xFF);
-};
-MapFile.getFileZ = function (posz) {
-	console.assert(typeof posz === 'number', 'Cannot get filename Z-component of a non-number.');
-	return ((posz >> 0) & 0xFF);
-};
-MapFile.getFilename = function (fposx, fposy, fposz) {
-	var str = '';
-	str += padLeft(fposx.toString(), 3, '0');
-	str += padLeft(fposy.toString(), 3, '0');
-	str += padLeft(fposz.toString(), 2, '0');
-	return str;
-};
-MapFile.resolveTileOffset = function (x, y) {
-	return ((x & 0xFF) << 0) + ((y & 0xFF) << 8);
-	//return (x - ((MapFile.getFileX(x) & 0xFF) << 0)) + (y - ((MapFile.getFileY(y) & 0xFF) << 8));
-};
-MapFile.prototype.toString = function () {
-	return MapFile.getFilename(this.baseX, this.baseY, this.baseZ);
-};
-MapFile.prototype.addTile = function (x, y, mapTile) {
-	var offset = MapFile.resolveTileOffset(x, y);
-	console.assert(mapTile instanceof MapTile, 'MapFile.addTile requires a MapTile');
-	this.structure[offset] = mapTile;
-};
+    /**
+     * Gets the MapFile's base X value.
+     * @static
+     * @param posx The map X position.
+     * @returns The base X value corresponding to position posx.
+     */
+    MapFile.getFileX = function (posx) {
+        console.assert(typeof posx === 'number', 'Cannot get filename X-component of a non-number.');
+        return ((posx >> 4) & 0xFFF);
+    };
 
-// Each MapTile contains an instance of a tile sight
-function MapTile() {
-	this.items = [];
-}
-MapTile.getTileX = function (posx) {
-	return posx & 0xFF;
-};
-MapTile.getTileY = function (posy) {
-	return posy & 0xFF;
-};
-MapTile.getTileZ = function (posz) {
-	return posz & 0xFF;
-};
-MapTile.prototype.addItem = function (mapItem) {
-	this.items.push(mapItem);
-};
+    /**
+     * Gets the MapFile's base Y value.
+     * @static
+     * @param posy The map Y position.
+     * @returns The base Y value corresponding to position posy.
+     */
+    MapFile.getFileY = function (posy) {
+        console.assert(typeof posy === 'number', 'Cannot get filename Y-component of a non-number.');
+        return ((posy >> 4) & 0xFFF);
+    };
 
-// Each MapItem contains an instance of an item on a tile
-function MapItem() {
-	this.id = 0;
-}
-
-// Result of a MapFileParser
-function MapFileParserResult() {
-	this.mapFiles = [];
-}
-MapFileParserResult.resolveIndex = function (fposx, fposy, fposz) {
-	return ((fposx & 0xFF) << 0) + ((fposy & 0xFF) << 8) + ((fposz & 0xFF) << 16);
-};
-MapFileParserResult.prototype.hasMapFile = function (fposx, fposy, fposz) {
-	return this.mapFiles.hasOwnProperty(MapFileParserResult.resolveIndex(fposx, fposy, fposz));
-};
-MapFileParserResult.prototype.getMapFile = function (fposx, fposy, fposz) {
-	return this.mapFiles[MapFileParserResult.resolveIndex(fposx, fposy, fposz)];
-};
-MapFileParserResult.prototype.addMapFile = function (mapFile) {
-	console.assert(mapFile instanceof MapFile, 'Cannot add to MapFileParserResult, mapFile is not a MapFile.');
-	// Add map file to the parse result.
-	this.mapFiles[MapFileParserResult.resolveIndex(mapFile.baseX, mapFile.baseY, mapFile.baseZ)] = mapFile;
-};
-
-// MapFileParser to parse the text from a Map file.
-function MapFileParser() {
-	this.tilePosition = new Matrix3D(0, 0, 0);
-}
-MapFileParser.prototype.parse = function (str) {
-	var result = new MapFileParserResult(), map, b, len, i, tiles, tile, hexString = '', itemCount = '';
-	
-	var posx, posy, posz;
-	var fposx, fposy, fposz;
-	var tposx, tposy, tposz;
-	var t, item;
-	b = 0;
-	len = str.length;
-	
-	while (b < len) {
-		/* Parse Position */
-		// PosX
-		for (i = 0; i < HALF_BYTES_POSX; i += 1, b += 1) {
-			hexString += str.charAt(b);
-		}
-		posx = parseInt(hexString, 16);
-		hexString = '';
-		
-		// PosY
-		for (i = 0; i < HALF_BYTES_POSY; i += 1, b += 1) {
-			hexString += str.charAt(b);
-		}
-		posy = parseInt(hexString, 16);
-		hexString = '';
-		
-		// PosZ
-		for (i = 0; i < HALF_BYTES_POSZ; i += 1, b += 1) {
-			hexString += str.charAt(b);
-		}
-		posz = parseInt(hexString, 16);
-		hexString = '';
-		
-		// Create a new map, if we don't already have one...
-		fposx = MapFile.getFileX(posx);
-		fposy = MapFile.getFileY(posy);
-		fposz = MapFile.getFileZ(posz);
-		
-		if (fposz == 0xFF) {
-			console.log("Z=255@" + b);
-		}
-		
-		if (!result.hasMapFile(fposx, fposy, fposz)) {
-			console.assert(fposz <= 0xF, 'Z-component too high (' + fposz + ').');
-			map = new MapFile(fposx, fposy, fposz);
-			result.addMapFile(map);
-		}
-		map = result.getMapFile(fposx, fposy, fposz);
-		
-		tposx = MapTile.getTileX(posx);
-		tposy = MapTile.getTileY(posy);
-		tposz = MapTile.getTileZ(posz);
-		
-		// Read the amount of items on the tile
-		for (i = 0; i < HALF_BYTES_ITEMS_ON_TILE; i += 1, b += 1) {
-			hexString += str.charAt(b);
-		}
-		itemCount = parseInt(hexString, 16);
-		hexString = '';
-		
-		tile = new MapTile();
-		try {
-			map.addTile(tposx, tposy, tile);
-		}
-		catch (e) {
-			console.log(e);
-			console.log(map, fposx, fposy, fposz);
-		}
-		
-		for (t = 0; t < itemCount; t += 1) {
-			item = new MapItem();
-			tile.addItem(item);
-			
-			for (i = 0; i < HALF_BYTES_ITEMID; i += 1, b += 1) {
-				hexString += str.charAt(b);
-			}
-			item.id = parseInt(hexString, 16);
-			hexString = '';
-			
-			if (Dat.isStackable(item.id)) {
-				for (i = 0; i < HALF_BYTES_ITEMCOUNT; i += 1, b += 1) {
-					hexString += str.charAt(b);
-				}
-				item.count = parseInt(hexString, 16);
-				hexString = '';
-			}
-			
-			if (Dat.isSplash(item.id)) {
-				for (i = 0; i < HALF_BYTES_ITEMSPLASH; i += 1, b += 1) {
-					hexString += str.charAt(b);
-				}
-				item.splash = parseInt(hexString, 16);
-				hexString = '';
-			}
-			
-			if (Dat.isFluid(item.id)) {
-				for (i = 0; i < HALF_BYTES_ITEMFLUID; i += 1, b += 1) {
-					hexString += str.charAt(b);
-				}
-				item.fluid = parseInt(hexString, 16);
-				hexString = '';
-			}
-			
-			if (Dat.isAnimated(item.id)) {
-				for (i = 0; i < HALF_BYTES_ITEMFRAME; i += 1, b += 1) {
-					hexString += str.charAt(b);
-				}
-				item.frame = parseInt(hexString, 16);
-				hexString = '';
-			}
-		}
-	}
-	return result;
-};
+    /**
+     * Gets the MapFile's base Z value.
+     * @static
+     * @param posz The map Z position.
+     * @returns The base Z value corresponding to position posz.
+     */
+    MapFile.getFileZ = function (posz) {
+        console.assert(typeof posz === 'number', 'Cannot get filename Z-component of a non-number.');
+        return ((posz >> 0) & 0xFF);
+    };
+    return MapFile;
+}());

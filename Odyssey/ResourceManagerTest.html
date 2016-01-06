@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <script type="text/javascript" src="Scripts/Matrix.js"></script>
+  <script type="text/javascript" src="Scripts/ResourceManager.js"></script>
+  <script type="text/javascript" src="Scripts/BinaryFile.js"></script>
+  <script type="text/javascript" src="Scripts/ResourceManagerFile.js"></script>
+  <script type="text/javascript" src="Scripts/ResourceManagerImage.js"></script>
+  <script type="text/javascript" src="Scripts/ResourceManagerPromise.js"></script>
+  <script type="text/javascript" src="Scripts/OdysseyMapRenderer.js"></script>
+  
+  <script type="text/javascript" src="Scripts/jquery.2.1.1.js"></script>
+  <script type="text/javascript" src="Scripts/dat.js"></script>
+  <script type="text/javascript" src="Scripts/MapFile.js"></script>
+  <meta charset="UTF-8" />
+ </head>
+ <body>
+  <canvas id="canvas-floor-7" width="1184" height="416">Your browser does not support HTML5Canvas</canvas>
+  <script type="text/javascript">
+var omr = new OdysseyMapRenderer();
+omr.initialize(function () {
+	omr.position.set(32367, 32241, 7);
+	omr.loadMapFile(
+		MapFile.getFileX(omr.position.x),
+		MapFile.getFileY(omr.position.y),
+		MapFile.getFileZ(omr.position.z)
+	);
+	omr.setCanvas(document.getElementById("canvas-floor-7"));
+	//omr.render();
+});
+  </script>
+  <script type="text/javascript" src="Scripts/OdysseyMapTimer.js"></script>
+ </body>
+</html>

@@ -1,0 +1,29 @@
+#OdysseyToolTipItemDetails {
+    position: absolute;
+    left: 175px;
+    top: 0;
+    z-index: 100;
+    width: auto;
+    height: auto;
+    padding: 1em;
+}
+
+
+#OdysseyToolTipItemAttribute {
+    clear: both;
+}
+.OdysseyToolTipItemAttributeLeftLabel {
+    width: 7em;
+    display: block;
+    float: left;
+    font-weight: bold;
+    padding: 0 0.5em;
+    text-align: right;
+}
+
+#OdysseyToolTipItemDetailsOptions {
+    text-align: right;
+}
+#OdysseyToolTipItemDetailsOptions input[type="button"] {
+    font-size: 1.2em;
+}
