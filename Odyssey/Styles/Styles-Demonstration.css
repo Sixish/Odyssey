@@ -1,3 +1,38 @@
+/* Generic style */
+#OdysseyToolRow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 999;
+}
+.OdysseyContainer {
+    font-size: 0.9em;
+    border-radius: 1em;
+    border-color: #909090;
+    border-width: 0.1em;
+    border-style: solid;
+    overflow: hidden;
+    color: #eaeaea;
+    text-align: center;
+    margin: 1em;
+}
+.OdysseyTool {
+    float: left;
+}
+.OdysseyToolHeader {
+    text-align: center;
+    border-width: 0px 0px 0.1em;
+    border-style: solid;
+    border-color: #ADADAD;
+    line-height: 2em;
+    margin: 0;
+}
+.OdysseyToolHeader img {
+    vertical-align: middle;
+}
+
+
 #OdysseyLargeMinimap {
     position: fixed;
     left: 0;
@@ -74,4 +109,17 @@
 }
 #OdysseyMinimapCloseLink:hover {
     color: #cc0000; /* TODO CHANGE */
+}
+
+/* Icons */
+#OdysseyToolRow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+#OdysseyMinimapBackground {
+    width: 100%;
+    height: 100%;
 }

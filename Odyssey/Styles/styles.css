@@ -1,5 +1,9 @@
 body {
     font-family: "Lucida Bright", "Palatino", "serif";
+    background-color: #000;
+}
+.clear {
+    clear: both;
 }
 @media (min-width: 501px) {
     #map-container {
