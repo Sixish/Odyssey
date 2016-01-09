@@ -5,7 +5,7 @@
     border: 0px solid #000;
     border-radius: 0;
 }
-#OdysseyNavListContainer {
+#OdysseyNavList {
     position: absolute;
     left: 0;
     top: 0;
@@ -20,7 +20,7 @@
     text-align: center;
     margin: 1em;
 }
-#OdysseyNavListContainer.visible {
+#OdysseyNavList.visible {
     width: 100%;/* Mobile-specific */
     margin: 0;
 }
@@ -33,11 +33,15 @@
     width: 100%;
     height: 100%;
 }
-#show-navigation {
+#OdysseyToolRow a.tool-link {
     text-decoration: none;
     padding: 0 0.5em;
 }
-.navigation-label {
+#OdysseyCloseNavigation {
+    font-size: 0.9em;
+    cursor: pointer;
+}
+.link-label {
     text-decoration: underline;
 }
 h2.OdysseyNavListHeader {
@@ -69,24 +73,24 @@ h4.OdysseyNavListHeader {
 #OdysseyNavListLocations li:hover {
     background: rgba(0, 0, 0, 0.3);
 }
-#OdysseyNavListContainer a {
+#OdysseyNavList a {
     color: #eaeaea;
     display: block;
 }
-#OdysseyNavListContainer .navigation-label,
-#OdysseyNavListContainer #OdysseyNavList {
+#OdysseyNavList .link-label,
+#OdysseyNavList {
     display: none;
 }
-#OdysseyNavListContainer.visible .navigation-label,
-#OdysseyNavListContainer.visible #OdysseyNavList {
+#OdysseyNavList.visible .link-label,
+#OdysseyNavList.visible {
     display: initial;
 }
 
 @media (min-width: 501px) {
-    #OdysseyNavListContainer {
+    #OdysseyNavList {
         width: auto;
     }
-    #OdysseyNavListContainer.visible {
+    #OdysseyNavList.visible {
         width: auto;
         margin: 1em;
     }

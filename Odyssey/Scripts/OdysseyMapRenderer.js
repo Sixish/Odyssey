@@ -1,5 +1,5 @@
 /*jslint browser: true, bitwise: true */
-/*global Matrix3D, OdysseyCanvasSection, MapFile, MapFileParserResult, jQuery*/
+/*global Matrix3D, OdysseyCanvasSection, MapFile, MapFileParser, MapFileParserResult, jQuery*/
 ///*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser */
 var OdysseyMapRenderer = (function ($) {
     "use strict";

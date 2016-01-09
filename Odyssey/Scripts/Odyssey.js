@@ -20,7 +20,7 @@ var Odyssey = window.Odyssey || (function () {
     // Resource Managers
     resourceManagerMaps.setFilepathPrefix("Odyssey/Maps/");
     resourceManagerSprites.setFilepathPrefix("Odyssey/Sprites/");
-    
+
     // Map Renderer
     odysseyMapRenderer.initialize(dat, resourceManagerSprites, resourceManagerMaps);
     odysseyMapRenderer.setSize(11, 11);

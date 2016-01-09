@@ -3,20 +3,21 @@
 var navigationMenu = (function ($) {
     "use strict";
     var hidden = true,
-        $showNavigation = $("#show-navigation"),
-        $navListContainer = $("#OdysseyNavListContainer");
+        $openNavigation = $("#OdysseyOpenNavigation"),
+        $closeNavigation = $("#OdysseyCloseNavigation"),
+        $navListContainer = $("#OdysseyNavList");
 
     /**
      * Displays the navigation list.
      */
-    function showNavigationList() {
+    function openNavigationList() {
         $navListContainer.addClass('visible');
     }
 
     /**
      * Hides the navigation list.
      */
-    function hideNavigationList() {
+    function closeNavigationList() {
         $navListContainer.removeClass('visible');
     }
 
@@ -25,9 +26,9 @@ var navigationMenu = (function ($) {
      */
     function toggleNavigationList() {
         if (hidden) {
-            showNavigationList();
+            openNavigationList();
         } else {
-            hideNavigationList();
+            closeNavigationList();
         }
         hidden = !hidden;
     }
@@ -41,11 +42,12 @@ var navigationMenu = (function ($) {
     }
 
     // Events
-    $showNavigation.click(handleNavigationLinkEvent);
+    $openNavigation.click(handleNavigationLinkEvent);
+    $closeNavigation.click(handleNavigationLinkEvent);
 
     return {
-        'show': showNavigationList,
-        'hide': hideNavigationList,
+        'open': openNavigationList,
+        'close': closeNavigationList,
         'toggle': toggleNavigationList
     };
 }(jQuery));

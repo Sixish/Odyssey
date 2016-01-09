@@ -35,8 +35,13 @@
         $body = $(document.body),
         // Small Minimap.
         $mmSmallMinimap = $("#OdysseyMiniMap"),
-        // "Close" link.
+        // Open/close links.
+        $mmOpen = $("#OdysseyOpenMinimap"),
         $mmClose = $("#OdysseyMinimapCloseLink"),
+        // Large minimap display (static images).
+        $mmMinimapLarge = $("#OdysseyLargeMinimap"),
+        // Whether or not the large minimap is visible.
+        visible = false,
         // Margin of the map container, i.e. map offset.
         mmContainerMarginLeft = parseInt($mmContainer.css('marginLeft').replace('px', ''), 10) || 0,
         mmContainerMarginTop = parseInt($mmContainer.css('marginTop').replace('px', ''), 10) || 0,
@@ -134,10 +139,17 @@
         }
     }
 
+    function toggleMinimap() {
+        if (visible) {
+            $mmMinimapLarge.removeClass("active").addClass("inactive");
+        } else {
+            $mmMinimapLarge.removeClass("inactive").addClass("active");
+        }
+        visible = !visible;
+    }
+
     function handleMinimapClickEvent() {
-        $("#OdysseyLargeMinimap")
-            .removeClass("inactive")
-            .addClass("active");
+        toggleMinimap();
     }
 
     function toggleZoomLevel(sgn) {
@@ -170,11 +182,9 @@
         toggleZoomLevel(+1);
     });
     $mmSmallMinimap.click(handleMinimapClickEvent);
-    $mmClose.click(function () {
-        $("#OdysseyLargeMinimap")
-            .removeClass("active")
-            .addClass("inactive");
-    });
+    // Open/close.
+    $mmOpen.click(toggleMinimap);
+    $mmClose.click(toggleMinimap);
 
     return {
         'toggleZoomLevel': toggleZoomLevel,

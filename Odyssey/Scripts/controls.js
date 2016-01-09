@@ -203,7 +203,5 @@
             return false;
         }
     }
-    document.body.addEventListener("keydown", handleMapShiftControls);
-    
-    
+    $(document.body).keydown(handleMapShiftControls);
 }(window.Odyssey, jQuery));
