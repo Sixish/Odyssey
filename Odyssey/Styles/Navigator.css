@@ -1,6 +1,6 @@
-/* Hide the Navigator */
+/* Navigator cursor is ugly. Hide until improved. */
 #OdysseyNavigator {
-    display: none;
+    display: none !important;
 }
 .OdysseyNavigatorRow div {
     height: 2em;

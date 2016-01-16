@@ -46,8 +46,17 @@
         mmContainerMarginLeft = parseInt($mmContainer.css('marginLeft').replace('px', ''), 10) || 0,
         mmContainerMarginTop = parseInt($mmContainer.css('marginTop').replace('px', ''), 10) || 0,
         // Radius of the focus area.
-        radiusFocusArea = parseInt($mmFocusArea.css('fontSize').replace('px', ''), 10) || 0;
+        radiusFocusArea = parseInt($mmFocusArea.css('fontSize').replace('px', ''), 10) || 0,
+        mapPosition = {
+            x: null,
+            y: null,
+            z: null
+        };
 
+    function getMapPosition() {
+        return mapPosition;
+    }
+    
     function getMapPositionX() {
         return (MIN_X + mmPosX);
     }
@@ -119,7 +128,11 @@
         return false;
     }
 
-    function handleViewportMouseMoveEvent(e) {
+    /**
+     * Shifts the viewport based on the event arguments.
+     * @param e the event arguments.
+     */
+    function handleViewportShiftEvent(e) {
         var offset = $mmContainer.offset();
         // Catch unexpected values.
         if ((e.pageX - offset.left) < 0) {
@@ -132,18 +145,28 @@
         // Set the relative minimap position based on the mouse position.
         mmPosX = (e.pageX - offset.left) / mmZoom;
         mmPosY = (e.pageY - offset.top) / mmZoom;
+    }
 
-        // If the mouse is down, handle the active area movement.
+    // Handle desktop mouse move.
+    function handleViewportMouseMoveEvent(e) {
+        // If the mouse is down, handle the viewport and active area movement.
         if (mouseIsDown) {
+            handleViewportShiftEvent(e);
             handleControlMapShift();
         }
     }
 
+    // Handle mobile touch move.
+    function handleViewportTouchMoveEvent(e) {
+        handleViewportShiftEvent(e.originalEvent.targetTouches[0]);
+        handleControlMapShift();
+    }
+
     function toggleMinimap() {
         if (visible) {
-            $mmMinimapLarge.removeClass("active").addClass("inactive");
+            $body.removeClass('state-minimap-active');
         } else {
-            $mmMinimapLarge.removeClass("inactive").addClass("active");
+            $body.addClass('state-minimap-active');
         }
         visible = !visible;
     }
@@ -177,6 +200,7 @@
     $body.mouseup(handleDocumentMouseUpEvent);
     $mmViewport.mousedown(handleViewportMouseDownEvent);
     $mmViewport.mousemove(handleViewportMouseMoveEvent);
+    $mmViewport.on('touchmove', handleViewportTouchMoveEvent);
     $mmViewport.click(handleControlMapShift);
     $mmContainer.dblclick(function () {
         toggleZoomLevel(+1);
@@ -188,6 +212,8 @@
 
     return {
         'toggleZoomLevel': toggleZoomLevel,
-        'setFloor': setFloor
+        'setFloor': setFloor,
+        'toggleMinimap': toggleMinimap,
+        'getMapPosition': getMapPosition
     };
 }(jQuery));

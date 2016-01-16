@@ -66,7 +66,7 @@
 }
 
 @media (min-width: 501px) {
-    #OdysseyTooltip {
+    #OdysseyToolTip {
         display: initial;
     }
 }

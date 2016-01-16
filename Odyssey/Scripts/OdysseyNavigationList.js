@@ -5,20 +5,23 @@ var navigationMenu = (function ($) {
     var hidden = true,
         $openNavigation = $("#OdysseyOpenNavigation"),
         $closeNavigation = $("#OdysseyCloseNavigation"),
-        $navListContainer = $("#OdysseyNavList");
+        $navListContainer = $("#OdysseyNavList"),
+        $body = $(document.body);
 
     /**
      * Displays the navigation list.
      */
     function openNavigationList() {
-        $navListContainer.addClass('visible');
+        $body.addClass('state-navlist-active');
+        //$navListContainer.addClass('visible');
     }
 
     /**
      * Hides the navigation list.
      */
     function closeNavigationList() {
-        $navListContainer.removeClass('visible');
+        $body.removeClass('state-navlist-active');
+        //$navListContainer.removeClass('visible');
     }
 
     /**

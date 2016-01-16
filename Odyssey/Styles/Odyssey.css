@@ -36,13 +36,6 @@ body {
     margin: 0 auto;
     background-color: #000;
 }
-#map-active-tile {
-    width: 32px;
-    height: 32px;
-    position: absolute;
-    left: 224px;
-    top: 160px;
-}
 #map-viewport {
     width: inherit;
     height: inherit;
@@ -53,14 +46,6 @@ body {
     position: absolute;
     height: inherit;
     width: inherit;
-}
-/*
-#map-viewport #floor-7 {
-    background: url("water.png") repeat 0 0 transparent;
-}
-*/
-#map-viewport #floor-8 {
-    /*background: rgba(0, 0, 0, 0.5);*/
 }
 #map-grid {
     position: absolute;
@@ -91,76 +76,6 @@ body {
 #map-grid .active-tile {
     border-color: #00ff00;
 }
-.item-sprite {
-    overflow: hidden;
-    background-repeat: no-repeat;
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-.item-sprite.sprites-32-1 {
-    width: 32px;
-    height: 32px;
-    overflow: hidden;
-}
-.item-sprite {
-    width: 32px;
-    height: 32px;
-}
-.item-sprite > div {
-    width: 768px;
-    height: 768px;
-}
-[data-sprite-width="1"] { width: 32px; z-index: 0; }
-[data-sprite-width="2"] { width: 64px; z-index: 10; left: -32px; }
-
-[data-sprite-height="1"] { height: 32px; z-index: 0; }
-[data-sprite-height="2"] { height: 64px; z-index: 10; top: -32px; }
-
-/* VIEW OFFSETS */
-/* TEMPORARILY REMOVED
-#floor-15 { margin: 256px 0 0 256px; }
-#floor-14 { margin: 224px 0 0 224px; }
-#floor-13 { margin: 192px 0 0 192px; }
-#floor-12 { margin: 160px 0 0 160px; }
-#floor-11 { margin: 128px 0 0 128px; }
-#floor-10 { margin: 96px 0 0 96px; }
-#floor-9 { margin: 64px 0 0 64px; }
-#floor-8 { margin: 32px 0 0 32px; }
-
-#floor-7 { margin: 0px 0 0 0px; }
-
-#floor-6 { margin: 32px 0 0 32px; }
-#floor-5 { margin: 64px 0 0 64px; }
-#floor-4 { margin: 96px 0 0 96px; }
-#floor-3 { margin: 128px 0 0 128px; }
-#floor-2 { margin: 160px 0 0 160px; }
-#floor-1 { margin: 192px 0 0 192px; }
-#floor-0 { margin: 224px 0 0 224px; }
-*/
-/* TEMPORARY */
-#map-grid {
-    /*display: none;*/
-}
-/* Tooltip */
-#map-tooltip {
-    line-height: 3em;
-    position: absolute;
-    z-index: 100000;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 0 1em;
-    left: 0;
-    top: 0;
-}
-#map-tooltip:hover {
-    
-}
-
-/* hide search controls by default */
-#map-search > fieldset {
-    display: none;
-}
 
 #map-viewport-translator > canvas {
     position: absolute;
@@ -174,15 +89,6 @@ body {
     color: #dbdbdb;
     margin: 0;
 }
-
-#OdysseyWidgets {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 1em;
-    z-index: 1000;
-}
-
 
 #map > .center {
     width: 352px;

@@ -20,22 +20,9 @@
     text-align: center;
     margin: 1em;
 }
-#OdysseyNavList.visible {
+body.state-navlist-active #OdysseyNavList {
     width: 100%;/* Mobile-specific */
     margin: 0;
-}
-#OdysseyNavListBackground {
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: rgba(81, 81, 81, 0.6);
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-}
-#OdysseyToolRow a.tool-link {
-    text-decoration: none;
-    padding: 0 0.5em;
 }
 #OdysseyCloseNavigation {
     font-size: 0.9em;
@@ -77,20 +64,24 @@ h4.OdysseyNavListHeader {
     color: #eaeaea;
     display: block;
 }
+/* State = inactive */
 #OdysseyNavList .link-label,
 #OdysseyNavList {
     display: none;
 }
-#OdysseyNavList.visible .link-label,
-#OdysseyNavList.visible {
+/* State = active */
+body.state-navlist-active #OdysseyNavList .link-label,
+body.state-navlist-active #OdysseyNavList {
     display: initial;
 }
 
 @media (min-width: 501px) {
+    /* State = inactive */
     #OdysseyNavList {
         width: auto;
     }
-    #OdysseyNavList.visible {
+    /* State = active */
+    body.state-navlist-active #OdysseyNavList {
         width: auto;
         margin: 1em;
     }
