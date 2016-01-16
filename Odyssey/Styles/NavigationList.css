@@ -25,11 +25,14 @@ body.state-navlist-active #OdysseyNavList {
     margin: 0;
 }
 #OdysseyCloseNavigation {
-    font-size: 0.9em;
     cursor: pointer;
 }
 .link-label {
     text-decoration: underline;
+}
+h1, h2, h3, h4, h5 {
+    margin: 0;
+    padding: 0.5em 0;
 }
 h2.OdysseyNavListHeader {
     font-size: 1.2em;
@@ -55,7 +58,6 @@ h4.OdysseyNavListHeader {
     background: rgba(0, 0, 0, 0.8);
     border-radius: 0.5em;
     padding: 0 0.1em;
-    height: 32px;
 }
 #OdysseyNavListLocations li:hover {
     background: rgba(0, 0, 0, 0.3);
@@ -63,12 +65,15 @@ h4.OdysseyNavListHeader {
 #OdysseyNavList a {
     color: #eaeaea;
     display: block;
+    padding: 0.75em 1em;/* Mobile-specific */
 }
+
 /* State = inactive */
 #OdysseyNavList .link-label,
 #OdysseyNavList {
     display: none;
 }
+
 /* State = active */
 body.state-navlist-active #OdysseyNavList .link-label,
 body.state-navlist-active #OdysseyNavList {
@@ -76,10 +81,17 @@ body.state-navlist-active #OdysseyNavList {
 }
 
 @media (min-width: 501px) {
-    /* State = inactive */
+    /* State = active|inactive */
     #OdysseyNavList {
         width: auto;
     }
+    
+    #OdysseyNavList a {
+        color: #eaeaea;
+        display: block;
+        padding: 0em 1em;/* Mobile-specific */
+    }
+    
     /* State = active */
     body.state-navlist-active #OdysseyNavList {
         width: auto;

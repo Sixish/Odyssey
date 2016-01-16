@@ -1,6 +1,6 @@
 /*jslint browser: true, devel:true */
 /*globals jQuery*/
-(function (map, $) {
+(function (map, worldmap, $) {
     "use strict";
     var // Keys that change map position.
         KEYCODE_ARROW_DOWN  = 40,
@@ -159,49 +159,71 @@
     //requestAnimationFrame(updateFocusedItems);
     function handleMapShiftControls(e) {
         var position = map.position,
-            ctrlModifier = e.ctrlKey ? CTRL_MULTIPLIER : NOCTRL_MULTIPLIER;
+            ctrlModifier = e.ctrlKey ? CTRL_MULTIPLIER : NOCTRL_MULTIPLIER,
+            hasChanged = false;
+        // Down.
         if (e.keyCode === KEYCODE_ARROW_DOWN) {
             e.preventDefault();
-            return position.shift(0, ctrlModifier, 0);
+            hasChanged = true;
+            position.shift(0, ctrlModifier, 0);
         }
+        
+        // Left.
         if (e.keyCode === KEYCODE_ARROW_LEFT) {
             e.preventDefault();
-            return position.shift(-1 * ctrlModifier, 0, 0);
+            hasChanged = true;
+            position.shift(-1 * ctrlModifier, 0, 0);
         }
+        
+        // Up.
         if (e.keyCode === KEYCODE_ARROW_UP) {
             e.preventDefault();
-            return position.shift(0, -1 * ctrlModifier, 0);
+            hasChanged = true;
+            position.shift(0, -1 * ctrlModifier, 0);
         }
+        
         if (e.keyCode === KEYCODE_ARROW_RIGHT) {
             e.preventDefault();
-            return position.shift(ctrlModifier, 0, 0);
+            hasChanged = true;
+            position.shift(ctrlModifier, 0, 0);
         }
-        // Top floor is 0, so controls are reversed (PgDn = +z)
+        
+        // Down a floor.
         if (e.keyCode === KEYCODE_PAGE_DOWN) {
+            // Top floor is 0, so controls are reversed (PgDn = +z)
             e.preventDefault();
             // Test if the current position is legal.
             if (0 <= position.z && position.z <= 15) {
+                // Don't advance if Z = max Z.
                 if (position.z < 15) {
+                    hasChanged = true;
                     position.shift(0, 0, 1);
                 }
             } else {
                 // Set the floor to the default of 7.
+                hasChanged = true;
                 position.set(position.x, position.y, 7);
             }
-            return false;
         }
+        
+        // Up a floor.
         if (e.keyCode === KEYCODE_PAGE_UP) {
             e.preventDefault();
             if (0 <= position.z && position.z <= 15) {
                 if (position.z > 0) {
+                    hasChanged = true;
                     position.shift(0, 0, -1);
                 }
             } else {
                 // Set the floor to the default of 7.
+                hasChanged = true;
                 position.set(position.x, position.y, 7);
             }
-            return false;
         }
+        if (hasChanged) {
+            worldmap.setMapPosition(position);
+        }
+        return false;
     }
     $(document.body).keydown(handleMapShiftControls);
-}(window.Odyssey, jQuery));
+}(window.Odyssey, window.WorldMap, jQuery));

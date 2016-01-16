@@ -93,6 +93,7 @@ body.state-minimap-active #OdysseyMinimapContainer,
     position: absolute;
     left: 0;
     top: 0;
+    margin: 0.5em;
 }
 #OdysseyToolRow > div {
     float: left;

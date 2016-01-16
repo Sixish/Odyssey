@@ -61,6 +61,6 @@ var Odyssey = window.Odyssey || (function () {
 
             requestAnimationFrame(update);
         };
-    }()));//, 100);
+    }()));
     return odysseyMapRenderer;
 }());

@@ -1,6 +1,6 @@
 /*jslint browser:true*/
 /*globals jQuery*/
-(function ($) {
+var WorldMap = (function ($) {
     "use strict";
     var // Minimap position relative to map image.
         mmPosX = -1,
@@ -56,17 +56,11 @@
     function getMapPosition() {
         return mapPosition;
     }
-    
-    function getMapPositionX() {
-        return (MIN_X + mmPosX);
-    }
 
-    function getMapPositionY() {
-        return (MIN_Y + mmPosY);
-    }
-
-    function getMapPositionZ() {
-        return (mmPosZ);
+    function setMapPosition(position) {
+        mapPosition.x = position.x;
+        mapPosition.y = position.y;
+        mapPosition.z = position.z;
     }
 
     function handleControlMapShift() {
@@ -143,8 +137,8 @@
         }
 
         // Set the relative minimap position based on the mouse position.
-        mmPosX = (e.pageX - offset.left) / mmZoom;
-        mmPosY = (e.pageY - offset.top) / mmZoom;
+        mapPosition.x = mmPosX = (e.pageX - offset.left) / mmZoom;
+        mapPosition.y = mmPosY = (e.pageY - offset.top) / mmZoom;
     }
 
     // Handle desktop mouse move.
@@ -214,6 +208,7 @@
         'toggleZoomLevel': toggleZoomLevel,
         'setFloor': setFloor,
         'toggleMinimap': toggleMinimap,
-        'getMapPosition': getMapPosition
+        'getMapPosition': getMapPosition,
+        'setMapPosition': setMapPosition
     };
 }(jQuery));
