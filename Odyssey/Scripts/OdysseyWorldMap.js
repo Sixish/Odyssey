@@ -15,14 +15,14 @@ var WorldMap = (function ($) {
         // Size of the images.
         SIZE_X = 2049,
         SIZE_Y = 2305,
-        // How big to shift maps when moving.
-        MAP_MOVE_INTERVAL = 127,
         // Minimum, maximum and default zoom levels.
         MIN_ZOOM = 1,
         MAX_ZOOM = 5,
         DEFAULT_ZOOM_VALUE = 1,
         // Whether or not the mouse is down.
         mouseIsDown = false,
+        // Viewport's container. This has a set width, while $mmViewport's varies.
+        $mmViewportContainer = $("#OdysseyLargeMinimap"),
         // Parent viewport.
         $mmViewport = $("#OdysseyMinimapViewport"),
         // Map container.
@@ -38,50 +38,59 @@ var WorldMap = (function ($) {
         // Open/close links.
         $mmOpen = $("#OdysseyOpenMinimap"),
         $mmClose = $("#OdysseyMinimapCloseLink"),
-        // Large minimap display (static images).
-        $mmMinimapLarge = $("#OdysseyLargeMinimap"),
         // Whether or not the large minimap is visible.
         visible = false,
-        // Margin of the map container, i.e. map offset.
-        mmContainerMarginLeft = parseInt($mmContainer.css('marginLeft').replace('px', ''), 10) || 0,
-        mmContainerMarginTop = parseInt($mmContainer.css('marginTop').replace('px', ''), 10) || 0,
-        // Radius of the focus area.
-        radiusFocusArea = parseInt($mmFocusArea.css('fontSize').replace('px', ''), 10) || 0,
         mapPosition = {
-            x: null,
-            y: null,
-            z: null
+            x: 33053,
+            y: 31013,
+            z: 7
+        },
+        events = {
+            'onClose': {
+                'listeners': []
+            },
+            'onOpen': {
+                'listeners': []
+            },
+            'onToggle': {
+                'listeners': []
+            }
         };
 
+    /**
+     * Fires the event with the specified context and arguments.
+     *
+     * @param e the name of the event.
+     * @param ctx the context (i.e. the value of 'this') in which to call the listeners.
+     * @param args an array of arguments to pass to the listener.
+     */
+    function fire(e, ctx, args) {
+        var event = events[e], listeners, i, len;
+        if (!event) {
+            return false;
+        }
+        // Listeners of the event.
+        listeners = event.listeners;
+        if (listeners && listeners.length) {
+            for (i = 0, len = listeners.length; i < len; i += 1) {
+                listeners[i].apply(ctx, args);
+            }
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Gets the position of the WorldMap.
+     */
     function getMapPosition() {
         return mapPosition;
     }
 
-    function setMapPosition(position) {
-        mapPosition.x = position.x;
-        mapPosition.y = position.y;
-        mapPosition.z = position.z;
-    }
-
     function handleControlMapShift() {
         var // Static width and height of the viewport.
-            mmViewportWidth = $mmViewport.width(),
-            mmViewportHeight = $mmViewport.height();
-
-        // X.
-        while (((radiusFocusArea / 2) - (mmContainerMarginLeft) >= (mmPosX * mmZoom))) {
-            mmContainerMarginLeft += MAP_MOVE_INTERVAL;
-        }
-        while ((((mmViewportWidth - mmContainerMarginLeft - (radiusFocusArea / 2))) <= (mmPosX * mmZoom)) && ((mmViewportWidth - (SIZE_X * mmZoom)) < mmContainerMarginLeft)) {
-            mmContainerMarginLeft -= MAP_MOVE_INTERVAL;
-        }
-        // Y.
-        while (((radiusFocusArea / 2) - (mmContainerMarginTop) >= (mmPosY * mmZoom))) {
-            mmContainerMarginTop += MAP_MOVE_INTERVAL;
-        }
-        while ((((mmViewportHeight - mmContainerMarginTop - (radiusFocusArea / 2))) <= (mmPosY * mmZoom)) &&  ((mmViewportHeight - (SIZE_Y * mmZoom)) < mmContainerMarginTop)) {
-            mmContainerMarginTop -= MAP_MOVE_INTERVAL;
-        }
+            mmViewportWidth = $mmViewportContainer.width(),
+            mmViewportHeight = $mmViewportContainer.height();
 
         // Focus area CSS.
         $mmFocusArea.css({
@@ -91,9 +100,20 @@ var WorldMap = (function ($) {
 
         // Container CSS updates.
         $mmContainer.css({
-            'left': mmContainerMarginLeft + 'px',
-            'top': mmContainerMarginTop + 'px'
+            'left': -mmZoom * (mmPosX - mmViewportWidth / 2) + 'px',
+            'top': -mmZoom * (mmPosY - mmViewportHeight / 2) + 'px'
         });
+    }
+
+    function setMapPosition(position) {
+        mapPosition.x = Math.floor(position.x);
+        mapPosition.y = Math.floor(position.y);
+        mapPosition.z = Math.floor(position.z);
+        // Update mmPosXYZ based on new mapPosition.
+        mmPosX = mapPosition.x - MIN_X;
+        mmPosY = mapPosition.y - MIN_Y;
+        mmPosZ = mapPosition.z;
+        handleControlMapShift();
     }
 
     function zoom(n) {
@@ -137,8 +157,11 @@ var WorldMap = (function ($) {
         }
 
         // Set the relative minimap position based on the mouse position.
-        mapPosition.x = mmPosX = (e.pageX - offset.left) / mmZoom;
-        mapPosition.y = mmPosY = (e.pageY - offset.top) / mmZoom;
+        setMapPosition({
+            x: MIN_X + (e.pageX - offset.left) / mmZoom,
+            y: MIN_Y + (e.pageY - offset.top) / mmZoom,
+            z: mapPosition.z
+        });
     }
 
     // Handle desktop mouse move.
@@ -157,12 +180,18 @@ var WorldMap = (function ($) {
     }
 
     function toggleMinimap() {
-        if (visible) {
-            $body.removeClass('state-minimap-active');
-        } else {
-            $body.addClass('state-minimap-active');
-        }
+        // Toggle the visibility.
         visible = !visible;
+        // Adjust classes based on new value.
+        // Fire the event corresponding to each state change.
+        if (visible) {
+            $body.addClass('state-minimap-active');
+            fire('onOpen');
+        } else {
+            $body.removeClass('state-minimap-active');
+            fire('onClose');
+        }
+        fire('onToggle');
     }
 
     function handleMinimapClickEvent() {
@@ -190,6 +219,31 @@ var WorldMap = (function ($) {
         zoom(newZoom);
     }
 
+    /**
+     * Binds a function to the close event.
+     *
+     * @param fn the function to call when the WorldMap is closed.
+     */
+    function attachOnCloseListener(fn) {
+        events.onClose.listeners.push(fn);
+    }
+    /**
+     * Binds a function to the open event.
+     *
+     * @param fn the function to call when the WorldMap is opened.
+     */
+    function attachOnOpenListener(fn) {
+        events.onOpen.listeners.push(fn);
+    }
+
+    /**
+     * Binds a function to the toggle event.
+     *
+     * @param fn the function to call when the WorldMap is toggled.
+     */
+    function attachOnToggleListener(fn) {
+        events.onToggle.listeners.push(fn);
+    }
     // Attach listeners.
     $body.mouseup(handleDocumentMouseUpEvent);
     $mmViewport.mousedown(handleViewportMouseDownEvent);
@@ -209,6 +263,10 @@ var WorldMap = (function ($) {
         'setFloor': setFloor,
         'toggleMinimap': toggleMinimap,
         'getMapPosition': getMapPosition,
-        'setMapPosition': setMapPosition
+        'setMapPosition': setMapPosition,
+        // Events
+        'onClose': attachOnCloseListener,
+        'onOpen': attachOnOpenListener,
+        'onToggle': attachOnToggleListener
     };
 }(jQuery));

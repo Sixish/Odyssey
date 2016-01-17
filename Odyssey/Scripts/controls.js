@@ -226,4 +226,9 @@
         return false;
     }
     $(document.body).keydown(handleMapShiftControls);
+    
+    worldmap.onClose(function () {
+        var pos = worldmap.getMapPosition();
+        map.position.set(pos.x, pos.y, pos.z);
+    });
 }(window.Odyssey, window.WorldMap, jQuery));
