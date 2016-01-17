@@ -81,13 +81,9 @@ var WorldMap = (function ($) {
     }
 
     /**
-     * Gets the position of the WorldMap.
+     * Updates WorldMap.
      */
-    function getMapPosition() {
-        return mapPosition;
-    }
-
-    function handleControlMapShift() {
+    function updateWorldMap() {
         var // Static width and height of the viewport.
             mmViewportWidth = $mmViewportContainer.width(),
             mmViewportHeight = $mmViewportContainer.height();
@@ -105,17 +101,9 @@ var WorldMap = (function ($) {
         });
     }
 
-    function setMapPosition(position) {
-        mapPosition.x = Math.floor(position.x);
-        mapPosition.y = Math.floor(position.y);
-        mapPosition.z = Math.floor(position.z);
-        // Update mmPosXYZ based on new mapPosition.
-        mmPosX = mapPosition.x - MIN_X;
-        mmPosY = mapPosition.y - MIN_Y;
-        mmPosZ = mapPosition.z;
-        handleControlMapShift();
-    }
-
+    /**
+     * Sets the zoom for the WorldMap.
+     */
     function zoom(n) {
         // Set the zoom value.
         mmZoom = n;
@@ -124,12 +112,40 @@ var WorldMap = (function ($) {
             .attr('width', Math.floor(SIZE_X * n))
             .attr('height', Math.floor(SIZE_Y * n));
         // Handle the map control elements.
-        handleControlMapShift();
+        updateWorldMap();
     }
 
+    /**
+     * Sets the current WorldMap floor.
+     */
     function setFloor(z) {
         $($mmContainerMaps[mmPosZ]).removeClass("active").addClass("inactive");
         $($mmContainerMaps[z]).removeClass("inactive").addClass("active");
+    }
+
+    /**
+     * Gets the position of the WorldMap.
+     */
+    function getMapPosition() {
+        return mapPosition;
+    }
+
+    /**
+     * Sets the WorldMap position and updates the WorldMap.
+     * @param position The new WorldMap position.
+     */
+    function setMapPosition(position) {
+        mapPosition.x = Math.floor(position.x);
+        mapPosition.y = Math.floor(position.y);
+        mapPosition.z = Math.floor(position.z);
+        // Update mmPosXYZ based on new mapPosition.
+        mmPosX = mapPosition.x - MIN_X;
+        mmPosY = mapPosition.y - MIN_Y;
+        if (mapPosition.z !== mmPosZ) {
+            setFloor(mapPosition.z);
+            mmPosZ = mapPosition.z;
+        }
+        updateWorldMap();
     }
 
     function handleDocumentMouseUpEvent() {
@@ -169,14 +185,14 @@ var WorldMap = (function ($) {
         // If the mouse is down, handle the viewport and active area movement.
         if (mouseIsDown) {
             handleViewportShiftEvent(e);
-            handleControlMapShift();
+            updateWorldMap();
         }
     }
 
     // Handle mobile touch move.
     function handleViewportTouchMoveEvent(e) {
         handleViewportShiftEvent(e.originalEvent.targetTouches[0]);
-        handleControlMapShift();
+        updateWorldMap();
     }
 
     function toggleMinimap() {
@@ -249,7 +265,7 @@ var WorldMap = (function ($) {
     $mmViewport.mousedown(handleViewportMouseDownEvent);
     $mmViewport.mousemove(handleViewportMouseMoveEvent);
     $mmViewport.on('touchmove', handleViewportTouchMoveEvent);
-    $mmViewport.click(handleControlMapShift);
+    $mmViewport.click(updateWorldMap);
     $mmContainer.dblclick(function () {
         toggleZoomLevel(+1);
     });

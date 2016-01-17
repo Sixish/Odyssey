@@ -226,7 +226,7 @@
         return false;
     }
     $(document.body).keydown(handleMapShiftControls);
-    
+    // Update the map position to reflect the WorldMap position.
     worldmap.onClose(function () {
         var pos = worldmap.getMapPosition();
         map.position.set(pos.x, pos.y, pos.z);
