@@ -362,7 +362,7 @@ var OdysseyMapRenderer = (function ($) {
             return null;
         }
 
-        tile = map.Map[((x - map.BaseX) << 4) + (y - map.BaseY)];
+        tile = map.Map[((x - map.BaseX) << 8) + (y - map.BaseY)];
 
         if (!tile) {
             return null;

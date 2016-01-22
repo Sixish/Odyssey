@@ -43,7 +43,7 @@ var MapFile = (function () {
      */
     MapFile.getFileX = function (posx) {
         console.assert(typeof posx === 'number', 'Cannot get filename X-component of a non-number.');
-        return ((posx >> 4) & 0xFFF);
+        return ((posx >> 8) & 0xFF);
     };
 
     /**
@@ -54,7 +54,7 @@ var MapFile = (function () {
      */
     MapFile.getFileY = function (posy) {
         console.assert(typeof posy === 'number', 'Cannot get filename Y-component of a non-number.');
-        return ((posy >> 4) & 0xFFF);
+        return ((posy >> 8) & 0xFF);
     };
 
     /**
@@ -67,5 +67,6 @@ var MapFile = (function () {
         console.assert(typeof posz === 'number', 'Cannot get filename Z-component of a non-number.');
         return ((posz >> 0) & 0xFF);
     };
+    
     return MapFile;
 }());

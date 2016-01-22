@@ -17,7 +17,7 @@ var MapFileParserResult = (function () {
      * @returns The unique index of that MapFile - the filename.
      */
     MapFileParserResult.resolveIndex = function (fposx, fposy, fposz) {
-        return ((fposx & 0xFFF) << 0) + ((fposy & 0xFFF) << 12) + ((fposz & 0xF) << 24);
+        return ((fposx & 0xFF) << 0) + ((fposy & 0xFF) << 8) + ((fposz & 0xF) << 16);
     };
     return MapFileParserResult;
 }());
