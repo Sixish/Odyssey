@@ -34,7 +34,7 @@ var WorldMap = (function ($) {
         // Document body.
         $body = $(document.body),
         // Small Minimap.
-        $mmSmallMinimap = $("#OdysseyMiniMap"),
+        $mmSmallMinimap = $("#OdysseyMiniMapCanvas"),
         // Open/close links.
         $mmOpen = $("#OdysseyOpenMinimap"),
         $mmClose = $("#OdysseyMinimapCloseLink"),

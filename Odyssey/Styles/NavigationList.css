@@ -1,10 +1,4 @@
 /* OdysseyNavList */
-#map-container {
-    background-color: #000;
-    padding: 0;
-    border: 0px solid #000;
-    border-radius: 0;
-}
 #OdysseyNavList {
     position: absolute;
     left: 0;

@@ -23,7 +23,7 @@ var Odyssey = window.Odyssey || (function () {
 
     // Map Renderer
     odysseyMapRenderer.initialize(dat, resourceManagerSprites, resourceManagerMaps);
-    odysseyMapRenderer.setSize(11, 11);
+    odysseyMapRenderer.setSize(17, 17);
     odysseyMapRenderer.setCanvas('northwest', document.getElementById("OdysseyMapCanvas-NW"), [-1, -1]);
     odysseyMapRenderer.setCanvas('north', document.getElementById("OdysseyMapCanvas-N"), [0, -1]);
     odysseyMapRenderer.setCanvas('northeast', document.getElementById("OdysseyMapCanvas-NE"), [1, -1]);
@@ -62,5 +62,6 @@ var Odyssey = window.Odyssey || (function () {
             requestAnimationFrame(update);
         };
     }()));
+
     return odysseyMapRenderer;
 }());

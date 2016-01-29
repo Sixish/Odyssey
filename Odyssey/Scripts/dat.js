@@ -135,7 +135,6 @@ var Dat = (function ($) {
 	Dat.load = function load(url) {
 		var that = this, dat = new Dat();
 		dat.setLoading(true);
-		console.log(dat);
 		// Load the Tibia.dat.json file.
 		$.ajax({
 			'url': url,

@@ -28,62 +28,6 @@ body {
     }
 }
 
-#map {
-    position: relative;
-    height: 1056px;
-    width: 1056px;
-    overflow: hidden;
-    margin: 0 auto;
-    background-color: #000;
-}
-#map-viewport {
-    width: inherit;
-    height: inherit;
-    position: relative;
-    background-color: #000000;
-}
-#map-viewport > div {
-    position: absolute;
-    height: inherit;
-    width: inherit;
-}
-#map-grid {
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 1000;
-}
-#map-grid div {
-    width: 30px;
-    height: 30px;
-    border: 1px solid #000000;
-    margin: 0;
-    padding: 0;
-    float: left;
-    opacity: 0.15;
-}
-#map-grid > div:hover,
-#map-grid .active-tile {
-    width: 28px;
-    height: 28px;
-    border-width: 2px;
-    border-style: solid;
-    opacity: 1;
-}
-#map-grid > div:hover {
-    border-color: #e6ffd0;
-}
-#map-grid .active-tile {
-    border-color: #00ff00;
-}
-
-#map-viewport-translator > canvas {
-    position: absolute;
-    left: 0;
-    top: 0;
-}
-
-
 body {
     background-color: #1e1e1e;
     color: #dbdbdb;
@@ -96,48 +40,4 @@ body {
     margin: 352px;
     border: 0.1em solid #01cc01;
     z-index: 999;
-}
-#map-viewport-translator > canvas {
-    opacity: 0.9;
-}
-#map-viewport-translator > #OdysseyMapCanvas-P {
-    opacity: 1;
-}
-#OdysseyMapCanvas-NW {
-    margin: -352px 0 0 -352px;
-    z-index: 0;
-}
-#OdysseyMapCanvas-N {
-    margin: -352px 0 0 0;
-    z-index: 1;
-}
-#OdysseyMapCanvas-NE {
-    margin: -352px 0 0 352px;
-    z-index: 2;
-}
-
-#OdysseyMapCanvas-W {
-    margin: 0 0 0 -352px;
-    z-index: 3;
-}
-#OdysseyMapCanvas-P {
-    margin: 0 0 0 0;
-    z-index: 4;
-}
-#OdysseyMapCanvas-E {
-    margin: 0 0 0 352px;
-    z-index: 5;
-}
-
-#OdysseyMapCanvas-SW {
-    margin: 352px 0 0 -352px;
-    z-index: 6;
-}
-#OdysseyMapCanvas-S {
-    margin: 352px 0 0 0;
-    z-index: 7;
-}
-#OdysseyMapCanvas-SE {
-    margin: 352px 0 0 352px;
-    z-index: 8;
 }

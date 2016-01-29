@@ -219,12 +219,17 @@ var ResourceManager = (function () {
         load(0);
         return promise;
     };
+
     ResourceManager.prototype.getResourceIDByFilename = function (filename) {
-        filename = this.prefix + filename;
-        if (!this.srcs.hasOwnProperty(filename)) {
+        if (!this.hasFile(filename)) {
             throw new Error("Resource " + filename + " does not exist.");
         }
-        return this.srcs[filename];
+        return this.srcs[this.prefix + filename];
     };
+
+    ResourceManager.prototype.hasFile = function (filename) {
+        return this.srcs.hasOwnProperty(this.prefix + filename);
+    };
+
     return ResourceManager;
 }());

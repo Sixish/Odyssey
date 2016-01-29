@@ -131,5 +131,6 @@ var ResourceManagerFile = (function ($) {
     ResourceManagerFile.prototype.getResourceContents = function () {
         return ((this.resource && this.resource.contents) || null);
     };
+
     return ResourceManagerFile;
 }(jQuery));

@@ -1,0 +1,107 @@
+/* OdysseyViewport.css
+ * 
+ * Dimensions : Canvas dimensions are (CSS dimensions) + 1 tile
+ *   to easily handle 64px sprites.
+ * Portability : font-size of the viewport determines the margins
+ * of each canvas.
+ */
+#map-container {
+    background-color: #000;
+    padding: 0;
+    border: 0px solid #000;
+    border-radius: 0;
+}
+#map {
+    position: relative;
+    overflow: hidden;
+    margin: 0 auto;
+    background-color: #000;
+}
+#map-viewport {
+    width: inherit;
+    height: inherit;
+    position: relative;
+    background-color: #000000;
+}
+#map-viewport > div {
+    position: absolute;
+    height: inherit;
+    width: inherit;
+}
+#map-grid {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000;
+    display: none;
+}
+#map-grid div {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #000000;
+    margin: 0;
+    padding: 0;
+    float: left;
+    opacity: 0.15;
+}
+#map-grid > div:hover,
+#map-grid .active-tile {
+    width: 28px;
+    height: 28px;
+    border-width: 2px;
+    border-style: solid;
+    opacity: 1;
+}
+#map-grid > div:hover {
+    border-color: #e6ffd0;
+}
+#map-grid .active-tile {
+    border-color: #00ff00;
+}
+#map-viewport-translator > canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+#map-viewport {
+    font-size: 544px;
+}
+
+#OdysseyMapCanvas-NW {
+    margin: -1em 0 0 -1em;
+    z-index: 0;
+}
+#OdysseyMapCanvas-N {
+    margin: -1em 0 0 0;
+    z-index: 1;
+}
+#OdysseyMapCanvas-NE {
+    margin: -1em 0 0 1em;
+    z-index: 2;
+}
+
+#OdysseyMapCanvas-W {
+    margin: 0 0 0 -1em;
+    z-index: 3;
+}
+#OdysseyMapCanvas-P {
+    margin: 0 0 0 0;
+    z-index: 4;
+}
+#OdysseyMapCanvas-E {
+    margin: 0 0 0 1em;
+    z-index: 5;
+}
+
+#OdysseyMapCanvas-SW {
+    margin: 1em 0 0 -1em;
+    z-index: 6;
+}
+#OdysseyMapCanvas-S {
+    margin: 1em 0 0 0;
+    z-index: 7;
+}
+#OdysseyMapCanvas-SE {
+    margin: 1em 0 0 1em;
+    z-index: 8;
+}

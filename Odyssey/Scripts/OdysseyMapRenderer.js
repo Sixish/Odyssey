@@ -113,12 +113,12 @@ var OdysseyMapRenderer = (function ($) {
     /**
      * The width (x) of a map file.
      */
-    OdysseyMapRenderer.MAPFILE_SIZE_X = 16;
+    OdysseyMapRenderer.MAPFILE_SIZE_X = 256;
 
     /**
      * The height (y) of a map file.
      */
-    OdysseyMapRenderer.MAPFILE_SIZE_Y = 16;
+    OdysseyMapRenderer.MAPFILE_SIZE_Y = 256;
 
     /**
      * The depth (z) of a map file.
@@ -326,6 +326,9 @@ var OdysseyMapRenderer = (function ($) {
     OdysseyMapRenderer.prototype.loadMapFile = function (mapX, mapY, mapZ) {
         var ctx = this, index, id, resource;
         index = MapFileParserResult.resolveIndex(mapX, mapY, mapZ) + ".json";
+        if (!this.mapFileManager.hasFile(index)) {
+            return false;
+        }
         id = this.mapFileManager.getResourceIDByFilename(index);
         resource = this.mapFileManager.getResource(id);
         if (!resource.isLoading()) {
@@ -468,17 +471,6 @@ var OdysseyMapRenderer = (function ($) {
         return this.canvases[z];
     };
 
-    OdysseyMapRenderer.prototype.clear = function () {
-        console.log("I am still used!! OdysseyMapRenderer.prototype.clear");
-        var cvs, i, len;
-        for (i = 0, len = this.canvases.length; i < len; i += 1) {
-            cvs = this.canvases[i];
-            if (cvs) {
-                cvs.getContext("2d").clearRect(0, 0, cvs.width, cvs.height);
-            }
-        }
-    };
-
     /**
      * Tests if the map is loaded at the given position.
      * @param posx the position X component.
@@ -496,6 +488,12 @@ var OdysseyMapRenderer = (function ($) {
 
         // Get the filename for the corresponding MapFile position components.
         filename = MapFileParserResult.resolveIndex(fposx, fposy, fposz) + ".json";
+
+        // Ensure the file exists.
+        if (!this.mapFileManager.hasFile(filename)) {
+            // We don't want to attempt loading this again.
+            return true;
+        }
 
         // Get the resource ID for the filename.
         resourceID = this.mapFileManager.getResourceIDByFilename(filename);
@@ -520,9 +518,13 @@ var OdysseyMapRenderer = (function ($) {
         // Get the filename for the corresponding MapFile position components.
         filename = MapFileParserResult.resolveIndex(fposx, fposy, fposz) + ".json";
 
+        // Ensure the file exists.
+        if (!this.mapFileManager.hasFile(filename)) {
+            return true;
+        }
+
         // Get the resource ID for the filename.
         resourceID = this.mapFileManager.getResourceIDByFilename(filename);
-
         return this.mapFileManager.hasFailed(resourceID);
     };
 
@@ -1200,10 +1202,12 @@ var OdysseyMapRenderer = (function ($) {
             for (y = ys; y <= ye; y += 1) {
                 for (z = zs; z <= ze; z += 1) {
                     filename = MapFileParserResult.resolveIndex(x, y, z) + ".json";
-                    resourceID = this.mapFileManager.getResourceIDByFilename(filename);
-                    if (!this.mapFileManager.isLoaded(resourceID)) {
-                        this.loadMapFile(x, y, z);
-                        return false;
+                    if (this.mapFileManager.hasFile(filename)) {
+                        resourceID = this.mapFileManager.getResourceIDByFilename(filename);
+                        if (!this.mapFileManager.isLoaded(resourceID)) {
+                            this.loadMapFile(x, y, z);
+                            return false;
+                        }
                     }
                 }
             }
@@ -1237,9 +1241,11 @@ var OdysseyMapRenderer = (function ($) {
             for (y = ys; y <= ye; y += 1) {
                 for (z = zs; z <= ze; z += 1) {
                     filename = MapFileParserResult.resolveIndex(x, y, z) + ".json";
-                    resourceID = this.mapFileManager.getResourceIDByFilename(filename);
-                    if (!this.mapFileManager.isLoaded(resourceID)) {
-                        return false;
+                    if (this.mapFileManager.hasFile(filename)) {
+                        resourceID = this.mapFileManager.getResourceIDByFilename(filename);
+                        if (!this.mapFileManager.isLoaded(resourceID)) {
+                            return false;
+                        }
                     }
                 }
             }
