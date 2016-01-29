@@ -1,0 +1,44 @@
+.link-label {
+    text-decoration: underline;
+    display: none;
+}
+#OdysseyToolRow {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 0.5em;
+}
+#OdysseyToolRow > div {
+    float: left;
+    position: relative;
+    z-index: 10000;
+    border-radius: 0.5em;
+    margin: 0 0.2em;
+    display: none;
+}
+#OdysseyToolRow > div#OdysseyToolRowIcon {
+    display: initial;
+}
+#OdysseyToolRow img {
+    vertical-align: middle;
+}
+#OdysseyToolRow a,
+#OdysseyToolRow a:visited {
+    color: #dbdbdb;
+}
+#OdysseyToolRow a.tool-link {
+    text-decoration: none;
+    padding: 0 0.5em;
+}
+
+@media (min-width: 501px) {
+    #OdysseyToolRow > div {
+        display: initial;
+    }
+    #OdysseyToolRow > div#OdysseyToolRowIcon {
+        display: none;
+    }
+    .link-label {
+        display: initial;
+    }
+}

@@ -6,6 +6,10 @@
  * so that we can adjust global styles based on what is active.
  */
 
+/* Tool Row */
+body.state-tools-active #OdysseyToolRow > div {
+    display: initial;
+}
 /* Fullscreen Pixel Minimap */
 body.state-minimap-active #OdysseyLargeMinimap {
     display: initial;
@@ -14,6 +18,7 @@ body.state-minimap-active #OdysseyMiniMap,
 body.state-minimap-active #OdysseyToolTip,
 body.state-minimap-active #OdysseyToolRow,
 body.state-minimap-active #OdysseyNavList,
+body.state-minimap-active #OdysseySearchContainer,
 body.state-minimap-active #map-container {
     display: none;
 }
@@ -26,10 +31,23 @@ body.state-navlist-active #OdysseyMiniMap,
 body.state-navlist-active #OdysseyToolTip,
 body.state-navlist-active #OdysseyToolRow,
 body.state-navlist-active #OdysseyLargeMinimap,
+body.state-navlist-active #OdysseySearchContainer,
 body.state-navlist-active #map-container {
     display: none;
 }
 
+/* Search */
+body.state-search-active #OdysseySearchContainer {
+    display: initial;
+}
+body.state-search-active #OdysseyLargeMinimap,
+body.state-search-active #OdysseyMiniMap,
+body.state-search-active #OdysseyToolTip,
+body.state-search-active #OdysseyToolRow,
+body.state-search-active #OdysseyNavList,
+body.state-search-active #map-container {
+    display: none;
+}
 /* Desktop behaviors */
 @media (min-width: 501px) {
     /*

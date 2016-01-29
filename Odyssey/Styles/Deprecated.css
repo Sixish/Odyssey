@@ -1,0 +1,10 @@
+/* State = inactive */
+#OdysseyNavList .link-label {
+    display: none;
+}
+
+/* State = active */
+body.state-navlist-active #OdysseyNavList .link-label,
+body.state-navlist-active #OdysseyNavList {
+    display: initial;
+}

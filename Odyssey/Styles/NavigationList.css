@@ -21,9 +21,6 @@ body.state-navlist-active #OdysseyNavList {
 #OdysseyCloseNavigation {
     cursor: pointer;
 }
-.link-label {
-    text-decoration: underline;
-}
 h1, h2, h3, h4, h5 {
     margin: 0;
     padding: 0.5em 0;
@@ -56,22 +53,13 @@ h4.OdysseyNavListHeader {
 #OdysseyNavListLocations li:hover {
     background: rgba(0, 0, 0, 0.3);
 }
+#OdysseyNavList {
+    display: none;
+}
 #OdysseyNavList a {
     color: #eaeaea;
     display: block;
     padding: 0.75em 1em;/* Mobile-specific */
-}
-
-/* State = inactive */
-#OdysseyNavList .link-label,
-#OdysseyNavList {
-    display: none;
-}
-
-/* State = active */
-body.state-navlist-active #OdysseyNavList .link-label,
-body.state-navlist-active #OdysseyNavList {
-    display: initial;
 }
 
 @media (min-width: 501px) {

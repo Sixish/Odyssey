@@ -20,6 +20,8 @@
   <script type="text/javascript" src="Odyssey/Scripts/Matrix.js"></script>
   <link rel="stylesheet" href="Odyssey/Styles/Odyssey.css">
   <link rel="stylesheet" href="Odyssey/Styles/OdysseyViewport.css">
+  <link rel="stylesheet" href="Odyssey/Styles/OdysseySearch.css">
+  <link rel="stylesheet" href="Odyssey/Styles/ToolRow.css">
   <link rel="stylesheet" href="Odyssey/Styles/Experimental.css">
   <link rel="stylesheet" href="Odyssey/Styles/ToolTip.css">
   <link rel="stylesheet" href="Odyssey/Styles/Minimap.css">
@@ -29,6 +31,7 @@
   <link rel="stylesheet" href="Odyssey/Styles/State.css">
  </head>
  <body>
+  <h1 id="ContentHeader">Odyssey</h1>
   <!-- Large Odyssey Minimap -->
 <?php include "Odyssey/Includes/LargeMinimap.php"; ?>
   <!-- Small Odyssey Minimap -->
@@ -66,20 +69,28 @@
     </a>
    </div>
    
+   <div id="OdysseyToolSearch">
+    <div class="OdysseyBoxBackground"></div>
+    <a id="OdysseyOpenSearch" href="#" class="tool-link">
+     <img src="Odyssey/Images/Icon-Search.png" alt="Search" />
+     <span class="link-label">Search</span>
+    </a>
+   </div>
+   
   </div>
   
   <!-- Odyssey Navigation List -->
 <?php include "Odyssey/Includes/OdysseyNavList.php"; ?>
   
-  
+  <!-- Odyssey Search -->
+<?php include "Odyssey/Includes/OdysseySearch.php"; ?>
+
   <div id="map-container">
    <div id="map">
     <!-- Odyssey Map Viewport -->
 <?php include "Odyssey/Includes/OdysseyMapViewport.php"; ?>
-    <div class="center"></div>
-    <div id="map-overlay-controls">
-     <div id="map-crosshairs-horizontal"></div>
-     <div id="map-crosshairs-vertical"></div>
+
+   <!-- Odyssey Map Grid -->
 <?php include "Odyssey/Includes/MapGrid.php"; ?>
     </div>
    </div>
@@ -96,6 +107,8 @@
 
   <script type="text/javascript" src="Odyssey/Scripts/Odyssey.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Tooltip.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/OdysseySearch.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/ToolRow.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Search.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/LinkScript.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/OdysseyNavigationList.js"></script>

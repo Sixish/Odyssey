@@ -89,29 +89,3 @@ body.state-minimap-active #OdysseyMinimapContainer,
 #OdysseyMinimapCloseLink:hover {
     color: #cc0000; /* TODO CHANGE */
 }
-#OdysseyToolRow {
-    position: absolute;
-    left: 0;
-    top: 0;
-    margin: 0.5em;
-}
-#OdysseyToolRow > div {
-    float: left;
-    position: relative;
-    z-index: 10000;
-    border-radius: 0.5em;
-    margin: 0 0.2em;
-}
-#OdysseyToolRow img {
-    vertical-align: middle;
-}
-#OdysseyToolRow a,
-#OdysseyToolRow a:visited {
-    color: #dbdbdb;
-}
-#OdysseyToolRow a.tool-link {
-    text-decoration: none;
-    padding: 0 0.5em;
-}
-
-/* Hide all main UI components that don't have the 'active' class. */

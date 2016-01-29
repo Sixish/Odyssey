@@ -17,7 +17,6 @@
     #OdysseyMiniMap {
         position: absolute;
         right: 0px;
-        overflow: hidden;
         margin: 1em;
         z-index: 9000;
     }
