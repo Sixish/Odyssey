@@ -6,5 +6,6 @@
 /* State = active */
 body.state-navlist-active #OdysseyNavList .link-label,
 body.state-navlist-active #OdysseyNavList {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }

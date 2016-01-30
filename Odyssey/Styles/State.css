@@ -8,10 +8,12 @@
 
 /* Tool Row */
 body.state-tools-active #OdysseyToolRow > div {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 /* Fullscreen Pixel Minimap */
 body.state-minimap-active #OdysseyLargeMinimap {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 body.state-minimap-active #OdysseyMiniMap,
@@ -25,6 +27,7 @@ body.state-minimap-active #map-container {
 
 /* Navigation List */
 body.state-navlist-active #OdysseyNavList {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 body.state-navlist-active #OdysseyMiniMap,
@@ -38,6 +41,7 @@ body.state-navlist-active #map-container {
 
 /* Search */
 body.state-search-active #OdysseySearchContainer {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 body.state-search-active #OdysseyLargeMinimap,
@@ -55,12 +59,14 @@ body.state-search-active #map-container {
      * don't hide other UI components.
      */
     body.state-navlist-active #OdysseyNavList {
+        display: block;/* IE does not understand 'initial' */
         display: initial;
     }
     body.state-navlist-active #OdysseyMiniMap,
     body.state-navlist-active #OdysseyToolTip,
     body.state-navlist-active #OdysseyToolRow,
     body.state-navlist-active #map-container {
+        display: block;/* IE does not understand 'initial' */
         display: initial;
     }
 }

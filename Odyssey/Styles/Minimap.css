@@ -6,6 +6,7 @@
 @media (min-width: 501px) {
     /* Desktop */
     #OdysseyMiniMapCanvas {
+        display: block;/* IE does not understand 'initial' */
         display: initial;
         width: 127px;
         height: 127px;
@@ -16,7 +17,7 @@
     }
     #OdysseyMiniMap {
         position: absolute;
-        right: 0px;
+        right: 0;
         margin: 1em;
         z-index: 9000;
     }

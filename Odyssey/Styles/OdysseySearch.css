@@ -7,6 +7,7 @@
     display: none;
 }
 body.state-search-active #OdysseySearchContainer {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 .OdysseyDarkenBackground {
@@ -43,17 +44,17 @@ body.state-search-active #OdysseySearchContainer {
 #OdysseySearchResultsContainer {
     max-height: 20em;
     overflow-y: auto;
-    padding: 0px 0.5em;
+    padding: 0 0.5em;
 }
 #OdysseySearch fieldset {
     border-radius: 0.5em;
 }
 .SearchResults {
-    margin: 0px;
+    margin: 0;
     text-align: left;
-    list-style: outside none none;
+    list-style: none;
     border-radius: 1em;
-    padding: 0px;
+    padding: 0;
     overflow: hidden;
 }
 .SearchResults > li {

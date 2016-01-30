@@ -33,12 +33,14 @@
 
 @media (min-width: 501px) {
     #OdysseyToolRow > div {
+        display: block;/* IE does not understand 'initial' */
         display: initial;
     }
     #OdysseyToolRow > div#OdysseyToolRowIcon {
         display: none;
     }
     .link-label {
+        display: inline;/* IE does not understand 'initial' */
         display: initial;
     }
 }

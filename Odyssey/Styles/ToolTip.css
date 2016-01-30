@@ -5,7 +5,7 @@
 #OdysseyToolTip,
 #OdysseyToolTipItemDetails {
     position: absolute;
-    right: 0px;
+    right: 0;
     top: 200px;
     width: 12em;
     font-size: 0.9em;
@@ -32,7 +32,7 @@
 #OdysseyToolTipHeader {
     font-size: 1.2em;
     text-align: center;
-    border-width: 0px 0px 0.1em;
+    border-width: 0 0 0.1em;
     border-style: solid;
     border-color: #ADADAD;
     line-height: 2em;
@@ -67,6 +67,7 @@
 
 @media (min-width: 501px) {
     #OdysseyToolTip {
+        display: block;/* IE does not understand 'initial' */
         display: initial;
     }
 }
