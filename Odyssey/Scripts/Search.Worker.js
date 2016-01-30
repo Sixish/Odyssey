@@ -1,7 +1,14 @@
 /*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/*global onmessage, postMessage, ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
 (function () {
     "use strict";
+    // Constants
+    var MIN_MAP_X = 0,
+        MIN_MAP_Y = 0,
+        MAX_MAP_X = 256,
+        MAX_MAP_Y = 256,
+        savedMaps = {};
+
     /* Utility functions */
     function extend(a, b) {
         var p;
@@ -30,27 +37,39 @@
         Array.prototype.push.apply(this.creatures, creatures);
     };
 
-    var savedMap = {};
-
     function setData(msg) {
-        extend(savedMap, msg.data);
+        extend(savedMaps, msg.data);
     }
 
-    function resolveOffset(x, y, z) {
-        return (x + (y << 8) + (z << 16));
+    function resolveOffset(x, y) {
+        return (x + (y << 8));
     }
 
-    function getTile(map, x, y, z) {
-        var offset = resolveOffset(x, y, z);
+    function getTile(map, x, y) {
+        var offset = resolveOffset(x, y);
 
-        return map && map.structure && map.structure[offset];
+        return map && map.Map[offset];
+    }
+
+    function mapContainsItem(map, itemID) {
+        return map.Items.indexOf(itemID) !== -1;
+    }
+
+    function mapContainsOneOfItem(map, itemIDs) {
+        var i, len = itemIDs.length;
+        for (i = 0; i < len; i += 1) {
+            if (mapContainsItem(map, itemIDs[i])) {
+                return true;
+            }
+        }
+        return false;
     }
 
     function tileContainsItem(tile, itemID) {
-        if (tile.hasOwnProperty('items')) {
-            var i, len = tile.items.length;
+        if (tile.hasOwnProperty('Items')) {
+            var i, len = tile.Items.length;
             for (i = 0; i < len; i += 1) {
-                if (tile.items[i].id === itemID) {
+                if (tile.Items[i].ID === itemID) {
                     return true;
                 }
             }
@@ -59,11 +78,11 @@
         return false;
     }
 
-    function getTileAbsolutePosition(map, x, y, z) {
+    function getTileAbsolutePosition(map, x, y) {
         return {
-            x: (map.baseX << 8) + x,
-            y: (map.baseY << 8) + y,
-            z: z
+            x: map.BaseX + x,
+            y: map.BaseY + y,
+            z: map.BaseZ
         };
     }
 
@@ -74,84 +93,68 @@
         return false;
     }
 
-    function searchData(o) {
-        var mapX,
-            mapY,
-            mapZ,
-            map,
-            minMapX,
-            minMapY,
-            minMapZ,
-            maxMapX,
-            maxMapY,
-            maxMapZ,
-            i,
-            len,
-            searchItems = (o && o.data && o.data.items) || [],
-            searchCreatures = (o && o.data && o.data.creatures) || [],
-            tile,
-            results = [],
-            itemsFound = [],
-            creaturesFound = [],
-            r;
+    function searchMap(map, o) {
+        var mapX, mapY, i, len, searchItems, searchCreatures, tile, results = [], itemsFound = [], creaturesFound = [], r;
+        searchItems = (o && o.data && o.data.items) || [];
+        searchCreatures = (o && o.data && o.data.creatures) || [];
 
-        minMapX = minMapY = minMapZ = 0;
-        maxMapX = maxMapY = 256;
-        maxMapZ = 16;
+        // Map files have a small array of items for fast searches.
+        if (mapContainsOneOfItem(map, searchItems)) {
+            for (mapX = MIN_MAP_X; mapX < MAX_MAP_X; mapX += 1) {
+                for (mapY = MIN_MAP_Y; mapY < MAX_MAP_Y; mapY += 1) {
+                    tile = getTile(map, mapX, mapY);
+                    if (tile) {
+                        for (i = 0, len = searchItems.length; i < len; i += 1) {
+                            if (tileContainsItem(tile, searchItems[i])) {
+                                itemsFound.push(searchItems[i]);
+                            }
+                        }
 
-        for (map in savedMap) {
-            if (savedMap.hasOwnProperty(map)) {
-                for (mapX = minMapX; mapX < maxMapX; mapX += 1) {
-                    for (mapY = minMapY; mapY < maxMapY; mapY += 1) {
-                        for (mapZ = minMapZ; mapZ < maxMapZ; mapZ += 1) {
+                        for (i = 0, len = searchCreatures.length; i < len; i += 1) {
+                            if (tileContainsCreature(tile, searchCreatures[i])) {
+                                creaturesFound.push(searchCreatures[i]);
+                            }
+                        }
 
-                            tile = getTile(savedMap[map], mapX, mapY, mapZ);
+                        if (itemsFound.length || creaturesFound.length) {
+                            r = new OdysseySearchResult();
+                            r.setPosition(getTileAbsolutePosition(map, mapX, mapY));
 
-                            if (tile) {
-
-                                for (i = 0, len = searchItems.length; i < len; i += 1) {
-                                    if (tileContainsItem(tile, searchItems[i])) {
-                                        itemsFound.push(searchItems[i]);
-                                    }
-                                }
-
-                                for (i = 0, len = searchCreatures.length; i < len; i += 1) {
-                                    if (tileContainsCreature(tile, searchCreatures[i])) {
-                                        creaturesFound.push(searchCreatures[i]);
-                                    }
-                                }
-
-                                if (itemsFound.length || creaturesFound.length) {
-                                    r = new OdysseySearchResult();
-                                    r.setPosition(getTileAbsolutePosition(savedMap[map], mapX, mapY, mapZ));
-
-                                    if (itemsFound.length) {
-                                        r.setItems(itemsFound);
-                                        itemsFound = [];
-                                    }
-
-                                    if (creaturesFound.length) {
-                                        r.setCreatures(creaturesFound);
-                                        creaturesFound = [];
-                                    }
-
-                                    if (o.onfind) {
-                                        o.onfind(r);
-                                    }
-
-                                    results.push(r);
-                                }
-
+                            if (itemsFound.length) {
+                                r.setItems(itemsFound);
+                                itemsFound = [];
                             }
 
+                            if (creaturesFound.length) {
+                                r.setCreatures(creaturesFound);
+                                creaturesFound = [];
+                            }
+
+                            if (o.onfind) {
+                                o.onfind(r);
+                            }
+
+                            results.push(r);
                         }
+
                     }
+                }
+            }
+        }
+    }
+    function searchData(o) {
+        var map, globalResultSet = [], result;
+        for (map in savedMaps) {
+            if (savedMaps.hasOwnProperty(map)) {
+                result = searchMap(savedMaps[map], o);
+                if (result && result.length) {
+                    Array.prototype.push.apply(globalResultSet, result);
                 }
             }
         }
 
         if (o.oncomplete) {
-            o.oncomplete(results);
+            o.oncomplete(globalResultSet);
         }
 
     }
@@ -179,8 +182,7 @@
                     postMessage(JSON.stringify(request));
                 }
             }));
-        }
-        if (msg.action === 'send') {
+        } else if (msg.action === 'send') {
             setData(msg);
         }
     };

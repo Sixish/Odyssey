@@ -1,6 +1,6 @@
 /*jslint browser: true, bitwise: true, devel:true */
 /*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
-(function () {
+var OdysseyMapSearch = (function () {
     "use strict";
     var handlers = {}; // TODO isolate outside global
 
@@ -93,6 +93,7 @@
         if (!this.events.hasOwnProperty(e)) {
             this.events[e] = new OdysseyMapSearchEvent(e);
         }
+        this.events[e].bind(fn);
     };
     OdysseyMapSearchPromise.prototype.fireEvent = function (e, ctx, args) {
         var event;
@@ -109,11 +110,11 @@
         messageListeners = {};
 
         function addMessageListener(messageID, fn) {
-            if (!messageList.hasOwnProperty(messageID)) {
-                messageList[messageID] = [];
+            if (!messageListeners.hasOwnProperty(messageID)) {
+                messageListeners[messageID] = [];
             }
 
-            messageList[messageID].push(fn);
+            messageListeners[messageID].push(fn);
         }
 
         w.onmessage = function (e) {
@@ -163,13 +164,15 @@
 
     }
 
-    onmessage = function handleMessage(e) {
+    window.onmessage = function handleMessage(e) {
         var data = e.data;
 
         if (data.hasOwnProperty('messageID')) {
-            if (handlers.hasOwnProperty(data[messageID])) {
-                handlers[messageID](data);
+            if (handlers.hasOwnProperty(data.messageID)) {
+                handlers[data.messageID](data);
             }
         }
     };
+
+    return OdysseyMapSearch;
 }());

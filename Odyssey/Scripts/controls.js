@@ -21,6 +21,8 @@
         // Which tiles currently have the .active-tile class?
         cssFocused = {},
         gridElements = [],
+        $body = $(document.body),
+        $inputs = $("input"),
         requestAnimationFrame = window.requestAnimationFrame;
 
     // Utility
@@ -223,12 +225,52 @@
         if (hasChanged) {
             worldmap.setMapPosition(position);
         }
-        return false;
+        // Do not return false. It will prevent event bubbling
+        // i.e. it will disable other controls and browser behaviors.
+        //return false;
     }
-    $(document.body).keydown(handleMapShiftControls);
-    // Update the map position to reflect the WorldMap position.
+
+    /**
+     * Handles keydown events for input fields. Prevents event propagation
+     * to ensure other controls do not respond to this event.
+     */
+    function inputPreventPropagation(e) {
+        e.stopPropagation();
+    }
+
+    // DOM event listeners.
+    $body.keydown(handleMapShiftControls);
+    $inputs.keydown(inputPreventPropagation);
+    // Search
+    $("#OdysseySearchSubmit").click(function () {
+        var search = new OdysseyMapSearch(), $results, $positions, $criteria, i = 0;
+        $results = $("#OdysseySearchResultsContainer li");
+        $positions = $("#OdysseySearchResultsContainer li .search-position");
+        $criteria = $("#OdysseySearchResultsContainer li .search-criteria");
+        search.send(map.maps);
+        $results.removeClass('active').addClass('inactive');
+        search.find({
+            items: [
+                parseInt($("#OdysseySearchItemID").val(), 10)
+            ],
+            onfind: function (e) {
+                var result = e.result;
+                $($results[i]).removeClass('inactive').addClass('active');
+                $($criteria[i]).text(result.items.join(", "));
+                $($positions[i]).text(result.position.x + ", " + result.position.y + ", " + result.position.z);
+                i += 1;
+            },
+            oncomplete: function (e) {
+                // Completed search.
+            }
+        });
+    });
+
+    // WorldMap event listeners.
     worldmap.onClose(function () {
+        // Update the map position to reflect the WorldMap position.
         var pos = worldmap.getMapPosition();
         map.position.set(pos.x, pos.y, pos.z);
     });
+
 }(window.Odyssey, window.WorldMap, jQuery));

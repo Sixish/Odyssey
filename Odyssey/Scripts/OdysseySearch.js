@@ -18,4 +18,6 @@
     // Event listeners.
     $header.click(toggleSearch);
     $linkOpenSearch.click(toggleSearch);
+    // Background click hides search.
+    $("#OdysseySearchContainer > .OdysseyDarkenBackground").click(toggleSearch);
 }(jQuery));
