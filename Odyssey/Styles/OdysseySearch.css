@@ -49,6 +49,20 @@ body.state-search-active #OdysseySearchContainer {
 #OdysseySearch fieldset {
     border-radius: 0.5em;
 }
+
+#OdysseySearch fieldset {
+    font-size: 1.5em;
+}
+input {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit;
+    border-radius: 0.2em;
+    background-color: #363636;
+}
+button, input[type="submit"] {
+    margin: 0.5em;
+}
 .SearchResults {
     margin: 0;
     text-align: left;

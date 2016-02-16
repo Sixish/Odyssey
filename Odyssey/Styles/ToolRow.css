@@ -17,6 +17,7 @@
     display: none;
 }
 #OdysseyToolRow > div#OdysseyToolRowIcon {
+    display: block;/* IE does not understand 'initial' */
     display: initial;
 }
 #OdysseyToolRow img {

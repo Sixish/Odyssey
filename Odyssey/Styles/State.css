@@ -55,8 +55,7 @@ body.state-search-active #map-container {
 /* Desktop behaviors */
 @media (min-width: 501px) {
     /*
-     * Desktop: if Navigation List is active,
-     * don't hide other UI components.
+     * Desktop: if Navigation List is active, don't hide other UI components.
      */
     body.state-navlist-active #OdysseyNavList {
         display: block;/* IE does not understand 'initial' */
@@ -69,4 +68,12 @@ body.state-search-active #map-container {
         display: block;/* IE does not understand 'initial' */
         display: initial;
     }
+    /*
+     * Desktop: if Search is active, don't hide the map.
+     */
+    body.state-search-active #map-container {
+        display: block;/* IE does not understand 'initial' */
+        display: initial;
+    }
+    
 }
