@@ -1,0 +1,3439 @@
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+    34 |    OdysseyController.NOCTRL_MULTIPLIER = 1;
+    35 |
+    36 |    OdysseyController.prototype.setContext = function (ctx) {
+-----------------------------------------------------^
+    37 |        this.context = ctx;
+    38 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+    38 |    };
+    39 |
+    40 |    function handleMapShiftControls(e) {
+------------^
+    41 |        var position = map.getPosition(),
+    42 |            ctrlModifier = e.ctrlKey ? OdysseyController.CTRL_MULTIPLIER : OdysseyController.NOCTRL_MULTIPLIER,
+
+Function is missing documentation for parameter `e`. at Scripts/Controller/Controls.js :
+   114 |     * to ensure other controls do not respond to this event.
+   115 |     */
+   116 |    function inputPreventPropagation(e) {
+------------^
+   117 |        e.stopPropagation();
+   118 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   133 |                parseInt($("#OdysseySearchItemID").val(), 10)
+   134 |            ],
+   135 |            onfind: function (e) {
+----------------------------^
+   136 |                var result = e.result;
+   137 |                $($results[i]).removeClass('inactive').addClass('active');
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   140 |                i += 1;
+   141 |            },
+   142 |            oncomplete: function (e) {
+--------------------------------^
+   143 |                // Completed search.
+   144 |            }
+
+Missing param type at Scripts/Controller/Controls.js :
+   151 |        /**
+   152 |         * Shifts the viewport based on the event arguments.
+   153 |         * @param e the event arguments.
+--------------------------^
+   154 |         */
+   155 |        function handleViewportShiftEvent(e) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   172 |        // Handle mouse up / down for WorldMap state.
+   173 |        // Mouse up on document to catch movements over the bounds of the viewport.
+   174 |        function handleDocumentMouseUpEvent() {
+----------------^
+   175 |            mousedownActive = false;
+   176 |        }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   177 |
+   178 |        // Mouse down on viewport.
+   179 |        function handleViewportMouseDownEvent() {
+----------------^
+   180 |            mousedownActive = true;
+   181 |            // Prevent drag selection.
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   184 |
+   185 |        // Handle desktop mouse move.
+   186 |        function handleViewportMouseMoveEvent(e) {
+----------------^
+   187 |            // If the mouse is down, handle the viewport and active area movement.
+   188 |            if (mousedownActive) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Controls.js :
+   192 |
+   193 |        // Handle mobile touch move.
+   194 |        function handleViewportTouchMoveEvent(e) {
+----------------^
+   195 |            handleViewportShiftEvent(e.originalEvent.targetTouches[0]);
+   196 |        }
+
+Expect valid jsdoc-block definition at Scripts/Controller/LinkScript.js :
+     8 |    var controller = Odyssey.getController();
+     9 |
+    10 |    function OdysseyLinkHandler() {}
+------------^
+    11 |
+    12 |    /**
+
+Missing param type at Scripts/Controller/LinkScript.js :
+    12 |    /**
+    13 |     * Tests whether a DOM element is an anchor element (link).
+    14 |     * @param e the DOM element.
+----------------------^
+    15 |     * @returns true if the element is an anchor (<a>) element; false otherwise.
+    16 |     */
+
+Missing type in @returns statement at Scripts/Controller/LinkScript.js :
+    14 |     * @param e the DOM element.
+    15 |     * @returns true if the element is an anchor (<a>) element; false otherwise.
+    16 |     */
+---------------^
+    17 |    OdysseyLinkHandler.isLink = function isLink(e) {
+    18 |        return e.nodeName === "A";
+
+Missing param type at Scripts/Controller/LinkScript.js :
+    21 |    /**
+    22 |     * Handles click events for Odyssey links.
+    23 |     * @param e the click event object.
+----------------------^
+    24 |     */
+    25 |    OdysseyLinkHandler.handleLinkClickEvent = function handleLinkClickEvent(e) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    12 |        SOUTHEAST = OdysseyTileMap.CANVAS_SOUTHEAST_ID;
+    13 |
+    14 |    function getX(c, canvases) {
+------------^
+    15 |        if (c === canvases[EAST] || c === canvases[NORTHEAST] || c === canvases[SOUTHEAST]) {
+    16 |            return 1;
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    22 |    }
+    23 |
+    24 |    function getY(c, canvases) {
+------------^
+    25 |        if (c === canvases[SOUTH] || c === canvases[SOUTHWEST] || c === canvases[SOUTHEAST]) {
+    26 |            return 1;
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    32 |    }
+    33 |
+    34 |    function dispatchControlProxy(fn, ctx) {
+------------^
+    35 |        return function (e) {
+    36 |            fn.call(ctx, e);
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    38 |    }
+    39 |
+    40 |    function OdysseyController() {
+------------^
+    41 |        this.eventDispatcher = new OdysseyEventDispatcher();
+    42 |        this.context = null;
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    46 |    OdysseyController.prototype = new OdysseyEventDispatchInterface();
+    47 |    OdysseyController.CONTROL_OVERLAY_CLICK = 0;
+    48 |    OdysseyController.handleControlOverlayClick = function (e) {
+----------------------------------------------------------^
+    49 |        var Odyssey = this.context,
+    50 |            xOffset = getX(e.target, Odyssey.overlayCanvases) * Odyssey.sizeX,
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    59 |    };
+    60 |
+    61 |    OdysseyController.prototype.setControlManager = function (controlManager) {
+------------------------------------------------------------^
+    62 |        this.controlmanager = controlManager;
+    63 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    62 |        this.controlmanager = controlManager;
+    63 |    };
+    64 |    OdysseyController.prototype.setContext = function (Odyssey) {
+-----------------------------------------------------^
+    65 |        this.context = Odyssey;
+    66 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    65 |        this.context = Odyssey;
+    66 |    };
+    67 |    OdysseyController.prototype.disable = function (controlID) {
+--------------------------------------------------^
+    68 |        this.controlStates[controlID] = false;
+    69 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    68 |        this.controlStates[controlID] = false;
+    69 |    };
+    70 |    OdysseyController.prototype.enable = function (controlID) {
+-------------------------------------------------^
+    71 |        this.controlStates[controlID] = true;
+    72 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    71 |        this.controlStates[controlID] = true;
+    72 |    };
+    73 |    OdysseyController.prototype.isDisabled = function (controlID) {
+-----------------------------------------------------^
+    74 |        return (this.controlStates[controlID] === false);
+    75 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    74 |        return (this.controlStates[controlID] === false);
+    75 |    };
+    76 |    OdysseyController.prototype.isEnabled = function (controlID) {
+----------------------------------------------------^
+    77 |        // Controls are enabled by default.
+    78 |        return (!this.isDisabled(controlID));
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
+    78 |        return (!this.isDisabled(controlID));
+    79 |    };
+    80 |    OdysseyController.prototype.initialize = function () {
+-----------------------------------------------------^
+    81 |        var ctx = this;
+    82 |        // Initialize the canvas selection.
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyControlManager.js :
+     1 |var OdysseyControlManager = (function () {
+     2 |    "use strict";
+     3 |    function OdysseyControlManager() {
+------------^
+     4 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     5 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+     2 |var OdysseyOverlay = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyOverlay() {
+------------^
+     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     6 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+     7 |    OdysseyOverlay.prototype = new OdysseyEventDispatchInterface();
+     8 |
+     9 |    OdysseyOverlay.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
+-----------------------------------------^
+    10 |        cvs.getContext('2d').clearRect(xStart, yStart, width, height);
+    11 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+    11 |    };
+    12 |
+    13 |    OdysseyOverlay.unpaintAll = function unpaintAll() {
+----------------------------------------^
+    14 |        var canvases = this.context.overlayCanvases, i, len = canvases.length;
+    15 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+    18 |    };
+    19 |
+    20 |    OdysseyOverlay.prototype.select = function select(pos) {
+----------------------------------------------^
+    21 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
+    22 |        if (index !== -1) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+    28 |    };
+    29 |
+    30 |    OdysseyOverlay.prototype.unselect = function unselect(pos) {
+------------------------------------------------^
+    31 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
+    32 |        if (index !== -1) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+    36 |    };
+    37 |
+    38 |    OdysseyOverlay.prototype.setContext = function (Odyssey) {
+--------------------------------------------------^
+    39 |        this.context = Odyssey;
+    40 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlay.js :
+    40 |    };
+    41 |
+    42 |    OdysseyOverlay.prototype.update = function (model) {
+----------------------------------------------^
+    43 |        // TODO. Need access to position.
+    44 |    };
+
+Sentence must start with an upper case letter at Scripts/Controller/Search.js :
+     2 |/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+     3 |/**
+     4 | * Search.js
+------------------^
+     5 | *
+     6 | * Provides the search methods. Search functionality works by sending map
+
+Sentence must start with an upper case letter at Scripts/Controller/Search.js :
+     5 | *
+     6 | * Provides the search methods. Search functionality works by sending map
+     7 | * data to the Search.Worker.js script, which performs the search asynchronously.
+-------------------------------------^
+     8 | * @TODO remove View components.
+     9 | * @TODO isolate classes (1 file = 1 class).
+
+Unavailable tag TODO at Scripts/Controller/Search.js :
+     6 | * Provides the search methods. Search functionality works by sending map
+     7 | * data to the Search.Worker.js script, which performs the search asynchronously.
+     8 | * @TODO remove View components.
+-----------^
+     9 | * @TODO isolate classes (1 file = 1 class).
+    10 | */
+
+Unavailable tag TODO at Scripts/Controller/Search.js :
+     7 | * data to the Search.Worker.js script, which performs the search asynchronously.
+     8 | * @TODO remove View components.
+     9 | * @TODO isolate classes (1 file = 1 class).
+-----------^
+    10 | */
+    11 |var OdysseyMapSearch = (function () {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    13 |    var handlers = {}; // TODO isolate outside global
+    14 |
+    15 |    function OdysseyMapSearchRequest(action) {
+------------^
+    16 |        this.action = action;
+    17 |        this.data = {};
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    18 |    }
+    19 |
+    20 |    function OdysseyMapSearchArguments() {
+------------^
+    21 |        this.items = [];
+    22 |        this.creatures = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    28 |    }
+    29 |
+    30 |    OdysseyMapSearchArguments.fromConfiguration = function (o) {
+----------------------------------------------------------^
+    31 |        var args = new OdysseyMapSearchArguments(), prop;
+    32 |
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    66 |    };
+    67 |
+    68 |    OdysseyMapSearchArguments.prototype.setItems = function (arr) {
+-----------------------------------------------------------^
+    69 |        Array.prototype.push.apply(this.items, arr);
+    70 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    70 |    };
+    71 |
+    72 |    OdysseyMapSearchArguments.prototype.setCreatures = function (arr) {
+---------------------------------------------------------------^
+    73 |        Array.prototype.push.apply(this.creatures, arr);
+    74 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    74 |    };
+    75 |
+    76 |    OdysseyMapSearchArguments.prototype.setSections = function (arr) {
+--------------------------------------------------------------^
+    77 |        Array.prototype.push.apply(this.sections, arr);
+    78 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    78 |    };
+    79 |
+    80 |    function OdysseyMapSection(from, to) {
+------------^
+    81 |        this.from = from;
+    82 |        this.to = to;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    87 |    OdysseyMapSearchArguments.prototype.duration = 250;
+    88 |
+    89 |    function OdysseyMapSearchEvent(eventName) {
+------------^
+    90 |        this.name = eventName;
+    91 |        this.listeners = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    91 |        this.listeners = [];
+    92 |    }
+    93 |    OdysseyMapSearchEvent.prototype.bind = function (callback) {
+---------------------------------------------------^
+    94 |        this.listeners.push(callback);
+    95 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    95 |    };
+    96 |
+    97 |    function OdysseyMapSearchPromise() {
+------------^
+    98 |        this.events = {};
+    99 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+    98 |        this.events = {};
+    99 |    }
+   100 |    OdysseyMapSearchPromise.prototype.on = function (e, fn) {
+---------------------------------------------------^
+   101 |        if (!this.events.hasOwnProperty(e)) {
+   102 |            this.events[e] = new OdysseyMapSearchEvent(e);
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   104 |        this.events[e].bind(fn);
+   105 |    };
+   106 |    OdysseyMapSearchPromise.prototype.fireEvent = function (e, ctx, args) {
+----------------------------------------------------------^
+   107 |        var event;
+   108 |        if (this.events.hasOwnProperty(e)) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   112 |    };
+   113 |
+   114 |    function OdysseyMapSearch() {
+------------^
+   115 |        var w, requestID, messageListeners;
+   116 |        w = new Worker("Odyssey/Scripts/Search.Worker.js");
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   118 |        messageListeners = {};
+   119 |
+   120 |        function addMessageListener(messageID, fn) {
+----------------^
+   121 |            if (!messageListeners.hasOwnProperty(messageID)) {
+   122 |                messageListeners[messageID] = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   126 |        }
+   127 |
+   128 |        w.onmessage = function (e) {
+------------------------------^
+   129 |            var msg = JSON.parse(e.data), id;
+   130 |
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   135 |        };
+   136 |
+   137 |        this.send = function (data) {
+----------------------------^
+   138 |            var request = new OdysseyMapSearchRequest("send");
+   139 |            request.requestID += 1;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   142 |        };
+   143 |
+   144 |        this.find = function (o) {
+----------------------------^
+   145 |            var request = new OdysseyMapSearchRequest("search"), id;
+   146 |            id = request.requestID;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   147 |            requestID += 1;
+   148 |
+   149 |            handlers[request.requestID] = function (r) {
+--------------------------------------------------^
+   150 |                if (r.status === 'complete') {
+   151 |                    // We have finished searching the whole map.
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.js :
+   173 |    }
+   174 |
+   175 |    window.onmessage = function handleMessage(e) {
+-------------------------------^
+   176 |        var data = e.data;
+   177 |
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    11 |
+    12 |    /* Utility functions */
+    13 |    function extend(a, b) {
+------------^
+    14 |        var p;
+    15 |        for (p in b) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    21 |    }
+    22 |
+    23 |    function OdysseySearchResult() {
+------------^
+    24 |        this.position = {};
+    25 |        this.items = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    26 |        this.creatures = [];
+    27 |    }
+    28 |    OdysseySearchResult.prototype.setPosition = function (o) {
+--------------------------------------------------------^
+    29 |        this.position.x = o.x;
+    30 |        this.position.y = o.y;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    31 |        this.position.z = o.z;
+    32 |    };
+    33 |    OdysseySearchResult.prototype.setItems = function (items) {
+-----------------------------------------------------^
+    34 |        Array.prototype.push.apply(this.items, items);
+    35 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    34 |        Array.prototype.push.apply(this.items, items);
+    35 |    };
+    36 |    OdysseySearchResult.prototype.setCreatures = function (creatures) {
+---------------------------------------------------------^
+    37 |        Array.prototype.push.apply(this.creatures, creatures);
+    38 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    38 |    };
+    39 |
+    40 |    function setData(msg) {
+------------^
+    41 |        extend(savedMaps, msg.data);
+    42 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    42 |    }
+    43 |
+    44 |    function resolveOffset(x, y) {
+------------^
+    45 |        return (x + (y << 8));
+    46 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    46 |    }
+    47 |
+    48 |    function getTile(map, x, y) {
+------------^
+    49 |        var offset = resolveOffset(x, y);
+    50 |
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    52 |    }
+    53 |
+    54 |    function mapContainsItem(map, itemID) {
+------------^
+    55 |        return map.Items.indexOf(itemID) !== -1;
+    56 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    56 |    }
+    57 |
+    58 |    function mapContainsOneOfItem(map, itemIDs) {
+------------^
+    59 |        var i, len = itemIDs.length;
+    60 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    66 |    }
+    67 |
+    68 |    function tileContainsItem(tile, itemID) {
+------------^
+    69 |        var i, len;
+    70 |        if (tile.hasOwnProperty('Items')) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    80 |    }
+    81 |
+    82 |    function getTileAbsolutePosition(map, x, y) {
+------------^
+    83 |        return {
+    84 |            x: map.BaseX + x,
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    88 |    }
+    89 |
+    90 |    function tileContainsCreature(tile, creature) {
+------------^
+    91 |        if (tile.hasOwnProperty('creatures')) {
+    92 |            return tile.creatures.indexOf(creature) !== -1;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    95 |    }
+    96 |
+    97 |    function searchMap(map, o) {
+------------^
+    98 |        var mapX, mapY, i, len, searchItems, searchCreatures, tile, results = [], itemsFound = [], creaturesFound = [], r;
+    99 |        searchItems = (o && o.data && o.data.items) || [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+   144 |        }
+   145 |    }
+   146 |    function searchData(o) {
+------------^
+   147 |        var map, globalResultSet = [], result;
+   148 |        for (map in savedMaps) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+   161 |    }
+   162 |
+   163 |    onmessage = function (e) {
+------------------------^
+   164 |        var msg = JSON.parse(e.data);
+   165 |
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+   167 |        if (msg.action === 'search') {
+   168 |            searchData(extend(msg, {
+   169 |                onfind: function (result) {
+--------------------------------^
+   170 |                    var request = {
+   171 |                        result: result,
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+   175 |                    postMessage(JSON.stringify(request));
+   176 |                },
+   177 |                oncomplete: function (results) {
+------------------------------------^
+   178 |                    var request = {
+   179 |                        results: results,
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyBinaryFileErrorEvent.js :
+     2 |var OdysseyBinaryFileErrorEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyBinaryFileErrorEvent(context) {
+------------^
+     5 |        this.file = context;
+     6 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyBinaryFileLoadedEvent.js :
+     2 |var OdysseyBinaryFileLoadedEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyBinaryFileLoadedEvent(context) {
+------------^
+     5 |        this.file = context;
+     6 |    }
+
+Missing line feed at file end at Scripts/Events/OdysseyDatLoadedEvent.js :
+     9 |
+    10 |    return OdysseyDatLoadedEvent;
+    11 |}());
+-------------^
+
+Function is missing documentation for parameter `eventName`. at Scripts/Events/OdysseyEvent.js :
+     4 |     * @constructor
+     5 |     */
+     6 |    function OdysseyEvent(eventName) {
+------------^
+     7 |        this.type = eventName;
+     8 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEvent.js :
+     8 |    }
+     9 |    OdysseyEvent.prototype.propagationStopped = false;
+    10 |    OdysseyEvent.prototype.stopPropagation = function () {
+-----------------------------------------------------^
+    11 |        this.propagationStopped = true;
+    12 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEvent.js :
+    12 |    };
+    13 |    OdysseyEvent.prototype.defaultPrevented = false;
+    14 |    OdysseyEvent.prototype.preventDefault = function () {
+----------------------------------------------------^
+    15 |        this.defaultPrevented = true;
+    16 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+     9 |    }
+    10 |    OdysseyEventDispatcher.prototype.parent = null;
+    11 |    OdysseyEventDispatcher.prototype.getParentEventHandler = function () {
+---------------------------------------------------------------------^
+    12 |        return this.parent;
+    13 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+    12 |        return this.parent;
+    13 |    };
+    14 |    OdysseyEventDispatcher.prototype.setParentEventHandler = function (parent) {
+---------------------------------------------------------------------^
+    15 |        this.parent = parent;
+    16 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+    15 |        this.parent = parent;
+    16 |    };
+    17 |    OdysseyEventDispatcher.prototype.getEventHandler = function (type) {
+---------------------------------------------------------------^
+    18 |        if (!this.events.hasOwnProperty(type)) {
+    19 |            this.events[type] = new OdysseyEventHandler(type);
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+    22 |    };
+    23 |
+    24 |    OdysseyEventDispatcher.prototype.dispatch = function (ctx, e) {
+--------------------------------------------------------^
+    25 |        var handler = this.getEventHandler(e.type), parent;
+    26 |        handler.fire(ctx, e);
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+    34 |    };
+    35 |
+    36 |    OdysseyEventDispatcher.prototype.addListener = function (type, fn) {
+-----------------------------------------------------------^
+    37 |        var handler = this.getEventHandler(type);
+    38 |        handler.addListener(fn);
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
+    39 |    };
+    40 |
+    41 |    OdysseyEventDispatcher.prototype.removeListener = function (type, fn) {
+--------------------------------------------------------------^
+    42 |        var handler = this.getEventHandler(type);
+    43 |        handler.removeListener(fn);
+
+Sentence must start with an upper case letter at Scripts/Events/OdysseyEventDispatchInterface.js :
+     1 |/**
+     2 | * OdysseyEventDispatchInterface.js
+-----------------------------------------^
+     3 | * Provides the necessary methods for classes implementing event dispatchers.
+     4 | * This class should not be used alone, but instead should be used as an
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/Events/OdysseyEventDispatchInterface.js :
+     1 |/**
+     2 | * OdysseyEventDispatchInterface.js
+     3 | * Provides the necessary methods for classes implementing event dispatchers.
+-----------^
+     4 | * This class should not be used alone, but instead should be used as an
+     5 | * extension of an object's prototype.
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatchInterface.js :
+     7 |var OdysseyEventDispatchInterface = (function () {
+     8 |    "use strict";
+     9 |    function OdysseyEventDispatchInterface() {}
+------------^
+    10 |
+    11 |    /**
+
+Missing type in @returns statement at Scripts/Events/OdysseyEventDispatchInterface.js :
+    11 |    /**
+    12 |     * Gets the object's parent event handler.
+    13 |     * @returns the object's parent event handler.
+---------------^
+    14 |     */
+    15 |    OdysseyEventDispatchInterface.prototype.getParentEventHandler = function () {
+
+Missing param type at Scripts/Events/OdysseyEventDispatchInterface.js :
+    20 |     * Sets the object's parent event handler. This event handler will receive
+    21 |     * bubbling events.
+    22 |     * @param parent the event handler to receive bubbling events.
+----------------------^
+    23 |     */
+    24 |    OdysseyEventDispatchInterface.prototype.setParentEventHandler = function (parent) {
+
+Missing param type at Scripts/Events/OdysseyEventDispatchInterface.js :
+    27 |    /**
+    28 |     * Binds an event listener to be called when the event is triggered.
+    29 |     * @param type the event type.
+----------------------^
+    30 |     * @param fn the function to call when the event is triggered.
+    31 |     */
+
+Missing param type at Scripts/Events/OdysseyEventDispatchInterface.js :
+    28 |     * Binds an event listener to be called when the event is triggered.
+    29 |     * @param type the event type.
+    30 |     * @param fn the function to call when the event is triggered.
+----------------------^
+    31 |     */
+    32 |    OdysseyEventDispatchInterface.prototype.addEventListener = function (type, fn) {
+
+Missing param type at Scripts/Events/OdysseyEventDispatchInterface.js :
+    37 |     * Removes an event listener so that it is no longer called when
+    38 |     * the event is triggered.
+    39 |     * @param type the event type.
+----------------------^
+    40 |     * @param fn the function to remove.
+    41 |     */
+
+Missing param type at Scripts/Events/OdysseyEventDispatchInterface.js :
+    38 |     * the event is triggered.
+    39 |     * @param type the event type.
+    40 |     * @param fn the function to remove.
+----------------------^
+    41 |     */
+    42 |    OdysseyEventDispatchInterface.prototype.removeEventListener = function (type, fn) {
+
+Function is missing documentation for parameter `event`. at Scripts/Events/OdysseyEventDispatchInterface.js :
+    47 |     * Dispatches an event.
+    48 |     */
+    49 |    OdysseyEventDispatchInterface.prototype.dispatchEvent = function (event, defaultAction) {
+--------------------------------------------------------------------^
+    50 |        this.eventDispatcher.dispatch(this, event);
+    51 |        if (!event.defaultPrevented && defaultAction !== undefined) {
+
+Function is missing documentation for parameter `defaultAction`. at Scripts/Events/OdysseyEventDispatchInterface.js :
+    47 |     * Dispatches an event.
+    48 |     */
+    49 |    OdysseyEventDispatchInterface.prototype.dispatchEvent = function (event, defaultAction) {
+--------------------------------------------------------------------^
+    50 |        this.eventDispatcher.dispatch(this, event);
+    51 |        if (!event.defaultPrevented && defaultAction !== undefined) {
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
+     1 |var OdysseyEventHandler = (function () {
+     2 |    "use strict";
+     3 |    function OdysseyEventHandler(type) {
+------------^
+     4 |        this.type = type;
+     5 |        this.listeners = [];
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
+     5 |        this.listeners = [];
+     6 |    }
+     7 |    OdysseyEventHandler.prototype.fire = function (ctx, e) {
+-------------------------------------------------^
+     8 |        var i, len = this.listeners.length, parent;
+     9 |        for (i = 0; (i < len && !e.propagationStopped); i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
+    12 |    };
+    13 |
+    14 |    OdysseyEventHandler.prototype.addListener = function (fn) {
+--------------------------------------------------------^
+    15 |        this.listeners.push(fn);
+    16 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
+    16 |    };
+    17 |
+    18 |    OdysseyEventHandler.prototype.removeListener = function (fn) {
+-----------------------------------------------------------^
+    19 |        var index = this.listeners.indexOf(fn), len;
+    20 |        if (index !== -1) {
+
+Missing line feed at file end at Scripts/Events/OdysseyInitializedEvent.js :
+     9 |
+    10 |    return OdysseyInitializedEvent;
+    11 |}());
+-------------^
+
+Function is missing documentation for parameter `pos`. at Scripts/Events/OdysseyMapClickEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapClickEvent(pos) {
+------------^
+     6 |        this.position = pos;
+     7 |    }
+
+Function is missing documentation for parameter `map`. at Scripts/Events/OdysseyMapFileLoadedEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapFileLoadedEvent(map) {
+------------^
+     6 |        this.target = map;
+     7 |    }
+
+Function is missing documentation for parameter `target`. at Scripts/Events/OdysseyMapPositionChangedEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapPositionChangedEvent(target, position) {
+------------^
+     6 |        this.position = position;
+     7 |    }
+
+Function is missing documentation for parameter `position`. at Scripts/Events/OdysseyMapPositionChangedEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapPositionChangedEvent(target, position) {
+------------^
+     6 |        this.position = position;
+     7 |    }
+
+Function is missing documentation for parameter `target`. at Scripts/Events/OdysseyMapZoomChangedEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapZoomChangedEvent(target, zoom) {
+------------^
+     6 |        this.zoom = zoom;
+     7 |    }
+
+Function is missing documentation for parameter `zoom`. at Scripts/Events/OdysseyMapZoomChangedEvent.js :
+     3 |     * @constructor
+     4 |     */
+     5 |    function OdysseyMapZoomChangedEvent(target, zoom) {
+------------^
+     6 |        this.zoom = zoom;
+     7 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseySpriteIndexLoadedEvent.js :
+     2 |var OdysseySpriteIndexLoadedEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseySpriteIndexLoadedEvent() {}
+------------^
+     5 |    OdysseySpriteIndexLoadedEvent.prototype = new OdysseyEvent('OdysseySpriteIndexLoaded');
+     6 |
+
+Missing line feed at file end at Scripts/Events/OdysseySpriteIndexLoadedEvent.js :
+     6 |
+     7 |    return OdysseySpriteIndexLoadedEvent;
+     8 |}());
+-------------^
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapHideEvent.js :
+     2 |var OdysseyWorldMapHideEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyWorldMapHideEvent() {}
+------------^
+     5 |    OdysseyWorldMapHideEvent.prototype = new OdysseyEvent('OdysseyWorldMapHide');
+     6 |
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapShowEvent.js :
+     2 |var OdysseyWorldMapShowEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyWorldMapShowEvent() {}
+------------^
+     5 |    OdysseyWorldMapShowEvent.prototype = new OdysseyEvent('OdysseyWorldMapShow');
+     6 |
+
+Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapToggleEvent.js :
+     2 |var OdysseyWorldMapToggleEvent = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyWorldMapToggleEvent() {}
+------------^
+     5 |    OdysseyWorldMapToggleEvent.prototype = new OdysseyEvent('OdysseyWorldMapToggle');
+     6 |
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+     3 |var ResourceManager = (function () {
+     4 |    "use strict";
+     5 |    function ResourceManager() {
+------------^
+     6 |        var fileUID = 0;
+     7 |
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    17 |
+    18 |        // Getter for private fileUID.
+    19 |        this.getUniqueFileID = function () {
+---------------------------------------^
+    20 |            var id = fileUID;
+    21 |            fileUID += 1;
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    25 |
+    26 |    // Gets the Bitmask ID (property name of the bitmask) for imageID.
+    27 |    ResourceManager.getFileBitmaskID = function (imageID) {
+-----------------------------------------------^
+    28 |        return Math.floor(imageID / 32);
+    29 |    };
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    29 |    };
+    30 |    // Gets the Bitmask value (if state is true) for imageID.
+    31 |    ResourceManager.getFileBitmask = function (imageID) {
+---------------------------------------------^
+    32 |        return 1 << (imageID % 32);
+    33 |    };
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    34 |
+    35 |    // Set the filepath prefix.
+    36 |    ResourceManager.prototype.setFilepathPrefix = function (path) {
+----------------------------------------------------------^
+    37 |        this.prefix = path;
+    38 |    };
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    38 |    };
+    39 |
+    40 |    ResourceManager.prototype.addImage = function (src) {
+-------------------------------------------------^
+    41 |        var uid, filename, rmImage, bitmaskID;
+    42 |
+
+Missing param type at Scripts/Generics/ResourceManager.js :
+    61 |    /**
+    62 |     * Manage a binary file.
+    63 |     * @param src the filepath for the binary file.
+----------------------^
+    64 |     */
+    65 |    ResourceManager.prototype.addBinaryFile = function (src) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    84 |    };
+    85 |
+    86 |    ResourceManager.prototype.getValue = function (resourceID) {
+-------------------------------------------------^
+    87 |        var bitmaskID, bitmask;
+    88 |        bitmaskID = ResourceManager.getFileBitmaskID(resourceID);
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    92 |    };
+    93 |
+    94 |    ResourceManager.prototype.setValue = function (resourceID, value) {
+-------------------------------------------------^
+    95 |        var bitmaskID, bitmask;
+    96 |        if (value !== this.getValue(resourceID)) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   103 |        return false;
+   104 |    };
+   105 |    ResourceManager.prototype.getResource = function (index) {
+----------------------------------------------------^
+   106 |        if (this.resources[index] === undefined) {
+   107 |            throw new Error("Resource not found at index " + index + ".");
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   109 |        return this.resources[index];
+   110 |    };
+   111 |    ResourceManager.prototype.getResourceImage = function (index) {
+---------------------------------------------------------^
+   112 |        var resource = this.getResource(index);
+   113 |        if (resource) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   115 |        }
+   116 |    };
+   117 |    ResourceManager.prototype.getResourceData = function (index) {
+--------------------------------------------------------^
+   118 |        var resource = this.getResource(index);
+   119 |        if (resource) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   121 |        }
+   122 |    };
+   123 |    ResourceManager.prototype.isLoading = function () {
+--------------------------------------------------^
+   124 |        var i, len = arguments.length, resource;
+   125 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   132 |    };
+   133 |
+   134 |    ResourceManager.prototype.isLoaded = function () {
+-------------------------------------------------^
+   135 |        var i, len = arguments.length, resource;
+   136 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   143 |    };
+   144 |
+   145 |    ResourceManager.prototype.isNotFound = function () {
+---------------------------------------------------^
+   146 |        var i, len = arguments.length, resource;
+   147 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   154 |    };
+   155 |
+   156 |    ResourceManager.prototype.hasFailed = function () {
+--------------------------------------------------^
+   157 |        // Returns true if at least one has failed.
+   158 |        var i, len = arguments.length, resource;
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   166 |    };
+   167 |
+   168 |    ResourceManager.prototype.load = function () {
+---------------------------------------------^
+   169 |        var files = arguments, promise = new ResourceManagerPromise(), resource, loaded = 0, loading = 0, count = arguments.length, rm = this, onLoadImageProxy, onErrorImageProxy;
+   170 |
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   170 |
+   171 |        // Controlled resource loading.
+   172 |        function load(i) {
+----------------^
+   173 |            if (files[i] === undefined) {
+   174 |                return;
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   191 |        }
+   192 |
+   193 |        onErrorImageProxy = function onErrorImageProxy(ctx, i) {
+------------------------------------^
+   194 |            return function () {
+   195 |                loaded += 1;
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   202 |        };
+   203 |
+   204 |        onLoadImageProxy = function onLoadImageProxy(ctx, i) {
+-----------------------------------^
+   205 |            return function () {
+   206 |                loaded += 1;
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   218 |    };
+   219 |
+   220 |    ResourceManager.prototype.getResourceIDByFilename = function (filename) {
+----------------------------------------------------------------^
+   221 |        if (!this.hasFile(filename)) {
+   222 |            throw new Error("Resource " + filename + " does not exist.");
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+   225 |    };
+   226 |
+   227 |    ResourceManager.prototype.hasFile = function (filename) {
+------------------------------------------------^
+   228 |        return this.srcs.hasOwnProperty(this.prefix + filename);
+   229 |    };
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManagerPromise.js :
+     3 |var ResourceManagerPromise = (function () {
+     4 |    "use strict";
+     5 |    function ResourceManagerPromise() {
+------------^
+     6 |        this.queue = [];
+     7 |        this.events = {};
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManagerPromise.js :
+     7 |        this.events = {};
+     8 |    }
+     9 |    ResourceManagerPromise.prototype.addEventListener = function (eventName, fn) {
+----------------------------------------------------------------^
+    10 |        if (!this.events.hasOwnProperty(eventName)) {
+    11 |            this.events[eventName] = [];
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManagerPromise.js :
+    13 |        this.events[eventName].push(fn);
+    14 |    };
+    15 |    ResourceManagerPromise.prototype.fire = function (e) {
+----------------------------------------------------^
+    16 |        var i, events = this.events[e], len;
+    17 |        if (events !== undefined) {
+
+Expect valid jsdoc-block definition at Scripts/Main.js :
+   121 |
+   122 |            // Populates the resource manager.
+   123 |            function populate() {
+--------------------^
+   124 |                OdysseySpriteIndex.populateResourceManager(spriteIndex, view.getResourceManager());
+   125 |            }
+
+Expected sr but got src at Scripts/Model/BinaryFile.js :
+    14 |    /**
+    15 |     * Creates a new BinaryFile from the source.
+    16 |     * @param src the source of the BinaryFile.
+----------------------^
+    17 |     */
+    18 |    BinaryFile.load = function (sr) {
+
+Missing param type at Scripts/Model/BinaryFile.js :
+    14 |    /**
+    15 |     * Creates a new BinaryFile from the source.
+    16 |     * @param src the source of the BinaryFile.
+----------------------^
+    17 |     */
+    18 |    BinaryFile.load = function (sr) {
+
+Function is missing documentation for parameter `src`. at Scripts/Model/BinaryFile.js :
+    25 |     * Loads the BinaryFile.
+    26 |     */
+    27 |    BinaryFile.prototype.load = function (src) {
+----------------------------------------^
+    28 |        var ctx = this;
+    29 |        $.ajax({
+
+Expect valid jsdoc-block definition at Scripts/Model/BinaryFile.js :
+    29 |        $.ajax({
+    30 |            url: src,
+    31 |            success: function (e) {
+-----------------------------^
+    32 |                ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
+    33 |            },
+
+Expect valid jsdoc-block definition at Scripts/Model/BinaryFile.js :
+    32 |                ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
+    33 |            },
+    34 |            error: function (e) {
+---------------------------^
+    35 |                ctx.dispatchEvent(new OdysseyBinaryFileErrorEvent(ctx));
+    36 |            }
+
+Invalid jsdoc-block definition at Scripts/Model/BinaryFile.js :
+    38 |    };
+    39 |
+    40 |    /**
+------------^
+    41 |     *
+    42 |     */
+
+Function is missing documentation for parameter `string`. at Scripts/Model/BinaryFile.js :
+    41 |     *
+    42 |     */
+    43 |    BinaryFile.prototype.setContents = function (string) {
+-----------------------------------------------^
+    44 |        this.contents = string;
+    45 |    };
+
+Missing param type at Scripts/Model/Dat.js :
+   136 |    /**
+   137 |     * Sets the Dat's data.
+   138 |     * @param o The Tibia.dat data.
+----------------------^
+   139 |     */
+   140 |    Dat.prototype.setData = function (o) {
+
+Missing param type at Scripts/Model/Dat.js :
+   144 |    /**
+   145 |     * Sets the Dat's loaded state.
+   146 |     * @param val Whether or not the Dat is loaded.
+----------------------^
+   147 |     */
+   148 |    Dat.prototype.setLoaded = function (val) {
+
+Missing param type at Scripts/Model/Dat.js :
+   153 |    /**
+   154 |     * Sets the Dat's loading state.
+   155 |     * @param val Whether or not the Dat is loading.
+----------------------^
+   156 |     */
+   157 |    Dat.prototype.setLoading = function (val) {
+
+Missing param type at Scripts/Model/Dat.js :
+   161 |    /**
+   162 |     * Gets the map color for the item with the corresponding item ID.
+   163 |     * @param id the ID corresponding to the item.
+----------------------^
+   164 |     * @returns the map color corresponding to the item, or null if it has no map color.
+   165 |     */
+
+Missing type in @returns statement at Scripts/Model/Dat.js :
+   163 |     * @param id the ID corresponding to the item.
+   164 |     * @returns the map color corresponding to the item, or null if it has no map color.
+   165 |     */
+---------------^
+   166 |    Dat.prototype.getMapColor = function (id) {
+   167 |        if (!this.data[0][id].hasOwnProperty(Dat.ATTRIBUTE_ID_MINIMAP)) {
+
+Sentence must start with an upper case letter at Scripts/Model/Dat.js :
+   172 |
+   173 |    /**
+   174 |     * Gets the Tibia.dat object for the item ID.
+------------------------------^
+   175 |     * @param id the ID corresponding to the item.
+   176 |     * @returns the object corresponding to the item.
+
+Missing param type at Scripts/Model/Dat.js :
+   173 |    /**
+   174 |     * Gets the Tibia.dat object for the item ID.
+   175 |     * @param id the ID corresponding to the item.
+----------------------^
+   176 |     * @returns the object corresponding to the item.
+   177 |     */
+
+Missing type in @returns statement at Scripts/Model/Dat.js :
+   175 |     * @param id the ID corresponding to the item.
+   176 |     * @returns the object corresponding to the item.
+   177 |     */
+---------------^
+   178 |    Dat.prototype.getItem = function (id) {
+   179 |        return this.data[0][id] || null;
+
+Missing param type at Scripts/Model/Dat.js :
+   182 |    /**
+   183 |     * Loads the Dat file at the url.
+   184 |     * @param url The filepath for the Tibia.dat.json file.
+----------------------^
+   185 |     * @returns an instance of the Dat object. This object is
+   186 |     * later populated with data.
+
+Missing type in @returns statement at Scripts/Model/Dat.js :
+   184 |     * @param url The filepath for the Tibia.dat.json file.
+   185 |     * @returns an instance of the Dat object. This object is
+   186 |     * later populated with data.
+-----------^
+   187 |     * @static
+   188 |     */
+
+Expect valid jsdoc-block definition at Scripts/Model/Dat.js :
+   194 |            'url': url,
+   195 |            'dataType': 'json',
+   196 |            'success': function (obj) {
+-------------------------------^
+   197 |                // Tibia.dat.json loaded.
+   198 |                // Save data for future use.
+
+Missing param type at Scripts/Model/MapFile.js :
+     5 |    /**
+     6 |     * Pads a string with padding until the string has a certain length.
+     7 |     * @param str The string to pad.
+----------------------^
+     8 |     * @param width The width to pad until.
+     9 |     * @param padding Optional. The text to use as padding. Default is "0".
+
+Missing param type at Scripts/Model/MapFile.js :
+     6 |     * Pads a string with padding until the string has a certain length.
+     7 |     * @param str The string to pad.
+     8 |     * @param width The width to pad until.
+----------------------^
+     9 |     * @param padding Optional. The text to use as padding. Default is "0".
+    10 |     * @returns The string with padding applied.
+
+Missing param type at Scripts/Model/MapFile.js :
+     7 |     * @param str The string to pad.
+     8 |     * @param width The width to pad until.
+     9 |     * @param padding Optional. The text to use as padding. Default is "0".
+----------------------^
+    10 |     * @returns The string with padding applied.
+    11 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFile.js :
+    11 |     */
+    12 |    function padLeft(str, width, padding) {
+    13 |        while (str.length < width) {
+---------------^
+    14 |            str = (padding || '0') + str;
+    15 |        }
+
+Missing param type at Scripts/Model/MapFile.js :
+    20 |     * Creates a new MapFile corresponding to 16 x 16 x 1 world tiles.
+    21 |     * @constructor
+    22 |     * @param x The base X value. Use MapFile.getFileX to get the base X value from position.
+----------------------^
+    23 |     * @param y The base Y value. Use MapFile.getFileY to get the base Y value from position.
+    24 |     * @param z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
+
+Missing param type at Scripts/Model/MapFile.js :
+    21 |     * @constructor
+    22 |     * @param x The base X value. Use MapFile.getFileX to get the base X value from position.
+    23 |     * @param y The base Y value. Use MapFile.getFileY to get the base Y value from position.
+----------------------^
+    24 |     * @param z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
+    25 |     */
+
+Missing param type at Scripts/Model/MapFile.js :
+    22 |     * @param x The base X value. Use MapFile.getFileX to get the base X value from position.
+    23 |     * @param y The base Y value. Use MapFile.getFileY to get the base Y value from position.
+    24 |     * @param z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
+----------------------^
+    25 |     */
+    26 |    function MapFile(x, y, z) {
+
+Missing param type at Scripts/Model/MapFile.js :
+    39 |     * Gets the MapFile's base X value.
+    40 |     * @static
+    41 |     * @param posx The map X position.
+----------------------^
+    42 |     * @returns The base X value corresponding to position posx.
+    43 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFile.js :
+    42 |     * @returns The base X value corresponding to position posx.
+    43 |     */
+    44 |    MapFile.getFileX = function (posx) {
+---------------^
+    45 |        console.assert(typeof posx === 'number', 'Cannot get filename X-component of a non-number.');
+    46 |        return ((posx >> 8) & 0xFF);
+
+Missing param type at Scripts/Model/MapFile.js :
+    50 |     * Gets the MapFile's base Y value.
+    51 |     * @static
+    52 |     * @param posy The map Y position.
+----------------------^
+    53 |     * @returns The base Y value corresponding to position posy.
+    54 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFile.js :
+    53 |     * @returns The base Y value corresponding to position posy.
+    54 |     */
+    55 |    MapFile.getFileY = function (posy) {
+---------------^
+    56 |        console.assert(typeof posy === 'number', 'Cannot get filename Y-component of a non-number.');
+    57 |        return ((posy >> 8) & 0xFF);
+
+Missing param type at Scripts/Model/MapFile.js :
+    61 |     * Gets the MapFile's base Z value.
+    62 |     * @static
+    63 |     * @param posz The map Z position.
+----------------------^
+    64 |     * @returns The base Z value corresponding to position posz.
+    65 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFile.js :
+    64 |     * @returns The base Z value corresponding to position posz.
+    65 |     */
+    66 |    MapFile.getFileZ = function (posz) {
+---------------^
+    67 |        console.assert(typeof posz === 'number', 'Cannot get filename Z-component of a non-number.');
+    68 |        return ((posz >> 0) & 0xFF);
+
+Missing param type at Scripts/Model/MapFileParser.js :
+    15 |     * to the tile's array index inside the Explored property
+    16 |     * of the JSON object.
+    17 |     * @param posx The x-position of the tile, relative to the base X position.
+----------------------^
+    18 |     * @param posy The y-position of the tile, relative to the base Y position.
+    19 |     * @returns The index corresponding to the number which contains the Explored flag of the tile.
+
+Missing param type at Scripts/Model/MapFileParser.js :
+    16 |     * of the JSON object.
+    17 |     * @param posx The x-position of the tile, relative to the base X position.
+    18 |     * @param posy The y-position of the tile, relative to the base Y position.
+----------------------^
+    19 |     * @returns The index corresponding to the number which contains the Explored flag of the tile.
+    20 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFileParser.js :
+    19 |     * @returns The index corresponding to the number which contains the Explored flag of the tile.
+    20 |     */
+    21 |    MapFileParser.getTileIndex = function (posx, posy) {
+---------------^
+    22 |        return Math.floor((posy / 32) + (posx << 3));
+    23 |    };
+
+Missing param type at Scripts/Model/MapFileParser.js :
+    27 |     * to the tile's offset inside the Explored integer corresponding
+    28 |     * to the tile.
+    29 |     * @param posx The x-position of the tile.
+----------------------^
+    30 |     * @param posy The y-position of the tile.
+    31 |     * @returns The tile's index within an Explored bit flag set.
+
+Missing param type at Scripts/Model/MapFileParser.js :
+    28 |     * to the tile.
+    29 |     * @param posx The x-position of the tile.
+    30 |     * @param posy The y-position of the tile.
+----------------------^
+    31 |     * @returns The tile's index within an Explored bit flag set.
+    32 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFileParser.js :
+    31 |     * @returns The tile's index within an Explored bit flag set.
+    32 |     */
+    33 |    MapFileParser.getTileOffset = function (posx, posy) {
+---------------^
+    34 |        return (posy % 32);
+    35 |    };
+
+Missing param type at Scripts/Model/MapFileParser.js :
+    37 |    /**
+    38 |     * Parses the text of a MapFile.
+    39 |     * @param str The text of the MapFile.
+----------------------^
+    40 |     * @returns The parsed map.
+    41 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFileParser.js :
+    39 |     * @param str The text of the MapFile.
+    40 |     * @returns The parsed map.
+    41 |     */
+---------------^
+    42 |    MapFileParser.prototype.parse = function (str) {
+    43 |        var map = JSON.parse(str), x, y, explored, tileMap, mapReplacement = [], i = 0, baseX, baseY;
+
+Missing param type at Scripts/Model/MapFileParserResult.js :
+    12 |    /**
+    13 |     * Resolves the filename index for the MapFile.
+    14 |     * @param fposx The MapFile base X value.
+----------------------^
+    15 |     * @param fposy The MapFile base Y value.
+    16 |     * @param fposz The MapFile base Z value.
+
+Missing param type at Scripts/Model/MapFileParserResult.js :
+    13 |     * Resolves the filename index for the MapFile.
+    14 |     * @param fposx The MapFile base X value.
+    15 |     * @param fposy The MapFile base Y value.
+----------------------^
+    16 |     * @param fposz The MapFile base Z value.
+    17 |     * @returns The unique index of that MapFile - the filename.
+
+Missing param type at Scripts/Model/MapFileParserResult.js :
+    14 |     * @param fposx The MapFile base X value.
+    15 |     * @param fposy The MapFile base Y value.
+    16 |     * @param fposz The MapFile base Z value.
+----------------------^
+    17 |     * @returns The unique index of that MapFile - the filename.
+    18 |     */
+
+Missing type in @returns statement at Scripts/Model/MapFileParserResult.js :
+    18 |     */
+    19 |    MapFileParserResult.resolveIndex = function (fposx, fposy, fposz) {
+    20 |        return ((fposx & 0xFF) << 0) + ((fposy & 0xFF) << 8) + ((fposz & 0xF) << 16);
+---------------^
+    21 |    };
+    22 |    return MapFileParserResult;
+
+Missing param type at Scripts/Model/Matrix.js :
+     4 |    /**
+     5 |     * Creates a new Matrix3D. Generic matrix of 3 dimensions.
+     6 |     * @param x The x component of the Matrix3D.
+----------------------^
+     7 |     * @param y The y component of the Matrix3D.
+     8 |     * @param z The z component of the Matrix3D.
+
+Missing param type at Scripts/Model/Matrix.js :
+     5 |     * Creates a new Matrix3D. Generic matrix of 3 dimensions.
+     6 |     * @param x The x component of the Matrix3D.
+     7 |     * @param y The y component of the Matrix3D.
+----------------------^
+     8 |     * @param z The z component of the Matrix3D.
+     9 |     * @constructor
+
+Missing param type at Scripts/Model/Matrix.js :
+     6 |     * @param x The x component of the Matrix3D.
+     7 |     * @param y The y component of the Matrix3D.
+     8 |     * @param z The z component of the Matrix3D.
+----------------------^
+     9 |     * @constructor
+    10 |     */
+
+Missing param type at Scripts/Model/Matrix.js :
+    17 |    /**
+    18 |     * Sets the Matrix3D x, y, z components.
+    19 |     * @param x The new X component.
+----------------------^
+    20 |     * @param y The new Y component.
+    21 |     * @param z The new Z component.
+
+Missing param type at Scripts/Model/Matrix.js :
+    18 |     * Sets the Matrix3D x, y, z components.
+    19 |     * @param x The new X component.
+    20 |     * @param y The new Y component.
+----------------------^
+    21 |     * @param z The new Z component.
+    22 |     */
+
+Missing param type at Scripts/Model/Matrix.js :
+    19 |     * @param x The new X component.
+    20 |     * @param y The new Y component.
+    21 |     * @param z The new Z component.
+----------------------^
+    22 |     */
+    23 |    Matrix3D.prototype.set = function set(x, y, z) {
+
+Missing param type at Scripts/Model/Matrix.js :
+    29 |    /**
+    30 |     * Sets the Matrix3D x, y, z components.
+    31 |     * @param m2 The Matrix3D-like object whose x, y, z components are used.
+----------------------^
+    32 |     */
+    33 |    Matrix3D.prototype.setEqual = function setEqual(m2) {
+
+Missing param type at Scripts/Model/Matrix.js :
+    37 |    /**
+    38 |     * Shifts the Matrix3D x, y, z components.
+    39 |     * @param offsetX the value to add to the x component.
+----------------------^
+    40 |     * @param offsetY the value to add to the y component.
+    41 |     * @param offsetZ the value to add to the z component.
+
+Missing param type at Scripts/Model/Matrix.js :
+    38 |     * Shifts the Matrix3D x, y, z components.
+    39 |     * @param offsetX the value to add to the x component.
+    40 |     * @param offsetY the value to add to the y component.
+----------------------^
+    41 |     * @param offsetZ the value to add to the z component.
+    42 |     * @returns the Matrix3D object.
+
+Missing param type at Scripts/Model/Matrix.js :
+    39 |     * @param offsetX the value to add to the x component.
+    40 |     * @param offsetY the value to add to the y component.
+    41 |     * @param offsetZ the value to add to the z component.
+----------------------^
+    42 |     * @returns the Matrix3D object.
+    43 |     */
+
+Missing type in @returns statement at Scripts/Model/Matrix.js :
+    43 |     */
+    44 |    Matrix3D.prototype.shift = function (offsetX, offsetY, offsetZ) {
+    45 |        console.assert(this.x !== null && this.y !== null && this.z !== null, "Cannot shift nulled matrix.");
+---------------^
+    46 |        this.set(this.x + offsetX, this.y + offsetY, this.z + offsetZ);
+    47 |        return this;
+
+Missing param type at Scripts/Model/Matrix.js :
+    50 |    /**
+    51 |     * Compares the x, y, z components.
+    52 |     * @param x the value to compare with the x component.
+----------------------^
+    53 |     * @param y the value to compare with the y component.
+    54 |     * @param z the value to compare with the z component.
+
+Missing param type at Scripts/Model/Matrix.js :
+    51 |     * Compares the x, y, z components.
+    52 |     * @param x the value to compare with the x component.
+    53 |     * @param y the value to compare with the y component.
+----------------------^
+    54 |     * @param z the value to compare with the z component.
+    55 |     * @returns true if the input x, y, z match the values of the corresponding Matrix components; false otherwise.
+
+Missing param type at Scripts/Model/Matrix.js :
+    52 |     * @param x the value to compare with the x component.
+    53 |     * @param y the value to compare with the y component.
+    54 |     * @param z the value to compare with the z component.
+----------------------^
+    55 |     * @returns true if the input x, y, z match the values of the corresponding Matrix components; false otherwise.
+    56 |     */
+
+Missing type in @returns statement at Scripts/Model/Matrix.js :
+    56 |     */
+    57 |    Matrix3D.prototype.equals = function equals(x, y, z) {
+    58 |        return this.x === x && this.y === y && this.z === z;
+---------------^
+    59 |    };
+    60 |
+
+Missing param type at Scripts/Model/Matrix.js :
+    61 |    /**
+    62 |     * Compares the x, y, z components of the Matrix3D.
+    63 |     * @param m2 the Matrix3D-like object to compare against the context Matrix3D.
+----------------------^
+    64 |     * @returns true if the x, y, z components of both objects match.
+    65 |     */
+
+Missing type in @returns statement at Scripts/Model/Matrix.js :
+    63 |     * @param m2 the Matrix3D-like object to compare against the context Matrix3D.
+    64 |     * @returns true if the x, y, z components of both objects match.
+    65 |     */
+---------------^
+    66 |    Matrix3D.prototype.equalsMatrix = function (m2) {
+    67 |        return this.equals(m2.x, m2.y, m2.z);
+
+Missing type in @returns statement at Scripts/Model/Matrix.js :
+    70 |    /**
+    71 |     * Gets the string representation of the Matrix3D.
+    72 |     * @returns the string representation of the Matrix3D.
+---------------^
+    73 |     */
+    74 |    Matrix3D.prototype.toString = function () {
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyGeography.js :
+     2 |var OdysseyGeography = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyGeography() {
+------------^
+     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     6 |    }
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
+     2 |var OdysseyMapIndex = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyMapIndex() {
+------------^
+     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     6 |        this.startPosition = new Matrix3D(0, 0, 0);
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
+     8 |    }
+     9 |    OdysseyMapIndex.prototype = new OdysseyEventDispatchInterface();
+    10 |    OdysseyMapIndex.prototype.setStartPosition = function (x, y, z) {
+---------------------------------------------------------^
+    11 |        this.startPosition.set(x, y, z);
+    12 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
+    11 |        this.startPosition.set(x, y, z);
+    12 |    };
+    13 |    OdysseyMapIndex.prototype.setEndPosition = function (x, y, z) {
+-------------------------------------------------------^
+    14 |        this.endPosition.set(x, y, z);
+    15 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
+    14 |        this.endPosition.set(x, y, z);
+    15 |    };
+    16 |    OdysseyMapIndex.prototype.addToResourceManager = function (resourceManager) {
+-------------------------------------------------------------^
+    17 |        var x, y, z, startX, startY, startZ, endX, endY, endZ;
+    18 |        startX = MapFile.getFileX(this.startPosition.x);
+
+Missing line feed at file end at Scripts/Model/OdysseyMapIndex.js :
+    34 |
+    35 |    return OdysseyMapIndex;
+    36 |}());
+-------------^
+
+Sentence must start with an upper case letter at Scripts/Model/OdysseyModel.js :
+     2 |/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface, MapFileParser, MapFileParserResult, MapFile, OdysseyMapFileLoadedEvent*/
+     3 |/**
+     4 | * OdysseyModel.js
+------------------------^
+     5 | *
+     6 | * Contains game information. This includes:
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/Model/OdysseyModel.js :
+     4 | * OdysseyModel.js
+     5 | *
+     6 | * Contains game information. This includes:
+-----------^
+     7 | * - World : the world of the game.
+     8 | * - Dat : a Dat context on which the map is based on.
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/Model/OdysseyModel.js :
+     5 | *
+     6 | * Contains game information. This includes:
+     7 | * - World : the world of the game.
+-------------^
+     8 | * - Dat : a Dat context on which the map is based on.
+     9 | */
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyModel.js :
+    10 |var OdysseyModel = (function () {
+    11 |    "use strict";
+    12 |    function OdysseyModel() {
+------------^
+    13 |        this.eventDispatcher = new OdysseyEventDispatcher();
+    14 |        this.world = null;
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    47 |    /**
+    48 |     * Parses the text of a map file.
+    49 |     * @param input the text of the map file to parse.
+----------------------^
+    50 |     */
+    51 |    OdysseyModel.prototype.parseMapDataFile = function (input) {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    60 |    /**
+    61 |     * Loads the map file at the given position.
+    62 |     * @param mapX the map file's base X component. Use MapFile.getFileX to get this value.
+----------------------^
+    63 |     * @param mapY the map file's base Y component. Use MapFile.getFileY to get this value.
+    64 |     * @param mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    61 |     * Loads the map file at the given position.
+    62 |     * @param mapX the map file's base X component. Use MapFile.getFileX to get this value.
+    63 |     * @param mapY the map file's base Y component. Use MapFile.getFileY to get this value.
+----------------------^
+    64 |     * @param mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
+    65 |     */
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    62 |     * @param mapX the map file's base X component. Use MapFile.getFileX to get this value.
+    63 |     * @param mapY the map file's base Y component. Use MapFile.getFileY to get this value.
+    64 |     * @param mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
+----------------------^
+    65 |     */
+    66 |    OdysseyModel.prototype.loadMapFile = function (mapX, mapY, mapZ) {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    83 |    /**
+    84 |     * Gets the map file at the position x, y, z.
+    85 |     * @param x the position X component.
+----------------------^
+    86 |     * @param y the position Y component.
+    87 |     * @param z the position Z component.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    84 |     * Gets the map file at the position x, y, z.
+    85 |     * @param x the position X component.
+    86 |     * @param y the position Y component.
+----------------------^
+    87 |     * @param z the position Z component.
+    88 |     * @returns the map containing the position.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    85 |     * @param x the position X component.
+    86 |     * @param y the position Y component.
+    87 |     * @param z the position Z component.
+----------------------^
+    88 |     * @returns the map containing the position.
+    89 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+    89 |     */
+    90 |    OdysseyModel.prototype.getMap = function (x, y, z) {
+    91 |        var mapOffset = MapFileParserResult.resolveIndex(MapFile.getFileX(x), MapFile.getFileY(y), MapFile.getFileZ(z));
+---------------^
+    92 |        return this.maps[mapOffset];
+    93 |    };
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    95 |    /**
+    96 |     * Gets the items on the tile at position x, y, z.
+    97 |     * @param x the position X component.
+----------------------^
+    98 |     * @param y the position Y component.
+    99 |     * @param z the position Z component.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    96 |     * Gets the items on the tile at position x, y, z.
+    97 |     * @param x the position X component.
+    98 |     * @param y the position Y component.
+----------------------^
+    99 |     * @param z the position Z component.
+   100 |     * @returns an array of map items.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+    97 |     * @param x the position X component.
+    98 |     * @param y the position Y component.
+    99 |     * @param z the position Z component.
+----------------------^
+   100 |     * @returns an array of map items.
+   101 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   101 |     */
+   102 |    OdysseyModel.prototype.getTileItems = function (x, y, z) {
+   103 |        var map = this.getMap(x, y, z), tile;
+---------------^
+   104 |
+   105 |        if (!map) {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   118 |    /**
+   119 |     * Tests if the map is loaded at the given position.
+   120 |     * @param posx the position X component.
+----------------------^
+   121 |     * @param posy the position Y component.
+   122 |     * @param posz the position Z component.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   119 |     * Tests if the map is loaded at the given position.
+   120 |     * @param posx the position X component.
+   121 |     * @param posy the position Y component.
+----------------------^
+   122 |     * @param posz the position Z component.
+   123 |     * @returns true if the map is loaded; false otherwise.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   120 |     * @param posx the position X component.
+   121 |     * @param posy the position Y component.
+   122 |     * @param posz the position Z component.
+----------------------^
+   123 |     * @returns true if the map is loaded; false otherwise.
+   124 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   124 |     */
+   125 |    OdysseyModel.prototype.mapIsLoaded = function (posx, posy, posz) {
+   126 |        var fposx, fposy, fposz, filename, resourceID;
+---------------^
+   127 |
+   128 |        // Get the MapFile position components.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   148 |    /**
+   149 |     * Tests if a map has failed to load.
+   150 |     * @param posx the position X component.
+----------------------^
+   151 |     * @param posy the position Y component.
+   152 |     * @param posz the position Z component.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   149 |     * Tests if a map has failed to load.
+   150 |     * @param posx the position X component.
+   151 |     * @param posy the position Y component.
+----------------------^
+   152 |     * @param posz the position Z component.
+   153 |     * @returns true if the map is loaded; false otherwise.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   150 |     * @param posx the position X component.
+   151 |     * @param posy the position Y component.
+   152 |     * @param posz the position Z component.
+----------------------^
+   153 |     * @returns true if the map is loaded; false otherwise.
+   154 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   154 |     */
+   155 |    OdysseyModel.prototype.mapHasFailed = function (posx, posy, posz) {
+   156 |        var fposx, fposy, fposz, filename, resourceID;
+---------------^
+   157 |        // Get the MapFile position components.
+   158 |        fposx = MapFile.getFileX(posx);
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   175 |    /**
+   176 |     * Loads the maps in the position range.
+   177 |     * @param xs the start X coordinate.
+----------------------^
+   178 |     * @param ys the start Y coordinate.
+   179 |     * @param zs the start Z coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   176 |     * Loads the maps in the position range.
+   177 |     * @param xs the start X coordinate.
+   178 |     * @param ys the start Y coordinate.
+----------------------^
+   179 |     * @param zs the start Z coordinate.
+   180 |     * @param xe the end X coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   177 |     * @param xs the start X coordinate.
+   178 |     * @param ys the start Y coordinate.
+   179 |     * @param zs the start Z coordinate.
+----------------------^
+   180 |     * @param xe the end X coordinate.
+   181 |     * @param ye the end Y coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   178 |     * @param ys the start Y coordinate.
+   179 |     * @param zs the start Z coordinate.
+   180 |     * @param xe the end X coordinate.
+----------------------^
+   181 |     * @param ye the end Y coordinate.
+   182 |     * @param ze the end Z coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   179 |     * @param zs the start Z coordinate.
+   180 |     * @param xe the end X coordinate.
+   181 |     * @param ye the end Y coordinate.
+----------------------^
+   182 |     * @param ze the end Z coordinate.
+   183 |     * @returns true if all maps are loaded; false otherwise.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   180 |     * @param xe the end X coordinate.
+   181 |     * @param ye the end Y coordinate.
+   182 |     * @param ze the end Z coordinate.
+----------------------^
+   183 |     * @returns true if all maps are loaded; false otherwise.
+   184 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   187 |
+   188 |        // Get the base values for the maps.
+   189 |        xs = MapFile.getFileX(xs);
+---------------^
+   190 |        ys = MapFile.getFileY(ys);
+   191 |        zs = MapFile.getFileZ(zs);
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   214 |    /**
+   215 |     * Tests if maps are loaded in the position range.
+   216 |     * @param xs the start X coordinate.
+----------------------^
+   217 |     * @param ys the start Y coordinate.
+   218 |     * @param zs the start Z coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   215 |     * Tests if maps are loaded in the position range.
+   216 |     * @param xs the start X coordinate.
+   217 |     * @param ys the start Y coordinate.
+----------------------^
+   218 |     * @param zs the start Z coordinate.
+   219 |     * @param xe the end X coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   216 |     * @param xs the start X coordinate.
+   217 |     * @param ys the start Y coordinate.
+   218 |     * @param zs the start Z coordinate.
+----------------------^
+   219 |     * @param xe the end X coordinate.
+   220 |     * @param ye the end Y coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   217 |     * @param ys the start Y coordinate.
+   218 |     * @param zs the start Z coordinate.
+   219 |     * @param xe the end X coordinate.
+----------------------^
+   220 |     * @param ye the end Y coordinate.
+   221 |     * @param ze the end Z coordinate.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   218 |     * @param zs the start Z coordinate.
+   219 |     * @param xe the end X coordinate.
+   220 |     * @param ye the end Y coordinate.
+----------------------^
+   221 |     * @param ze the end Z coordinate.
+   222 |     * @returns true if all maps are loaded; false otherwise.
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   219 |     * @param xe the end X coordinate.
+   220 |     * @param ye the end Y coordinate.
+   221 |     * @param ze the end Z coordinate.
+----------------------^
+   222 |     * @returns true if all maps are loaded; false otherwise.
+   223 |     */
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   226 |
+   227 |        // Get the base values for the maps.
+   228 |        xs = MapFile.getFileX(xs);
+---------------^
+   229 |        ys = MapFile.getFileY(ys);
+   230 |        zs = MapFile.getFileZ(zs);
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   252 |    /**
+   253 |     * Sets the dat context to be used for the model.
+   254 |     * @param dat the dat context to be used for the model.
+----------------------^
+   255 |     */
+   256 |    OdysseyModel.prototype.setDat = function (dat) {
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   260 |    /**
+   261 |     * Gets the dat context used by the model.
+   262 |     * @returns the dat context used by the model.
+---------------^
+   263 |     */
+   264 |    OdysseyModel.prototype.getDat = function () {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   268 |    /**
+   269 |     * Sets the world of the model.
+   270 |     * @param world the world to use for the model.
+----------------------^
+   271 |     */
+   272 |    OdysseyModel.prototype.setWorld = function (world) {
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   276 |    /**
+   277 |     * Gets the world of the model.
+   278 |     * @returns the world of the model, or null if one is not set.
+---------------^
+   279 |     */
+   280 |    OdysseyModel.prototype.getWorld = function () {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   284 |    /**
+   285 |     * Sets the geography object of the model.
+   286 |     * @param geography the geography object to use for the model.
+----------------------^
+   287 |     */
+   288 |    OdysseyModel.prototype.setGeography = function (geography) {
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   292 |    /**
+   293 |     * Gets the geography object of the model.
+   294 |     * @returns the geography object of the model, or null if one is not set.
+---------------^
+   295 |     */
+   296 |    OdysseyModel.prototype.getGeography = function () {
+
+Missing param type at Scripts/Model/OdysseyModel.js :
+   300 |    /**
+   301 |     * Sets the spawns of the model world.
+   302 |     * @param spawns the spawns of the model world.
+----------------------^
+   303 |     */
+   304 |    OdysseyModel.prototype.setWorldSpawns = function (spawns) {
+
+Missing type in @returns statement at Scripts/Model/OdysseyModel.js :
+   308 |    /**
+   309 |     * Gets the spawns of the model world.
+   310 |     * @returns the spawns object of the model world, or null if one is not set.
+---------------^
+   311 |     */
+   312 |    OdysseyModel.prototype.getWorldSpawns = function () {
+
+Expected mapIndex but got the at Scripts/Model/OdysseyModel.js :
+   316 |    /**
+   317 |     * Sets the map index of the model.
+   318 |     * @param {OdysseyMapIndex} the map index object to use for the model.
+----------------------------------------^
+   319 |     */
+   320 |    OdysseyModel.prototype.setMapIndex = function (mapIndex) {
+
+Sentence must start with an upper case letter at Scripts/Model/OdysseyWorld.js :
+     1 |/*global OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
+     2 |/**
+     3 | * OdysseyWorld.js
+------------------------^
+     4 | *
+     5 | * Contains map information.
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/Model/OdysseyWorld.js :
+     3 | * OdysseyWorld.js
+     4 | *
+     5 | * Contains map information.
+-----------^
+     6 | */
+     7 |var OdysseyWorld = (function () {
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+     7 |var OdysseyWorld = (function () {
+     8 |    "use strict";
+     9 |    function OdysseyWorld() {
+------------^
+    10 |        this.eventDispatcher = new OdysseyEventDispatcher();
+    11 |        this.items = {};
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+    12 |    }
+    13 |    OdysseyWorld.prototype = new OdysseyEventDispatchInterface();
+    14 |    OdysseyWorld.prototype.tileExists = function (x, y, z) {
+------------------------------------------------^
+    15 |        return !(this[x] === undefined || this[x][y] === undefined || this[x][y][z] === undefined);
+    16 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+    15 |        return !(this[x] === undefined || this[x][y] === undefined || this[x][y][z] === undefined);
+    16 |    };
+    17 |    OdysseyWorld.prototype.getTile = function (x, y, z) {
+---------------------------------------------^
+    18 |        if (this.tileExists(x, y, z)) {
+    19 |            return this[x][y][z];
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+    21 |        return null;
+    22 |    };
+    23 |    OdysseyWorld.prototype.containsItem = function (itemID) {
+--------------------------------------------------^
+    24 |        return this.items.hasOwnProperty(itemID);
+    25 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+    24 |        return this.items.hasOwnProperty(itemID);
+    25 |    };
+    26 |    OdysseyWorld.prototype.addItem = function (itemID) {
+---------------------------------------------^
+    27 |        if (this.items[itemID] === undefined) {
+    28 |            this.items[itemID] = 0;
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
+    30 |        this.items[itemID] += 1;
+    31 |    };
+    32 |    OdysseyWorld.prototype.addTile = function (x, y, z, tile) {
+---------------------------------------------^
+    33 |        var i, item;
+    34 |        if (this[x] === undefined) {
+
+Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorldSpawns.js :
+     2 |var OdysseyWorldSpawns = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyWorldSpawns() {
+------------^
+     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     6 |    }
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+     3 |var ResourceManagerFile = (function ($) {
+     4 |    "use strict";
+     5 |    function ResourceManagerFile(src) {
+------------^
+     6 |        this.src = src;
+     7 |        this.events = {};
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    32 |    ResourceManagerFile.FLAG_A = 1048576;
+    33 |
+    34 |    ResourceManagerFile.prototype.isLoaded = function () {
+-----------------------------------------------------^
+    35 |        return Boolean(this.state & ResourceManagerFile.FLAG_LOADED);
+    36 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    35 |        return Boolean(this.state & ResourceManagerFile.FLAG_LOADED);
+    36 |    };
+    37 |    ResourceManagerFile.prototype.setIsLoaded = function (flag) {
+--------------------------------------------------------^
+    38 |        if (this.isLoaded() !== flag) {
+    39 |            this.state ^= ResourceManagerFile.FLAG_LOADED;
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    41 |    };
+    42 |
+    43 |    ResourceManagerFile.prototype.isLoading = function () {
+------------------------------------------------------^
+    44 |        return Boolean(this.state & ResourceManagerFile.FLAG_LOADING);
+    45 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    45 |    };
+    46 |
+    47 |    ResourceManagerFile.prototype.setIsLoading = function (flag) {
+---------------------------------------------------------^
+    48 |        if (this.isLoading() !== flag) {
+    49 |            this.state ^= ResourceManagerFile.FLAG_LOADING;
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    51 |    };
+    52 |
+    53 |    ResourceManagerFile.prototype.isNotFound = function () {
+-------------------------------------------------------^
+    54 |        return Boolean(this.state & ResourceManagerFile.FLAG_NOT_FOUND);
+    55 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    54 |        return Boolean(this.state & ResourceManagerFile.FLAG_NOT_FOUND);
+    55 |    };
+    56 |    ResourceManagerFile.prototype.setIsNotFound = function (flag) {
+----------------------------------------------------------^
+    57 |        if (this.isNotFound() !== flag) {
+    58 |            this.state ^= ResourceManagerFile.FLAG_NOT_FOUND;
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    60 |    };
+    61 |
+    62 |    ResourceManagerFile.prototype.hasFailed = function () {
+------------------------------------------------------^
+    63 |        return Boolean(this.state & ResourceManagerFile.FLAG_LOAD_FAILED);
+    64 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    63 |        return Boolean(this.state & ResourceManagerFile.FLAG_LOAD_FAILED);
+    64 |    };
+    65 |    ResourceManagerFile.prototype.setLoadFailed = function (flag) {
+----------------------------------------------------------^
+    66 |        if (this.hasFailed() !== flag) {
+    67 |            this.state ^= ResourceManagerFile.FLAG_LOAD_FAILED;
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    69 |    };
+    70 |
+    71 |    ResourceManagerFile.prototype.setState = function (state) {
+-----------------------------------------------------^
+    72 |        this.state = state;
+    73 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    72 |        this.state = state;
+    73 |    };
+    74 |    ResourceManagerFile.prototype.addEventListener = function (e, fn) {
+-------------------------------------------------------------^
+    75 |        if (!this.events.hasOwnProperty(e)) {
+    76 |            this.events[e] = [];
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    78 |        this.events[e].push(fn);
+    79 |    };
+    80 |    ResourceManagerFile.prototype.fire = function (e) {
+-------------------------------------------------^
+    81 |        var i, len, events;
+    82 |        if (this.events.hasOwnProperty(e)) {
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    88 |    };
+    89 |
+    90 |    ResourceManagerFile.prototype.load = function () {
+-------------------------------------------------^
+    91 |        var ctx = this;
+    92 |        ctx.setIsLoading(true);
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    93 |        if (!(this.resource instanceof BinaryFile)) {
+    94 |            this.resource = new BinaryFile();
+    95 |            this.resource.onload = function () {
+-------------------------------------------^
+    96 |                ctx.setIsLoaded(true);
+    97 |                ctx.setIsLoading(false);
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+    98 |                ctx.fire('load');
+    99 |            };
+   100 |            this.resource.onerror = function () {
+--------------------------------------------^
+   101 |                ctx.setLoadFailed(true);
+   102 |                ctx.setIsLoading(false);
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+   112 |            url: this.src,
+   113 |            dataType: 'text',
+   114 |            success: function (r) {
+-----------------------------^
+   115 |                ctx.resource.setContents(r);
+   116 |                if (ctx.resource.onload !== null) {
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+   118 |                }
+   119 |            },
+   120 |            error: function (e) {
+---------------------------^
+   121 |                if (ctx.resource.onerror !== null) {
+   122 |                    ctx.resource.onerror();
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+   126 |    };
+   127 |
+   128 |    ResourceManagerFile.prototype.getData = function () {
+----------------------------------------------------^
+   129 |        return this.resource;
+   130 |    };
+
+Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
+   129 |        return this.resource;
+   130 |    };
+   131 |    ResourceManagerFile.prototype.getResourceContents = function () {
+----------------------------------------------------------------^
+   132 |        return ((this.resource && this.resource.contents) || null);
+   133 |    };
+
+Expect valid jsdoc-block definition at Scripts/Polyfills/Console-Sub.js :
+     4 |    "use strict";
+     5 |    return {
+     6 |        log: function () {},
+---------------------^
+     7 |        assert: function () {}
+     8 |    };
+
+Expect valid jsdoc-block definition at Scripts/Polyfills/Console-Sub.js :
+     5 |    return {
+     6 |        log: function () {},
+     7 |        assert: function () {}
+------------------------^
+     8 |    };
+     9 |}());
+
+Expect valid jsdoc-block definition at Scripts/Polyfills/polyfill-requestanimationframe.js :
+    10 |
+    11 |    if (!window.requestAnimationFrame) {
+    12 |        window.requestAnimationFrame = function (callback) {
+-----------------------------------------------^
+    13 |            var currTime = new Date().getTime(),
+    14 |                timeToCall = Math.max(0, 16 - (currTime - lastTime)),
+
+Expect valid jsdoc-block definition at Scripts/Polyfills/polyfill-requestanimationframe.js :
+    22 |
+    23 |    if (!window.cancelAnimationFrame) {
+    24 |        window.cancelAnimationFrame = function (id) {
+----------------------------------------------^
+    25 |            clearTimeout(id);
+    26 |        };
+
+Missing param type at Scripts/View/OdysseyMinimap.js :
+    33 |    /**
+    34 |     * Draws a pixel of a color at position on the canvas.
+    35 |     * @param rgba the color as an RGBA integer (0xRRGGBBAA).
+----------------------^
+    36 |     * @param x the X coordinate on the canvas.
+    37 |     * @param y the Y coordinate on the canvas.
+
+Missing param type at Scripts/View/OdysseyMinimap.js :
+    34 |     * Draws a pixel of a color at position on the canvas.
+    35 |     * @param rgba the color as an RGBA integer (0xRRGGBBAA).
+    36 |     * @param x the X coordinate on the canvas.
+----------------------^
+    37 |     * @param y the Y coordinate on the canvas.
+    38 |     */
+
+Missing param type at Scripts/View/OdysseyMinimap.js :
+    35 |     * @param rgba the color as an RGBA integer (0xRRGGBBAA).
+    36 |     * @param x the X coordinate on the canvas.
+    37 |     * @param y the Y coordinate on the canvas.
+----------------------^
+    38 |     */
+    39 |    OdysseyMinimap.prototype.drawPixel = function (rgba, x, y) {
+
+Missing param type at Scripts/View/OdysseyMinimap.js :
+    49 |    /**
+    50 |     * Sets the minimap canvas.
+    51 |     * @param canvas the canvas to use for the minimap.
+----------------------^
+    52 |     */
+    53 |    OdysseyMinimap.prototype.setCanvas = function (canvas) {
+
+Expected Dat but got Odyssey at Scripts/View/OdysseyMinimap.js :
+    58 |    /**
+    59 |     * Initializes the OdysseyMinimap.
+    60 |     * @param Odyssey the OdysseyTileMap to use.
+----------------------^
+    61 |     */
+    62 |    OdysseyMinimap.prototype.initialize = function (Dat) {
+
+Missing param type at Scripts/View/OdysseyMinimap.js :
+    58 |    /**
+    59 |     * Initializes the OdysseyMinimap.
+    60 |     * @param Odyssey the OdysseyTileMap to use.
+----------------------^
+    61 |     */
+    62 |    OdysseyMinimap.prototype.initialize = function (Dat) {
+
+Function is missing documentation for parameter `model`. at Scripts/View/OdysseyMinimap.js :
+    69 |     * Re-renders the minimap.
+    70 |     */
+    71 |    OdysseyMinimap.prototype.update = function (model) {
+----------------------------------------------^
+    72 |        var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
+    73 |        xs = this.position.x - 63;
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseySearch.js :
+     7 |        $body = $(document.body),
+     8 |        $linkOpenSearch = $("#OdysseyOpenSearch");
+     9 |    function toggleSearch() {
+------------^
+    10 |        if (active) {
+    11 |            $body.removeClass("state-search-active");
+
+Expected src but got the at Scripts/View/OdysseySpriteIndex.js :
+    61 |     * and thus unreliable. Use the isLoaded field to determine if it
+    62 |     * is loaded and safe to use, or the SpriteIndexLoaded event.
+    63 |     * @param {string} the source file loation.
+-------------------------------^
+    64 |     * @returns {OdysseySpriteIndex} the loaded sprite index object.
+    65 |     */
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseySpriteIndex.js :
+    70 |            url: src,
+    71 |            dataType: 'json',
+    72 |            success: function (data) {
+-----------------------------^
+    73 |                spriteIndex.setData(data);
+    74 |                spriteIndex.setLoading(false);
+
+Missing line feed at file end at Scripts/View/OdysseySpriteIndex.js :
+    81 |
+    82 |    return OdysseySpriteIndex;
+    83 |}(jQuery));
+-------------------^
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
+     6 |        $ToolTipItemsCount = $(".OdysseyToolTipItem .OdysseyToolTipCount"),
+     7 |        ttLength = $ToolTipItems.length;
+     8 |    function OdysseyTileInfo() {
+------------^
+     9 |        this.eventDispatcher = new OdysseyEventDispatcher();
+    10 |    }
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
+    11 |    OdysseyTileInfo.prototype = new OdysseyEventDispatchInterface();
+    12 |
+    13 |    OdysseyTileInfo.prototype.setContext = function (Odyssey) {
+---------------------------------------------------^
+    14 |        this.context = Odyssey;
+    15 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
+    14 |        this.context = Odyssey;
+    15 |    };
+    16 |    OdysseyTileInfo.prototype.showInfo = function (x, y, z) {
+-------------------------------------------------^
+    17 |        var items = this.context.getTileItems(x, y, z), i, len;
+    18 |
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
+    30 |        }
+    31 |    };
+    32 |    OdysseyTileInfo.prototype.update = function (model) {
+-----------------------------------------------^
+    33 |        // TODO
+    34 |        // We need access to the tile map because it has position?
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
+     4 |    "use strict";
+     5 |    // Helper functions.
+     6 |    function proxy(fn, ctx, args) {
+------------^
+     7 |        return function () {
+     8 |            fn.apply(ctx, args);
+
+Sentence must start with an upper case letter at Scripts/View/OdysseyTileMap.js :
+   103 |
+   104 |    /**
+   105 |     * Proxy method for stop updating a tile map. this method returns a function
+----------------------------------------------------------^
+   106 |     * that can safely be passed as event listeners with a custom context.
+   107 |     * @param {OdysseyView} instance the view to stop updating.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   146 |    /**
+   147 |     * Adjusts the canvases for changes in zoom level.
+   148 |     * @param e the Zoom event.
+----------------------^
+   149 |     */
+   150 |    OdysseyTileMap.prototype.adjustForZoomChange = function (e) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   180 |    /**
+   181 |     * Handles updating the tile map display.
+   182 |     * @param model the model to use for updating.
+----------------------^
+   183 |     */
+   184 |    OdysseyTileMap.prototype.update = function () {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   188 |    /**
+   189 |     * Sets the Odyssey viewport.
+   190 |     * @param element the DOM element to use as a viewport.
+----------------------^
+   191 |     */
+   192 |    OdysseyTileMap.prototype.setViewport = function (element) {
+
+Sentence must start with an upper case letter at Scripts/View/OdysseyTileMap.js :
+   196 |    /**
+   197 |     * Sets the current map position. This method should be used
+   198 |     * instead of position.set(x, y, z) because it registers an event
+-----------------------------------^
+   199 |     * for listeners.
+   200 |     * @param x the new x-coordinate.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   198 |     * instead of position.set(x, y, z) because it registers an event
+   199 |     * for listeners.
+   200 |     * @param x the new x-coordinate.
+----------------------^
+   201 |     * @param y the new y-coordinate.
+   202 |     * @param z the new z-coordinate.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   199 |     * for listeners.
+   200 |     * @param x the new x-coordinate.
+   201 |     * @param y the new y-coordinate.
+----------------------^
+   202 |     * @param z the new z-coordinate.
+   203 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   200 |     * @param x the new x-coordinate.
+   201 |     * @param y the new y-coordinate.
+   202 |     * @param z the new z-coordinate.
+----------------------^
+   203 |     */
+   204 |    OdysseyTileMap.prototype.setPosition = function (x, y, z) {
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   209 |    /**
+   210 |     * Gets the map position.
+   211 |     * @returns the map position.
+---------------^
+   212 |     */
+   213 |    OdysseyTileMap.prototype.getPosition = function () {
+
+Sentence must start with an upper case letter at Scripts/View/OdysseyTileMap.js :
+   217 |    /**
+   218 |     * Sets the current map zoom state. This method should be used
+   219 |     * instead of zoom.set(zoom) because it registers an event for
+-------------------------------^
+   220 |     * listeners.
+   221 |     * @param zoom the new zoom state.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   219 |     * instead of zoom.set(zoom) because it registers an event for
+   220 |     * listeners.
+   221 |     * @param zoom the new zoom state.
+----------------------^
+   222 |     */
+   223 |    OdysseyTileMap.prototype.setZoom = function (zoom) {
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/View/OdysseyTileMap.js :
+   229 |     * Sets the size of the display. The canvases should have
+   230 |     * sizes corresponding to 32 times the size of the
+   231 |     * OdysseyTileMap, plus 32x32 to resolve clipping for 64x64px
+---------------^
+   232 |     * sprites.
+   233 |     * @param sx the amount of tiles in the X direction on the viewport and each canvas.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   231 |     * OdysseyTileMap, plus 32x32 to resolve clipping for 64x64px
+   232 |     * sprites.
+   233 |     * @param sx the amount of tiles in the X direction on the viewport and each canvas.
+----------------------^
+   234 |     * @param sy the amount of tiles in the Y direction on the viewport and each canvas.
+   235 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   232 |     * sprites.
+   233 |     * @param sx the amount of tiles in the X direction on the viewport and each canvas.
+   234 |     * @param sy the amount of tiles in the Y direction on the viewport and each canvas.
+----------------------^
+   235 |     */
+   236 |    OdysseyTileMap.prototype.setSize = function (sx, sy) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   241 |    /**
+   242 |     * Calculates the canvas section index based on the map position.
+   243 |     * @param posX a map position X component.
+----------------------^
+   244 |     * @param posY a map position Y component.
+   245 |     * @returns the canvas index that should contain (posX, posY).
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   242 |     * Calculates the canvas section index based on the map position.
+   243 |     * @param posX a map position X component.
+   244 |     * @param posY a map position Y component.
+----------------------^
+   245 |     * @returns the canvas index that should contain (posX, posY).
+   246 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   245 |     * @returns the canvas index that should contain (posX, posY).
+   246 |     */
+   247 |    OdysseyTileMap.prototype.getCanvasSectionIndex = function (posX, posY) {
+---------------^
+   248 |        var dxu = (Math.floor(((posX - (posX % this.sizeX)) - (this.position.x - (this.position.x % this.sizeX))) / this.sizeX)),
+   249 |            dyu = (Math.floor(((posY - (posY % this.sizeY)) - (this.position.y - (this.position.y % this.sizeY))) / this.sizeY)),
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   258 |    /**
+   259 |     * Gets the canvas section corresponding to the input position components.
+   260 |     * @param posx the position X component of the canvas section.
+----------------------^
+   261 |     * @param posy the position Y component of the canvas section.
+   262 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   259 |     * Gets the canvas section corresponding to the input position components.
+   260 |     * @param posx the position X component of the canvas section.
+   261 |     * @param posy the position Y component of the canvas section.
+----------------------^
+   262 |     */
+   263 |    OdysseyTileMap.prototype.getCanvasSection = function (posx, posy) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   276 |     * 2. Items can have "hangable" sprites corresponding to the properties of an underlying wall.
+   277 |     * 3. Items can have "animation" sprites. We discard animations.
+   278 |     * @param itemId the item ID.
+----------------------^
+   279 |     * @param posx the position X component of the item.
+   280 |     * @param posy the position Y component of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   277 |     * 3. Items can have "animation" sprites. We discard animations.
+   278 |     * @param itemId the item ID.
+   279 |     * @param posx the position X component of the item.
+----------------------^
+   280 |     * @param posy the position Y component of the item.
+   281 |     * @param posz the position Z component of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   278 |     * @param itemId the item ID.
+   279 |     * @param posx the position X component of the item.
+   280 |     * @param posy the position Y component of the item.
+----------------------^
+   281 |     * @param posz the position Z component of the item.
+   282 |     * @param hasVertical whether or not the tile has a vertical wall on it.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   279 |     * @param posx the position X component of the item.
+   280 |     * @param posy the position Y component of the item.
+   281 |     * @param posz the position Z component of the item.
+----------------------^
+   282 |     * @param hasVertical whether or not the tile has a vertical wall on it.
+   283 |     * @param hasHorizontal whether or not the tile has a horizontal wall on it.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   280 |     * @param posy the position Y component of the item.
+   281 |     * @param posz the position Z component of the item.
+   282 |     * @param hasVertical whether or not the tile has a vertical wall on it.
+----------------------^
+   283 |     * @param hasHorizontal whether or not the tile has a horizontal wall on it.
+   284 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   281 |     * @param posz the position Z component of the item.
+   282 |     * @param hasVertical whether or not the tile has a vertical wall on it.
+   283 |     * @param hasHorizontal whether or not the tile has a horizontal wall on it.
+----------------------^
+   284 |     */
+   285 |    OdysseyTileMap.prototype.getSpriteID = function (itemId, posx, posy, posz, hasVertical, hasHorizontal) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   304 |    /**
+   305 |     * Gets the sprite file index containing the sprite ID.
+   306 |     * @param sprID the ID of the sprite to search for.
+----------------------^
+   307 |     * @returns the index of the spritesheet containing the sprite, or -1 if not found.
+   308 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   306 |     * @param sprID the ID of the sprite to search for.
+   307 |     * @returns the index of the spritesheet containing the sprite, or -1 if not found.
+   308 |     */
+---------------^
+   309 |    OdysseyTileMap.prototype.getSpriteFileID = function (sprID) {
+   310 |        var spritesheets = this.view.getSpriteIndex().data, i, len = spritesheets.length, sheet;
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   321 |    /**
+   322 |     * Gets the sprite file containing a sprite.
+   323 |     * @param sprID the ID of the sprite to search for.
+----------------------^
+   324 |     * @returns the spritesheet containing the sprite.
+   325 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   323 |     * @param sprID the ID of the sprite to search for.
+   324 |     * @returns the spritesheet containing the sprite.
+   325 |     */
+---------------^
+   326 |    OdysseyTileMap.prototype.getSpriteFileContaining = function (sprID) {
+   327 |        var spritesheets = this.view.getSpriteIndex().data;
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   331 |    /**
+   332 |     * Gets the sprite's offset X component.
+   333 |     * @param sprID the ID of the sprite.
+----------------------^
+   334 |     * @returns the sprite's offset X component.
+   335 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   333 |     * @param sprID the ID of the sprite.
+   334 |     * @returns the sprite's offset X component.
+   335 |     */
+---------------^
+   336 |    OdysseyTileMap.prototype.getSpriteOffsetX = function (sprID) {
+   337 |        var sheet = this.getSpriteFileContaining(sprID),
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   346 |    /**
+   347 |     * Gets the sprite's offset Y component.
+   348 |     * @param sprID the ID of the sprite.
+----------------------^
+   349 |     * @returns the sprite's offset Y component.
+   350 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   348 |     * @param sprID the ID of the sprite.
+   349 |     * @returns the sprite's offset Y component.
+   350 |     */
+---------------^
+   351 |    OdysseyTileMap.prototype.getSpriteOffsetY = function (sprID) {
+   352 |        var sheet = this.getSpriteFileContaining(sprID),
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   360 |    /**
+   361 |     * Gets the sprite's size X component.
+   362 |     * @param sprID the ID of the sprite.
+----------------------^
+   363 |     * @returns the sprite's size X component.
+   364 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   362 |     * @param sprID the ID of the sprite.
+   363 |     * @returns the sprite's size X component.
+   364 |     */
+---------------^
+   365 |    OdysseyTileMap.prototype.getSpriteSizeX = function (sprID) {
+   366 |        var sheet = this.getSpriteFileContaining(sprID);
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   370 |    /**
+   371 |     * Gets the sprite's size Y component.
+   372 |     * @param sprID the ID of the sprite.
+----------------------^
+   373 |     * @returns the sprite's size Y component.
+   374 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   372 |     * @param sprID the ID of the sprite.
+   373 |     * @returns the sprite's size Y component.
+   374 |     */
+---------------^
+   375 |    OdysseyTileMap.prototype.getSpriteSizeY = function (sprID) {
+   376 |        var sheet = this.getSpriteFileContaining(sprID);
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   380 |    /**
+   381 |     * Sets a canvas for rendering the map.
+   382 |     * @param index the index of the canvas.
+----------------------^
+   383 |     * @param canvas the DOM canvas element.
+   384 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   381 |     * Sets a canvas for rendering the map.
+   382 |     * @param index the index of the canvas.
+   383 |     * @param canvas the DOM canvas element.
+----------------------^
+   384 |     */
+   385 |    OdysseyTileMap.prototype.setCanvas = function (index, canvas) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   389 |    /**
+   390 |     * Sets a canvas for rendering the overlay.
+   391 |     * @param index the index of the canvas.
+----------------------^
+   392 |     * @param canvas the DOM canvas element.
+   393 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   390 |     * Sets a canvas for rendering the overlay.
+   391 |     * @param index the index of the canvas.
+   392 |     * @param canvas the DOM canvas element.
+----------------------^
+   393 |     */
+   394 |    OdysseyTileMap.prototype.setOverlayCanvas = function (index, canvas) {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   398 |    /**
+   399 |     * Gets the canvas at the specified index.
+   400 |     * @param index the index of the canvas to get.
+----------------------^
+   401 |     * @returns the canvas corresponding to the name.
+   402 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   400 |     * @param index the index of the canvas to get.
+   401 |     * @returns the canvas corresponding to the name.
+   402 |     */
+---------------^
+   403 |    OdysseyTileMap.prototype.getCanvas = function (index) {
+   404 |        return this.canvases[index];
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   407 |    /**
+   408 |     * Renders a sprite on the canvas.
+   409 |     * @param sprID the sprite ID.
+----------------------^
+   410 |     * @param x the X component of the map tile's position.
+   411 |     * @param y the Y component of the map tile's position.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   408 |     * Renders a sprite on the canvas.
+   409 |     * @param sprID the sprite ID.
+   410 |     * @param x the X component of the map tile's position.
+----------------------^
+   411 |     * @param y the Y component of the map tile's position.
+   412 |     * @param z the Z component of the map tile's position.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   409 |     * @param sprID the sprite ID.
+   410 |     * @param x the X component of the map tile's position.
+   411 |     * @param y the Y component of the map tile's position.
+----------------------^
+   412 |     * @param z the Z component of the map tile's position.
+   413 |     * @param ox the offset X of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   410 |     * @param x the X component of the map tile's position.
+   411 |     * @param y the Y component of the map tile's position.
+   412 |     * @param z the Z component of the map tile's position.
+----------------------^
+   413 |     * @param ox the offset X of the item.
+   414 |     * @param oy the offset Y of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   411 |     * @param y the Y component of the map tile's position.
+   412 |     * @param z the Z component of the map tile's position.
+   413 |     * @param ox the offset X of the item.
+----------------------^
+   414 |     * @param oy the offset Y of the item.
+   415 |     * @param height the height of the tile beneath the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   412 |     * @param z the Z component of the map tile's position.
+   413 |     * @param ox the offset X of the item.
+   414 |     * @param oy the offset Y of the item.
+----------------------^
+   415 |     * @param height the height of the tile beneath the item.
+   416 |     * @returns true if the render was successful; false otherwise.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   413 |     * @param ox the offset X of the item.
+   414 |     * @param oy the offset Y of the item.
+   415 |     * @param height the height of the tile beneath the item.
+----------------------^
+   416 |     * @returns true if the render was successful; false otherwise.
+   417 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   421 |        spritesheet = this.getSpriteFileID(sprID);
+   422 |        if (!this.view.getResourceManager().isLoaded(spritesheet)) {
+   423 |            this.view.getResourceManager().load(spritesheet);
+---------------^
+   424 |            return false;
+   425 |        }
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   454 |    /**
+   455 |     * Renders an item on the canvas.
+   456 |     * @param itemID the ID of the item to draw.
+----------------------^
+   457 |     * @param x the X component of the map tile's position.
+   458 |     * @param y the Y component of the map tile's position.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   455 |     * Renders an item on the canvas.
+   456 |     * @param itemID the ID of the item to draw.
+   457 |     * @param x the X component of the map tile's position.
+----------------------^
+   458 |     * @param y the Y component of the map tile's position.
+   459 |     * @param z the Z component of the map tile's position.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   456 |     * @param itemID the ID of the item to draw.
+   457 |     * @param x the X component of the map tile's position.
+   458 |     * @param y the Y component of the map tile's position.
+----------------------^
+   459 |     * @param z the Z component of the map tile's position.
+   460 |     * @param ox the offset X of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   457 |     * @param x the X component of the map tile's position.
+   458 |     * @param y the Y component of the map tile's position.
+   459 |     * @param z the Z component of the map tile's position.
+----------------------^
+   460 |     * @param ox the offset X of the item.
+   461 |     * @param oy the offset Y of the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   458 |     * @param y the Y component of the map tile's position.
+   459 |     * @param z the Z component of the map tile's position.
+   460 |     * @param ox the offset X of the item.
+----------------------^
+   461 |     * @param oy the offset Y of the item.
+   462 |     * @param height the height of the tile beneath the item.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   459 |     * @param z the Z component of the map tile's position.
+   460 |     * @param ox the offset X of the item.
+   461 |     * @param oy the offset Y of the item.
+----------------------^
+   462 |     * @param height the height of the tile beneath the item.
+   463 |     * @param hasVertical whether or not the tile has a vertical wall beneath it.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   460 |     * @param ox the offset X of the item.
+   461 |     * @param oy the offset Y of the item.
+   462 |     * @param height the height of the tile beneath the item.
+----------------------^
+   463 |     * @param hasVertical whether or not the tile has a vertical wall beneath it.
+   464 |     * @param hasHorizontal whether or not the tile has a horizontal wall beneath it.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   461 |     * @param oy the offset Y of the item.
+   462 |     * @param height the height of the tile beneath the item.
+   463 |     * @param hasVertical whether or not the tile has a vertical wall beneath it.
+----------------------^
+   464 |     * @param hasHorizontal whether or not the tile has a horizontal wall beneath it.
+   465 |     * @returns true if the render was successful; false otherwise.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   462 |     * @param height the height of the tile beneath the item.
+   463 |     * @param hasVertical whether or not the tile has a vertical wall beneath it.
+   464 |     * @param hasHorizontal whether or not the tile has a horizontal wall beneath it.
+----------------------^
+   465 |     * @returns true if the render was successful; false otherwise.
+   466 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   472 |        }
+   473 |        return success;
+   474 |    };
+---------------^
+   475 |
+   476 |    /**
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   476 |    /**
+   477 |     * Creates a new array of items, sorted according to the provided Dat context.
+   478 |     * @param items the array of map items to sort.
+----------------------^
+   479 |     * @param Dat the Dat context to sort according to.
+   480 |     * @static
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   477 |     * Creates a new array of items, sorted according to the provided Dat context.
+   478 |     * @param items the array of map items to sort.
+   479 |     * @param Dat the Dat context to sort according to.
+----------------------^
+   480 |     * @static
+   481 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   501 |    /**
+   502 |     * Renders a tile.
+   503 |     * @param x the map position X component.
+----------------------^
+   504 |     * @param y the map position Y component.
+   505 |     * @param z the map position Z component.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   502 |     * Renders a tile.
+   503 |     * @param x the map position X component.
+   504 |     * @param y the map position Y component.
+----------------------^
+   505 |     * @param z the map position Z component.
+   506 |     * @returns true if the whole tile was rendered; false otherwise.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   503 |     * @param x the map position X component.
+   504 |     * @param y the map position Y component.
+   505 |     * @param z the map position Z component.
+----------------------^
+   506 |     * @returns true if the whole tile was rendered; false otherwise.
+   507 |     */
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   507 |     */
+   508 |    OdysseyTileMap.prototype.renderTile = function (x, y, z) {
+   509 |        var items = this.view.getModel().getTileItems(x, y, z),
+---------------^
+   510 |            renderItems,
+   511 |            i,
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   569 |    /**
+   570 |     * Refreshes the whole viewport. This is used when the sprites are known to be loaded.
+   571 |     * @returns true if the refresh was successful; false otherwise.
+---------------^
+   572 |     */
+   573 |    OdysseyTileMap.prototype.refresh = function () {
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   619 |     * tiles pre-rendered. If rendering to the canvas is necessary, tiles
+   620 |     * will be selectively rendered to the canvas.
+   621 |     * @returns true if rendering was successful; false otherwise.
+---------------^
+   622 |     */
+   623 |    OdysseyTileMap.prototype.render = function () {
+
+Missing type in @returns statement at Scripts/View/OdysseyTileMap.js :
+   654 |     * Selectively renders tiles that have failed to render
+   655 |     * in previous rendering attempts.
+   656 |     * @returns false if rendering failed or if there was nothing to render.
+---------------^
+   657 |     */
+   658 |    OdysseyTileMap.prototype.renderSelective = function () {
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   686 |     * Adds a tile to the list of tiles that failed to render,
+   687 |     * allowing for the selective rendering of failed tiles.
+   688 |     * @param x the map position X component.
+----------------------^
+   689 |     * @param y the map position Y component.
+   690 |     * @param z the map position Z component.
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   687 |     * allowing for the selective rendering of failed tiles.
+   688 |     * @param x the map position X component.
+   689 |     * @param y the map position Y component.
+----------------------^
+   690 |     * @param z the map position Z component.
+   691 |     */
+
+Missing param type at Scripts/View/OdysseyTileMap.js :
+   688 |     * @param x the map position X component.
+   689 |     * @param y the map position Y component.
+   690 |     * @param z the map position Z component.
+----------------------^
+   691 |     */
+   692 |    OdysseyTileMap.prototype.setRenderFailed = function (x, y, z) {
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
+   704 |
+   705 |    // TEMPORARY.
+   706 |    OdysseyTileMap.prototype.updateCanvasIDs = function () {
+-------------------------------------------------------^
+   707 |        this.canvases[OdysseyTileMap.CANVAS_NORTHWEST_ID].setAttribute('id', 'OdysseyMapCanvas-NW');
+   708 |        this.canvases[OdysseyTileMap.CANVAS_NORTH_ID].setAttribute('id', 'OdysseyMapCanvas-N');
+
+Sentence must start with an upper case letter at Scripts/View/OdysseyView.js :
+     1 |/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
+     2 |/**
+     3 | * OdysseyModel.js
+------------------------^
+     4 | *
+     5 | * Contains UI components. This includes:
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/View/OdysseyView.js :
+     3 | * OdysseyModel.js
+     4 | *
+     5 | * Contains UI components. This includes:
+-----------^
+     6 | * - Minimap : the minimap of the model.
+     7 | * - WorldMap : the world map of the model.
+
+You started a new line with an upper case letter but previous line does not end with a period at Scripts/View/OdysseyView.js :
+     4 | *
+     5 | * Contains UI components. This includes:
+     6 | * - Minimap : the minimap of the model.
+-------------^
+     7 | * - WorldMap : the world map of the model.
+     8 | * - TileMap : the tile map of the model.
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyView.js :
+    10 |var OdysseyView = (function () {
+    11 |    "use strict";
+    12 |    function OdysseyView() {
+------------^
+    13 |        this.eventDispatcher = new OdysseyEventDispatcher();
+    14 |        this.minimap = null;
+
+Missing param type at Scripts/View/OdysseyView.js :
+    66 |    /**
+    67 |     * Sets the minimap of the view.
+    68 |     * @param minimap the minimap for the view.
+----------------------^
+    69 |     */
+    70 |    OdysseyView.prototype.setMinimap = function (minimap) {
+
+Missing type in @returns statement at Scripts/View/OdysseyView.js :
+    75 |    /**
+    76 |     * Gets the minimap of the view.
+    77 |     * @returns the minimap of the view, or null if one is not set.
+---------------^
+    78 |     */
+    79 |    OdysseyView.prototype.getMinimap = function () {
+
+Missing param type at Scripts/View/OdysseyView.js :
+    83 |    /**
+    84 |     * Sets the world map of the view.
+    85 |     * @param worldMap the world map for the view.
+----------------------^
+    86 |     */
+    87 |    OdysseyView.prototype.setWorldMap = function (worldMap) {
+
+Missing type in @returns statement at Scripts/View/OdysseyView.js :
+    92 |    /**
+    93 |     * Gets the world map of the view.
+    94 |     * @returns the world map of the view, or null if one is not set.
+---------------^
+    95 |     */
+    96 |    OdysseyView.prototype.getWorldMap = function () {
+
+Missing param type at Scripts/View/OdysseyView.js :
+   100 |    /**
+   101 |     * Sets the tile map of the view.
+   102 |     * @param tileMap the tile map for the view.
+----------------------^
+   103 |     */
+   104 |    OdysseyView.prototype.setTileMap = function (tileMap) {
+
+Missing type in @returns statement at Scripts/View/OdysseyView.js :
+   109 |    /**
+   110 |     * Gets the tile map of the view.
+   111 |     * @returns the tile map for the view, or null if one is not set.
+---------------^
+   112 |     */
+   113 |    OdysseyView.prototype.getTileMap = function () {
+
+Missing param type at Scripts/View/OdysseyView.js :
+   117 |    /**
+   118 |     * Sets the tile info view component.
+   119 |     * @param tileInfo the tile info view component.
+----------------------^
+   120 |     */
+   121 |    OdysseyView.prototype.setTileInfo = function (tileInfo) {
+
+Missing type in @returns statement at Scripts/View/OdysseyView.js :
+   126 |    /**
+   127 |     * Gets the tile info view component.
+   128 |     * @returns the tile info view component.
+---------------^
+   129 |     */
+   130 |    OdysseyView.prototype.getTileInfo = function () {
+
+Missing param type at Scripts/View/OdysseyView.js :
+   134 |    /**
+   135 |     * Sets the overlay view component.
+   136 |     * @param overlay the overlay view component.
+----------------------^
+   137 |     */
+   138 |    OdysseyView.prototype.setOverlay = function (overlay) {
+
+Missing type in @returns statement at Scripts/View/OdysseyView.js :
+   143 |    /**
+   144 |     * Gets the overlay view component.
+   145 |     * @returns the overlay view component.
+---------------^
+   146 |     */
+   147 |    OdysseyView.prototype.getOverlay = function () {
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+     3 |var OdysseyWorldMap = (function ($) {
+     4 |    "use strict";
+     5 |    function OdysseyWorldMap() {
+------------^
+     6 |        this.eventDispatcher = new OdysseyEventDispatcher();
+     7 |        this.position = new Matrix3D(null, null, null);
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    34 |    OdysseyWorldMap.DEFAULT_ZOOM = 1;
+    35 |
+    36 |    OdysseyWorldMap.prototype.show = function () {
+---------------------------------------------^
+    37 |        this.visible = true;
+    38 |        $("body").addClass('state-minimap-active');
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    39 |        this.dispatchEvent(new OdysseyWorldMapShowEvent());
+    40 |    };
+    41 |    OdysseyWorldMap.prototype.hide = function () {
+---------------------------------------------^
+    42 |        this.visible = false;
+    43 |        $("body").removeClass('state-minimap-active');
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    44 |        this.dispatchEvent(new OdysseyWorldMapHideEvent());
+    45 |    };
+    46 |    OdysseyWorldMap.prototype.toggle = function () {
+-----------------------------------------------^
+    47 |        if (this.visible) {
+    48 |            this.hide();
+
+Function is missing documentation for parameter `x`. at Scripts/View/OdysseyWorldMap.js :
+    56 |     * Sets the WorldMap's position.
+    57 |     */
+    58 |    OdysseyWorldMap.prototype.setPosition = function (x, y, z) {
+----------------------------------------------------^
+    59 |        this.position.set(x, y, z);
+    60 |        this.dispatchEvent(new OdysseyWorldMapPositionChangeEvent(this.position));
+
+Function is missing documentation for parameter `y`. at Scripts/View/OdysseyWorldMap.js :
+    56 |     * Sets the WorldMap's position.
+    57 |     */
+    58 |    OdysseyWorldMap.prototype.setPosition = function (x, y, z) {
+----------------------------------------------------^
+    59 |        this.position.set(x, y, z);
+    60 |        this.dispatchEvent(new OdysseyWorldMapPositionChangeEvent(this.position));
+
+Function is missing documentation for parameter `z`. at Scripts/View/OdysseyWorldMap.js :
+    56 |     * Sets the WorldMap's position.
+    57 |     */
+    58 |    OdysseyWorldMap.prototype.setPosition = function (x, y, z) {
+----------------------------------------------------^
+    59 |        this.position.set(x, y, z);
+    60 |        this.dispatchEvent(new OdysseyWorldMapPositionChangeEvent(this.position));
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    61 |    };
+    62 |
+    63 |    OdysseyWorldMap.prototype.setFocusAreaElement = function (element) {
+------------------------------------------------------------^
+    64 |        this.ui.focusArea = element;
+    65 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    64 |        this.ui.focusArea = element;
+    65 |    };
+    66 |    OdysseyWorldMap.prototype.getFocusAreaElement = function () {
+------------------------------------------------------------^
+    67 |        return this.ui.focusArea || null;
+    68 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    68 |    };
+    69 |
+    70 |    OdysseyWorldMap.prototype.setWrapperElement = function (element) {
+----------------------------------------------------------^
+    71 |        this.ui.wrapper = element;
+    72 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    71 |        this.ui.wrapper = element;
+    72 |    };
+    73 |    OdysseyWorldMap.prototype.getWrapperElement = function () {
+----------------------------------------------------------^
+    74 |        return this.ui.wrapper || null;
+    75 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    75 |    };
+    76 |
+    77 |    OdysseyWorldMap.prototype.setMapViewportElement = function (element) {
+--------------------------------------------------------------^
+    78 |        this.ui.viewport = element;
+    79 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    78 |        this.ui.viewport = element;
+    79 |    };
+    80 |    OdysseyWorldMap.prototype.getMapViewportElement = function () {
+--------------------------------------------------------------^
+    81 |        return this.ui.viewport || null;
+    82 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    82 |    };
+    83 |
+    84 |    OdysseyWorldMap.prototype.setMapContainerElement = function (element) {
+---------------------------------------------------------------^
+    85 |        this.ui.mapContainer = element;
+    86 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    85 |        this.ui.mapContainer = element;
+    86 |    };
+    87 |    OdysseyWorldMap.prototype.getMapContainerElement = function () {
+---------------------------------------------------------------^
+    88 |        return this.ui.mapContainer || null;
+    89 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    89 |    };
+    90 |
+    91 |    OdysseyWorldMap.prototype.setMapImageElement = function (z, element) {
+-----------------------------------------------------------^
+    92 |        this.ui.mapImages[z] = element;
+    93 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    92 |        this.ui.mapImages[z] = element;
+    93 |    };
+    94 |    OdysseyWorldMap.prototype.getMapImageElement = function (z) {
+-----------------------------------------------------------^
+    95 |        return this.ui.mapImages[z] || null;
+    96 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/OdysseyWorldMap.js :
+    96 |    };
+    97 |
+    98 |    OdysseyWorldMap.prototype.getMapImageElements = function () {
+------------------------------------------------------------^
+    99 |        return this.ui.mapImages || null;
+   100 |    };
+
+Function is missing documentation for parameter `n`. at Scripts/View/OdysseyWorldMap.js :
+   126 |     * Sets the zoom for the WorldMap.
+   127 |     */
+   128 |    OdysseyWorldMap.prototype.zoom = function (n) {
+---------------------------------------------^
+   129 |        var e, elements, i, len, valX, valY;
+   130 |        // Set the zoom value.
+
+Function is missing documentation for parameter `z`. at Scripts/View/OdysseyWorldMap.js :
+   148 |     * Sets the current WorldMap floor.
+   149 |     */
+   150 |    OdysseyWorldMap.prototype.setFloor = function (z) {
+-------------------------------------------------^
+   151 |        $(this.getMapImageElement(this.position.z))
+   152 |            .removeClass("active")
+
+Missing param type at Scripts/View/OdysseyWorldMap.js :
+   166 |    /**
+   167 |     * Sets the WorldMap position and updates the WorldMap.
+   168 |     * @param position The new WorldMap position.
+----------------------^
+   169 |     */
+   170 |    OdysseyWorldMap.prototype.setMapPosition = function setMapPosition(position) {
+
+Function is missing documentation for parameter `value`. at Scripts/View/OdysseyZoomState.js :
+     4 |     * @constructor
+     5 |     */
+     6 |    function OdysseyZoomState(value) {
+------------^
+     7 |        this.value = value;
+     8 |    }
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+     3 |var ResourceManagerImage = (function () {
+     4 |    "use strict";
+     5 |    function ResourceManagerImage(src) {
+------------^
+     6 |        this.src = src;
+     7 |        this.events = {};
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    33 |    ResourceManagerImage.FLAG_A = 1048576;
+    34 |
+    35 |    ResourceManagerImage.prototype.isLoaded = function () {
+------------------------------------------------------^
+    36 |        return Boolean(this.state & ResourceManagerImage.FLAG_LOADED);
+    37 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    36 |        return Boolean(this.state & ResourceManagerImage.FLAG_LOADED);
+    37 |    };
+    38 |    ResourceManagerImage.prototype.setIsLoaded = function (flag) {
+---------------------------------------------------------^
+    39 |        if (this.isLoaded() !== flag) {
+    40 |            this.state ^= ResourceManagerImage.FLAG_LOADED;
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    42 |    };
+    43 |
+    44 |    ResourceManagerImage.prototype.isLoading = function () {
+-------------------------------------------------------^
+    45 |        return Boolean(this.state & ResourceManagerImage.FLAG_LOADING);
+    46 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    46 |    };
+    47 |
+    48 |    ResourceManagerImage.prototype.setIsLoading = function (flag) {
+----------------------------------------------------------^
+    49 |        if (this.isLoading() !== flag) {
+    50 |            this.state ^= ResourceManagerImage.FLAG_LOADING;
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    52 |    };
+    53 |
+    54 |    ResourceManagerFile.prototype.isNotFound = function () {
+-------------------------------------------------------^
+    55 |        return Boolean(this.state & ResourceManagerFile.FLAG_NOT_FOUND);
+    56 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    55 |        return Boolean(this.state & ResourceManagerFile.FLAG_NOT_FOUND);
+    56 |    };
+    57 |    ResourceManagerFile.prototype.setIsNotFound = function (flag) {
+----------------------------------------------------------^
+    58 |        if (this.isNotFound() !== flag) {
+    59 |            this.state ^= ResourceManagerFile.FLAG_NOT_FOUND;
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    61 |    };
+    62 |
+    63 |    ResourceManagerImage.prototype.hasFailed = function () {
+-------------------------------------------------------^
+    64 |        return Boolean(this.state & ResourceManagerImage.FLAG_LOAD_FAILED);
+    65 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    64 |        return Boolean(this.state & ResourceManagerImage.FLAG_LOAD_FAILED);
+    65 |    };
+    66 |    ResourceManagerImage.prototype.setLoadFailed = function (flag) {
+-----------------------------------------------------------^
+    67 |        if (this.hasFailed() !== flag) {
+    68 |            this.state ^= ResourceManagerImage.FLAG_LOAD_FAILED;
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    70 |    };
+    71 |
+    72 |    ResourceManagerImage.prototype.setState = function (state) {
+------------------------------------------------------^
+    73 |        this.state = state;
+    74 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    73 |        this.state = state;
+    74 |    };
+    75 |    ResourceManagerImage.prototype.addEventListener = function (e, fn) {
+--------------------------------------------------------------^
+    76 |        if (!this.events.hasOwnProperty(e)) {
+    77 |            this.events[e] = [];
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    79 |        this.events[e].push(fn);
+    80 |    };
+    81 |    ResourceManagerImage.prototype.fire = function (e) {
+--------------------------------------------------^
+    82 |        var i, len, events;
+    83 |        if (this.events.hasOwnProperty(e)) {
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    89 |    };
+    90 |
+    91 |    ResourceManagerImage.prototype.load = function () {
+--------------------------------------------------^
+    92 |        var ctx = this;
+    93 |        ctx.setIsLoading(true);
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    94 |        if (!(this.resource instanceof Image)) {
+    95 |            this.resource = new Image();
+    96 |            this.resource.onload = function () {
+-------------------------------------------^
+    97 |                ctx.setIsLoaded(true);
+    98 |                ctx.setIsLoading(false);
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+    99 |                ctx.fire('load');
+   100 |            };
+   101 |            this.resource.onerror = function () {
+--------------------------------------------^
+   102 |                ctx.setLoadFailed(true);
+   103 |                ctx.setIsLoading(false);
+
+Expect valid jsdoc-block definition at Scripts/View/ResourceManagerImage.js :
+   116 |    };
+   117 |
+   118 |    ResourceManagerImage.prototype.getImage = function () {
+------------------------------------------------------^
+   119 |        return this.resource;
+   120 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/ToolRow.js :
+     6 |        $linkToggleIcons = $("#OdysseyOpenToolRow"),
+     7 |        $body = $(document.body);
+     8 |    function toggleToolRow() {
+------------^
+     9 |        if (active) {
+    10 |            $body.removeClass("state-tools-active");
+
+Expect valid jsdoc-block definition at Scripts/View/Tooltip.js :
+     5 |    var $tooltip = $("#OdysseyToolTipHeader"),
+     6 |        focusPosition = new Matrix3D(0, 0, 0);
+     7 |    function setTooltipPosition(x, y, z) {
+------------^
+     8 |    }
+     9 |    function updateTooltipPosition(x, y, z) {
+
+Expect valid jsdoc-block definition at Scripts/View/Tooltip.js :
+     7 |    function setTooltipPosition(x, y, z) {
+     8 |    }
+     9 |    function updateTooltipPosition(x, y, z) {
+------------^
+    10 |    }
+    11 |    // On each grid tile hover, set the focus position
+
+
+431 code style errors found.

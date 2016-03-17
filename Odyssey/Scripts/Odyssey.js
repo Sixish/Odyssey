@@ -1,67 +1,106 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker, OdysseyMapRenderer, OdysseyMiniMapRenderer */
-/* Odyssey.js
+/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
+/** Odyssey.js
  * Initializes the Odyssey Map Renderer.
  * Tasks:
- *   Create the dependencies.
- *   Assign the MapFile to a queue.
- *   Set the starting MapPosition.
- *   Expose API.
+ * - establishes a link between the MVC components,
+ * - provides a front-end API including event handlers,
+ * - creates the starting state for the components.
+ *
+ * OdysseyModel.js        Main entry point for the Model.
+ * OdysseyView.js         Main entry point for the View.
+ * OdysseyController.js   Main entry point for the Controller.
+ *
+ * Rules :
+ *   OdysseyModel : Model
+ * - Stores the state of the map.
+ * - Implements event handling, bubbling to Odyssey.
+ * - Cannot access the View in any way.
+ * - Cannot access the Controller in any way.
+ *
+ *   OdysseyView : View
+ * - Stores the state of the rendered map.
+ * - Updates the map, including changes to the DOM.
+ * - Implements event handling, bubbling to Odyssey.
+ * - Holds a reference to the Model.
+ * - Cannot access the Controller in any way.
+ *
+ *   OdysseyController : Controller
+ * - Stores the state of active controls.
+ * - Implements event handling, bubbling to Odyssey.
+ * - Holds a reference to the Model.
+ * - Holds a reference to the View.
  */
-var Odyssey = window.Odyssey || (function () {
+var Odyssey = (function () {
     "use strict";
-    var dat = Dat.load("Odyssey/Data/dat.json"),
-        odysseyMapRenderer = new OdysseyMapRenderer(),
-        odysseyMiniMapRenderer = new OdysseyMiniMapRenderer(),
-        resourceManagerMaps = new ResourceManager(),
-        resourceManagerSprites = new ResourceManager(),
-        requestAnimationFrame = window.requestAnimationFrame;
 
-    // Resource Managers
-    resourceManagerMaps.setFilepathPrefix("Odyssey/Maps/");
-    resourceManagerSprites.setFilepathPrefix("Odyssey/Sprites/");
+    /**
+     * Constructor for the web application.
+     * @constructor
+     */
+    function Odyssey() {
+        this.eventDispatcher = new OdysseyEventDispatcher();
+        this.model = null;
+        this.view = null;
+        this.controller = null;
+    }
+    Odyssey.prototype = new OdysseyEventDispatchInterface();
 
-    // Map Renderer
-    odysseyMapRenderer.initialize(dat, resourceManagerSprites, resourceManagerMaps);
-    odysseyMapRenderer.setSize(17, 17);
-    odysseyMapRenderer.setCanvas('northwest', document.getElementById("OdysseyMapCanvas-NW"), [-1, -1]);
-    odysseyMapRenderer.setCanvas('north', document.getElementById("OdysseyMapCanvas-N"), [0, -1]);
-    odysseyMapRenderer.setCanvas('northeast', document.getElementById("OdysseyMapCanvas-NE"), [1, -1]);
-    odysseyMapRenderer.setCanvas('west', document.getElementById("OdysseyMapCanvas-W"), [-1, 0]);
-    odysseyMapRenderer.setCanvas('pivot', document.getElementById("OdysseyMapCanvas-P"), [0, 0]);
-    odysseyMapRenderer.setCanvas('east', document.getElementById("OdysseyMapCanvas-E"), [1, 0]);
-    odysseyMapRenderer.setCanvas('southwest', document.getElementById("OdysseyMapCanvas-SW"), [-1, 1]);
-    odysseyMapRenderer.setCanvas('south', document.getElementById("OdysseyMapCanvas-S"), [0, 1]);
-    odysseyMapRenderer.setCanvas('southeast', document.getElementById("OdysseyMapCanvas-SE"), [1, 1]);
-    //odysseyMapRenderer.position.set(32255, 32648, 13);
-    odysseyMapRenderer.position.set(0x82A0, 0x79FF, 0x0F);
-    // Minimap
-    odysseyMiniMapRenderer.setCanvas(document.getElementById("OdysseyMiniMapCanvas"));
-    odysseyMiniMapRenderer.initialize(odysseyMapRenderer, dat);
-    window.mmr = odysseyMiniMapRenderer;
+    /**
+     * Sets the controller. This object should contain methods to bind controls.
+     * @param {OdysseyController} controller the controller. This must implement the
+     * OdysseyEventDispatchInterface and have an eventDispatcher object field.
+     */
+    Odyssey.prototype.setController = function (controller) {
+        this.controller = controller;
+        this.controller.setParentEventHandler(this.eventDispatcher);
+    };
 
-    requestAnimationFrame((function () {
-        var sPos = new Matrix3D(0, 0, 0),
-            mPos = odysseyMapRenderer.position;
-        return function update() {
-            if (mPos.x !== sPos.x || mPos.y !== sPos.y || mPos.z !== sPos.z) {
-                //odysseyMapRenderer.clear();
-                odysseyMapRenderer.render();
-                odysseyMiniMapRenderer.update();
-                sPos.x = mPos.x;
-                sPos.y = mPos.y;
-                sPos.z = mPos.z;
-            } else if (odysseyMapRenderer.failedRenderedTiles.length) {
-                // render() handles everything now.
-                if (odysseyMapRenderer.render()) {
-                    odysseyMiniMapRenderer.update();
-                }
+    /**
+     * Gets the controller.
+     * @returns {OdysseyController} the controller.
+     */
+    Odyssey.prototype.getController = function () {
+        return this.controller;
+    };
 
-            }
+    /**
+     * Sets the view. This object should contain all information required
+     * for rendering the map, given a reference to the model able to reconstruct
+     * the map.
+     * @param {OdysseyView} view the view. This must implement the OdysseyEventDispatchInterface
+     * and have an eventDispatcher object field.
+     */
+    Odyssey.prototype.setView = function (view) {
+        this.view = view;
+        this.view.setParentEventHandler(this.eventDispatcher);
+    };
 
-            requestAnimationFrame(update);
-        };
-    }()));
+    /**
+     * Gets the view.
+     * @returns {OdysseyView} the view.
+     */
+    Odyssey.prototype.getView = function () {
+        return this.view;
+    };
 
-    return odysseyMapRenderer;
+    /**
+     * Sets the model. This object should contain all information required
+     * for reconstruction of the map, including: the map data, a Dat context.
+     * @param {ODysseyModel} model the model. This must implement the OdysseyEventDispatchInterface
+     * and have an eventDispatcher object field.
+     */
+    Odyssey.prototype.setModel = function (model) {
+        this.model = model;
+        this.model.setParentEventHandler(this.eventDispatcher);
+    };
+
+    /**
+     * Gets the model.
+     * @returns {OdysseyModel} the model.
+     */
+    Odyssey.prototype.getModel = function () {
+        return this.model;
+    };
+
+    return Odyssey;
 }());

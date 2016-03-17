@@ -1,0 +1,16 @@
+#map-viewport.zoom-025 {
+    transform: scale(0.25, 0.25);
+}
+#map-viewport.zoom-050 {
+    transform: scale(0.5, 0.5);
+}
+#map-viewport,
+#map-viewport.zoom-100 {
+    transform: scale(1, 1);
+}
+#map-viewport.zoom-200 {
+    transform: scale(2, 2);
+}
+#map-viewport.zoom-400 {
+    transform: scale(4, 4);
+}

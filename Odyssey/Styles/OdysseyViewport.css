@@ -30,6 +30,9 @@
     position: relative;
     background-color: #000000;
 }
+#map-viewport-offset {
+    transform: translate(0.75em, 0.75em);
+}
 #map-viewport > div {
     position: absolute;
     height: inherit;
@@ -70,44 +73,58 @@
     left: 0;
     top: 0;
 }
-#map-viewport {
-    font-size: 544px;
-}
+/* Adjust font-size based on zoom level.
+ */
+#map-viewport,
+#map-viewport.zoom-100 { font-size: 736px; }
+#map-viewport.zoom-400 { font-size: 192px; }
+#map-viewport.zoom-200 { font-size: 384px; }
+#map-viewport.zoom-050 { font-size: 1472px; }
+#map-viewport.zoom-025 { font-size: 2944px; }
 
+#OdysseyMapCanvasOverlay-NW,
 #OdysseyMapCanvas-NW {
     margin: -1em 0 0 -1em;
     z-index: 0;
 }
+#OdysseyMapCanvasOverlay-N,
 #OdysseyMapCanvas-N {
     margin: -1em 0 0 0;
     z-index: 1;
 }
+#OdysseyMapCanvasOverlay-NE,
 #OdysseyMapCanvas-NE {
     margin: -1em 0 0 1em;
     z-index: 2;
 }
 
+#OdysseyMapCanvasOverlay-W,
 #OdysseyMapCanvas-W {
     margin: 0 0 0 -1em;
     z-index: 3;
 }
+#OdysseyMapCanvasOverlay-P,
 #OdysseyMapCanvas-P {
     margin: 0 0 0 0;
     z-index: 4;
 }
+#OdysseyMapCanvasOverlay-E,
 #OdysseyMapCanvas-E {
     margin: 0 0 0 1em;
     z-index: 5;
 }
 
+#OdysseyMapCanvasOverlay-SW,
 #OdysseyMapCanvas-SW {
     margin: 1em 0 0 -1em;
     z-index: 6;
 }
+#OdysseyMapCanvasOverlay-S,
 #OdysseyMapCanvas-S {
     margin: 1em 0 0 0;
     z-index: 7;
 }
+#OdysseyMapCanvasOverlay-SE,
 #OdysseyMapCanvas-SE {
     margin: 1em 0 0 1em;
     z-index: 8;
