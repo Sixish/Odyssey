@@ -1,10 +1,10 @@
-/*global OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
+/*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
 var OdysseyOverlay = (function () {
     "use strict";
     function OdysseyOverlay() {
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
-    OdysseyOverlay.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyOverlay.prototype, new OdysseyEventDispatchInterface());
 
     OdysseyOverlay.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
         cvs.getContext('2d').clearRect(xStart, yStart, width, height);
@@ -39,7 +39,7 @@ var OdysseyOverlay = (function () {
         this.context = Odyssey;
     };
 
-    OdysseyOverlay.prototype.update = function (model) {
+    OdysseyOverlay.prototype.update = function () {
         // TODO. Need access to position.
     };
 

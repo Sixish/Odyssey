@@ -1,4 +1,4 @@
-/*global Odyssey, OdysseyView, OdysseyModel, OdysseyMinimap, OdysseyWorldMap, OdysseyTileMap, OdysseyWorld, OdysseyGeography, OdysseyWorldSpawns, OdysseyController, OdysseyControlManager, Dat, OdysseyTileInfo, OdysseyOverlay, ResourceManager, document, OdysseySpriteIndex, OdysseyMapIndex, OdysseyInitializedEvent*/
+/*global Odyssey, OdysseyWorldMapControl, OdysseySearchControl, OdysseyLinkClickControl, OdysseyView, OdysseyModel, OdysseyMinimap, OdysseyWorldMap, OdysseyTileMap, OdysseyWorld, OdysseyGeography, OdysseyWorldSpawns, OdysseyController, OdysseyControlManager, Dat, OdysseyTileInfo, OdysseyOverlay, ResourceManager, document, OdysseySpriteIndex, OdysseyMapIndex, OdysseyInitializedEvent*/
 /** Main.js.
  *
  * Main entry point for the TibiaOdyssey web application.
@@ -48,15 +48,15 @@ var o = (function () {
         }
     }
 
+    // Model.
     odyssey.setModel((function () {
         var model = new OdysseyModel();
+        model.setParentEventHandler(odyssey.eventDispatcher);
 
         // Dat.
         model.setDat((function () {
             var dat = Dat.load("Odyssey/Data/dat.json");
             dat.addEventListener("OdysseyDatLoaded", dependencyLoaded);
-            // Dat does not implement OdysseyEventDispatchInterface,
-            // i.e. it cannot dispatch events.
             return dat;
         }()));
 
@@ -103,10 +103,14 @@ var o = (function () {
     // View.
     odyssey.setView((function () {
         var view = new OdysseyView();
+        view.setParentEventHandler(odyssey.eventDispatcher);
         // View needs a reference to the model.
         view.setModel(odyssey.getModel());
-        // Start the rendering process when dependencies are loaded.
+        // Global event listeners.
         odyssey.addEventListener("OdysseyInitialized", OdysseyView.updateProxy(view));
+        odyssey.addEventListener("OdysseyBinaryFileLoaded", OdysseyView.updateProxy(view));
+        odyssey.addEventListener("OdysseyMapZoomChange", OdysseyView.updateProxy(view));
+        odyssey.addEventListener("OdysseyMapPositionChange", OdysseyView.updateProxy(view));
 
         // Resource Manager (sprites).
         view.setResourceManager((function () {
@@ -153,6 +157,7 @@ var o = (function () {
             wm.setWrapperElement(document.getElementById("OdysseyLargeMinimap"));
             wm.setMapViewportElement(document.getElementById("OdysseyMinimapViewport"));
             wm.setMapContainerElement(document.getElementById("OdysseyMinimapContainer"));
+            wm.setFocusAreaElement(document.getElementById("OdysseyMinimapActive"));
             for (z = 0, maxZ = 16; z < maxZ; z += 1) {
                 wm.setMapImageElement(z, document.getElementById("MinimapFloor" + padLeft(String(z), "0", 2)));
             }
@@ -167,7 +172,12 @@ var o = (function () {
             tileMap.setView(view);
 
             tileMap.setViewport(document.getElementById("map-viewport-translator"));
+            // To debug non-graphical aspects, try setting the size lower.
+            // This reduces the amount of sprites that need to load,
+            // meaning faster load times.
+            // Note that this does not adjust the size of the canvases.
             tileMap.setSize(23, 23);
+            //tileMap.setSize(3, 3);
             // Canvases.
             tileMap.setCanvas(OdysseyTileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
             tileMap.setCanvas(OdysseyTileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvas-N"));
@@ -189,12 +199,12 @@ var o = (function () {
             tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvasOverlay-S"));
             tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
 
-            odyssey.addEventListener('OdysseyMapFileLoaded', OdysseyView.updateProxy(view));
-            odyssey.addEventListener('OdysseyMapZoomChange', OdysseyView.updateProxy(view));
-            odyssey.addEventListener('OdysseyMapPositionChange', OdysseyView.updateProxy(view));
-
             //tileMap.setPosition(32255, 32648, 13);
             tileMap.setPosition(32366, 32239, 7);
+            view.addEventListener("OdysseyWorldMapHide", function () {
+                var pos = this.getMapPosition();
+                tileMap.setPosition(pos.x, pos.y, pos.z);
+            });
 
             return tileMap;
         }()));
@@ -211,7 +221,7 @@ var o = (function () {
                 tileInfo.showInfo(e.position.x, e.position.y, e.position.z);
             }
 
-            odyssey.addEventListener('OdysseyMapClick', handleTileSelect);
+            odyssey.addEventListener("OdysseyMapClick", handleTileSelect);
             tileInfo.setParentEventHandler(view.eventDispatcher);
             return tileInfo;
         }()));
@@ -228,7 +238,7 @@ var o = (function () {
                 overlay.select(e.position);
             }
 
-            odyssey.addEventListener('OdysseyMapClick', handleOverlaySelect);
+            odyssey.addEventListener("OdysseyMapClick", handleOverlaySelect);
             overlay.setParentEventHandler(view.eventDispatcher);
             return overlay;
         }()));
@@ -239,12 +249,40 @@ var o = (function () {
     // Controller.
     odyssey.setController((function () {
         var controller = new OdysseyController();
-        // Controller needs access to the Model and View.
-        // TODO.
+        controller.setParentEventHandler(odyssey.eventDispatcher);
 
         controller.setControlManager((function () {
             var m = new OdysseyControlManager();
             m.setParentEventHandler(controller.eventDispatcher);
+            // Controls will have a reference to the Model and View,
+            // the control manager will provide these to them.
+            // Controls should implement the initialize method if
+            // their functionality relies on either the view or model.
+            // The initialize method will be called after the controls
+            // are provided reference to these.
+            // Controls should implement:
+            // - OdysseyViewAttributor, to get and set the View,
+            // - OdysseyModelAttributor, to get and set the Model.
+            m.setView(odyssey.getView());
+            m.setModel(odyssey.getModel());
+
+            // Odyssey link clicks.
+            m.addControl((function () {
+                var control = new OdysseyLinkClickControl();
+                return control;
+            }()));
+
+            // World Map controls.
+            m.addControl((function () {
+                var control = new OdysseyWorldMapControl();
+                return control;
+            }()));
+
+            // Search controls.
+            m.addControl((function () {
+                var control = new OdysseySearchControl();
+                return control;
+            }()));
 
             return m;
         }()));

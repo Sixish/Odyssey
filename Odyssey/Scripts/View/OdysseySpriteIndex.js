@@ -9,7 +9,7 @@ var OdysseySpriteIndex = (function ($) {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.data = [];
     }
-    OdysseySpriteIndex.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseySpriteIndex.prototype, new OdysseyEventDispatchInterface());
 
     /**
      * Populates a resource manager with the sprite index data.
@@ -19,7 +19,7 @@ var OdysseySpriteIndex = (function ($) {
     OdysseySpriteIndex.populateResourceManager = function (spriteIndex, resourceManager) {
         var spritesheets = spriteIndex.data, i, len;
         for (i = 0, len = spritesheets.length; i < len; i += 1) {
-            resourceManager.addImage(spritesheets[i].src);
+            resourceManager.addBinaryFile(spritesheets[i].src);
         }
     };
 

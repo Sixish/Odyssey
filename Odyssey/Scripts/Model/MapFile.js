@@ -1,20 +1,7 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/*jslint bitwise: true */
+/*global console*/
 var MapFile = (function () {
     "use strict";
-    /**
-     * Pads a string with padding until the string has a certain length.
-     * @param str The string to pad.
-     * @param width The width to pad until.
-     * @param padding Optional. The text to use as padding. Default is "0".
-     * @returns The string with padding applied.
-     */
-    function padLeft(str, width, padding) {
-        while (str.length < width) {
-            str = (padding || '0') + str;
-        }
-        return str;
-    }
 
     /**
      * Creates a new MapFile corresponding to 16 x 16 x 1 world tiles.

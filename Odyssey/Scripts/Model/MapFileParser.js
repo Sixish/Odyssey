@@ -1,5 +1,5 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/*jslint bitwise: true*/
+/*global Matrix3D*/
 var MapFileParser = (function () {
     "use strict";
     /**
@@ -14,9 +14,9 @@ var MapFileParser = (function () {
      * Gets a tile's index within the object. This refers
      * to the tile's array index inside the Explored property
      * of the JSON object.
-     * @param posx The x-position of the tile, relative to the base X position.
-     * @param posy The y-position of the tile, relative to the base Y position.
-     * @returns The index corresponding to the number which contains the Explored flag of the tile.
+     * @param {Number} posx The x-position of the tile, relative to the base X position.
+     * @param {Number} posy The y-position of the tile, relative to the base Y position.
+     * @returns {Number} The index corresponding to the number which contains the Explored flag of the tile.
      */
     MapFileParser.getTileIndex = function (posx, posy) {
         return Math.floor((posy / 32) + (posx << 3));
@@ -26,21 +26,22 @@ var MapFileParser = (function () {
      * Gets a tile's binary offset within the object. This refers
      * to the tile's offset inside the Explored integer corresponding
      * to the tile.
-     * @param posx The x-position of the tile.
-     * @param posy The y-position of the tile.
-     * @returns The tile's index within an Explored bit flag set.
+     * @param {Number} posx The x-position of the tile.
+     * @param {Number} posy The y-position of the tile.
+     * @returns {Number} The tile's index within an Explored bit flag set.
      */
     MapFileParser.getTileOffset = function (posx, posy) {
         return (posy % 32);
     };
 
     /**
-     * Parses the text of a MapFile.
-     * @param str The text of the MapFile.
-     * @returns The parsed map.
+     * Parses a JSON-deserialized object from a file and fixes the data
+     * according to Odyssey's map structure.
+     * @param {Object} map the JSON-deserialized object parsed from a file.
+     * @returns {Number} the parsed map.
      */
-    MapFileParser.prototype.parse = function (str) {
-        var map = JSON.parse(str), x, y, explored, tileMap, mapReplacement = [], i = 0, baseX, baseY;
+    MapFileParser.prototype.parse = function (map) {
+        var x, y, explored, tileMap, mapReplacement = [], i = 0, baseX, baseY;
 
         if (!map) {
             return null;
@@ -63,5 +64,6 @@ var MapFileParser = (function () {
         map.Map = mapReplacement;
         return map;
     };
+
     return MapFileParser;
 }());

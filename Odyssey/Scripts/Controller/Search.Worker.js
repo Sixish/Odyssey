@@ -169,16 +169,16 @@
                 onfind: function (result) {
                     var request = {
                         result: result,
-                        requestID: msg.requestID,
-                        status: "find"
+                        id: msg.id,
+                        type: "find"
                     };
                     postMessage(JSON.stringify(request));
                 },
                 oncomplete: function (results) {
                     var request = {
                         results: results,
-                        requestID: msg.requestID,
-                        status: "complete"
+                        id: msg.id,
+                        type: "complete"
                     };
                     postMessage(JSON.stringify(request));
                 }

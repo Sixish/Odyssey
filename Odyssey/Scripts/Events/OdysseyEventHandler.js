@@ -5,7 +5,7 @@ var OdysseyEventHandler = (function () {
         this.listeners = [];
     }
     OdysseyEventHandler.prototype.fire = function (ctx, e) {
-        var i, len = this.listeners.length, parent;
+        var i, len = this.listeners.length;
         for (i = 0; (i < len && !e.propagationStopped); i += 1) {
             this.listeners[i].call(ctx, e);
         }

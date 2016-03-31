@@ -8,7 +8,7 @@ var OdysseyTileInfo = (function ($) {
     function OdysseyTileInfo() {
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
-    OdysseyTileInfo.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyTileInfo.prototype, new OdysseyEventDispatchInterface());
 
     OdysseyTileInfo.prototype.setContext = function (Odyssey) {
         this.context = Odyssey;

@@ -18,7 +18,7 @@ var OdysseyView = (function () {
         this.overlay = null;
         this.spriteIndex = null;
     }
-    OdysseyView.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyView.prototype, new OdysseyEventDispatchInterface());
 
     /**
      * Proxy method for updating a view. This method returns a function
@@ -37,6 +37,7 @@ var OdysseyView = (function () {
      */
     OdysseyView.prototype.setResourceManager = function (resourceManager) {
         this.resourceManager = resourceManager;
+        this.resourceManager.setParentEventHandler(this.eventDispatcher);
     };
 
     /**
@@ -170,7 +171,7 @@ var OdysseyView = (function () {
      */
     OdysseyView.prototype.update = function () {
         if (this.minimap !== null) {
-            this.minimap.update(this.model, this);
+            //this.minimap.update(this.model, this);
         }
         if (this.worldMap !== null) {
             this.worldMap.update(this.model, this);

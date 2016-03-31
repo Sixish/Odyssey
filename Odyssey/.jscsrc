@@ -13,7 +13,7 @@
         "checkRedundantReturns": true,
         "requireReturnTypes": true,
         //"checkTypes": false,
-        "enforceExistence": true,
+        //"enforceExistence": true,
         "disallowNewlineAfterDescription": true,
         "requireDescriptionCompleteSentence": true,
         "requireParamDescription": true,

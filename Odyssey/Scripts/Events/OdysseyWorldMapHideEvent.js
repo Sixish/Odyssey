@@ -1,8 +1,8 @@
-/*global OdysseyEvent*/
+/*global extend, OdysseyEvent*/
 var OdysseyWorldMapHideEvent = (function () {
     "use strict";
     function OdysseyWorldMapHideEvent() {}
-    OdysseyWorldMapHideEvent.prototype = new OdysseyEvent('OdysseyWorldMapHide');
+    extend(OdysseyWorldMapHideEvent.prototype, new OdysseyEvent('OdysseyWorldMapHide'));
 
     return OdysseyWorldMapHideEvent;
 }());

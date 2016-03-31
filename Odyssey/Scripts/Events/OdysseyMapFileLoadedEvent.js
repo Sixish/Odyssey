@@ -1,11 +1,13 @@
+/*global extend, OdysseyEvent*/
 var OdysseyMapFileLoadedEvent = (function () {
+    "use strict";
     /**
      * @constructor
      */
     function OdysseyMapFileLoadedEvent(map) {
         this.target = map;
     }
-    OdysseyMapFileLoadedEvent.prototype = new OdysseyEvent('OdysseyMapFileLoaded');
+    extend(OdysseyMapFileLoadedEvent.prototype, new OdysseyEvent('OdysseyMapFileLoaded'));
 
     return OdysseyMapFileLoadedEvent;
 }());

@@ -7,6 +7,10 @@ var OdysseyEventDispatcher = (function () {
     function OdysseyEventDispatcher() {
         this.events = {};
     }
+    OdysseyEventDispatcher.prototype.toJSON = function () {
+        // Do not serialize this object, as it is a container for functions.
+        return;
+    };
     OdysseyEventDispatcher.prototype.parent = null;
     OdysseyEventDispatcher.prototype.getParentEventHandler = function () {
         return this.parent;

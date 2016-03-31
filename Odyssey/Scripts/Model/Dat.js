@@ -1,5 +1,4 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global OdysseyDatLoadedEvent, OdysseyEventDispatchInterface, OdysseyEventDispatcher, ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher, OdysseyDatLoadedEvent, jQuery*/
 /* Dat.js
  * Loads Tibia.dat.json files.
  * Handles requests for item information.
@@ -12,7 +11,7 @@ var Dat = (function ($) {
     function Dat() {
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
-    Dat.prototype = new OdysseyEventDispatchInterface();
+    extend(Dat.prototype, new OdysseyEventDispatchInterface());
     /** @const */
     Dat.ATTRIBUTE_ID_GROUND          = 0;
     /** @const */

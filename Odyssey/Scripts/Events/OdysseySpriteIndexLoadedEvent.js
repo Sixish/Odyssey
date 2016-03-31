@@ -1,8 +1,8 @@
-/*global OdysseyEvent*/
+/*global extend, OdysseyEvent*/
 var OdysseySpriteIndexLoadedEvent = (function () {
     "use strict";
     function OdysseySpriteIndexLoadedEvent() {}
-    OdysseySpriteIndexLoadedEvent.prototype = new OdysseyEvent('OdysseySpriteIndexLoaded');
+    extend(OdysseySpriteIndexLoadedEvent.prototype, new OdysseyEvent('OdysseySpriteIndexLoaded'));
 
     return OdysseySpriteIndexLoadedEvent;
 }());

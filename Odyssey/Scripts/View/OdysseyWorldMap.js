@@ -1,7 +1,19 @@
 /*jslint browser:true*/
-/*globals jQuery, Matrix3D, OdysseyEventDispatcher, OdysseyWorldMapPositionChangeEvent, OdysseyEventDispatchInterface, OdysseyWorldMapToggleEvent, OdysseyWorldMapHideEvent, OdysseyWorldMapShowEvent*/
+/*globals jQuery, extend, Matrix3D, OdysseyEventDispatcher, OdysseyWorldMapPositionChangeEvent, OdysseyEventDispatchInterface, OdysseyWorldMapToggleEvent, OdysseyWorldMapHideEvent, OdysseyWorldMapShowEvent*/
+/** OdysseyWorldMap.js
+ *
+ * Represents the state of the world map, i.e. the large pixel map.
+ */
+/**
+ * Creates a closure for the OdysseyWorldMap class.
+ * @param {jQuery} $ the jQuery instance.
+ */
 var OdysseyWorldMap = (function ($) {
     "use strict";
+    /**
+     * Creates a new OdysseyWorldMap.
+     * @constructor
+     */
     function OdysseyWorldMap() {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.position = new Matrix3D(null, null, null);
@@ -16,7 +28,7 @@ var OdysseyWorldMap = (function ($) {
         this.visible = false;
         this.mapPosition = new Matrix3D(33053, 31013, 7);
     }
-    OdysseyWorldMap.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyWorldMap.prototype, new OdysseyEventDispatchInterface());
 
     /** @const */
     OdysseyWorldMap.MIN_POSITION_X = (124 * 256);
@@ -33,16 +45,27 @@ var OdysseyWorldMap = (function ($) {
     /** @const */
     OdysseyWorldMap.DEFAULT_ZOOM = 1;
 
+    /**
+     * Shows the world map.
+     */
     OdysseyWorldMap.prototype.show = function () {
         this.visible = true;
         $("body").addClass('state-minimap-active');
         this.dispatchEvent(new OdysseyWorldMapShowEvent());
     };
+
+    /**
+     * Hides the world map.
+     */
     OdysseyWorldMap.prototype.hide = function () {
         this.visible = false;
         $("body").removeClass('state-minimap-active');
         this.dispatchEvent(new OdysseyWorldMapHideEvent());
     };
+
+    /**
+     * Toggles the visibility of the world map.
+     */
     OdysseyWorldMap.prototype.toggle = function () {
         if (this.visible) {
             this.hide();
@@ -53,54 +76,108 @@ var OdysseyWorldMap = (function ($) {
     };
 
     /**
-     * Sets the WorldMap's position.
+     * Sets the world map's position and updates the map.
+     * @param {Number} x the new x position.
+     * @param {Number} y the new y position.
+     * @param {Number} z the new z position.
      */
     OdysseyWorldMap.prototype.setPosition = function (x, y, z) {
         this.position.set(x, y, z);
         this.dispatchEvent(new OdysseyWorldMapPositionChangeEvent(this.position));
     };
 
+    /**
+     * Sets the element of the focus area.
+     * @param {Object} element the DOM element to use for the focus area.
+     */
     OdysseyWorldMap.prototype.setFocusAreaElement = function (element) {
         this.ui.focusArea = element;
     };
+
+    /**
+     * Gets the element of the focus area.
+     * @returns {Object} the DOM element to use for the focus area.
+     */
     OdysseyWorldMap.prototype.getFocusAreaElement = function () {
         return this.ui.focusArea || null;
     };
 
+    /**
+     * Sets the element for the wrapper.
+     * @param {Object} element the element to use for the wrapper.
+     */
     OdysseyWorldMap.prototype.setWrapperElement = function (element) {
         this.ui.wrapper = element;
     };
+
+    /**
+     * Gets the element for the wrapper.
+     * @returns {Object} the element used for the wrapper.
+     */
     OdysseyWorldMap.prototype.getWrapperElement = function () {
         return this.ui.wrapper || null;
     };
 
+    /**
+     * Sets the element for the viewport.
+     * @param {Object} element the DOM element to use for the viewport.
+     */
     OdysseyWorldMap.prototype.setMapViewportElement = function (element) {
         this.ui.viewport = element;
     };
+
+    /**
+     * Gets the element for the viewport.
+     * @returns {Object} the DOM element used for the viewport.
+     */
     OdysseyWorldMap.prototype.getMapViewportElement = function () {
         return this.ui.viewport || null;
     };
 
+    /**
+     * Sets the element used to contain the map.
+     * @param {Object} element the element to contain the map.
+     */
     OdysseyWorldMap.prototype.setMapContainerElement = function (element) {
         this.ui.mapContainer = element;
     };
+
+    /**
+     * Gets the element used to contain the map.
+     * @returns {Object} the element used to contain the map.
+     */
     OdysseyWorldMap.prototype.getMapContainerElement = function () {
         return this.ui.mapContainer || null;
     };
 
+    /**
+     * Sets the image element used for a floor of the world map.
+     * @param {Number} z the floor of the world map corresponding to the map image.
+     * @param {Object} element the DOM image element containing the map.
+     */
     OdysseyWorldMap.prototype.setMapImageElement = function (z, element) {
         this.ui.mapImages[z] = element;
     };
+
+    /**
+     * Gets the image element corresponding to the floor.
+     * @param {Number} z the floor.
+     * @returns {Object} the image element corresponding to this floor.
+     */
     OdysseyWorldMap.prototype.getMapImageElement = function (z) {
         return this.ui.mapImages[z] || null;
     };
 
+    /**
+     * Gets all the DOM image elements used as maps.
+     * @returns {Array<Object>} all DOM image elements used for the maps.
+     */
     OdysseyWorldMap.prototype.getMapImageElements = function () {
         return this.ui.mapImages || null;
     };
 
     /**
-     * Updates WorldMap.
+     * Updates the world map.
      */
     OdysseyWorldMap.prototype.update = function () {
         var $container = $(this.getMapViewportElement()),
@@ -123,7 +200,8 @@ var OdysseyWorldMap = (function ($) {
     };
 
     /**
-     * Sets the zoom for the WorldMap.
+     * Sets the zoom for the world map and updates the map.
+     * @param {Number} n the zoom state of the map.
      */
     OdysseyWorldMap.prototype.zoom = function (n) {
         var e, elements, i, len, valX, valY;
@@ -145,7 +223,8 @@ var OdysseyWorldMap = (function ($) {
     };
 
     /**
-     * Sets the current WorldMap floor.
+     * Sets the current world map floor.
+     * @param {Number} z the active floor.
      */
     OdysseyWorldMap.prototype.setFloor = function (z) {
         $(this.getMapImageElement(this.position.z))
@@ -157,15 +236,16 @@ var OdysseyWorldMap = (function ($) {
     };
 
     /**
-     * Gets the position of the WorldMap.
+     * Gets the position of the world map.
+     * @returns {Matrix3D} the map position.
      */
     OdysseyWorldMap.prototype.getMapPosition = function () {
         return this.mapPosition;
     };
 
     /**
-     * Sets the WorldMap position and updates the WorldMap.
-     * @param position The new WorldMap position.
+     * Sets the world map position and updates the world map.
+     * @param {Matrix3D} position the new world map position.
      */
     OdysseyWorldMap.prototype.setMapPosition = function setMapPosition(position) {
         this.mapPosition.set(Math.floor(position.x), Math.floor(position.y), Math.floor(position.z));

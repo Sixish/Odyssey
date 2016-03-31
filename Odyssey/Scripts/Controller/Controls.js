@@ -1,5 +1,6 @@
-    /*jslint browser: true, devel:true */
-/*globals jQuery, Odyssey, OdysseyWorldMap, OdysseyMapSearch, OdysseyEventDispatchInterface*/
+/*jslint browser: true, devel:true */
+/*globals jQuery, extend, Odyssey, OdysseyWorldMap, OdysseyMapSearch, OdysseyEventDispatchInterface*/
+// TODO move from Controls.js to more specialized classes.
 (function (map, worldmap, $) {
     "use strict";
     var $body = $(document.body),
@@ -11,7 +12,7 @@
     function OdysseyController() {
         this.context = null;
     }
-    OdysseyController.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyController.prototype, new OdysseyEventDispatchInterface());
 
     // Keys that affect map position.
     /** @const */
@@ -33,10 +34,10 @@
     /** @const */
     OdysseyController.NOCTRL_MULTIPLIER = 1;
 
-    OdysseyController.prototype.setContext = function (ctx) {
-        this.context = ctx;
-    };
-
+    /**
+     * Handles the keyboard controls of map position shifting.
+     * @param {Object} e the keyboard event.
+     */
     function handleMapShiftControls(e) {
         var position = map.getPosition(),
             ctrlModifier = e.ctrlKey ? OdysseyController.CTRL_MULTIPLIER : OdysseyController.NOCTRL_MULTIPLIER,
@@ -112,6 +113,7 @@
     /**
      * Handles keydown events for input fields. Prevents event propagation
      * to ensure other controls do not respond to this event.
+     * @param {Object} e the event that fired on the input.
      */
     function inputPreventPropagation(e) {
         e.stopPropagation();
@@ -120,93 +122,4 @@
     // DOM event listeners.
     $body.keydown(handleMapShiftControls);
     $inputs.keydown(inputPreventPropagation);
-    // Search
-    $("#OdysseySearchSubmit").click(function () {
-        var search = new OdysseyMapSearch(), $results, $positions, $criteria, i = 0;
-        $results = $("#OdysseySearchResultsContainer li");
-        $positions = $("#OdysseySearchResultsContainer li .search-position");
-        $criteria = $("#OdysseySearchResultsContainer li .search-criteria");
-        search.send(map.maps);
-        $results.removeClass('active').addClass('inactive');
-        search.find({
-            items: [
-                parseInt($("#OdysseySearchItemID").val(), 10)
-            ],
-            onfind: function (e) {
-                var result = e.result;
-                $($results[i]).removeClass('inactive').addClass('active');
-                $($criteria[i]).text(result.items.join(", "));
-                $($positions[i]).text(result.position.x + ", " + result.position.y + ", " + result.position.z);
-                i += 1;
-            },
-            oncomplete: function (e) {
-                // Completed search.
-            }
-        });
-    });
-
-    (function () {
-        // Handle WorldMap mouse drag.
-        var mousedownActive = false;
-        /**
-         * Shifts the viewport based on the event arguments.
-         * @param e the event arguments.
-         */
-        function handleViewportShiftEvent(e) {
-            var offset = $(worldmap.getMapContainerElement()).offset();
-            // Catch unexpected values.
-            if ((e.pageX - offset.left) < 0) {
-                return false;
-            }
-            if ((e.pageY - offset.top) < 0) {
-                return false;
-            }
-
-            // Set the relative minimap position based on the mouse position.
-            worldmap.setMapPosition({
-                x: OdysseyWorldMap.MIN_POSITION_X + (e.pageX - offset.left) / worldmap.mapZoom,
-                y: OdysseyWorldMap.MIN_POSITION_Y + (e.pageY - offset.top) / worldmap.mapZoom,
-                z: worldmap.mapPosition.z
-            });
-        }
-        // Handle mouse up / down for WorldMap state.
-        // Mouse up on document to catch movements over the bounds of the viewport.
-        function handleDocumentMouseUpEvent() {
-            mousedownActive = false;
-        }
-
-        // Mouse down on viewport.
-        function handleViewportMouseDownEvent() {
-            mousedownActive = true;
-            // Prevent drag selection.
-            return false;
-        }
-
-        // Handle desktop mouse move.
-        function handleViewportMouseMoveEvent(e) {
-            // If the mouse is down, handle the viewport and active area movement.
-            if (mousedownActive) {
-                handleViewportShiftEvent(e);
-            }
-        }
-
-        // Handle mobile touch move.
-        function handleViewportTouchMoveEvent(e) {
-            handleViewportShiftEvent(e.originalEvent.targetTouches[0]);
-        }
-
-        // Attach event listeners.
-        $("body").mouseup(handleDocumentMouseUpEvent);
-        $(worldmap.getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
-        $(worldmap.getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
-        $(worldmap.getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
-        // WorldMap event listeners.
-        worldmap.addEventListener('OdysseyWorldMapClose', function () {
-            // Update the map position to reflect the WorldMap position.
-            var pos = worldmap.getMapPosition();
-            map.setPosition(pos.x, pos.y, pos.z);
-        });
-    }());
-
-    return OdysseyController;
 }(Odyssey.getMapRenderer(), Odyssey.getWorldMap(), jQuery));

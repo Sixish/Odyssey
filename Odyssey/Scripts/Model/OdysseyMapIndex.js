@@ -1,4 +1,4 @@
-/*global Matrix3D, MapFile, MapFileParserResult*/
+/*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher, Matrix3D, MapFile, MapFileParserResult*/
 var OdysseyMapIndex = (function () {
     "use strict";
     function OdysseyMapIndex() {
@@ -6,7 +6,7 @@ var OdysseyMapIndex = (function () {
         this.startPosition = new Matrix3D(0, 0, 0);
         this.endPosition = new Matrix3D(0, 0, 0);
     }
-    OdysseyMapIndex.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyMapIndex.prototype, new OdysseyEventDispatchInterface());
     OdysseyMapIndex.prototype.setStartPosition = function (x, y, z) {
         this.startPosition.set(x, y, z);
     };

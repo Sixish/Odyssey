@@ -1,5 +1,5 @@
-/*jslint browser: true, bitwise: true */
-/*global OdysseyEventDispatchInterface, OdysseyEventDispatcher, OdysseyMinimapRenderedEvent*/
+/*jslint bitwise: true */
+/*global Matrix3D, Odyssey, OdysseyEventDispatchInterface, OdysseyEventDispatcher, OdysseyMinimapRenderedEvent*/
 var OdysseyMinimap = (function () {
     "use strict";
     /**
@@ -28,8 +28,8 @@ var OdysseyMinimap = (function () {
          */
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
+    extend(OdysseyMinimap.prototype, new OdysseyEventDispatchInterface());
 
-    OdysseyMinimap.prototype = new OdysseyEventDispatchInterface();
     /**
      * Draws a pixel of a color at position on the canvas.
      * @param rgba the color as an RGBA integer (0xRRGGBBAA).
@@ -53,16 +53,6 @@ var OdysseyMinimap = (function () {
     OdysseyMinimap.prototype.setCanvas = function (canvas) {
         this.canvas = canvas;
         this.drawContext = canvas.getContext("2d");
-    };
-
-    /**
-     * Initializes the OdysseyMinimap.
-     * @param Odyssey the OdysseyTileMap to use.
-     */
-    OdysseyMinimap.prototype.initialize = function (Dat) {
-        // Dependencies.
-        this.Dat = Dat;
-        this.position = Odyssey.position;
     };
 
     /**
@@ -93,5 +83,6 @@ var OdysseyMinimap = (function () {
         // Fire the OdysseyMiniMapRendered event.
         this.dispatchEvent(new OdysseyMinimapRenderedEvent());
     };
+
     return OdysseyMinimap;
 }());

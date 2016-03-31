@@ -1,9 +1,11 @@
+/*global extend, OdysseyEvent*/
 var OdysseyMinimapRenderedEvent = (function () {
+    "use strict";
     /**
      * @constructor
      */
     function OdysseyMinimapRenderedEvent() {}
-    OdysseyMinimapRenderedEvent.prototype = new OdysseyEvent('OdysseyMiniMapRendered');
+    extend(OdysseyMinimapRenderedEvent.prototype, new OdysseyEvent('OdysseyMiniMapRendered'));
 
     return OdysseyMinimapRenderedEvent;
 }());

@@ -1,5 +1,7 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/** MapItem.js
+ *
+ * Class to store a single item on a map.
+ */
 var MapItem = (function () {
     "use strict";
     /**

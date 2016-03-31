@@ -1,5 +1,5 @@
 /*jslint bitwise: true*/
-/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface, MapFileParser, MapFileParserResult, MapFile, OdysseyMapFileLoadedEvent*/
+/*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface, MapFileParser, MapFileParserResult, MapFile, OdysseyMapFileLoadedEvent*/
 /**
  * OdysseyModel.js
  *
@@ -25,7 +25,7 @@ var OdysseyModel = (function () {
          */
         this.mapsFailed = {};
     }
-    OdysseyModel.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyModel.prototype, new OdysseyEventDispatchInterface());
 
     /**
      * Sets the resource manager for the model.
@@ -33,7 +33,16 @@ var OdysseyModel = (function () {
      * @param {ResourceManager} resourceManager the resource manager to use.
      */
     OdysseyModel.prototype.setResourceManager = function (resourceManager) {
+        var ctx = this;
         this.resourceManager = resourceManager;
+        this.resourceManager.setParentEventHandler(this.eventDispatcher);
+        // Handle map file loads.
+        this.resourceManager.addEventListener("OdysseyBinaryFileLoaded", function (e) {
+            var file = e.file;
+            if (file && file.hasOwnProperty('contents')) {
+                ctx.parseMapDataFile(file.contents);
+            }
+        });
     };
 
     /**
@@ -64,20 +73,20 @@ var OdysseyModel = (function () {
      * @param mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
      */
     OdysseyModel.prototype.loadMapFile = function (mapX, mapY, mapZ) {
-        var ctx = this, index, id, resource;
+        var index, id;
         index = MapFileParserResult.resolveIndex(mapX, mapY, mapZ) + ".json";
         if (!this.resourceManager.hasFile(index)) {
             return false;
         }
         id = this.resourceManager.getResourceIDByFilename(index);
-        resource = this.resourceManager.getResource(id);
-        if (!resource.isLoading()) {
-            resource.addEventListener('load', function () {
-                var map = ctx.parseMapDataFile(resource.getResourceContents());
-                ctx.dispatchEvent(new OdysseyMapFileLoadedEvent(map));
-            });
-            resource.load();
+        // TODO is this check necessary?
+        if (!(this.resourceManager.isLoaded(id) || this.resourceManager.isLoading(id))) {
+            this.resourceManager.load(id);
+            // Map file is not ready to use.
+            return false;
         }
+        // Map file is already loaded, indicate that it is ready to use.
+        return true;
     };
 
     /**
@@ -183,7 +192,7 @@ var OdysseyModel = (function () {
      * @returns true if all maps are loaded; false otherwise.
      */
     OdysseyModel.prototype.loadMaps = function (xs, ys, zs, xe, ye, ze) {
-        var x, y, z, filename, resourceID;
+        var x, y, z, success = true;
 
         // Get the base values for the maps.
         xs = MapFile.getFileX(xs);
@@ -197,18 +206,13 @@ var OdysseyModel = (function () {
         for (x = xs; x <= xe; x += 1) {
             for (y = ys; y <= ye; y += 1) {
                 for (z = zs; z <= ze; z += 1) {
-                    filename = MapFileParserResult.resolveIndex(x, y, z) + ".json";
-                    if (this.resourceManager.hasFile(filename)) {
-                        resourceID = this.resourceManager.getResourceIDByFilename(filename);
-                        if (!this.resourceManager.isLoaded(resourceID)) {
-                            this.loadMapFile(x, y, z);
-                            return false;
-                        }
+                    if (!this.loadMapFile(x, y, z)) {
+                        success = false;
                     }
                 }
             }
         }
-        return true;
+        return success;
     };
 
     /**

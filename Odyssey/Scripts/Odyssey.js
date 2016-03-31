@@ -1,4 +1,4 @@
-/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
+/*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyControllerAttributor, OdysseyViewAttributor, OdysseyModelAttributor*/
 /** Odyssey.js
  * Initializes the Odyssey Map Renderer.
  * Tasks:
@@ -43,64 +43,10 @@ var Odyssey = (function () {
         this.view = null;
         this.controller = null;
     }
-    Odyssey.prototype = new OdysseyEventDispatchInterface();
-
-    /**
-     * Sets the controller. This object should contain methods to bind controls.
-     * @param {OdysseyController} controller the controller. This must implement the
-     * OdysseyEventDispatchInterface and have an eventDispatcher object field.
-     */
-    Odyssey.prototype.setController = function (controller) {
-        this.controller = controller;
-        this.controller.setParentEventHandler(this.eventDispatcher);
-    };
-
-    /**
-     * Gets the controller.
-     * @returns {OdysseyController} the controller.
-     */
-    Odyssey.prototype.getController = function () {
-        return this.controller;
-    };
-
-    /**
-     * Sets the view. This object should contain all information required
-     * for rendering the map, given a reference to the model able to reconstruct
-     * the map.
-     * @param {OdysseyView} view the view. This must implement the OdysseyEventDispatchInterface
-     * and have an eventDispatcher object field.
-     */
-    Odyssey.prototype.setView = function (view) {
-        this.view = view;
-        this.view.setParentEventHandler(this.eventDispatcher);
-    };
-
-    /**
-     * Gets the view.
-     * @returns {OdysseyView} the view.
-     */
-    Odyssey.prototype.getView = function () {
-        return this.view;
-    };
-
-    /**
-     * Sets the model. This object should contain all information required
-     * for reconstruction of the map, including: the map data, a Dat context.
-     * @param {ODysseyModel} model the model. This must implement the OdysseyEventDispatchInterface
-     * and have an eventDispatcher object field.
-     */
-    Odyssey.prototype.setModel = function (model) {
-        this.model = model;
-        this.model.setParentEventHandler(this.eventDispatcher);
-    };
-
-    /**
-     * Gets the model.
-     * @returns {OdysseyModel} the model.
-     */
-    Odyssey.prototype.getModel = function () {
-        return this.model;
-    };
+    extend(Odyssey.prototype, new OdysseyEventDispatchInterface());
+    extend(Odyssey.prototype, new OdysseyModelAttributor());
+    extend(Odyssey.prototype, new OdysseyViewAttributor());
+    extend(Odyssey.prototype, new OdysseyControllerAttributor());
 
     return Odyssey;
 }());

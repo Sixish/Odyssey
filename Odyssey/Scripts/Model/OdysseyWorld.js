@@ -1,4 +1,4 @@
-/*global OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
+/*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
 /**
  * OdysseyWorld.js
  *
@@ -10,7 +10,7 @@ var OdysseyWorld = (function () {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.items = {};
     }
-    OdysseyWorld.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyWorld.prototype, new OdysseyEventDispatchInterface());
     OdysseyWorld.prototype.tileExists = function (x, y, z) {
         return !(this[x] === undefined || this[x][y] === undefined || this[x][y][z] === undefined);
     };

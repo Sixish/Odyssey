@@ -1,14 +1,7 @@
-/*jslint browser: true, bitwise: true */
-/*global requestAnimationFrame, console, Matrix3D, OdysseyCanvasSection, MapFile, MapFileParser, MapFileParserResult, jQuery, OdysseyMapRenderCompleteEvent, OdysseyMapZoomChangedEvent, OdysseyMapPositionChangedEvent, OdysseyEventDispatcher, OdysseyMapFileLoadedEvent, OdysseyEventDispatchInterface*/
-var OdysseyTileMap = (function ($) {
+/*jslint browser: true, bitwise: true, devel: true */
+/*global requestAnimationFrame, extend, Matrix3D, MapFile, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyMapPositionChangedEvent, OdysseyMapZOomChangedEvent, OdysseyMapRenderCompleteEvent, OdysseyMapZoomChangedEvent*/
+var OdysseyTileMap = (function () {
     "use strict";
-    // Helper functions.
-    function proxy(fn, ctx, args) {
-        return function () {
-            fn.apply(ctx, args);
-        };
-    }
-
     /**
      * Creates a new OdysseyTileMap. Used to render the game world.
      * @constructor
@@ -112,7 +105,7 @@ var OdysseyTileMap = (function ($) {
         };
     };
 
-    OdysseyTileMap.prototype = new OdysseyEventDispatchInterface();
+    extend(OdysseyTileMap.prototype, new OdysseyEventDispatchInterface());
 
     /**
      * Sets the view. OdysseyTileMap needs a reference to the parent view.
@@ -121,6 +114,7 @@ var OdysseyTileMap = (function ($) {
     OdysseyTileMap.prototype.setView = function (view) {
         this.view = view;
     };
+
     /**
      * Sentinel value determining if rendering should continue,
      * i.e. if the rendering has already completed.
@@ -134,12 +128,6 @@ var OdysseyTileMap = (function ($) {
         // The dat file must be loaded first.
         if (this.view.getModel().getDat().isLoaded) {
             this.render();
-        }
-        // Check if the canvases have been fully rendered.
-        // Use the OdysseyMapRenderComplete event to set this.
-        if (!this.hasFullyRendered) {
-            // Give the client a chance to load resources and repeat this process.
-            requestAnimationFrame(proxy(this.repeatRendering, this, null));
         }
     };
 
@@ -182,6 +170,9 @@ var OdysseyTileMap = (function ($) {
      * @param model the model to use for updating.
      */
     OdysseyTileMap.prototype.update = function () {
+        if (this.view.getResourceManager().isBusy()) {
+            return;
+        }
         this.repeatRendering();
     };
 
@@ -419,7 +410,9 @@ var OdysseyTileMap = (function ($) {
         var spritesheet, spriteOffsetX, spriteOffsetY, spriteSizeX, spriteSizeY, offsetX, offsetY, cvs;
 
         spritesheet = this.getSpriteFileID(sprID);
-        if (!this.view.getResourceManager().isLoaded(spritesheet)) {
+        // TODO is this check necessary?
+        //if (!(this.view.getResourceManager().isLoaded(spritesheet) || this.view.getResourceManager().isLoading(spritesheet))) {
+        if (!(this.view.getResourceManager().isLoaded(spritesheet))) {
             this.view.getResourceManager().load(spritesheet);
             return false;
         }
@@ -521,13 +514,6 @@ var OdysseyTileMap = (function ($) {
         if (items === null) {
             if (!this.view.getModel().mapIsLoaded(x, y, z) && !this.view.getModel().mapHasFailed(x, y, z)) {
                 // The render failed because the map is not loaded.
-
-                // Start loading the map.
-                this.view.getModel().loadMapFile(
-                    MapFile.getFileX(x),
-                    MapFile.getFileY(y),
-                    MapFile.getFileZ(z)
-                );
                 return false;
             }
             // The render didn't fail, it just isn't possible
@@ -566,15 +552,9 @@ var OdysseyTileMap = (function ($) {
         return success;
     };
 
-    /**
-     * Refreshes the whole viewport. This is used when the sprites are known to be loaded.
-     * @returns true if the refresh was successful; false otherwise.
-     */
-    OdysseyTileMap.prototype.refresh = function () {
-        var x, xs, xe, y, ys, ye, z, zs, ze, currentMapPosition = this.position, success = true;
-
+    OdysseyTileMap.prototype.loadMaps = function () {
+        var currentMapPosition = this.position, xs, xe, ys, ye, zs, ze;
         // Set the range of position values to render.
-
         xs = (currentMapPosition.x - (currentMapPosition.x % this.sizeX)) - this.sizeX;
         xe = (currentMapPosition.x - (currentMapPosition.x % this.sizeX)) + 2 * this.sizeX - 1;
 
@@ -585,27 +565,42 @@ var OdysseyTileMap = (function ($) {
         zs = currentMapPosition.z;
         ze = currentMapPosition.z;
 
+        // Ensure the maps are loaded.
+        return this.view.getModel().loadMaps(xs, ys, zs, xe, ye, ze);
+    };
+
+    /**
+     * Refreshes the whole viewport. This is used when the sprites are known to be loaded.
+     * @returns true if the refresh was successful; false otherwise.
+     */
+    OdysseyTileMap.prototype.refresh = function () {
+        var currentMapPosition = this.position, xs, xe, ys, ye, zs, ze, x, y, z, success = true;
+        // Set the range of position values to render.
+        xs = (currentMapPosition.x - (currentMapPosition.x % this.sizeX)) - this.sizeX;
+        xe = (currentMapPosition.x - (currentMapPosition.x % this.sizeX)) + 2 * this.sizeX - 1;
+
+        ys = (currentMapPosition.y - (currentMapPosition.y % this.sizeY)) - this.sizeY;
+        ye = (currentMapPosition.y - (currentMapPosition.y % this.sizeY)) + 2 * this.sizeY - 1;
+
+        // Our map doesn't support multi-level rendering just yet.
+        zs = currentMapPosition.z;
+        ze = currentMapPosition.z;
+
+        //var x, xs, xe, y, ys, ye, z, zs, ze, currentMapPosition = this.position, success = true;
+
         // Clear the list of failed tiles.
         this.clearRenderFailed();
 
-        // Ensure the maps are loaded.
-        if (!this.view.getModel().mapsLoadedInRange(xs, ys, zs, xe, ye, ze)) {
-            this.view.getModel().loadMaps(xs, ys, zs, xe, ye, ze);
-        }
+        // Ensure all the maps are loaded.
+        this.loadMaps();
+
         for (x = xs; x <= xe; x += 1) {
             for (y = ys; y <= ye; y += 1) {
                 for (z = zs; z <= ze; z += 1) {
                     if (!this.renderTile(x, y, z)) {
                         // If the map was loaded, this tile does not exist.
-                        if (!this.view.getModel().mapIsLoaded(x, y, z)) {
-                            // This tile was not correctly rendered.
-                            // Try again later (after resources are loaded).
-                            this.setRenderFailed(x, y, z);
-
-                            // Full render was not successful because
-                            // the tile failed to load.
-                            success = false;
-                        }
+                        this.setRenderFailed(x, y, z);
+                        success = false;
                     }
                 }
             }
@@ -622,10 +617,18 @@ var OdysseyTileMap = (function ($) {
      */
     OdysseyTileMap.prototype.render = function () {
         // We cannot proceed until we've loaded the dat file.
+        this.dispatchEvent({ type: 'OdysseyBeginRenderProcess' });
         if (!this.view.getModel().getDat().isLoaded) {
             console.assert(this.view.getModel().getDat().isLoading, "Script must initialize before rendering.");
             return false;
         }
+
+        // Load the map files required to render the full viewport.
+        if (!this.loadMaps()) {
+            console.log("Maps not ready. Exiting.");
+            return false;
+        }
+
         if (this.translate()) {
             this.awaitingRefresh = true;
             this.renderedPosition.set(this.position.x, this.position.y, this.position.z);
@@ -636,8 +639,8 @@ var OdysseyTileMap = (function ($) {
             // Perform a refresh to resolve issues with 64x64 sprites.
             if (this.awaitingRefresh) {
                 if (this.refresh()) {
-                    this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.stopRepeatRendering);
                     this.renderedPosition.set(this.position.x, this.position.y, this.position.z);
+                    this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.stopRepeatRendering);
                     return true;
                 }
                 return false;
@@ -662,18 +665,25 @@ var OdysseyTileMap = (function ($) {
             return false;
         }
 
-        for (i = arr.length - 1; i > 0; i -= 1) {
+        for (i = arr.length - 1; i >= 0; i -= 1) {
             pos = arr[i];
-            if (!this.renderTile(pos.x, pos.y, pos.z)) {
+            if (pos === undefined) {
+                // Huh, this shouldn't have happened.
+                console.log("Found invalid entries in failed rendered tiles array.");
+            } else if (this.renderTile(pos.x, pos.y, pos.z)) {
+                // We must remove the last element from the array now,
+                // because the next iterations of this loop may alter the
+                // array in such a way that we cannot reliably continue.
+                arr.length -= 1;
+            } else {
                 // We failed again. We can't reliably remove
                 // array indices if we continue. Break and remove
                 // what we can.
                 break;
             }
         }
-        arr.length = i;
 
-        if (i === 0) {
+        if (arr.length === 0) {
             // We have finished rendering all objects, perform
             // a full render so that we can resolve any issues
             // with 64px display.
@@ -725,8 +735,10 @@ var OdysseyTileMap = (function ($) {
     OdysseyTileMap.prototype.translate = function () {
         var pos = this.position,
             rPos = this.renderedPosition,
-            dxu = (Math.floor(rPos.x / this.sizeX) - Math.floor(pos.x / this.sizeX)),
-            dyu = (Math.floor(rPos.y / this.sizeY) - Math.floor(pos.y / this.sizeY)),
+            //dxu = (Math.floor(rPos.x / this.sizeX) - Math.floor(pos.x / this.sizeX)),
+            dxu = (Math.floor(pos.x / this.sizeX) - Math.floor(rPos.x / this.sizeX)),
+            //dyu = (Math.floor(rPos.y / this.sizeY) - Math.floor(pos.y / this.sizeY)),
+            dyu = (Math.floor(pos.y / this.sizeY) - Math.floor(rPos.y / this.sizeY)),
             canvasOffsetX = Math.max(-3, Math.min(3, dxu)),
             canvasOffsetY = Math.max(-3, Math.min(3, dyu)),
             maxCanvasOffsetX = Math.max(canvasOffsetX, -canvasOffsetX),
@@ -743,6 +755,7 @@ var OdysseyTileMap = (function ($) {
             x,
             y,
             needsRefresh = false;
+
         // East / west canvas movements.
         for (p = 0, sgn = (dxu < 0 ? -1 : +1); p !== canvasOffsetX; p += sgn) {
             for (c = 0; c < 3; c += 1) {
@@ -756,17 +769,23 @@ var OdysseyTileMap = (function ($) {
                 swapCanvas.getContext('2d').clearRect(0, 0, (32 * (this.sizeX + 1)), (32 * (this.sizeY + 1)));
             }
         }
+
         // Schedule the canvas for re-rendering.
         for (x = 0; x < (this.sizeX * maxCanvasOffsetX); x += 1) {
             for (y = 0; y < (this.sizeY * 3); y += 1) {
+                // The following is the formula to determine where to start replacing tiles,
+                // i.e. the top left canvas, or the rectangle we've not rendered yet.
+                // The loops' conditions determine the area of that rectangle.
+                // TODO check : there might be a 1px offset?
                 this.setRenderFailed(
-                    baseX + x + xOffset * this.sizeX,
-                    baseY + y + (-1) * this.sizeY,
+                    (baseX + (xOffset < 0 ? -1 : (2 - canvasOffsetX)) * this.sizeX) + x,
+                    (baseY + (-1 * this.sizeY)) + y,
                     pos.z
                 );
                 needsRefresh = true;
             }
         }
+
         // South / north canvas movements.
         for (p = 0, sgn = (dyu < 0 ? -1 : +1); p !== canvasOffsetY; p += sgn) {
             for (c = 0; c < 3; c += 1) {
@@ -780,17 +799,23 @@ var OdysseyTileMap = (function ($) {
                 swapCanvas.getContext('2d').clearRect(0, 0, (32 * (this.sizeX + 1)), (32 * (this.sizeY + 1)));
             }
         }
+
         // Schedule the canvas for re-rendering.
         for (x = 0; x < (this.sizeX * 3); x += 1) {
             for (y = 0; y < (this.sizeY * maxCanvasOffsetY); y += 1) {
+                // The following is the formula to determine where to start replacing tiles,
+                // i.e. the top left canvas, or the rectangle we've not rendered yet.
+                // The loops' conditions determine the area of that rectangle.
+                // TODO check : there might be a 1px offset?
                 this.setRenderFailed(
-                    baseX + x + (-1) * this.sizeX,
-                    baseY + y + yOffset * this.sizeY,
+                    (baseX + (-1 * this.sizeX)) + x,
+                    (baseY + (yOffset < 0 ? -1 : (2 - canvasOffsetY)) * this.sizeY) + y,
                     pos.z
                 );
                 needsRefresh = true;
             }
         }
+
         // Set the viewport's translation.
         this.viewport.style.transform = "translate(" + (-32 * (1 + (pos.x % this.sizeX) - Math.ceil(this.sizeX / 2))) + "px, " + (-32 * (1 + (pos.y % this.sizeY) - Math.ceil(this.sizeY / 2))) + "px)";
         // Update the canvas IDs.
@@ -800,4 +825,4 @@ var OdysseyTileMap = (function ($) {
     };
 
     return OdysseyTileMap;
-}(jQuery));
+}());

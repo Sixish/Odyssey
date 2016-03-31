@@ -14,7 +14,7 @@ $max_floor = 15;
 for ($i = $min_floor; $i < $max_floor; $i++) {
     $floorID = str_pad("" . $i, 2, '0', STR_PAD_LEFT);
     $isActive = ($i == DEFAULT_ACTIVE_FLOOR);
-    echo "     <img src=\"Odyssey/Images/Minimap/Map" . $floorID . ".png\" id=\"MinimapFloor" . $floorID . "\" class=\"" . ($isActive ? "active" : "inactive") . "\" draggable=\"false\" />\n";
+    echo "     <img data-src=\"Odyssey/Images/Minimap/Map" . $floorID . ".png\" id=\"MinimapFloor" . $floorID . "\" class=\"" . ($isActive ? "active" : "inactive") . "\" draggable=\"false\" />\n";
 }
 ?>
     </div>

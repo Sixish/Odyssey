@@ -1,5 +1,4 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerImage, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
+/*jslint bitwise: true*/
 var MapFileParserResult = (function () {
     "use strict";
     /**
@@ -9,6 +8,7 @@ var MapFileParserResult = (function () {
     function MapFileParserResult() {
         this.mapFiles = [];
     }
+
     /**
      * Resolves the filename index for the MapFile.
      * @param fposx The MapFile base X value.
@@ -19,5 +19,6 @@ var MapFileParserResult = (function () {
     MapFileParserResult.resolveIndex = function (fposx, fposy, fposz) {
         return ((fposx & 0xFF) << 0) + ((fposy & 0xFF) << 8) + ((fposz & 0xF) << 16);
     };
+
     return MapFileParserResult;
 }());

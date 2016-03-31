@@ -18,7 +18,7 @@ var OdysseyZoom = (function ($) {
     function OdysseyZoomEvent(zoom) {
         this.zoom = zoom;
     }
-    OdysseyZoomEvent.prototype = new OdysseyEvent('OdysseyZoom');
+    extend(OdysseyZoomEvent.prototype, new OdysseyEvent('OdysseyZoom'));
 
     function fireZoomEvent(e) {
         var i, len = onZoomListeners.length;

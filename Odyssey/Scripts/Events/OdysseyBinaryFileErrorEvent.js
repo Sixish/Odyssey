@@ -1,10 +1,10 @@
-/*global OdysseyEvent*/
+/*global extend, OdysseyEvent*/
 var OdysseyBinaryFileErrorEvent = (function () {
     "use strict";
     function OdysseyBinaryFileErrorEvent(context) {
         this.file = context;
     }
-    OdysseyBinaryFileErrorEvent.prototype = new OdysseyEvent("OdysseyBinaryFileError");
+    extend(OdysseyBinaryFileErrorEvent.prototype, new OdysseyEvent("OdysseyBinaryFileError"));
 
     return OdysseyBinaryFileErrorEvent;
 }());
