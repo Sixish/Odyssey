@@ -1,4 +1,4 @@
-/*global jQuery, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
+/*global jQuery, extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
 var OdysseyTileInfo = (function ($) {
     "use strict";
     var $ToolTipItems = $(".OdysseyToolTipItem"),

@@ -1,7 +1,8 @@
+//jscs: disable
 /*jslint browser: true, devel:true */
-/*globals jQuery, extend, Odyssey, OdysseyWorldMap, OdysseyMapSearch, OdysseyEventDispatchInterface*/
+/*globals jQuery, extend, OdysseyWorldMap, OdysseyMapSearch, OdysseyEventDispatchInterface*/
 // TODO move from Controls.js to more specialized classes.
-(function (map, worldmap, $) {
+(function ($) {
     "use strict";
     var $body = $(document.body),
         $inputs = $("input"),
@@ -122,4 +123,4 @@
     // DOM event listeners.
     $body.keydown(handleMapShiftControls);
     $inputs.keydown(inputPreventPropagation);
-}(Odyssey.getMapRenderer(), Odyssey.getWorldMap(), jQuery));
+}(jQuery));

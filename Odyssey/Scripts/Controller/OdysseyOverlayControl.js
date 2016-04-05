@@ -1,23 +1,23 @@
 /*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
-var OdysseyOverlay = (function () {
+var OdysseyOverlayControl = (function () {
     "use strict";
-    function OdysseyOverlay() {
+    function OdysseyOverlayControl() {
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
-    extend(OdysseyOverlay.prototype, new OdysseyEventDispatchInterface());
+    extend(OdysseyOverlayControl.prototype, new OdysseyEventDispatchInterface());
 
-    OdysseyOverlay.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
+    OdysseyOverlayControl.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
         cvs.getContext('2d').clearRect(xStart, yStart, width, height);
     };
 
-    OdysseyOverlay.unpaintAll = function unpaintAll() {
+    OdysseyOverlayControl.unpaintAll = function unpaintAll() {
         var canvases = this.context.overlayCanvases, i, len = canvases.length;
         for (i = 0; i < len; i += 1) {
-            OdysseyOverlay.clearCanvas(canvases[i], 0, 0, canvases[i].width, canvases[i].height);
+            OdysseyOverlayControl.clearCanvas(canvases[i], 0, 0, canvases[i].width, canvases[i].height);
         }
     };
 
-    OdysseyOverlay.prototype.select = function select(pos) {
+    OdysseyOverlayControl.prototype.select = function select(pos) {
         var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
         if (index !== -1) {
             cvs = this.context.overlayCanvases[index];
@@ -27,21 +27,21 @@ var OdysseyOverlay = (function () {
         }
     };
 
-    OdysseyOverlay.prototype.unselect = function unselect(pos) {
+    OdysseyOverlayControl.prototype.unselect = function unselect(pos) {
         var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
         if (index !== -1) {
             cvs = this.context.overlayCanvases[index];
-            OdysseyOverlay.clearCanvas(cvs, 32 * (1 + (pos.x % this.context.sizeX)), 32 * (1 + (pos.y % this.context.sizeY)), 32, 32);
+            OdysseyOverlayControl.clearCanvas(cvs, 32 * (1 + (pos.x % this.context.sizeX)), 32 * (1 + (pos.y % this.context.sizeY)), 32, 32);
         }
     };
 
-    OdysseyOverlay.prototype.setContext = function (Odyssey) {
+    OdysseyOverlayControl.prototype.setContext = function (Odyssey) {
         this.context = Odyssey;
     };
 
-    OdysseyOverlay.prototype.update = function () {
+    OdysseyOverlayControl.prototype.update = function () {
         // TODO. Need access to position.
     };
 
-    return OdysseyOverlay;
+    return OdysseyOverlayControl;
 }());

@@ -21,6 +21,7 @@ body.state-minimap-active #OdysseyToolTip,
 body.state-minimap-active #OdysseyToolRow,
 body.state-minimap-active #OdysseyNavList,
 body.state-minimap-active #OdysseySearchContainer,
+body.state-minimap-active #OdysseyStatus,
 body.state-minimap-active #map-container {
     display: none;
 }
@@ -35,6 +36,7 @@ body.state-navlist-active #OdysseyToolTip,
 body.state-navlist-active #OdysseyToolRow,
 body.state-navlist-active #OdysseyLargeMinimap,
 body.state-navlist-active #OdysseySearchContainer,
+body.state-navlist-active #OdysseyStatus,
 body.state-navlist-active #map-container {
     display: none;
 }
@@ -49,6 +51,7 @@ body.state-search-active #OdysseyMiniMap,
 body.state-search-active #OdysseyToolTip,
 body.state-search-active #OdysseyToolRow,
 body.state-search-active #OdysseyNavList,
+body.state-search-active #OdysseyStatus,
 body.state-search-active #map-container {
     display: none;
 }
@@ -64,13 +67,15 @@ body.state-search-active #map-container {
     body.state-navlist-active #OdysseyMiniMap,
     body.state-navlist-active #OdysseyToolTip,
     body.state-navlist-active #OdysseyToolRow,
+    body.state-navlist-active #OdysseyStatus,
     body.state-navlist-active #map-container {
         display: block;/* IE does not understand 'initial' */
         display: initial;
     }
     /*
-     * Desktop: if Search is active, don't hide the map.
+     * Desktop: if Search is active, don't hide the map or status.
      */
+    body.state-search-active #OdysseyStatus,
     body.state-search-active #map-container {
         display: block;/* IE does not understand 'initial' */
         display: initial;

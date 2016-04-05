@@ -2,6 +2,9 @@
 /*global jQuery, extend, OdysseyMapSearch, OdysseyModelAttributor, OdysseyViewAttributor, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
 var OdysseySearchControl = (function ($) {
     "use strict";
+    // 
+    var KEYCODE_ENTER = 13;
+
     function OdysseySearchControl() {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.mouseIsDown = false;
@@ -26,8 +29,10 @@ var OdysseySearchControl = (function ($) {
             $(document.body).toggleClass("state-search-active");
         });
 
-        // Submit search request.
-        $("#OdysseySearchSubmit").click(function () {
+        /**
+         * Performs the search with the input information.
+         */
+        function performSearch() {
             var $results, $positions, $criteria, i = 0, o;
             $results = $("#OdysseySearchResultsContainer li");
             $positions = $("#OdysseySearchResultsContainer li .search-position");
@@ -62,7 +67,32 @@ var OdysseySearchControl = (function ($) {
                 ]
             };
             ctx.searcher.find(o, handleSearchFind, handleSearchComplete);
-        });
+        }
+
+        /**
+         * Handles input field key presses.
+         * @param {Object} e the keypress event that fired.
+         */
+        function handleSearchKeyInput(e) {
+            // Submit the search when the user presses enter.
+            if (e.keyCode === KEYCODE_ENTER) {
+                e.preventDefault();
+                e.stopPropagation();
+                performSearch();
+            }
+        }
+        /**
+         * Handles search button click.
+         * @param {Object} e the click event that fired.
+         */
+        function handleSearchClick(e) {
+            e.stopPropagation();
+            performSearch();
+        }
+        // Handle key input.
+        $("#OdysseySearchItemID").keypress(handleSearchKeyInput);
+        // Submit search request.
+        $("#OdysseySearchSubmit").click(handleSearchClick);
     };
 
     return OdysseySearchControl;

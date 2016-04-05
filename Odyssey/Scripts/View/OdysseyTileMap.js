@@ -7,6 +7,7 @@ var OdysseyTileMap = (function () {
      * @constructor
      */
     function OdysseyTileMap() {
+        var i, len = 16;
         /**
          * The event dispatcher. Manages Odyssey events.
          */
@@ -45,6 +46,11 @@ var OdysseyTileMap = (function () {
          * These are stored for selective rendering.
          */
         this.failedRenderedTiles = [];
+        this.failedRenderedTiles = {};
+        // Set up the keys of failedRenderedTiles.
+        for (i = 0; i < len; i += 1) {
+            this.failedRenderedTiles[i] = [];
+        }
 
         /**
          * The number of tiles to display on the viewport in the X direction.
@@ -110,6 +116,7 @@ var OdysseyTileMap = (function () {
     /**
      * Sets the view. OdysseyTileMap needs a reference to the parent view.
      * @param {OdysseyView} view the parent view.
+     * @TODO remove (replace with extend : reusable interface).
      */
     OdysseyTileMap.prototype.setView = function (view) {
         this.view = view;
@@ -597,10 +604,14 @@ var OdysseyTileMap = (function () {
         for (x = xs; x <= xe; x += 1) {
             for (y = ys; y <= ye; y += 1) {
                 for (z = zs; z <= ze; z += 1) {
-                    if (!this.renderTile(x, y, z)) {
-                        // If the map was loaded, this tile does not exist.
-                        this.setRenderFailed(x, y, z);
-                        success = false;
+                    if (this.hasRenderFailed(x, y, z)) {
+                        if (!this.renderTile(x, y, z)) {
+                            // If the map was loaded, this tile does not exist.
+                            this.setRenderFailed(x, y, z, true);
+                            success = false;
+                        } else {
+                            this.setRenderFailed(x, y, z, false);
+                        }
                     }
                 }
             }
@@ -659,6 +670,7 @@ var OdysseyTileMap = (function () {
      * @returns false if rendering failed or if there was nothing to render.
      */
     OdysseyTileMap.prototype.renderSelective = function () {
+        return this.refresh();
         var arr = this.failedRenderedTiles, pos, i;
         if (arr.length === 0) {
             // Nothing to render, so we are done.
@@ -671,15 +683,18 @@ var OdysseyTileMap = (function () {
                 // Huh, this shouldn't have happened.
                 console.log("Found invalid entries in failed rendered tiles array.");
             } else if (this.renderTile(pos.x, pos.y, pos.z)) {
-                // We must remove the last element from the array now,
-                // because the next iterations of this loop may alter the
-                // array in such a way that we cannot reliably continue.
-                arr.length -= 1;
+                if (!broken) {
+                    // We must remove the last element from the array now,
+                    // because the next iterations of this loop may alter the
+                    // array in such a way that we cannot reliably continue.
+                    arr.length -= 1;
+                }
             } else {
                 // We failed again. We can't reliably remove
-                // array indices if we continue. Break and remove
-                // what we can.
-                break;
+                // array indices if we continue.
+                broken = true;
+                // Continue loading sprites, but don't remove the indexes.
+                //break;
             }
         }
 
@@ -699,8 +714,19 @@ var OdysseyTileMap = (function () {
      * @param y the map position Y component.
      * @param z the map position Z component.
      */
-    OdysseyTileMap.prototype.setRenderFailed = function (x, y, z) {
-        this.failedRenderedTiles.push(new Matrix3D(x, y, z));
+    OdysseyTileMap.prototype.setRenderFailed = function (x, y, z, value) {
+        this.failedRenderedTiles[z][MapFile.getOffset(x, y)] = (value !== undefined ? value : true);
+    };
+
+    /**
+     * Gets the rendering status of the tile at (x, y, z).
+     * @param x the map position X component.
+     * @param y the map position Y component.
+     * @param z the map position Z component.
+     * @returns true if the tile at (x, y, z) has failed to render.
+     */
+    OdysseyTileMap.prototype.hasRenderFailed = function (x, y, z) {
+        return this.failedRenderedTiles[z][MapFile.getOffset(x, y)] || false;
     };
 
     /**
@@ -709,7 +735,12 @@ var OdysseyTileMap = (function () {
      * to pause until tiles are added.
      */
     OdysseyTileMap.prototype.clearRenderFailed = function () {
-        this.failedRenderedTiles.splice(0);
+        var z, len = 16;
+        for (z = 0; z < len; z += 1) {
+            //this.failedRenderedTiles[z].splice(0);
+            //this.failedRenderedTiles[z].length = 0;
+        }
+        //this.failedRenderedTiles.splice(0);
     };
 
     // TEMPORARY.
@@ -760,11 +791,11 @@ var OdysseyTileMap = (function () {
         for (p = 0, sgn = (dxu < 0 ? -1 : +1); p !== canvasOffsetX; p += sgn) {
             for (c = 0; c < 3; c += 1) {
                 // Save the west or east canvas (depending on xOffset) for overwriting the index.
-                swapCanvas = canvases[3 * (1 + xOffset) + c];
+                swapCanvas = canvases[3 * (1 - xOffset) + c];
                 // Shift all canvases to the left or right.
-                canvases[3 * (1 + xOffset) + c] = canvases[3 * (1 + xOffset - sgn) + c];
-                canvases[3 * (1 + xOffset - sgn) + c] = canvases[3 * (1 + xOffset - 2 * sgn) + c];
-                canvases[3 * (1 + xOffset - 2 * sgn) + c] = swapCanvas;
+                canvases[3 * (1 - xOffset) + c] = canvases[3 * (1 - xOffset + sgn) + c];
+                canvases[3 * (1 - xOffset + sgn) + c] = canvases[3 * (1 - xOffset + 2 * sgn) + c];
+                canvases[3 * (1 - xOffset + 2 * sgn) + c] = swapCanvas;
                 // The swap canvas is no longer relevant.
                 swapCanvas.getContext('2d').clearRect(0, 0, (32 * (this.sizeX + 1)), (32 * (this.sizeY + 1)));
             }
@@ -780,21 +811,21 @@ var OdysseyTileMap = (function () {
                 this.setRenderFailed(
                     (baseX + (xOffset < 0 ? -1 : (2 - canvasOffsetX)) * this.sizeX) + x,
                     (baseY + (-1 * this.sizeY)) + y,
-                    pos.z
+                    pos.z,
+                    true
                 );
                 needsRefresh = true;
             }
         }
-
         // South / north canvas movements.
         for (p = 0, sgn = (dyu < 0 ? -1 : +1); p !== canvasOffsetY; p += sgn) {
             for (c = 0; c < 3; c += 1) {
                 // Save the top or bottom canvas (depending on yOffset) for overwriting the index.
-                swapCanvas = canvases[3 * c + (yOffset + 1)];
+                swapCanvas = canvases[3 * c + (1 - yOffset)];
                 // Shift all canvases to the left or right.
-                canvases[3 * c + (yOffset + 1)] = canvases[3 * c + (yOffset + 1 - yOffset)];
-                canvases[(3 * c + (yOffset + 1 - yOffset))] = canvases[(3 * c + (yOffset + 1 - 2 * yOffset))];
-                canvases[(3 * c + (yOffset + 1 - 2 * yOffset))] = swapCanvas;
+                canvases[3 * c + (1 - yOffset)] = canvases[3 * c + (1 - yOffset + sgn)];
+                canvases[(3 * c + (yOffset + 1 - yOffset))] = canvases[3 * c + (1 - yOffset + 2 * sgn)];
+                canvases[3 * c + (1 - yOffset + 2 * sgn)] = swapCanvas;
                 // The swap canvas is no longer relevant.
                 swapCanvas.getContext('2d').clearRect(0, 0, (32 * (this.sizeX + 1)), (32 * (this.sizeY + 1)));
             }
@@ -810,7 +841,8 @@ var OdysseyTileMap = (function () {
                 this.setRenderFailed(
                     (baseX + (-1 * this.sizeX)) + x,
                     (baseY + (yOffset < 0 ? -1 : (2 - canvasOffsetY)) * this.sizeY) + y,
-                    pos.z
+                    pos.z,
+                    true
                 );
                 needsRefresh = true;
             }

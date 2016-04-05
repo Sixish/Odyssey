@@ -23,6 +23,17 @@ var MapFile = (function () {
     }
 
     /**
+     * Gets the MapFile's position offset.
+     * @static
+     * @param posx the map X position.
+     * @param posy the map Y position.
+     * @returns The position offset corresponding to position (x, y) on this MapFile.
+     */
+    MapFile.getOffset = function (x, y) {
+        return ((x & 0xFFFF) << 16) + (y & 0xFFFF);
+    };
+
+    /**
      * Gets the MapFile's base X value.
      * @static
      * @param posx The map X position.

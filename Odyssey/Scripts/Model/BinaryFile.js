@@ -1,5 +1,4 @@
-/*global jQuery, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyBinaryFileErrorEvent, OdysseyBinaryFileLoadedEvent*/
-var BinaryFile = (function ($) {
+var BinaryFile = (function () {
     "use strict";
     /**
      * Constructor for binary files.
@@ -17,4 +16,4 @@ var BinaryFile = (function ($) {
     };
 
     return BinaryFile;
-}(jQuery));
+}());

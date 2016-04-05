@@ -26,6 +26,8 @@ var ResourceManager = (function () {
         // File IDs awaiting load.
         this.resourcesAwaitingLoad = [];
         this.resourcesAwaitingLoadMap = {};
+        // Needed for progress %.
+        this.loaded = [];
 
         // Event listeners.
         //this.addEventListener("OdysseyBinaryFileLoaded", proxy(this.stopLoader, this, null));
@@ -190,6 +192,7 @@ var ResourceManager = (function () {
             // Check if the current element is invalid, ensuring next
             // elements will replace it.
             if (r === null || r.isLoaded()) {
+                this.loaded.push(r);
                 skip += 1;
             }
         }
@@ -320,6 +323,14 @@ var ResourceManager = (function () {
 
     ResourceManager.prototype.hasFileWithPrefix = function (filename) {
         return this.srcs.hasOwnProperty(filename);
+    };
+
+    ResourceManager.prototype.getLoadedCount = function () {
+        return this.loaded.length;
+    };
+
+    ResourceManager.prototype.getLoadingCount = function () {
+        return this.resourcesAwaitingLoad.length;
     };
 
     return ResourceManager;

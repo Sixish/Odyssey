@@ -72,6 +72,7 @@
   <link rel="stylesheet" href="Odyssey/Styles/NavigationList.css">
   <link rel="stylesheet" href="Odyssey/Styles/OdysseyZoom.css">
   <link rel="stylesheet" href="Odyssey/Styles/State.css">
+  <link rel="stylesheet" href="Odyssey/Styles/Status.css">
  </head>
  <body>
   <h1 id="ContentHeader">Odyssey</h1>
@@ -87,6 +88,9 @@
 
   <!-- Item Info -->
 <?php include "Odyssey/Includes/ItemInfo.php"; ?>
+
+  <!-- Status -->
+<?php include "Odyssey/Includes/Status.php"; ?>
   <div id="OdysseyToolRow">
   
    <div id="OdysseyToolRowIcon">
@@ -145,6 +149,7 @@
   <script type="text/javascript" src="Odyssey/Scripts/Model/MapFile.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyMapIndex.js"></script>
   
+  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyStatus.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyTileMap.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyMinimap.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/Zoom.js"></script>
@@ -158,12 +163,12 @@
   
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyController.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyMapSearch.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyOverlay.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyOverlayControl.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyControlManager.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyWorldMapControl.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyLinkClickControl.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseySearchControl.js"></script>
-  <!--<script type="text/javascript" src="Odyssey/Scripts/Controller/Controls.js"></script>-->
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyNavigationControl.js"></script>
   
   <script type="text/javascript" src="Odyssey/Scripts/Odyssey.js"></script>
   

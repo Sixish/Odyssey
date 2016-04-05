@@ -26,10 +26,14 @@ var OdysseyWorldMapControl = (function ($) {
         var ctx = this;
         $("#OdysseyOpenMinimap").click(function () {
             ctx.dispatchEvent(new OdysseyWorldMapOpenLinkClickEvent(), ctx.processShowClick);
+            // Stop propagation.
+            return false;
         });
 
-        $("#OdysseyMinimapCloseLink").click(function () {
+        $("#OdysseyMinimapCloseLink").click(function (e) {
             ctx.dispatchEvent(new OdysseyWorldMapCloseLinkClickEvent(), ctx.processHideClick);
+            // Stop propagation.
+            return false;
         });
 
         /**

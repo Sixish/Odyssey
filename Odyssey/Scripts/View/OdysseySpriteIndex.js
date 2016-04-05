@@ -1,4 +1,4 @@
-/*global jQuery, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseySpriteIndexLoadedEvent*/
+/*global jQuery, extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseySpriteIndexLoadedEvent*/
 var OdysseySpriteIndex = (function ($) {
     "use strict";
     /**

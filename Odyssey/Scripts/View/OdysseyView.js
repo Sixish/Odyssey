@@ -1,4 +1,4 @@
-/*global OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
+/*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
 /**
  * OdysseyModel.js
  *
@@ -164,6 +164,22 @@ var OdysseyView = (function () {
      */
     OdysseyView.prototype.getSpriteIndex = function () {
         return this.spriteIndex;
+    };
+
+    /**
+     * Gets the status view component.
+     * @returns {OdysseyStatus} the status view component.
+     */
+    OdysseyView.prototype.getStatus = function () {
+        return this.status;
+    };
+
+    /**
+     * Sets the status view component.
+     * @param {OdysseyStatus} status the status view component.
+     */
+    OdysseyView.prototype.setStatus = function (status) {
+        this.status = status;
     };
 
     /**

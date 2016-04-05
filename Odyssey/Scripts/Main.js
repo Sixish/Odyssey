@@ -1,4 +1,4 @@
-/*global Odyssey, OdysseyWorldMapControl, OdysseySearchControl, OdysseyLinkClickControl, OdysseyView, OdysseyModel, OdysseyMinimap, OdysseyWorldMap, OdysseyTileMap, OdysseyWorld, OdysseyGeography, OdysseyWorldSpawns, OdysseyController, OdysseyControlManager, Dat, OdysseyTileInfo, OdysseyOverlay, ResourceManager, document, OdysseySpriteIndex, OdysseyMapIndex, OdysseyInitializedEvent*/
+/*global Odyssey, OdysseyStatus, OdysseyNavigationControl, OdysseyWorldMapControl, OdysseySearchControl, OdysseyLinkClickControl, OdysseyView, OdysseyModel, OdysseyMinimap, OdysseyWorldMap, OdysseyTileMap, OdysseyWorld, OdysseyGeography, OdysseyWorldSpawns, OdysseyController, OdysseyControlManager, Dat, OdysseyTileInfo, OdysseyOverlay, ResourceManager, document, OdysseySpriteIndex, OdysseyMapIndex, OdysseyInitializedEvent*/
 /** Main.js.
  *
  * Main entry point for the TibiaOdyssey web application.
@@ -228,7 +228,8 @@ var o = (function () {
 
         // Overlay.
         view.setOverlay((function () {
-            var overlay = new OdysseyOverlay();
+            // TODO FIX - this is not a View but a Control.
+            var overlay = new OdysseyOverlayControl();
 
             /**
              * Handles selection (i.e. mouse clicks) of the overlay.
@@ -241,6 +242,35 @@ var o = (function () {
             odyssey.addEventListener("OdysseyMapClick", handleOverlaySelect);
             overlay.setParentEventHandler(view.eventDispatcher);
             return overlay;
+        }()));
+
+        view.setStatus((function () {
+            var status = new OdysseyStatus();
+            status.setContainer(document.getElementById("OdysseyStatus"));
+            status.setStatusTextField(document.getElementById("ProgressText"));
+            status.setProgressBar(document.getElementById("ProgressBar"));
+
+            // TODO implement
+            function updateProgressBarLoadingCore() {
+                var loading = 0, loaded = 0;
+                loading += view.getModel().getResourceManager().getLoadingCount();
+                loaded += view.getModel().getResourceManager().getLoadedCount();
+                // Progress %
+                status.setProgress(Math.floor(100 * loaded / (loading + loaded)) / 100);
+            }
+            function updateProgressBarLoadingSprites() {
+                var loading = 0, loaded = 0;
+                // Loading.
+                loading += view.getResourceManager().getLoadingCount();
+                // Loaded.
+                loaded += view.getResourceManager().getLoadedCount();
+                // Progress %
+                status.setStatusText("Loading Sprites (" + loaded + " / " + (loaded + loading) + ")");
+                status.setProgress(Math.floor(100 * loaded / (loading + loaded)) / 100);
+            }
+            odyssey.addEventListener("OdysseyBinaryFileLoaded", updateProgressBarLoadingSprites);
+
+            return status;
         }()));
 
         return view;
@@ -284,6 +314,11 @@ var o = (function () {
                 return control;
             }()));
 
+            m.addControl((function () {
+                var control = new OdysseyNavigationControl();
+                return control;
+            }()));
+
             return m;
         }()));
 
@@ -293,3 +328,9 @@ var o = (function () {
     // Expose the Odyssey API.
     return odyssey;
 }());
+
+// temp
+function move(rx, ry, rz) {
+    var p = o.getView().getTileMap().getPosition();
+    o.getView().getTileMap().setPosition(p.x + rx, p.y + ry, p.z + rz);
+}

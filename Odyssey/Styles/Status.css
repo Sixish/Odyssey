@@ -1,0 +1,73 @@
+@-webkit-keyframes testprogressanimation {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+#OdysseyStatus {
+    position: fixed;
+    z-index: 1;
+    bottom: 0;/* Mobile */
+    margin: 0px auto;
+    width: 100%;
+    text-align: center;
+    opacity: 1;
+}
+#ProgressContainer {
+    position: relative;
+    width: 100%; /* Mobile */
+    margin: 0px auto;
+    overflow: hidden;
+    padding: 0em; /* Mobile */
+}
+
+#ProgressText {
+    display: none; /* Mobile */
+}
+
+#ProgressText, #ProgressBarContainer {
+    height: 0.5em;
+    line-height: 0.25em;
+}
+#ProgressBarContainer {
+    background: #001e00;
+}
+#ProgressBarContainer #ProgressBar {
+    /*animation: testprogressanimation 5s linear infinite;*/
+    width: 0%;
+    background: #00a200;
+    height: 100%;
+}
+
+/* Desktop behaviors */
+@media (min-width: 501px) {
+    #OdysseyStatus {
+        bottom: 0.25em;
+        transition-property: opacity, z-index;
+        transition-delay: 1s;
+        transition-duration: 2s;
+    }
+    #OdysseyStatus:hover {
+        opacity: 0;
+        z-index: 0;
+    }
+    
+    #ProgressContainer {
+        width: 30em;
+        padding: 0.5em 0em 0 0em;
+        border-radius: 0.5em;
+        border: 0.1em solid #d5d5d5;
+    }
+    
+    #ProgressText {
+        display: block;/* IE does not understand 'initial' */
+        display: initial;
+    }
+    
+    #ProgressBarContainer {
+        border-radius: 1em;
+    }
+}
