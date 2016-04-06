@@ -1,6 +1,6 @@
 /*jslint browser: true, bitwise: true, devel: true */
-/*global requestAnimationFrame, extend, Matrix3D, MapFile, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyMapPositionChangedEvent, OdysseyMapZOomChangedEvent, OdysseyMapRenderCompleteEvent, OdysseyMapZoomChangedEvent*/
-var OdysseyTileMap = (function () {
+/*global jQuery, requestAnimationFrame, extend, Matrix3D, MapFile, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyMapPositionChangedEvent, OdysseyMapZOomChangedEvent, OdysseyMapRenderCompleteEvent, OdysseyMapZoomChangedEvent*/
+var OdysseyTileMap = (function ($) {
     "use strict";
     /**
      * Creates a new OdysseyTileMap. Used to render the game world.
@@ -107,7 +107,8 @@ var OdysseyTileMap = (function () {
      */
     OdysseyTileMap.stopUpdateProxy = function (instance) {
         return function () {
-            instance.stopRepeatRendering();
+            console.trace();
+            //instance.stopRepeatRendering();
         };
     };
 
@@ -121,12 +122,6 @@ var OdysseyTileMap = (function () {
     OdysseyTileMap.prototype.setView = function (view) {
         this.view = view;
     };
-
-    /**
-     * Sentinel value determining if rendering should continue,
-     * i.e. if the rendering has already completed.
-     */
-    OdysseyTileMap.prototype.hasFullyRendered = false;
 
     /**
      * Repeats the rendering process until the map has been fully rendered.
@@ -158,14 +153,6 @@ var OdysseyTileMap = (function () {
     };
 
     /**
-     * Instructs the continuous rendering method to stop.
-     * This is called when rendering is complete.
-     */
-    OdysseyTileMap.prototype.stopRepeatRendering = function () {
-        this.hasFullyRendered = true;
-    };
-
-    /**
      * Whether or not the renderer is awaiting a full refresh.
      * This value is used by the render method to determine if a
      * full refresh is to be performed after all sprites have loaded.
@@ -180,7 +167,8 @@ var OdysseyTileMap = (function () {
         if (this.view.getResourceManager().isBusy()) {
             return;
         }
-        this.repeatRendering();
+        this.render();
+        //this.repeatRendering();
     };
 
     /**
@@ -189,6 +177,14 @@ var OdysseyTileMap = (function () {
      */
     OdysseyTileMap.prototype.setViewport = function (element) {
         this.viewport = element;
+    };
+
+    OdysseyTileMap.prototype.setContainer = function (element) {
+        this.container = element;
+    };
+
+    OdysseyTileMap.prototype.getContainer = function () {
+        return this.container;
     };
 
     /**
@@ -596,7 +592,7 @@ var OdysseyTileMap = (function () {
         //var x, xs, xe, y, ys, ye, z, zs, ze, currentMapPosition = this.position, success = true;
 
         // Clear the list of failed tiles.
-        this.clearRenderFailed();
+        //this.clearRenderFailed();
 
         // Ensure all the maps are loaded.
         this.loadMaps();
@@ -617,6 +613,14 @@ var OdysseyTileMap = (function () {
             }
         }
         return success;
+    };
+
+    OdysseyTileMap.prototype.show = function () {
+        $(this.getContainer()).addClass("ready");
+    };
+
+    OdysseyTileMap.prototype.hide = function () {
+        $(this.getContainer()).removeClass("ready");
     };
 
     /**
@@ -651,13 +655,13 @@ var OdysseyTileMap = (function () {
             if (this.awaitingRefresh) {
                 if (this.refresh()) {
                     this.renderedPosition.set(this.position.x, this.position.y, this.position.z);
-                    this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.stopRepeatRendering);
+                    this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.show);
                     return true;
                 }
                 return false;
             }
             this.renderedPosition.set(this.position.x, this.position.y, this.position.z);
-            this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.stopRepeatRendering);
+            this.dispatchEvent(new OdysseyMapRenderCompleteEvent(), this.show);
             return true;
         }
 
@@ -671,7 +675,7 @@ var OdysseyTileMap = (function () {
      */
     OdysseyTileMap.prototype.renderSelective = function () {
         return this.refresh();
-        var arr = this.failedRenderedTiles, pos, i;
+        var arr = this.failedRenderedTiles, pos, i, broken = false;
         if (arr.length === 0) {
             // Nothing to render, so we are done.
             return false;
@@ -738,7 +742,7 @@ var OdysseyTileMap = (function () {
         var z, len = 16;
         for (z = 0; z < len; z += 1) {
             //this.failedRenderedTiles[z].splice(0);
-            //this.failedRenderedTiles[z].length = 0;
+            this.failedRenderedTiles[z].length = 0;
         }
         //this.failedRenderedTiles.splice(0);
     };
@@ -857,4 +861,4 @@ var OdysseyTileMap = (function () {
     };
 
     return OdysseyTileMap;
-}());
+}(jQuery));

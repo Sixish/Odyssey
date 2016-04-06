@@ -2,7 +2,7 @@
 $viewport_width = ((23 + 1) * 32);
 $viewport_height = ((23 + 1) * 32);
 ?>
-    <div id="map-viewport">
+    <div id="map-viewport" class="ready">
      <div id="map-viewport-translator">
       <canvas id="OdysseyMapCanvas-NW" width="<?php echo $viewport_width; ?>" height="<?php echo $viewport_height; ?>">Your browser does not support HTML5Canvas</canvas>
       <canvas id="OdysseyMapCanvas-N" width="<?php echo $viewport_width; ?>" height="<?php echo $viewport_height; ?>">Your browser does not support HTML5Canvas</canvas>

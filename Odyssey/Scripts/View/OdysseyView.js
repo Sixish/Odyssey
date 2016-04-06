@@ -134,6 +134,7 @@ var OdysseyView = (function () {
 
     /**
      * Sets the overlay view component.
+     * @TODO OdysseyOverlay is not a type.
      * @param overlay the overlay view component.
      */
     OdysseyView.prototype.setOverlay = function (overlay) {
@@ -143,6 +144,7 @@ var OdysseyView = (function () {
 
     /**
      * Gets the overlay view component.
+     * @TODO OdysseyOverlay is not a type.
      * @returns the overlay view component.
      */
     OdysseyView.prototype.getOverlay = function () {

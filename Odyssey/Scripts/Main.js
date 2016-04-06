@@ -171,6 +171,7 @@ var o = (function () {
             // tile map needs a reference to the view.
             tileMap.setView(view);
 
+            tileMap.setContainer(document.getElementById("map-container"));
             tileMap.setViewport(document.getElementById("map-viewport-translator"));
             // To debug non-graphical aspects, try setting the size lower.
             // This reduces the amount of sprites that need to load,
@@ -256,7 +257,7 @@ var o = (function () {
                 loading += view.getModel().getResourceManager().getLoadingCount();
                 loaded += view.getModel().getResourceManager().getLoadedCount();
                 // Progress %
-                status.setProgress(Math.floor(100 * loaded / (loading + loaded)) / 100);
+                status.setProgress(Math.floor(100 * (loaded || 0) / ((loading || 0) + (loaded || 1))) / 100);
             }
             function updateProgressBarLoadingSprites() {
                 var loading = 0, loaded = 0;
@@ -266,7 +267,7 @@ var o = (function () {
                 loaded += view.getResourceManager().getLoadedCount();
                 // Progress %
                 status.setStatusText("Loading Sprites (" + loaded + " / " + (loaded + loading) + ")");
-                status.setProgress(Math.floor(100 * loaded / (loading + loaded)) / 100);
+                status.setProgress(Math.floor(100 * (loaded || 0) / (((loading || 0) + (loaded || 0)) || Infinity)) / 100);
             }
             odyssey.addEventListener("OdysseyBinaryFileLoaded", updateProgressBarLoadingSprites);
 
