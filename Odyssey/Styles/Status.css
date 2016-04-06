@@ -43,7 +43,7 @@
 }
 
 /* Desktop behaviors */
-@media (min-width: 501px) {
+@media screen and (min-width: 501px) and (orientation: portrait), screen and (min-height: 501px) and (orientation: landscape) {
     #OdysseyStatus {
         bottom: 0.25em;
         transition-property: opacity, z-index;

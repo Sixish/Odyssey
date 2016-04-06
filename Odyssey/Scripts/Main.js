@@ -200,7 +200,7 @@ var o = (function () {
             tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
 
             //tileMap.setPosition(32255, 32648, 13);
-            tileMap.setPosition(32366, 32239, 7);
+            tileMap.setPosition(32367, 32615, 7);
             view.addEventListener("OdysseyWorldMapHide", function () {
                 var pos = this.getMapPosition();
                 tileMap.setPosition(pos.x, pos.y, pos.z);
@@ -328,9 +328,3 @@ var o = (function () {
     // Expose the Odyssey API.
     return odyssey;
 }());
-
-// temp
-function move(rx, ry, rz) {
-    var p = o.getView().getTileMap().getPosition();
-    o.getView().getTileMap().setPosition(p.x + rx, p.y + ry, p.z + rz);
-}

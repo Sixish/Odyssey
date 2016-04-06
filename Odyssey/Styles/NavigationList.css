@@ -62,7 +62,7 @@ h4.OdysseyNavListHeader {
     padding: 0.75em 1em;/* Mobile-specific */
 }
 
-@media (min-width: 501px) {
+@media screen and (min-width: 501px) and (orientation: portrait), screen and (min-height: 501px) and (orientation: landscape) {
     /* State = active|inactive */
     #OdysseyNavList {
         width: auto;

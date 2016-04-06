@@ -96,7 +96,7 @@ button, input[type="submit"] {
 .search-criteria:after {
     content: "\BB";
 }
-@media (min-width: 501px) {
+@media screen and (min-width: 501px) and (orientation: portrait), screen and (min-height: 501px) and (orientation: landscape) {
     .OdysseyDarkenBackground {
         opacity: 0.75;
     }

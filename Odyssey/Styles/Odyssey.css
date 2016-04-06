@@ -21,7 +21,7 @@ body {
     height: 100%;
     border-radius: inherit;
 }
-@media (min-width: 501px) {
+@media screen and (min-width: 501px) and (orientation: portrait), screen and (min-height: 501px) and (orientation: landscape) {
     #map-container {
         background-color: #ffef96;
         padding: 0.5em;
