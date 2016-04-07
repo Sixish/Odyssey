@@ -60,7 +60,7 @@ var OdysseySpriteIndex = (function ($) {
      * Loads the source sprite index file. The loading is asynchronous
      * and thus unreliable. Use the isLoaded field to determine if it
      * is loaded and safe to use, or the SpriteIndexLoaded event.
-     * @param {string} the source file loation.
+     * @param {string} src the source file location.
      * @returns {OdysseySpriteIndex} the loaded sprite index object.
      */
     OdysseySpriteIndex.load = function (src) {

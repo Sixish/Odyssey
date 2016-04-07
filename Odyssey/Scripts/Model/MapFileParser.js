@@ -38,7 +38,7 @@ var MapFileParser = (function () {
      * Parses a JSON-deserialized object from a file and fixes the data
      * according to Odyssey's map structure.
      * @param {Object} map the JSON-deserialized object parsed from a file.
-     * @returns {Number} the parsed map.
+     * @returns {Object|Null} the parsed map.
      */
     MapFileParser.prototype.parse = function (map) {
         var x, y, explored, tileMap, mapReplacement = [], i = 0, baseX, baseY;

@@ -1,6 +1,6 @@
 /*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher, OdysseyDatLoadedEvent, jQuery*/
 /* Dat.js
- * Loads Tibia.dat.json files.
+ * Loads Tibia Dat JSON files.
  * Handles requests for item information.
  */
 var Dat = (function ($) {
@@ -134,7 +134,7 @@ var Dat = (function ($) {
 
     /**
      * Sets the Dat's data.
-     * @param o The Tibia.dat data.
+     * @param {Object} o The Tibia Dat data.
      */
     Dat.prototype.setData = function (o) {
         this.data = o;
@@ -142,7 +142,7 @@ var Dat = (function ($) {
 
     /**
      * Sets the Dat's loaded state.
-     * @param val Whether or not the Dat is loaded.
+     * @param {Boolean} val Whether or not the Dat is loaded.
      */
     Dat.prototype.setLoaded = function (val) {
         this.isLoaded = val;
@@ -151,7 +151,7 @@ var Dat = (function ($) {
 
     /**
      * Sets the Dat's loading state.
-     * @param val Whether or not the Dat is loading.
+     * @param {Boolean} val Whether or not the Dat is loading.
      */
     Dat.prototype.setLoading = function (val) {
         this.isLoading = val;
@@ -159,8 +159,8 @@ var Dat = (function ($) {
 
     /**
      * Gets the map color for the item with the corresponding item ID.
-     * @param id the ID corresponding to the item.
-     * @returns the map color corresponding to the item, or null if it has no map color.
+     * @param {Number} id the ID corresponding to the item.
+     * @returns {Number|Null} the map color corresponding to the item, or null if it has no map color.
      */
     Dat.prototype.getMapColor = function (id) {
         if (!this.data[0][id].hasOwnProperty(Dat.ATTRIBUTE_ID_MINIMAP)) {
@@ -170,9 +170,9 @@ var Dat = (function ($) {
     };
 
     /**
-     * Gets the Tibia.dat object for the item ID.
-     * @param id the ID corresponding to the item.
-     * @returns the object corresponding to the item.
+     * Gets the Tibia Dat object for the item ID.
+     * @param {Number} id the ID corresponding to the item.
+     * @returns {Object|Null} the object corresponding to the item.
      */
     Dat.prototype.getItem = function (id) {
         return this.data[0][id] || null;
@@ -180,20 +180,20 @@ var Dat = (function ($) {
 
     /**
      * Loads the Dat file at the url.
-     * @param url The filepath for the Tibia.dat.json file.
-     * @returns an instance of the Dat object. This object is
+     * @param {String} url The filepath for the Tibia Dat JSON file.
+     * @returns {Dat} an instance of the Dat object. This object is
      * later populated with data.
      * @static
      */
     Dat.load = function load(url) {
         var dat = new Dat();
         dat.setLoading(true);
-        // Load the Tibia.dat.json file.
+        // Load the Tibia Dat JSON file.
         $.ajax({
             'url': url,
             'dataType': 'json',
             'success': function (obj) {
-                // Tibia.dat.json loaded.
+                // Tibia Dat JSON loaded.
                 // Save data for future use.
                 dat.setData(obj);
 

@@ -2,6 +2,8 @@
 var OdysseySearchFindEvent = (function () {
     "use strict";
     /**
+     * Creates an instance of a search find event.
+     * @param {Object} response the search response.
      * @constructor
      */
     function OdysseySearchFindEvent(response) {

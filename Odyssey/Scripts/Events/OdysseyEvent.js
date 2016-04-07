@@ -1,6 +1,9 @@
 var OdysseyEvent = (function () {
     "use strict";
     /**
+     * Creates a new Odyssey event. This should be used to extend
+     * an existing constructor's prototype.
+     * @param {String} eventName the event's name.
      * @constructor
      */
     function OdysseyEvent(eventName) {

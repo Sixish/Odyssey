@@ -2,9 +2,13 @@
 /*global extend, proxy, OdysseyEventDispatchInterface, OdysseyEventDispatcher, ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerFile, ResourceManagerPromise */
 var ResourceManager = (function () {
     "use strict";
+    /**
+     * Creates a resource manager.
+     * @constructor
+     */
     function ResourceManager() {
-        this.eventDispatcher = new OdysseyEventDispatcher();
         var fileUID = 0;
+        this.eventDispatcher = new OdysseyEventDispatcher();
 
         this.spritesheets = [];
 
@@ -57,7 +61,7 @@ var ResourceManager = (function () {
 
     /**
      * Manage a binary file.
-     * @param src the filepath for the binary file.
+     * @param {String} src the filepath for the binary file.
      */
     ResourceManager.prototype.addBinaryFile = function (src) {
         var uid, filename, rmFile, bitmaskID;

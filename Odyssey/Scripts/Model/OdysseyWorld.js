@@ -1,7 +1,5 @@
 /*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
-/**
- * OdysseyWorld.js
- *
+/** OdysseyWorld.js
  * Contains map information.
  */
 var OdysseyWorld = (function () {

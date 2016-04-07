@@ -24,7 +24,7 @@ var ResourceManagerFile = (function ($) {
         this.contents = null;
     }
     extend(ResourceManagerFile.prototype, new OdysseyEventDispatchInterface());
-    ResourceManagerFile.imageFormats = [ ".png" ];
+    ResourceManagerFile.imageFormats = [".png"];
     /** Loaded flag. @const */
     ResourceManagerFile.FLAG_LOADED = 1;
     /** Load failed flag. @const */
@@ -71,7 +71,7 @@ var ResourceManagerFile = (function ($) {
 
     /**
      * Creates a new ResourceManagerFile from the source.
-     * @param src the source of the file.
+     * @param {String} src the source of the file.
      */
     ResourceManagerFile.load = function (src) {
         var file = new ResourceManagerFile();
@@ -161,6 +161,7 @@ var ResourceManagerFile = (function ($) {
 
     /**
      * Loads the ResourceManagerFile.
+     * @param {String} src the URL of the file.
      */
     ResourceManagerFile.prototype.load = function (src) {
         var ext = src.slice(-4);
@@ -218,6 +219,7 @@ var ResourceManagerFile = (function ($) {
 
         /**
          * Handles the successful loading of the binary file.
+         * @param {Object} data the web server response.
          */
         function handleLoadSuccess(data) {
             ctx.setContents(data);

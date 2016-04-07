@@ -44,7 +44,7 @@
   <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyModel.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/BinaryFile.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/ResourceManagerFile.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Model/Matrix.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Model/Matrix3D.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyWorld.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyGeography.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyWorldSpawns.js"></script>

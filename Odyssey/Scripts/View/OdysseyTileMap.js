@@ -101,9 +101,10 @@ var OdysseyTileMap = (function ($) {
     OdysseyTileMap.MAPFILE_SIZE_Z = 1;
 
     /**
-     * Proxy method for stop updating a tile map. this method returns a function
-     * that can safely be passed as event listeners with a custom context.
-     * @param {OdysseyView} instance the view to stop updating.
+     * Proxy method for stop updating a tile map.
+     * @param {OdysseyTileMap} instance the view to stop updating.
+     * @returns {Function} a function that can safely be passed as event listeners
+     * without losing the provided context.
      */
     OdysseyTileMap.stopUpdateProxy = function (instance) {
         return function () {
@@ -116,8 +117,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets the view. OdysseyTileMap needs a reference to the parent view.
+     * TODO : remove (replace with extend : reusable interface).
      * @param {OdysseyView} view the parent view.
-     * @TODO remove (replace with extend : reusable interface).
      */
     OdysseyTileMap.prototype.setView = function (view) {
         this.view = view;
@@ -135,7 +136,7 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Adjusts the canvases for changes in zoom level.
-     * @param e the Zoom event.
+     * @param {Object} e the Zoom event.
      */
     OdysseyTileMap.prototype.adjustForZoomChange = function (e) {
         var zoom = e.zoom,
@@ -161,7 +162,6 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Handles updating the tile map display.
-     * @param model the model to use for updating.
      */
     OdysseyTileMap.prototype.update = function () {
         if (this.view.getResourceManager().isBusy()) {
@@ -173,7 +173,7 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets the Odyssey viewport.
-     * @param element the DOM element to use as a viewport.
+     * @param {Object} element the DOM element to use as a viewport.
      */
     OdysseyTileMap.prototype.setViewport = function (element) {
         this.viewport = element;
@@ -189,11 +189,11 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets the current map position. This method should be used
-     * instead of position.set(x, y, z) because it registers an event
+     * instead of position's set method because it registers an event
      * for listeners.
-     * @param x the new x-coordinate.
-     * @param y the new y-coordinate.
-     * @param z the new z-coordinate.
+     * @param {Number} x the new x-coordinate.
+     * @param {Number} y the new y-coordinate.
+     * @param {Number} z the new z-coordinate.
      */
     OdysseyTileMap.prototype.setPosition = function (x, y, z) {
         this.position.set(x, y, z);
@@ -202,7 +202,7 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the map position.
-     * @returns the map position.
+     * @returns {Matrix3D} the map position.
      */
     OdysseyTileMap.prototype.getPosition = function () {
         return this.position;
@@ -210,9 +210,9 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets the current map zoom state. This method should be used
-     * instead of zoom.set(zoom) because it registers an event for
+     * instead of zoom's set method because it registers an event for
      * listeners.
-     * @param zoom the new zoom state.
+     * @param {Number} zoom the new zoom state.
      */
     OdysseyTileMap.prototype.setZoom = function (zoom) {
         this.zoom.set(zoom);
@@ -220,12 +220,11 @@ var OdysseyTileMap = (function ($) {
     };
 
     /**
-     * Sets the size of the display. The canvases should have
-     * sizes corresponding to 32 times the size of the
-     * OdysseyTileMap, plus 32x32 to resolve clipping for 64x64px
-     * sprites.
-     * @param sx the amount of tiles in the X direction on the viewport and each canvas.
-     * @param sy the amount of tiles in the Y direction on the viewport and each canvas.
+     * Sets the size of the display. The canvases should have sizes
+     * corresponding to 32 times the size of the OdysseyTileMap,
+     * plus 32x32 to resolve clipping for 64x64px sprites.
+     * @param {Number} sx the amount of tiles in the X direction on the viewport and each canvas.
+     * @param {Number} sy the amount of tiles in the Y direction on the viewport and each canvas.
      */
     OdysseyTileMap.prototype.setSize = function (sx, sy) {
         this.sizeX = sx;
@@ -234,9 +233,9 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Calculates the canvas section index based on the map position.
-     * @param posX a map position X component.
-     * @param posY a map position Y component.
-     * @returns the canvas index that should contain (posX, posY).
+     * @param {Number} posX a map position X component.
+     * @param {Number} posY a map position Y component.
+     * @returns {Number} the canvas index that should contain (posX, posY).
      */
     OdysseyTileMap.prototype.getCanvasSectionIndex = function (posX, posY) {
         var dxu = (Math.floor(((posX - (posX % this.sizeX)) - (this.position.x - (this.position.x % this.sizeX))) / this.sizeX)),
@@ -251,8 +250,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the canvas section corresponding to the input position components.
-     * @param posx the position X component of the canvas section.
-     * @param posy the position Y component of the canvas section.
+     * @param {Number} posx the position X component of the canvas section.
+     * @param {Number} posy the position Y component of the canvas section.
      */
     OdysseyTileMap.prototype.getCanvasSection = function (posx, posy) {
         var index = this.getCanvasSectionIndex(posx, posy);
@@ -269,12 +268,12 @@ var OdysseyTileMap = (function ($) {
      * 1. Items can have "gradient" sprites which correspond to position on the map.
      * 2. Items can have "hangable" sprites corresponding to the properties of an underlying wall.
      * 3. Items can have "animation" sprites. We discard animations.
-     * @param itemId the item ID.
-     * @param posx the position X component of the item.
-     * @param posy the position Y component of the item.
-     * @param posz the position Z component of the item.
-     * @param hasVertical whether or not the tile has a vertical wall on it.
-     * @param hasHorizontal whether or not the tile has a horizontal wall on it.
+     * @param {Number} itemId the item ID.
+     * @param {Number} posx the position X component of the item.
+     * @param {Number} posy the position Y component of the item.
+     * @param {Number} posz the position Z component of the item.
+     * @param {Boolean} hasVertical whether or not the tile has a vertical wall on it.
+     * @param {Boolean} hasHorizontal whether or not the tile has a horizontal wall on it.
      */
     OdysseyTileMap.prototype.getSpriteID = function (itemId, posx, posy, posz, hasVertical, hasHorizontal) {
         var item = this.view.getModel().getDat().getItem(itemId), max;
@@ -297,8 +296,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite file index containing the sprite ID.
-     * @param sprID the ID of the sprite to search for.
-     * @returns the index of the spritesheet containing the sprite, or -1 if not found.
+     * @param {Number} sprID the ID of the sprite to search for.
+     * @returns {Number} the index of the spritesheet containing the sprite, or -1 if not found.
      */
     OdysseyTileMap.prototype.getSpriteFileID = function (sprID) {
         var spritesheets = this.view.getSpriteIndex().data, i, len = spritesheets.length, sheet;
@@ -314,8 +313,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite file containing a sprite.
-     * @param sprID the ID of the sprite to search for.
-     * @returns the spritesheet containing the sprite.
+     * @param {Number} sprID the ID of the sprite to search for.
+     * @returns {Object} the spritesheet containing the sprite.
      */
     OdysseyTileMap.prototype.getSpriteFileContaining = function (sprID) {
         var spritesheets = this.view.getSpriteIndex().data;
@@ -324,8 +323,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite's offset X component.
-     * @param sprID the ID of the sprite.
-     * @returns the sprite's offset X component.
+     * @param {Number} sprID the ID of the sprite.
+     * @returns {Number} the sprite's offset X component.
      */
     OdysseyTileMap.prototype.getSpriteOffsetX = function (sprID) {
         var sheet = this.getSpriteFileContaining(sprID),
@@ -339,8 +338,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite's offset Y component.
-     * @param sprID the ID of the sprite.
-     * @returns the sprite's offset Y component.
+     * @param {Number} sprID the ID of the sprite.
+     * @returns {Number} the sprite's offset Y component.
      */
     OdysseyTileMap.prototype.getSpriteOffsetY = function (sprID) {
         var sheet = this.getSpriteFileContaining(sprID),
@@ -353,8 +352,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite's size X component.
-     * @param sprID the ID of the sprite.
-     * @returns the sprite's size X component.
+     * @param {Number} sprID the ID of the sprite.
+     * @returns {Number} the sprite's size X component.
      */
     OdysseyTileMap.prototype.getSpriteSizeX = function (sprID) {
         var sheet = this.getSpriteFileContaining(sprID);
@@ -363,8 +362,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the sprite's size Y component.
-     * @param sprID the ID of the sprite.
-     * @returns the sprite's size Y component.
+     * @param {Number} sprID the ID of the sprite.
+     * @returns {Number} the sprite's size Y component.
      */
     OdysseyTileMap.prototype.getSpriteSizeY = function (sprID) {
         var sheet = this.getSpriteFileContaining(sprID);
@@ -373,8 +372,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets a canvas for rendering the map.
-     * @param index the index of the canvas.
-     * @param canvas the DOM canvas element.
+     * @param {Number} index the index of the canvas.
+     * @param {Object} canvas the DOM canvas element.
      */
     OdysseyTileMap.prototype.setCanvas = function (index, canvas) {
         this.canvases[index] = canvas;
@@ -382,8 +381,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Sets a canvas for rendering the overlay.
-     * @param index the index of the canvas.
-     * @param canvas the DOM canvas element.
+     * @param {Number} index the index of the canvas.
+     * @param {Object} canvas the DOM canvas element.
      */
     OdysseyTileMap.prototype.setOverlayCanvas = function (index, canvas) {
         this.overlayCanvases[index] = canvas;
@@ -391,8 +390,8 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the canvas at the specified index.
-     * @param index the index of the canvas to get.
-     * @returns the canvas corresponding to the name.
+     * @param {Number} index the index of the canvas to get.
+     * @returns {Object} the canvas corresponding to the name.
      */
     OdysseyTileMap.prototype.getCanvas = function (index) {
         return this.canvases[index];
@@ -400,14 +399,14 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Renders a sprite on the canvas.
-     * @param sprID the sprite ID.
-     * @param x the X component of the map tile's position.
-     * @param y the Y component of the map tile's position.
-     * @param z the Z component of the map tile's position.
-     * @param ox the offset X of the item.
-     * @param oy the offset Y of the item.
-     * @param height the height of the tile beneath the item.
-     * @returns true if the render was successful; false otherwise.
+     * @param {Number} sprID the sprite ID.
+     * @param {Number} x the X component of the map tile's position.
+     * @param {Number} y the Y component of the map tile's position.
+     * @param {Number} z the Z component of the map tile's position.
+     * @param {Number} ox the offset X of the item.
+     * @param {Number} oy the offset Y of the item.
+     * @param {Number} height the height of the tile beneath the item.
+     * @returns {Boolean} true if the render was successful; false otherwise.
      */
     OdysseyTileMap.prototype.renderSprite = function (sprID, x, y, z, ox, oy, height) {
         var spritesheet, spriteOffsetX, spriteOffsetY, spriteSizeX, spriteSizeY, offsetX, offsetY, cvs;
@@ -449,16 +448,16 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Renders an item on the canvas.
-     * @param itemID the ID of the item to draw.
-     * @param x the X component of the map tile's position.
-     * @param y the Y component of the map tile's position.
-     * @param z the Z component of the map tile's position.
-     * @param ox the offset X of the item.
-     * @param oy the offset Y of the item.
-     * @param height the height of the tile beneath the item.
-     * @param hasVertical whether or not the tile has a vertical wall beneath it.
-     * @param hasHorizontal whether or not the tile has a horizontal wall beneath it.
-     * @returns true if the render was successful; false otherwise.
+     * @param {Number} itemID the ID of the item to draw.
+     * @param {Number} x the X component of the map tile's position.
+     * @param {Number} y the Y component of the map tile's position.
+     * @param {Number} z the Z component of the map tile's position.
+     * @param {Number} ox the offset X of the item.
+     * @param {Number} oy the offset Y of the item.
+     * @param {Number} height the height of the tile beneath the item.
+     * @param {Boolean} hasVertical whether or not the tile has a vertical wall beneath it.
+     * @param {Boolean} hasHorizontal whether or not the tile has a horizontal wall beneath it.
+     * @returns {Boolean} true if the render was successful; false otherwise.
      */
     OdysseyTileMap.prototype.renderItem = function (itemID, x, y, z, ox, oy, height, hasVertical, hasHorizontal) {
         var sprID = this.getSpriteID(itemID, x, y, z, hasVertical, hasHorizontal),
@@ -471,8 +470,9 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Creates a new array of items, sorted according to the provided Dat context.
-     * @param items the array of map items to sort.
-     * @param Dat the Dat context to sort according to.
+     * @param {Array<Object>} items the array of map items to sort.
+     * @param {Dat} Dat the Dat context to sort according to.
+     * @returns {Array<Object>} a copy of the items array sorted according to render order.
      * @static
      */
     OdysseyTileMap.getRenderOrderByDat = function (items, Dat) {
@@ -496,10 +496,10 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Renders a tile.
-     * @param x the map position X component.
-     * @param y the map position Y component.
-     * @param z the map position Z component.
-     * @returns true if the whole tile was rendered; false otherwise.
+     * @param {Number} x the map position X component.
+     * @param {Number} y the map position Y component.
+     * @param {Number} z the map position Z component.
+     * @returns {Boolean} true if the whole tile was rendered; false otherwise.
      */
     OdysseyTileMap.prototype.renderTile = function (x, y, z) {
         var items = this.view.getModel().getTileItems(x, y, z),
@@ -574,7 +574,7 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Refreshes the whole viewport. This is used when the sprites are known to be loaded.
-     * @returns true if the refresh was successful; false otherwise.
+     * @returns {Boolean} true if the refresh was successful; false otherwise.
      */
     OdysseyTileMap.prototype.refresh = function () {
         var currentMapPosition = this.position, xs, xe, ys, ye, zs, ze, x, y, z, success = true;
@@ -628,7 +628,7 @@ var OdysseyTileMap = (function ($) {
      * re-rendering if possible, such as if the outside canvases have the
      * tiles pre-rendered. If rendering to the canvas is necessary, tiles
      * will be selectively rendered to the canvas.
-     * @returns true if rendering was successful; false otherwise.
+     * @returns {Boolean} true if rendering was successful; false otherwise.
      */
     OdysseyTileMap.prototype.render = function () {
         // We cannot proceed until we've loaded the dat file.
@@ -671,10 +671,10 @@ var OdysseyTileMap = (function ($) {
     /**
      * Selectively renders tiles that have failed to render
      * in previous rendering attempts.
-     * @returns false if rendering failed or if there was nothing to render.
+     * @returns {Boolean} false if rendering failed or if there was nothing to render.
      */
     OdysseyTileMap.prototype.renderSelective = function () {
-        return this.refresh();
+        /*
         var arr = this.failedRenderedTiles, pos, i, broken = false;
         if (arr.length === 0) {
             // Nothing to render, so we are done.
@@ -709,14 +709,17 @@ var OdysseyTileMap = (function ($) {
             return true;
         }
         return false;
+        */
+        return this.refresh();
     };
 
     /**
      * Adds a tile to the list of tiles that failed to render,
      * allowing for the selective rendering of failed tiles.
-     * @param x the map position X component.
-     * @param y the map position Y component.
-     * @param z the map position Z component.
+     * @param {Number} x the map position X component.
+     * @param {Number} y the map position Y component.
+     * @param {Number} z the map position Z component.
+     * @param {Boolean} value whether or not the tile failed.
      */
     OdysseyTileMap.prototype.setRenderFailed = function (x, y, z, value) {
         this.failedRenderedTiles[z][MapFile.getOffset(x, y)] = (value !== undefined ? value : true);
@@ -724,10 +727,10 @@ var OdysseyTileMap = (function ($) {
 
     /**
      * Gets the rendering status of the tile at (x, y, z).
-     * @param x the map position X component.
-     * @param y the map position Y component.
-     * @param z the map position Z component.
-     * @returns true if the tile at (x, y, z) has failed to render.
+     * @param {Number} x the map position X component.
+     * @param {Number} y the map position Y component.
+     * @param {Number} z the map position Z component.
+     * @returns {Boolean} true if the tile at (x, y, z) has failed to render.
      */
     OdysseyTileMap.prototype.hasRenderFailed = function (x, y, z) {
         return this.failedRenderedTiles[z][MapFile.getOffset(x, y)] || false;

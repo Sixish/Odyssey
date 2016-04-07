@@ -1,11 +1,9 @@
 /*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface*/
-/**
- * OdysseyModel.js
- *
+/** OdysseyModel.js
  * Contains UI components. This includes:
- * - Minimap : the minimap of the model.
- * - WorldMap : the world map of the model.
- * - TileMap : the tile map of the model.
+ *   Minimap : the minimap of the model.
+ *   WorldMap : the world map of the model.
+ *   TileMap : the tile map of the model.
  */
 var OdysseyView = (function () {
     "use strict";
@@ -66,7 +64,7 @@ var OdysseyView = (function () {
     };
     /**
      * Sets the minimap of the view.
-     * @param minimap the minimap for the view.
+     * @param {OdysseyMinimap} minimap the minimap for the view.
      */
     OdysseyView.prototype.setMinimap = function (minimap) {
         this.minimap = minimap;
@@ -75,7 +73,7 @@ var OdysseyView = (function () {
 
     /**
      * Gets the minimap of the view.
-     * @returns the minimap of the view, or null if one is not set.
+     * @returns {OdysseyMinimap} the minimap of the view, or null if one is not set.
      */
     OdysseyView.prototype.getMinimap = function () {
         return this.minimap;
@@ -83,7 +81,7 @@ var OdysseyView = (function () {
 
     /**
      * Sets the world map of the view.
-     * @param worldMap the world map for the view.
+     * @param {OdysseyWorldMap} worldMap the world map for the view.
      */
     OdysseyView.prototype.setWorldMap = function (worldMap) {
         this.worldMap = worldMap;
@@ -92,7 +90,7 @@ var OdysseyView = (function () {
 
     /**
      * Gets the world map of the view.
-     * @returns the world map of the view, or null if one is not set.
+     * @returns {OdysseyWorldMap} the world map of the view, or null if one is not set.
      */
     OdysseyView.prototype.getWorldMap = function () {
         return this.worldMap;
@@ -100,7 +98,7 @@ var OdysseyView = (function () {
 
     /**
      * Sets the tile map of the view.
-     * @param tileMap the tile map for the view.
+     * @param {OdysseyTileMap} tileMap the tile map for the view.
      */
     OdysseyView.prototype.setTileMap = function (tileMap) {
         this.tileMap = tileMap;
@@ -109,7 +107,7 @@ var OdysseyView = (function () {
 
     /**
      * Gets the tile map of the view.
-     * @returns the tile map for the view, or null if one is not set.
+     * @returns {OdysseyTileMap} the tile map for the view, or null if one is not set.
      */
     OdysseyView.prototype.getTileMap = function () {
         return this.tileMap;
@@ -117,7 +115,7 @@ var OdysseyView = (function () {
 
     /**
      * Sets the tile info view component.
-     * @param tileInfo the tile info view component.
+     * @param {OdysseyTileInfo} tileInfo the tile info view component.
      */
     OdysseyView.prototype.setTileInfo = function (tileInfo) {
         this.tileInfo = tileInfo;
@@ -126,7 +124,7 @@ var OdysseyView = (function () {
 
     /**
      * Gets the tile info view component.
-     * @returns the tile info view component.
+     * @returns {OdysseyTileInfo} the tile info view component.
      */
     OdysseyView.prototype.getTileInfo = function () {
         return this.tileInfo;
@@ -134,8 +132,8 @@ var OdysseyView = (function () {
 
     /**
      * Sets the overlay view component.
-     * @TODO OdysseyOverlay is not a type.
-     * @param overlay the overlay view component.
+     * TODO : OdysseyOverlay is not a type.
+     * @param {OdysseyOverlay} overlay the overlay view component.
      */
     OdysseyView.prototype.setOverlay = function (overlay) {
         this.overlay = overlay;
@@ -144,8 +142,8 @@ var OdysseyView = (function () {
 
     /**
      * Gets the overlay view component.
-     * @TODO OdysseyOverlay is not a type.
-     * @returns the overlay view component.
+     * TODO : OdysseyOverlay is not a type.
+     * @returns {OdysseyOverlay} the overlay view component.
      */
     OdysseyView.prototype.getOverlay = function () {
         return this.overlay;
@@ -189,7 +187,7 @@ var OdysseyView = (function () {
      */
     OdysseyView.prototype.update = function () {
         if (this.minimap !== null) {
-            //this.minimap.update(this.model, this);
+            this.minimap.update(this.model, this);
         }
         if (this.worldMap !== null) {
             this.worldMap.update(this.model, this);

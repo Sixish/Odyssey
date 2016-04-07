@@ -6,9 +6,9 @@ var MapFile = (function () {
     /**
      * Creates a new MapFile corresponding to 16 x 16 x 1 world tiles.
      * @constructor
-     * @param x The base X value. Use MapFile.getFileX to get the base X value from position.
-     * @param y The base Y value. Use MapFile.getFileY to get the base Y value from position.
-     * @param z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
+     * @param {Number} x The base X value. Use MapFile.getFileX to get the base X value from position.
+     * @param {Number} y The base Y value. Use MapFile.getFileY to get the base Y value from position.
+     * @param {Number} z The base Z value. Use MapFile.getFileZ to get the base Z value from position.
      */
     function MapFile(x, y, z) {
         // Each MapFile contains (16 x 16 x 1), enforce it.
@@ -25,9 +25,9 @@ var MapFile = (function () {
     /**
      * Gets the MapFile's position offset.
      * @static
-     * @param posx the map X position.
-     * @param posy the map Y position.
-     * @returns The position offset corresponding to position (x, y) on this MapFile.
+     * @param {Number} x the map X position.
+     * @param {Number} y the map Y position.
+     * @returns {Number} The position offset corresponding to position (x, y) on this MapFile.
      */
     MapFile.getOffset = function (x, y) {
         return ((x & 0xFFFF) << 16) + (y & 0xFFFF);
@@ -36,8 +36,8 @@ var MapFile = (function () {
     /**
      * Gets the MapFile's base X value.
      * @static
-     * @param posx The map X position.
-     * @returns The base X value corresponding to position posx.
+     * @param {Number} posx The map X position.
+     * @returns {Number} The base X value corresponding to position posx.
      */
     MapFile.getFileX = function (posx) {
         console.assert(typeof posx === 'number', 'Cannot get filename X-component of a non-number.');
@@ -47,8 +47,8 @@ var MapFile = (function () {
     /**
      * Gets the MapFile's base Y value.
      * @static
-     * @param posy The map Y position.
-     * @returns The base Y value corresponding to position posy.
+     * @param {Number} posy The map Y position.
+     * @returns {Number} The base Y value corresponding to position posy.
      */
     MapFile.getFileY = function (posy) {
         console.assert(typeof posy === 'number', 'Cannot get filename Y-component of a non-number.');
@@ -58,8 +58,8 @@ var MapFile = (function () {
     /**
      * Gets the MapFile's base Z value.
      * @static
-     * @param posz The map Z position.
-     * @returns The base Z value corresponding to position posz.
+     * @param {Number} posz The map Z position.
+     * @returns {Number} The base Z value corresponding to position posz.
      */
     MapFile.getFileZ = function (posz) {
         console.assert(typeof posz === 'number', 'Cannot get filename Z-component of a non-number.');

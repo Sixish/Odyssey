@@ -9,7 +9,8 @@ var BinaryFile = (function () {
     }
 
     /**
-     *
+     * Sets the contents of the BinaryFile.
+     * @param {String} string the contents of the BinaryFile.
      */
     BinaryFile.prototype.setContents = function (string) {
         this.contents = string;

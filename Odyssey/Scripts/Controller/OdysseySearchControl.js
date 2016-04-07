@@ -2,9 +2,13 @@
 /*global jQuery, extend, OdysseyMapSearch, OdysseyModelAttributor, OdysseyViewAttributor, OdysseyEventDispatchInterface, OdysseyEventDispatcher*/
 var OdysseySearchControl = (function ($) {
     "use strict";
-    // 
+    /** @const */
     var KEYCODE_ENTER = 13;
 
+    /**
+     * Constructor for search controls.
+     * @constructor
+     */
     function OdysseySearchControl() {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.mouseIsDown = false;
@@ -13,7 +17,9 @@ var OdysseySearchControl = (function ($) {
     extend(OdysseySearchControl.prototype, new OdysseyViewAttributor());
     extend(OdysseySearchControl.prototype, new OdysseyModelAttributor());
 
-    // Search
+    /**
+     * Initializes the search control.
+     */
     OdysseySearchControl.prototype.initialize = function () {
         var ctx = this;
         ctx.searcher = new OdysseyMapSearch();

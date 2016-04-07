@@ -2,6 +2,8 @@
 var OdysseyMapFileLoadedEvent = (function () {
     "use strict";
     /**
+     * Creates an instance of the map file loaded event.
+     * @param {Object} map the map file that was loaded.
      * @constructor
      */
     function OdysseyMapFileLoadedEvent(map) {

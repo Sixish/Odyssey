@@ -1,8 +1,6 @@
 /*jslint bitwise: true*/
 /*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface, MapFileParser, MapFileParserResult, MapFile, OdysseyMapFileLoadedEvent*/
-/**
- * OdysseyModel.js
- *
+/** OdysseyModel.js
  * Contains game information. This includes:
  * - World : the world of the game.
  * - Dat : a Dat context on which the map is based on.
@@ -55,7 +53,7 @@ var OdysseyModel = (function () {
 
     /**
      * Parses the text of a map file.
-     * @param input the text of the map file to parse.
+     * @param {String} input the text of the map file to parse.
      */
     OdysseyModel.prototype.parseMapDataFile = function (input) {
         var parser, results, key, maps = this.maps;
@@ -68,9 +66,9 @@ var OdysseyModel = (function () {
 
     /**
      * Loads the map file at the given position.
-     * @param mapX the map file's base X component. Use MapFile.getFileX to get this value.
-     * @param mapY the map file's base Y component. Use MapFile.getFileY to get this value.
-     * @param mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
+     * @param {Number} mapX the map file's base X component. Use MapFile.getFileX to get this value.
+     * @param {Number} mapY the map file's base Y component. Use MapFile.getFileY to get this value.
+     * @param {Number} mapZ the map file's base Z component. Use MapFile.getFileZ to get this value.
      */
     OdysseyModel.prototype.loadMapFile = function (mapX, mapY, mapZ) {
         var index, id;
@@ -91,10 +89,10 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the map file at the position x, y, z.
-     * @param x the position X component.
-     * @param y the position Y component.
-     * @param z the position Z component.
-     * @returns the map containing the position.
+     * @param {Number} x the position X component.
+     * @param {Number} y the position Y component.
+     * @param {Number} z the position Z component.
+     * @returns {Object} the map containing the position.
      */
     OdysseyModel.prototype.getMap = function (x, y, z) {
         var mapOffset = MapFileParserResult.resolveIndex(MapFile.getFileX(x), MapFile.getFileY(y), MapFile.getFileZ(z));
@@ -103,10 +101,10 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the items on the tile at position x, y, z.
-     * @param x the position X component.
-     * @param y the position Y component.
-     * @param z the position Z component.
-     * @returns an array of map items.
+     * @param {Number} x the position X component.
+     * @param {Number} y the position Y component.
+     * @param {Number} z the position Z component.
+     * @returns {Array<Object>} an array of map items.
      */
     OdysseyModel.prototype.getTileItems = function (x, y, z) {
         var map = this.getMap(x, y, z), tile;
@@ -126,10 +124,10 @@ var OdysseyModel = (function () {
 
     /**
      * Tests if the map is loaded at the given position.
-     * @param posx the position X component.
-     * @param posy the position Y component.
-     * @param posz the position Z component.
-     * @returns true if the map is loaded; false otherwise.
+     * @param {Number} posx the position X component.
+     * @param {Number} posy the position Y component.
+     * @param {Number} posz the position Z component.
+     * @returns {Boolean} true if the map is loaded; false otherwise.
      */
     OdysseyModel.prototype.mapIsLoaded = function (posx, posy, posz) {
         var fposx, fposy, fposz, filename, resourceID;
@@ -156,10 +154,10 @@ var OdysseyModel = (function () {
 
     /**
      * Tests if a map has failed to load.
-     * @param posx the position X component.
-     * @param posy the position Y component.
-     * @param posz the position Z component.
-     * @returns true if the map is loaded; false otherwise.
+     * @param {Number} posx the position X component.
+     * @param {Number} posy the position Y component.
+     * @param {Number} posz the position Z component.
+     * @returns {Boolean} true if the map is loaded; false otherwise.
      */
     OdysseyModel.prototype.mapHasFailed = function (posx, posy, posz) {
         var fposx, fposy, fposz, filename, resourceID;
@@ -183,13 +181,13 @@ var OdysseyModel = (function () {
 
     /**
      * Loads the maps in the position range.
-     * @param xs the start X coordinate.
-     * @param ys the start Y coordinate.
-     * @param zs the start Z coordinate.
-     * @param xe the end X coordinate.
-     * @param ye the end Y coordinate.
-     * @param ze the end Z coordinate.
-     * @returns true if all maps are loaded; false otherwise.
+     * @param {Number} xs the start X coordinate.
+     * @param {Number} ys the start Y coordinate.
+     * @param {Number} zs the start Z coordinate.
+     * @param {Number} xe the end X coordinate.
+     * @param {Number} ye the end Y coordinate.
+     * @param {Number} ze the end Z coordinate.
+     * @returns {Boolean} true if all maps are loaded; false otherwise.
      */
     OdysseyModel.prototype.loadMaps = function (xs, ys, zs, xe, ye, ze) {
         var x, y, z, success = true;
@@ -217,13 +215,13 @@ var OdysseyModel = (function () {
 
     /**
      * Tests if maps are loaded in the position range.
-     * @param xs the start X coordinate.
-     * @param ys the start Y coordinate.
-     * @param zs the start Z coordinate.
-     * @param xe the end X coordinate.
-     * @param ye the end Y coordinate.
-     * @param ze the end Z coordinate.
-     * @returns true if all maps are loaded; false otherwise.
+     * @param {Number} xs the start X coordinate.
+     * @param {Number} ys the start Y coordinate.
+     * @param {Number} zs the start Z coordinate.
+     * @param {Number} xe the end X coordinate.
+     * @param {Number} ye the end Y coordinate.
+     * @param {Number} ze the end Z coordinate.
+     * @returns {Boolean} true if all maps are loaded; false otherwise.
      */
     OdysseyModel.prototype.mapsLoadedInRange = function (xs, ys, zs, xe, ye, ze) {
         var x, y, z, filename, resourceID;
@@ -255,7 +253,7 @@ var OdysseyModel = (function () {
 
     /**
      * Sets the dat context to be used for the model.
-     * @param dat the dat context to be used for the model.
+     * @param {Dat} dat the dat context to be used for the model.
      */
     OdysseyModel.prototype.setDat = function (dat) {
         this.dat = dat;
@@ -263,7 +261,7 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the dat context used by the model.
-     * @returns the dat context used by the model.
+     * @returns {Dat} the dat context used by the model.
      */
     OdysseyModel.prototype.getDat = function () {
         return this.dat;
@@ -271,7 +269,7 @@ var OdysseyModel = (function () {
 
     /**
      * Sets the world of the model.
-     * @param world the world to use for the model.
+     * @param {OdysseyWorld} world the world to use for the model.
      */
     OdysseyModel.prototype.setWorld = function (world) {
         this.world = world;
@@ -279,7 +277,7 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the world of the model.
-     * @returns the world of the model, or null if one is not set.
+     * @returns {OdysseyWorld} the world of the model, or null if one is not set.
      */
     OdysseyModel.prototype.getWorld = function () {
         return this.world;
@@ -287,7 +285,7 @@ var OdysseyModel = (function () {
 
     /**
      * Sets the geography object of the model.
-     * @param geography the geography object to use for the model.
+     * @param {OdysseyGeography} geography the geography object to use for the model.
      */
     OdysseyModel.prototype.setGeography = function (geography) {
         this.geography = geography;
@@ -295,7 +293,7 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the geography object of the model.
-     * @returns the geography object of the model, or null if one is not set.
+     * @returns {OdysseyGeography} the geography object of the model, or null if one is not set.
      */
     OdysseyModel.prototype.getGeography = function () {
         return this.geography;
@@ -303,7 +301,7 @@ var OdysseyModel = (function () {
 
     /**
      * Sets the spawns of the model world.
-     * @param spawns the spawns of the model world.
+     * @param {OdysseyWorldSpawns} spawns the spawns of the model world.
      */
     OdysseyModel.prototype.setWorldSpawns = function (spawns) {
         this.worldSpawns = spawns;
@@ -311,7 +309,7 @@ var OdysseyModel = (function () {
 
     /**
      * Gets the spawns of the model world.
-     * @returns the spawns object of the model world, or null if one is not set.
+     * @returns {OdysseyWorldSpawns} the spawns object of the model world, or null if one is not set.
      */
     OdysseyModel.prototype.getWorldSpawns = function () {
         return this.worldSpawns;
@@ -319,7 +317,7 @@ var OdysseyModel = (function () {
 
     /**
      * Sets the map index of the model.
-     * @param {OdysseyMapIndex} the map index object to use for the model.
+     * @param {OdysseyMapIndex} mapIndex the map index object to use for the model.
      */
     OdysseyModel.prototype.setMapIndex = function (mapIndex) {
         this.mapIndex = mapIndex;
