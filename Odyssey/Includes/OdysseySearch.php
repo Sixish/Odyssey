@@ -1,5 +1,5 @@
   <div id="OdysseySearchContainer">
-   <div class="OdysseyDarkenBackground"></div>
+   <div class="OdysseyBoxBackground"></div>
    <div id="OdysseySearch">
     <div class="OdysseyBoxBackground"></div>
     <h2 id="OdysseySearchHeader"><a href="#">Search</a></h2>

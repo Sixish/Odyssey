@@ -10,16 +10,6 @@ body.state-search-active #OdysseySearchContainer {
     display: block;/* IE does not understand 'initial' */
     display: initial;
 }
-.OdysseyDarkenBackground {
-    width: inherit;
-    height: inherit;
-    position: absolute;
-    left: 0;
-    top: 0;
-    background-color: #000;
-    z-index: 99999;
-    opacity: 1;
-}
 
 #OdysseySearch {
     position: relative;
@@ -97,9 +87,7 @@ button, input[type="submit"] {
     content: "\BB";
 }
 @media screen and (min-width: 501px) and (orientation: portrait), screen and (min-height: 501px) and (orientation: landscape) {
-    .OdysseyDarkenBackground {
-        opacity: 0.75;
-    }
+
     #OdysseySearch {
         max-width: 23em;
     }

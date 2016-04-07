@@ -31,7 +31,7 @@ var OdysseySearchControl = (function ($) {
         });
 
         // Close search.
-        $("#OdysseySearchContainer > .OdysseyDarkenBackground, #OdysseySearchHeader").click(function () {
+        $("#OdysseySearchContainer > .OdysseyBoxBackground, #OdysseySearchHeader").click(function () {
             $(document.body).toggleClass("state-search-active");
         });
 
