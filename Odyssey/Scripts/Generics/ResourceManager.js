@@ -45,16 +45,30 @@ var ResourceManager = (function () {
     extend(ResourceManager.prototype, new OdysseyEventDispatchInterface());
     ResourceManager.MAX_CONNECTIONS = 1;
 
-    // Gets the Bitmask ID (property name of the bitmask) for imageID.
+    /**
+     * Gets the Bitmask ID (property name of the bitmask) for imageID.
+     * @param {Number} imageID the image's ID.
+     * @returns {Number} the property name of the bitmask for the image.
+     * @static
+     */
     ResourceManager.getFileBitmaskID = function (imageID) {
         return Math.floor(imageID / 32);
     };
-    // Gets the Bitmask value (if state is true) for imageID.
+
+    /**
+     * Gets the Bitmask value (if state is true) for imageID.
+     * @param {Number} imageID the image's ID.
+     * @returns {Number} the resource's bitmask ID.
+     * @static
+     */
     ResourceManager.getFileBitmask = function (imageID) {
         return 1 << (imageID % 32);
     };
 
-    // Set the filepath prefix.
+    /**
+     * Sets the resource manager's filepath prefix.
+     * @param {String} path the resource manager's filepath prefix.
+     */
     ResourceManager.prototype.setFilepathPrefix = function (path) {
         this.prefix = path;
     };
@@ -62,6 +76,7 @@ var ResourceManager = (function () {
     /**
      * Manage a binary file.
      * @param {String} src the filepath for the binary file.
+     * @returns {Number} the file's resource ID.
      */
     ResourceManager.prototype.addBinaryFile = function (src) {
         var uid, filename, rmFile, bitmaskID;
@@ -85,6 +100,11 @@ var ResourceManager = (function () {
         return uid;
     };
 
+    /**
+     * Gets the status value of the resource of the given ID.
+     * @param {Number} resourceID the resource's ID.
+     * @returns {Number} the status value representing a set of bitflags.
+     */
     ResourceManager.prototype.getValue = function (resourceID) {
         var bitmaskID, bitmask;
         bitmaskID = ResourceManager.getFileBitmaskID(resourceID);
@@ -93,6 +113,12 @@ var ResourceManager = (function () {
         return Boolean(this[bitmaskID] & bitmask);
     };
 
+    /**
+     * Sets the status value of the resource with the given resource ID.
+     * @param {Number} resourceID the resource's ID.
+     * @param {Number} value a number representing the status as a set of bitflags.
+     * @returns {Boolean} true if the value changed; false otherwise.
+     */
     ResourceManager.prototype.setValue = function (resourceID, value) {
         var bitmaskID, bitmask;
         if (value !== this.getValue(resourceID)) {
@@ -104,6 +130,12 @@ var ResourceManager = (function () {
         }
         return false;
     };
+
+    /**
+     * Gets the resource with the given ID.
+     * @param {Number} index the resource's ID.
+     * @TODO what does this return? ResourceManagerFile?
+     */
     ResourceManager.prototype.getResource = function (index) {
         if (this.resources[index] === undefined) {
             //throw new Error("Resource not found at index " + index + ".");
@@ -111,18 +143,38 @@ var ResourceManager = (function () {
         }
         return this.resources[index];
     };
+
+    /**
+     * Gets the image of the resource with the given resource ID.
+     * @param {Number} index the resource's ID.
+     * @returns {Image|Null} the resource's image.
+     */
     ResourceManager.prototype.getResourceImage = function (index) {
         var file = this.getResource(index);
         if (file && file.resource instanceof Image) {
             return file.resource;
         }
+        return null;
     };
+
+    /**
+     * Gets the data of the resource with the given ID.
+     * @param {Number} index the resource ID.
+     * @returns {Object|Null} the resource's data.
+     */
     ResourceManager.prototype.getResourceData = function (index) {
         var resource = this.getResource(index);
         if (resource) {
             return resource.getData();
         }
+        return null;
     };
+
+    /**
+     * Checks if the resources are loading.
+     * @param {...Number} the resource IDs to check.
+     * @returns {Boolean} true if any resources are loading; false otherwise.
+     */
     ResourceManager.prototype.isLoading = function () {
         var i, len = arguments.length, resource;
         for (i = 0; i < len; i += 1) {
@@ -134,6 +186,11 @@ var ResourceManager = (function () {
         return false;
     };
 
+    /**
+     * Checks if the resources are loaded.
+     * @param {...Number} the resource IDs to check.
+     * @returns {Boolean} true if all resources are loaded; false otherwise.
+     */
     ResourceManager.prototype.isLoaded = function () {
         var i, len = arguments.length, resource;
         for (i = 0; i < len; i += 1) {
@@ -145,6 +202,11 @@ var ResourceManager = (function () {
         return true;
     };
 
+    /**
+     * Checks if the resources were not found.
+     * @param {...Number} the resource IDs to check.
+     * @returns {Boolean} true if any resources were not found; false otherwise.
+     */
     ResourceManager.prototype.isNotFound = function () {
         var i, len = arguments.length, resource;
         for (i = 0; i < len; i += 1) {
@@ -156,6 +218,11 @@ var ResourceManager = (function () {
         return false;
     };
 
+    /**
+     * Checks if the resource IDs are awaiting load.
+     * @param {...Number} the resource IDs to check.
+     * @returns {Boolean} true if any resources have failed; false otherwise.
+     */
     ResourceManager.prototype.hasFailed = function () {
         // Returns true if at least one has failed.
         var i, len = arguments.length, resource;
@@ -168,10 +235,20 @@ var ResourceManager = (function () {
         return false;
     };
 
-    ResourceManager.prototype.isAwaitingLoad = function (o) {
-        return this.resourcesAwaitingLoadMap.hasOwnProperty(o);
+    /**
+     * Checks if the resource with the given ID is awaiting load.
+     * @param {Number} id the resource ID to check.
+     * @returns {Boolean} true if the resource is awaiting load; false otherwise.
+     * @TODO this is not true, returns true if it's already loaded.
+     */
+    ResourceManager.prototype.isAwaitingLoad = function (id) {
+        return this.resourcesAwaitingLoadMap.hasOwnProperty(id);
     };
 
+    /**
+     * Sets the resource with the given resource as awaiting load.
+     * @param {Number} id the resource ID to set as awaiting load.
+     */
     ResourceManager.prototype.setAwaitingLoad = function (id) {
         if (!this.isAwaitingLoad(id)) {
             this.resourcesAwaitingLoadMap[id] = 0;
@@ -180,7 +257,10 @@ var ResourceManager = (function () {
         this.resourcesAwaitingLoadMap[id] += 1;
     };
 
-    // TODO
+    /**
+     * Filters out resources not awaiting load.
+     * @TODO
+     */
     ResourceManager.prototype.filterAwaiting = function () {
         var i, len = this.resourcesAwaitingLoad.length, r, skip = 0;
         for (i = 0; i < len; i += 1) {
@@ -204,13 +284,26 @@ var ResourceManager = (function () {
         this.resourcesAwaitingLoad.length -= skip;
     };
 
+    /**
+     * Sorts resources awaiting to load by their priority.
+     */
     ResourceManager.prototype.sortAwaiting = function () {
         var map = this.resourcesAwaitingLoadMap;
-        this.resourcesAwaitingLoad.sort(function (a, b) {
+        /**
+         * Determines the sort order of two items in an array.
+         * @returns {Number} negative if the two items should be swapped; positive otherwise.
+         */
+        function sorter(a, b) {
             return (map[a] || 0) - (map[b] || 0);
-        });
+        }
+        // Handle sort.
+        this.resourcesAwaitingLoad.sort(sorter);
     };
 
+    /**
+     * Starts n loaders.
+     * @param {Number} n the number of loaders to start.
+     */
     ResourceManager.prototype.start = function (n) {
         var i;
         // Let n = 1 if not set or 0.
@@ -227,18 +320,32 @@ var ResourceManager = (function () {
         }
     };
 
+    /**
+     * Stops n loaders.
+     * @param {Number} n the number of loaders to stop.
+     */
     ResourceManager.prototype.stop = function (n) {
         this.activeLoaders -= n;
     };
 
+    /**
+     * Stops a loader.
+     */
     ResourceManager.prototype.stopLoader = function () {
         this.stop(1);
     };
 
+    /**
+     * Starts a loader.
+     */
     ResourceManager.prototype.startLoader = function () {
         this.start(1);
     };
 
+    /**
+     * Loads a resource of the given resource ID.
+     * @param {Number} id the resource's ID.
+     */
     ResourceManager.prototype.load = function (id) {
         if (!(this.isLoading(id) || this.isLoaded(id))) {
             this.setAwaitingLoad(id);
@@ -248,10 +355,20 @@ var ResourceManager = (function () {
         }
     };
 
+    /**
+     * Checks if another connection can be opened. That is,
+     * checks if the resource manager has not exhausted its
+     * open connections limit.
+     * @returns {Boolean} true if the resource manager can
+     * open another connection; false otherwise.
+     */
     ResourceManager.prototype.canOpenConnection = function () {
         return (this.activeLoaders < ResourceManager.MAX_CONNECTIONS);
     };
 
+    /**
+     * Loads the next resource.
+     */
     ResourceManager.prototype.loadNextResource = function () {
         var id = this.getNextLoadResourceID();
         if (id === -1) {
@@ -261,6 +378,11 @@ var ResourceManager = (function () {
         this.loadResource(id);
     };
 
+    /**
+     * Gets the ID of the next resource awaiting load.
+     * @returns {Number} the resource ID of the next loaded resource,
+     * or -1 if all resources are loading or already loaded.
+     */
     ResourceManager.prototype.getNextLoadResourceID = function () {
         var r, arr = this.resourcesAwaitingLoad;
         this.resourceIndex = arr.length;
@@ -276,14 +398,28 @@ var ResourceManager = (function () {
         return -1;
     };
 
+    /**
+     * Checks if a resource with the given ID exists.
+     * @param {Number} id the resource ID.
+     * @returns {Boolean} true if the resource identified by the
+     * resource ID exists; false otherwise.
+     */
     ResourceManager.prototype.resourceExists = function (id) {
         return this.getResource(id) !== null;
     };
 
+    /**
+     * Checks if the resource manager is busy loading files.
+     * @returns {Boolean} true if the resource manager is currently loading files.
+     */
     ResourceManager.prototype.isBusy = function () {
         return (this.resourcesAwaitingLoad.length > 0);
     };
 
+    /**
+     * Loads the resource with the given ID.
+     * @param {Number} id the resource ID to load.
+     */
     ResourceManager.prototype.loadResource = function (id) {
         var resource = this.getResource(this.resourcesAwaitingLoad[id]),
             exists = (this.resourcesAwaitingLoad[id] !== undefined) && this.resourceExists(this.resourcesAwaitingLoad[id]);
@@ -310,10 +446,18 @@ var ResourceManager = (function () {
         resource.load(resource.src);
     };
 
+    /**
+     * Gets a resource ID by its filename, excluding its path prefix.
+     * @returns {Number} the resource ID of the resource identified by the filename.
+     */
     ResourceManager.prototype.getResourceIDByFilename = function (filename) {
         return this.getResourceIDByFilenameWithPrefix(this.prefix + filename);
     };
 
+    /**
+     * Gets a resource ID by its filename, including its path prefix.
+     * @returns {Number} the resource ID of the resource identified by the filename.
+     */
     ResourceManager.prototype.getResourceIDByFilenameWithPrefix = function (filename) {
         if (!this.hasFileWithPrefix(filename)) {
             throw new Error("Resource " + filename + " does not exist.");
@@ -321,18 +465,34 @@ var ResourceManager = (function () {
         return this.srcs[filename];
     };
 
+    /**
+     * Checks if a file exists with the given name, excluding its path prefix.
+     * @returns {Boolean} true if the file with this name exists; false otherwise.
+     */
     ResourceManager.prototype.hasFile = function (filename) {
         return this.hasFileWithPrefix(this.prefix + filename);
     };
 
+    /**
+     * Checks if a file exists with the given name, including its path prefix.
+     * @returns {Boolean} true if the file with this name exists; false otherwise.
+     */
     ResourceManager.prototype.hasFileWithPrefix = function (filename) {
         return this.srcs.hasOwnProperty(filename);
     };
 
+    /**
+     * Gets the amount of resources already loaded.
+     * @returns {Number} the amount of resources already loaded.
+     */
     ResourceManager.prototype.getLoadedCount = function () {
         return this.loaded.length;
     };
 
+    /**
+     * Gets the amount of resources being loaded.
+     * @returns {Number} the amount of resources being loaded.
+     */
     ResourceManager.prototype.getLoadingCount = function () {
         return this.resourcesAwaitingLoad.length;
     };

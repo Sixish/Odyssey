@@ -123,7 +123,9 @@ var o = (function () {
         view.setSpriteIndex((function () {
             var spriteIndex = OdysseySpriteIndex.load("Odyssey/Data/SpriteSheetIndex.json");
 
-            // Populates the resource manager.
+            /**
+             * Populates the resource manager.
+             */
             function populate() {
                 OdysseySpriteIndex.populateResourceManager(spriteIndex, view.getResourceManager());
             }
@@ -256,7 +258,10 @@ var o = (function () {
             status.setStatusTextField(document.getElementById("ProgressText"));
             status.setProgressBar(document.getElementById("ProgressBar"));
 
-            // TODO implement
+            /**
+             * Updates the progress bar in response to core files being loaded.
+             * @TODO implement
+             */
             function updateProgressBarLoadingCore() {
                 var loading = 0, loaded = 0;
                 loading += view.getModel().getResourceManager().getLoadingCount();
@@ -264,6 +269,10 @@ var o = (function () {
                 // Progress %
                 status.setProgress(Math.floor(100 * (loaded || 0) / ((loading || 0) + (loaded || 1))) / 100);
             }
+
+            /**
+             * Updates the progress bar in response to sprites being loaded.
+             */
             function updateProgressBarLoadingSprites() {
                 var loading = 0, loaded = 0;
                 // Loading.

@@ -184,6 +184,10 @@ var ResourceManagerFile = (function ($) {
         ctx.setIsLoading(true);
         if (!(this.resource instanceof Image)) {
             this.resource = new Image();
+
+            /**
+             * Handles the image load event.
+             */
             this.resource.onload = function () {
                 ctx.setIsLoading(false);
                 if (!ctx.isLoaded()) {
@@ -191,6 +195,10 @@ var ResourceManagerFile = (function ($) {
                     ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
                 }
             };
+
+            /**
+             * Handles the image load error event.
+             */
             this.resource.onerror = function () {
                 ctx.setIsLoading(false);
                 ctx.setLoadFailed(true);
@@ -263,6 +271,10 @@ var ResourceManagerFile = (function ($) {
         return ((this.resource && this.resource.contents) || null);
     };
 
+    /**
+     * Sets the contents of the managed file.
+     * @param {String} o the contents of the file.
+     */
     ResourceManagerFile.prototype.setContents = function (o) {
         this.contents = o;
     };

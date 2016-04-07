@@ -622,437 +622,125 @@ Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
     25 |            var id = fileUID;
     26 |            fileUID += 1;
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    47 |
-    48 |    // Gets the Bitmask ID (property name of the bitmask) for imageID.
-    49 |    ResourceManager.getFileBitmaskID = function (imageID) {
------------------------------------------------^
-    50 |        return Math.floor(imageID / 32);
-    51 |    };
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   135 |     * Gets the resource with the given ID.
+   136 |     * @param {Number} index the resource's ID.
+   137 |     * @TODO what does this return? ResourceManagerFile?
+---------------^
+   138 |     */
+   139 |    ResourceManager.prototype.getResource = function (index) {
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    51 |    };
-    52 |    // Gets the Bitmask value (if state is true) for imageID.
-    53 |    ResourceManager.getFileBitmask = function (imageID) {
----------------------------------------------^
-    54 |        return 1 << (imageID % 32);
-    55 |    };
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   240 |     * @param {Number} id the resource ID to check.
+   241 |     * @returns {Boolean} true if the resource is awaiting load; false otherwise.
+   242 |     * @TODO this is not true, returns true if it's already loaded.
+---------------^
+   243 |     */
+   244 |    ResourceManager.prototype.isAwaitingLoad = function (id) {
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    56 |
-    57 |    // Set the filepath prefix.
-    58 |    ResourceManager.prototype.setFilepathPrefix = function (path) {
-----------------------------------------------------------^
-    59 |        this.prefix = path;
-    60 |    };
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   260 |    /**
+   261 |     * Filters out resources not awaiting load.
+   262 |     * @TODO
+---------------^
+   263 |     */
+   264 |    ResourceManager.prototype.filterAwaiting = function () {
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    86 |    };
-    87 |
-    88 |    ResourceManager.prototype.getValue = function (resourceID) {
--------------------------------------------------^
-    89 |        var bitmaskID, bitmask;
-    90 |        bitmaskID = ResourceManager.getFileBitmaskID(resourceID);
+Function is missing documentation for parameter `a`. at Scripts/Generics/ResourceManager.js :
+   294 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
+   295 |         */
+   296 |        function sorter(a, b) {
+----------------^
+   297 |            return (map[a] || 0) - (map[b] || 0);
+   298 |        }
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    94 |    };
-    95 |
-    96 |    ResourceManager.prototype.setValue = function (resourceID, value) {
--------------------------------------------------^
-    97 |        var bitmaskID, bitmask;
-    98 |        if (value !== this.getValue(resourceID)) {
+Function is missing documentation for parameter `b`. at Scripts/Generics/ResourceManager.js :
+   294 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
+   295 |         */
+   296 |        function sorter(a, b) {
+----------------^
+   297 |            return (map[a] || 0) - (map[b] || 0);
+   298 |        }
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   105 |        return false;
-   106 |    };
-   107 |    ResourceManager.prototype.getResource = function (index) {
-----------------------------------------------------^
-   108 |        if (this.resources[index] === undefined) {
-   109 |            //throw new Error("Resource not found at index " + index + ".");
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   112 |        return this.resources[index];
-   113 |    };
-   114 |    ResourceManager.prototype.getResourceImage = function (index) {
----------------------------------------------------------^
-   115 |        var file = this.getResource(index);
-   116 |        if (file && file.resource instanceof Image) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   118 |        }
-   119 |    };
-   120 |    ResourceManager.prototype.getResourceData = function (index) {
---------------------------------------------------------^
-   121 |        var resource = this.getResource(index);
-   122 |        if (resource) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   124 |        }
-   125 |    };
-   126 |    ResourceManager.prototype.isLoading = function () {
---------------------------------------------------^
-   127 |        var i, len = arguments.length, resource;
-   128 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   135 |    };
-   136 |
-   137 |    ResourceManager.prototype.isLoaded = function () {
--------------------------------------------------^
-   138 |        var i, len = arguments.length, resource;
-   139 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   146 |    };
-   147 |
-   148 |    ResourceManager.prototype.isNotFound = function () {
----------------------------------------------------^
-   149 |        var i, len = arguments.length, resource;
-   150 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   157 |    };
-   158 |
-   159 |    ResourceManager.prototype.hasFailed = function () {
---------------------------------------------------^
-   160 |        // Returns true if at least one has failed.
-   161 |        var i, len = arguments.length, resource;
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   169 |    };
-   170 |
-   171 |    ResourceManager.prototype.isAwaitingLoad = function (o) {
--------------------------------------------------------^
-   172 |        return this.resourcesAwaitingLoadMap.hasOwnProperty(o);
-   173 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   173 |    };
-   174 |
-   175 |    ResourceManager.prototype.setAwaitingLoad = function (id) {
---------------------------------------------------------^
-   176 |        if (!this.isAwaitingLoad(id)) {
-   177 |            this.resourcesAwaitingLoadMap[id] = 0;
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   182 |
-   183 |    // TODO
-   184 |    ResourceManager.prototype.filterAwaiting = function () {
--------------------------------------------------------^
-   185 |        var i, len = this.resourcesAwaitingLoad.length, r, skip = 0;
-   186 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   205 |    };
-   206 |
-   207 |    ResourceManager.prototype.sortAwaiting = function () {
------------------------------------------------------^
-   208 |        var map = this.resourcesAwaitingLoadMap;
-   209 |        this.resourcesAwaitingLoad.sort(function (a, b) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   212 |    };
-   213 |
-   214 |    ResourceManager.prototype.start = function (n) {
-----------------------------------------------^
-   215 |        var i;
-   216 |        // Let n = 1 if not set or 0.
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   228 |    };
-   229 |
-   230 |    ResourceManager.prototype.stop = function (n) {
----------------------------------------------^
-   231 |        this.activeLoaders -= n;
-   232 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   232 |    };
-   233 |
-   234 |    ResourceManager.prototype.stopLoader = function () {
----------------------------------------------------^
-   235 |        this.stop(1);
-   236 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   236 |    };
-   237 |
-   238 |    ResourceManager.prototype.startLoader = function () {
-----------------------------------------------------^
-   239 |        this.start(1);
-   240 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   240 |    };
-   241 |
-   242 |    ResourceManager.prototype.load = function (id) {
----------------------------------------------^
-   243 |        if (!(this.isLoading(id) || this.isLoaded(id))) {
-   244 |            this.setAwaitingLoad(id);
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   249 |    };
-   250 |
-   251 |    ResourceManager.prototype.canOpenConnection = function () {
-----------------------------------------------------------^
-   252 |        return (this.activeLoaders < ResourceManager.MAX_CONNECTIONS);
-   253 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   253 |    };
-   254 |
-   255 |    ResourceManager.prototype.loadNextResource = function () {
----------------------------------------------------------^
-   256 |        var id = this.getNextLoadResourceID();
-   257 |        if (id === -1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   262 |    };
-   263 |
-   264 |    ResourceManager.prototype.getNextLoadResourceID = function () {
---------------------------------------------------------------^
-   265 |        var r, arr = this.resourcesAwaitingLoad;
-   266 |        this.resourceIndex = arr.length;
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   277 |    };
-   278 |
-   279 |    ResourceManager.prototype.resourceExists = function (id) {
--------------------------------------------------------^
-   280 |        return this.getResource(id) !== null;
-   281 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   281 |    };
-   282 |
-   283 |    ResourceManager.prototype.isBusy = function () {
------------------------------------------------^
-   284 |        return (this.resourcesAwaitingLoad.length > 0);
-   285 |    };
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   285 |    };
-   286 |
-   287 |    ResourceManager.prototype.loadResource = function (id) {
------------------------------------------------------^
-   288 |        var resource = this.getResource(this.resourcesAwaitingLoad[id]),
-   289 |            exists = (this.resourcesAwaitingLoad[id] !== undefined) && this.resourceExists(this.resourcesAwaitingLoad[id]);
-
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   311 |    };
-   312 |
-   313 |    ResourceManager.prototype.getResourceIDByFilename = function (filename) {
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   451 |     * @returns {Number} the resource ID of the resource identified by the filename.
+   452 |     */
+   453 |    ResourceManager.prototype.getResourceIDByFilename = function (filename) {
 ----------------------------------------------------------------^
-   314 |        return this.getResourceIDByFilenameWithPrefix(this.prefix + filename);
-   315 |    };
+   454 |        return this.getResourceIDByFilenameWithPrefix(this.prefix + filename);
+   455 |    };
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   315 |    };
-   316 |
-   317 |    ResourceManager.prototype.getResourceIDByFilenameWithPrefix = function (filename) {
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   459 |     * @returns {Number} the resource ID of the resource identified by the filename.
+   460 |     */
+   461 |    ResourceManager.prototype.getResourceIDByFilenameWithPrefix = function (filename) {
 --------------------------------------------------------------------------^
-   318 |        if (!this.hasFileWithPrefix(filename)) {
-   319 |            throw new Error("Resource " + filename + " does not exist.");
+   462 |        if (!this.hasFileWithPrefix(filename)) {
+   463 |            throw new Error("Resource " + filename + " does not exist.");
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   322 |    };
-   323 |
-   324 |    ResourceManager.prototype.hasFile = function (filename) {
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   470 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
+   471 |     */
+   472 |    ResourceManager.prototype.hasFile = function (filename) {
 ------------------------------------------------^
-   325 |        return this.hasFileWithPrefix(this.prefix + filename);
-   326 |    };
+   473 |        return this.hasFileWithPrefix(this.prefix + filename);
+   474 |    };
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   326 |    };
-   327 |
-   328 |    ResourceManager.prototype.hasFileWithPrefix = function (filename) {
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   478 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
+   479 |     */
+   480 |    ResourceManager.prototype.hasFileWithPrefix = function (filename) {
 ----------------------------------------------------------^
-   329 |        return this.srcs.hasOwnProperty(filename);
-   330 |    };
+   481 |        return this.srcs.hasOwnProperty(filename);
+   482 |    };
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   330 |    };
-   331 |
-   332 |    ResourceManager.prototype.getLoadedCount = function () {
--------------------------------------------------------^
-   333 |        return this.loaded.length;
-   334 |    };
+Unavailable tag TODO at Scripts/Main.js :
+   261 |            /**
+   262 |             * Updates the progress bar in response to core files being loaded.
+   263 |             * @TODO implement
+-----------------------^
+   264 |             */
+   265 |            function updateProgressBarLoadingCore() {
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-   334 |    };
-   335 |
-   336 |    ResourceManager.prototype.getLoadingCount = function () {
---------------------------------------------------------^
-   337 |        return this.resourcesAwaitingLoad.length;
-   338 |    };
+Expected obj but got the at Scripts/Model/Dat.js :
+   191 |        /**
+   192 |         * Handles the successful loading of the Dat.
+   193 |         * @param {Object} the response from the AJAX request
+-----------------------------------^
+   194 |         * containing the Dat's data.
+   195 |         */
 
-Expect valid jsdoc-block definition at Scripts/Main.js :
-   125 |
-   126 |            // Populates the resource manager.
-   127 |            function populate() {
---------------------^
-   128 |                OdysseySpriteIndex.populateResourceManager(spriteIndex, view.getResourceManager());
-   129 |            }
+Illegal trailing whitespace at Scripts/Model/Dat.js :
+   202 |            dat.setLoaded(true);
+   203 |            dat.setLoading(false);
+   204 |        }        
+-------------------------^
+   205 |        // Load the Tibia Dat JSON file.
+   206 |        $.ajax({
 
-Expect valid jsdoc-block definition at Scripts/Main.js :
-   258 |
-   259 |            // TODO implement
-   260 |            function updateProgressBarLoadingCore() {
---------------------^
-   261 |                var loading = 0, loaded = 0;
-   262 |                loading += view.getModel().getResourceManager().getLoadingCount();
+Expected resourceManager but got the at Scripts/Model/OdysseyMapIndex.js :
+    36 |     * Adds the map index data to the resource manager so that
+    37 |     * the resource manager knows which resources are valid.
+    38 |     * @param {ResourceManager} the resource manager to add to.
+----------------------------------------^
+    39 |     */
+    40 |    OdysseyMapIndex.prototype.addToResourceManager = function (resourceManager) {
 
-Expect valid jsdoc-block definition at Scripts/Main.js :
-   265 |                status.setProgress(Math.floor(100 * (loaded || 0) / ((loading || 0) + (loaded || 1))) / 100);
-   266 |            }
-   267 |            function updateProgressBarLoadingSprites() {
---------------------^
-   268 |                var loading = 0, loaded = 0;
-   269 |                // Loading.
+Unavailable tag constructor. at Scripts/Model/OdysseyModel.js :
+    10 |    /**
+    11 |     * Creates a model for the web application.
+    12 |     * @constructor.
+---------------^
+    13 |     */
+    14 |    function OdysseyModel() {
 
-Expect valid jsdoc-block definition at Scripts/Model/Dat.js :
-   193 |            'url': url,
-   194 |            'dataType': 'json',
-   195 |            'success': function (obj) {
--------------------------------^
-   196 |                // Tibia Dat JSON loaded.
-   197 |                // Save data for future use.
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyGeography.js :
-     2 |var OdysseyGeography = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyGeography() {
-------------^
-     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     6 |    }
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
-     2 |var OdysseyMapIndex = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyMapIndex() {
-------------^
-     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     6 |        this.startPosition = new Matrix3D(0, 0, 0);
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
-     8 |    }
-     9 |    extend(OdysseyMapIndex.prototype, new OdysseyEventDispatchInterface());
-    10 |    OdysseyMapIndex.prototype.setStartPosition = function (x, y, z) {
----------------------------------------------------------^
-    11 |        this.startPosition.set(x, y, z);
-    12 |    };
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
-    11 |        this.startPosition.set(x, y, z);
-    12 |    };
-    13 |    OdysseyMapIndex.prototype.setEndPosition = function (x, y, z) {
--------------------------------------------------------^
-    14 |        this.endPosition.set(x, y, z);
-    15 |    };
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyMapIndex.js :
-    14 |        this.endPosition.set(x, y, z);
-    15 |    };
-    16 |    OdysseyMapIndex.prototype.addToResourceManager = function (resourceManager) {
--------------------------------------------------------------^
-    17 |        var x, y, z, startX, startY, startZ, endX, endY, endZ;
-    18 |        startX = MapFile.getFileX(this.startPosition.x);
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyModel.js :
-     8 |var OdysseyModel = (function () {
-     9 |    "use strict";
-    10 |    function OdysseyModel() {
-------------^
-    11 |        this.eventDispatcher = new OdysseyEventDispatcher();
-    12 |        this.world = null;
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyModelAttributor.js :
-     1 |var OdysseyModelAttributor = (function () {
-     2 |    "use strict";
-     3 |    function OdysseyModelAttributor() {}
-------------^
-     4 |    /**
-     5 |     * Sets the model. This object should contain all information required
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-     5 |var OdysseyWorld = (function () {
-     6 |    "use strict";
-     7 |    function OdysseyWorld() {
-------------^
-     8 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     9 |        this.items = {};
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-    10 |    }
-    11 |    extend(OdysseyWorld.prototype, new OdysseyEventDispatchInterface());
-    12 |    OdysseyWorld.prototype.tileExists = function (x, y, z) {
-------------------------------------------------^
-    13 |        return !(this[x] === undefined || this[x][y] === undefined || this[x][y][z] === undefined);
-    14 |    };
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-    13 |        return !(this[x] === undefined || this[x][y] === undefined || this[x][y][z] === undefined);
-    14 |    };
-    15 |    OdysseyWorld.prototype.getTile = function (x, y, z) {
----------------------------------------------^
-    16 |        if (this.tileExists(x, y, z)) {
-    17 |            return this[x][y][z];
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-    19 |        return null;
-    20 |    };
-    21 |    OdysseyWorld.prototype.containsItem = function (itemID) {
---------------------------------------------------^
-    22 |        return this.items.hasOwnProperty(itemID);
-    23 |    };
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-    22 |        return this.items.hasOwnProperty(itemID);
-    23 |    };
-    24 |    OdysseyWorld.prototype.addItem = function (itemID) {
----------------------------------------------^
-    25 |        if (this.items[itemID] === undefined) {
-    26 |            this.items[itemID] = 0;
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorld.js :
-    28 |        this.items[itemID] += 1;
-    29 |    };
-    30 |    OdysseyWorld.prototype.addTile = function (x, y, z, tile) {
----------------------------------------------^
-    31 |        var i, item;
-    32 |        if (this[x] === undefined) {
-
-Expect valid jsdoc-block definition at Scripts/Model/OdysseyWorldSpawns.js :
-     2 |var OdysseyWorldSpawns = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyWorldSpawns() {
-------------^
-     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     6 |    }
-
-Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
-   185 |        if (!(this.resource instanceof Image)) {
-   186 |            this.resource = new Image();
-   187 |            this.resource.onload = function () {
--------------------------------------------^
-   188 |                ctx.setIsLoading(false);
-   189 |                if (!ctx.isLoaded()) {
-
-Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
-   192 |                }
-   193 |            };
-   194 |            this.resource.onerror = function () {
---------------------------------------------^
-   195 |                ctx.setIsLoading(false);
-   196 |                ctx.setLoadFailed(true);
-
-Expect valid jsdoc-block definition at Scripts/Model/ResourceManagerFile.js :
-   264 |    };
-   265 |
-   266 |    ResourceManagerFile.prototype.setContents = function (o) {
---------------------------------------------------------^
-   267 |        this.contents = o;
-   268 |    };
+Wrong returns value at Scripts/Model/OdysseyWorld.js :
+    37 |            return this[x][y][z];
+    38 |        }
+    39 |        return null;
+-----------------------^
+    40 |    };
+    41 |
 
 Variable declarations must be the first statements of a function scope. at Scripts/View/OdysseyMinimap.js :
     61 |    OdysseyMinimap.prototype.update = function () {
@@ -1062,181 +750,29 @@ Variable declarations must be the first statements of a function scope. at Scrip
     64 |        xs = this.position.x - 63;
     65 |        ys = this.position.y - 63;
 
-Expect valid jsdoc-block definition at Scripts/View/OdysseySearch.js :
-     7 |        $body = $(document.body),
-     8 |        $linkOpenSearch = $("#OdysseyOpenSearch");
-     9 |    function toggleSearch() {
-------------^
-    10 |        if (active) {
-    11 |            $body.removeClass("state-search-active");
+Illegal trailing whitespace at Scripts/View/OdysseySpriteIndex.js :
+    67 |        var spriteIndex = new OdysseySpriteIndex();
+    68 |        spriteIndex.setLoading(true);
+    69 |        
+----------------^
+    70 |        /**
+    71 |         * Handles the successful load of the sprite index.
 
-Expect valid jsdoc-block definition at Scripts/View/OdysseySpriteIndex.js :
-    70 |            url: src,
-    71 |            dataType: 'json',
-    72 |            success: function (data) {
------------------------------^
-    73 |                spriteIndex.setData(data);
-    74 |                spriteIndex.setLoading(false);
+Unavailable tag TODO at Scripts/View/OdysseyTileInfo.js :
+    17 |    /**
+    18 |     * Sets the context.
+    19 |     * @TODO remove
+---------------^
+    20 |     * @param {Odyssey} Odyssey the Odyssey context to use.
+    21 |     */
 
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-     7 |var OdysseyStatus = (function ($) {
-     8 |    "use strict";
-     9 |    function OdysseyStatus() {
-------------^
-    10 |        /**
-    11 |         * The event dispatcher. Manages Odyssey events.
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    17 |    extend(OdysseyTileMap.prototype, new OdysseyEventDispatchInterface());
-    18 |
-    19 |    OdysseyStatus.prototype.getStatusTextField = function () {
----------------------------------------------------------^
-    20 |        return this.ui.statusText;
-    21 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    20 |        return this.ui.statusText;
-    21 |    };
-    22 |    OdysseyStatus.prototype.setStatusTextField = function (element) {
----------------------------------------------------------^
-    23 |        this.ui.statusText = element;
-    24 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    24 |    };
-    25 |
-    26 |    OdysseyStatus.prototype.setContainer = function (element) {
----------------------------------------------------^
-    27 |        this.ui.container = element;
-    28 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    27 |        this.ui.container = element;
-    28 |    };
-    29 |    OdysseyStatus.prototype.getContainer = function () {
----------------------------------------------------^
-    30 |        return this.ui.container;
-    31 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    31 |    };
-    32 |
-    33 |    OdysseyStatus.prototype.setProgressBar = function (element) {
------------------------------------------------------^
-    34 |        this.ui.progressBar = element;
-    35 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    34 |        this.ui.progressBar = element;
-    35 |    };
-    36 |    OdysseyStatus.prototype.getProgressBar = function () {
------------------------------------------------------^
-    37 |        return this.ui.progressBar;
-    38 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    38 |    };
-    39 |
-    40 |    OdysseyStatus.prototype.setStatusText = function (txt) {
-----------------------------------------------------^
-    41 |        $(this.getStatusTextField()).text(txt);
-    42 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    42 |    };
-    43 |
-    44 |    OdysseyStatus.prototype.setProgress = function (percent) {
---------------------------------------------------^
-    45 |        this.progress = percent;
-    46 |        $(this.getProgressBar()).width((100 * percent) + "%");
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyStatus.js :
-    46 |        $(this.getProgressBar()).width((100 * percent) + "%");
-    47 |    };
-    48 |    OdysseyStatus.prototype.update = function () {
----------------------------------------------^
-    49 |        // TODO.
-    50 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
-     6 |        $ToolTipItemsCount = $(".OdysseyToolTipItem .OdysseyToolTipCount"),
-     7 |        ttLength = $ToolTipItems.length;
-     8 |    function OdysseyTileInfo() {
-------------^
-     9 |        this.eventDispatcher = new OdysseyEventDispatcher();
-    10 |    }
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
-    11 |    extend(OdysseyTileInfo.prototype, new OdysseyEventDispatchInterface());
-    12 |
-    13 |    OdysseyTileInfo.prototype.setContext = function (Odyssey) {
----------------------------------------------------^
-    14 |        this.context = Odyssey;
-    15 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
-    14 |        this.context = Odyssey;
-    15 |    };
-    16 |    OdysseyTileInfo.prototype.showInfo = function (x, y, z) {
--------------------------------------------------^
-    17 |        var items = this.context.getTileItems(x, y, z), i, len;
-    18 |
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileInfo.js :
-    30 |        }
-    31 |    };
-    32 |    OdysseyTileInfo.prototype.update = function (model) {
------------------------------------------------^
-    33 |        // TODO
-    34 |        // We need access to the tile map because it has position?
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   180 |    };
-   181 |
-   182 |    OdysseyTileMap.prototype.setContainer = function (element) {
-----------------------------------------------------^
-   183 |        this.container = element;
-   184 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   184 |    };
-   185 |
-   186 |    OdysseyTileMap.prototype.getContainer = function () {
-----------------------------------------------------^
-   187 |        return this.container;
-   188 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   556 |    };
-   557 |
-   558 |    OdysseyTileMap.prototype.loadMaps = function () {
-------------------------------------------------^
-   559 |        var currentMapPosition = this.position, xs, xe, ys, ye, zs, ze;
-   560 |        // Set the range of position values to render.
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   616 |    };
-   617 |
-   618 |    OdysseyTileMap.prototype.show = function () {
---------------------------------------------^
-   619 |        $(this.getContainer()).addClass("ready");
-   620 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   620 |    };
-   621 |
-   622 |    OdysseyTileMap.prototype.hide = function () {
---------------------------------------------^
-   623 |        $(this.getContainer()).removeClass("ready");
-   624 |    };
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyTileMap.js :
-   752 |
-   753 |    // TEMPORARY.
-   754 |    OdysseyTileMap.prototype.updateCanvasIDs = function () {
--------------------------------------------------------^
-   755 |        this.canvases[OdysseyTileMap.CANVAS_NORTHWEST_ID].setAttribute('id', 'OdysseyMapCanvas-NW');
-   756 |        this.canvases[OdysseyTileMap.CANVAS_NORTH_ID].setAttribute('id', 'OdysseyMapCanvas-N');
+Unavailable tag TODO at Scripts/View/OdysseyTileMap.js :
+   566 |    /**
+   567 |     * Starts loading all maps required to render the full viewport.
+   568 |     * @TODO find return value
+---------------^
+   569 |     */
+   570 |    OdysseyTileMap.prototype.loadMaps = function () {
 
 Expect valid jsdoc-block definition at Scripts/View/OdysseyView.js :
      8 |var OdysseyView = (function () {
@@ -1246,21 +782,5 @@ Expect valid jsdoc-block definition at Scripts/View/OdysseyView.js :
     11 |        this.eventDispatcher = new OdysseyEventDispatcher();
     12 |        this.minimap = null;
 
-Expect valid jsdoc-block definition at Scripts/View/OdysseyViewAttributor.js :
-     1 |var OdysseyViewAttributor = (function () {
-     2 |    "use strict";
-     3 |    function OdysseyViewAttributor() {}
-------------^
-     4 |    /**
-     5 |     * Sets the view. This object should contain all information required
 
-Illegal trailing whitespace at Scripts/View/ToolRow.js :
-    25 |        this.ui.open = element;
-    26 |    };
-    27 |    
-------------^
-    28 |    /**
-    29 |     * Gets the element used to toggle this view component's visibility.
-
-
-158 code style errors found.
+98 code style errors found.

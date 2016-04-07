@@ -6,6 +6,9 @@
         $header = $("#OdysseySearchHeader"),
         $body = $(document.body),
         $linkOpenSearch = $("#OdysseyOpenSearch");
+    /**
+     * Toggles the visibility of the search component.
+     */
     function toggleSearch() {
         if (active) {
             $body.removeClass("state-search-active");

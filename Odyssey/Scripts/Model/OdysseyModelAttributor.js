@@ -1,5 +1,10 @@
 var OdysseyModelAttributor = (function () {
     "use strict";
+    /**
+     * Creates a model attributor object. This should be used to
+     * extend another object's prototype.
+     * @constructor
+     */
     function OdysseyModelAttributor() {}
     /**
      * Sets the model. This object should contain all information required

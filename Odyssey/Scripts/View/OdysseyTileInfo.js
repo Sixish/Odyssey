@@ -5,14 +5,30 @@ var OdysseyTileInfo = (function ($) {
         $ToolTipItemsID = $(".OdysseyToolTipItem .OdysseyToolTipID"),
         $ToolTipItemsCount = $(".OdysseyToolTipItem .OdysseyToolTipCount"),
         ttLength = $ToolTipItems.length;
+    /**
+     * Creates a tile info view component.
+     * @constructor
+     */
     function OdysseyTileInfo() {
         this.eventDispatcher = new OdysseyEventDispatcher();
     }
     extend(OdysseyTileInfo.prototype, new OdysseyEventDispatchInterface());
 
+    /**
+     * Sets the context.
+     * @TODO remove
+     * @param {Odyssey} Odyssey the Odyssey context to use.
+     */
     OdysseyTileInfo.prototype.setContext = function (Odyssey) {
         this.context = Odyssey;
     };
+
+    /**
+     * Shows the tile information for the tile at (x, y, z).
+     * @param {Number} x the x-coordinate of the tile to show information for.
+     * @param {Number} y the y-coordinate of the tile to show information for.
+     * @param {Number} z the z-coordinate of the tile to show information for.
+     */
     OdysseyTileInfo.prototype.showInfo = function (x, y, z) {
         var items = this.context.getTileItems(x, y, z), i, len;
 
@@ -29,7 +45,11 @@ var OdysseyTileInfo = (function ($) {
             $($ToolTipItems[i]).hide();
         }
     };
-    OdysseyTileInfo.prototype.update = function (model) {
+
+    /**
+     * Updates the tile info view component.
+     */
+    OdysseyTileInfo.prototype.update = function () {
         // TODO
         // We need access to the tile map because it has position?
         // Or, controller could set this.position.

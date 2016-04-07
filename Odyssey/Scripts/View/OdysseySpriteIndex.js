@@ -66,15 +66,22 @@ var OdysseySpriteIndex = (function ($) {
     OdysseySpriteIndex.load = function (src) {
         var spriteIndex = new OdysseySpriteIndex();
         spriteIndex.setLoading(true);
+        
+        /**
+         * Handles the successful load of the sprite index.
+         * @param {Object} data the JSON data returned by the server.
+         */
+        function handleLoadSuccess(data) {
+            spriteIndex.setData(data);
+            spriteIndex.setLoading(false);
+            spriteIndex.setLoaded(true);
+            spriteIndex.dispatchEvent(new OdysseySpriteIndexLoadedEvent());
+        }
+        // Send the request.
         $.ajax({
             url: src,
             dataType: 'json',
-            success: function (data) {
-                spriteIndex.setData(data);
-                spriteIndex.setLoading(false);
-                spriteIndex.setLoaded(true);
-                spriteIndex.dispatchEvent(new OdysseySpriteIndexLoadedEvent());
-            }
+            success: handleLoadSuccess
         });
         return spriteIndex;
     };

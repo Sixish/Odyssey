@@ -24,7 +24,7 @@ var OdysseyToolRow = (function ($) {
     OdysseyToolRow.prototype.setToggleElement = function (element) {
         this.ui.open = element;
     };
-    
+
     /**
      * Gets the element used to toggle this view component's visibility.
      * @returns {Object} the DOM element used to toggle this view

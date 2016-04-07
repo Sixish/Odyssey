@@ -179,10 +179,18 @@ var OdysseyTileMap = (function ($) {
         this.viewport = element;
     };
 
+    /**
+     * Sets the tile map's container element.
+     * @param {Object} element the DOM element containing the tile map.
+     */
     OdysseyTileMap.prototype.setContainer = function (element) {
         this.container = element;
     };
 
+    /**
+     * Gets the tile map's container element.
+     * @returns {Object} the container DOM element.
+     */
     OdysseyTileMap.prototype.getContainer = function () {
         return this.container;
     };
@@ -555,6 +563,10 @@ var OdysseyTileMap = (function ($) {
         return success;
     };
 
+    /**
+     * Starts loading all maps required to render the full viewport.
+     * @TODO find return value
+     */
     OdysseyTileMap.prototype.loadMaps = function () {
         var currentMapPosition = this.position, xs, xe, ys, ye, zs, ze;
         // Set the range of position values to render.
@@ -615,10 +627,16 @@ var OdysseyTileMap = (function ($) {
         return success;
     };
 
+    /**
+     * Shows the tile map.
+     */
     OdysseyTileMap.prototype.show = function () {
         $(this.getContainer()).addClass("ready");
     };
 
+    /**
+     * Hides the tile map.
+     */
     OdysseyTileMap.prototype.hide = function () {
         $(this.getContainer()).removeClass("ready");
     };
@@ -750,7 +768,10 @@ var OdysseyTileMap = (function ($) {
         //this.failedRenderedTiles.splice(0);
     };
 
-    // TEMPORARY.
+    /**
+     * Updates the IDs of the canvas elements. This ensures that all canvases
+     * have correct IDs after performing translations.
+     */
     OdysseyTileMap.prototype.updateCanvasIDs = function () {
         this.canvases[OdysseyTileMap.CANVAS_NORTHWEST_ID].setAttribute('id', 'OdysseyMapCanvas-NW');
         this.canvases[OdysseyTileMap.CANVAS_NORTH_ID].setAttribute('id', 'OdysseyMapCanvas-N');

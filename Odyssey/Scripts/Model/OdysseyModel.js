@@ -7,6 +7,10 @@
  */
 var OdysseyModel = (function () {
     "use strict";
+    /**
+     * Creates a model for the web application.
+     * @constructor.
+     */
     function OdysseyModel() {
         this.eventDispatcher = new OdysseyEventDispatcher();
         this.world = null;

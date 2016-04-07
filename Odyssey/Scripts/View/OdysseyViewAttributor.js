@@ -1,6 +1,12 @@
 var OdysseyViewAttributor = (function () {
     "use strict";
+    /**
+     * Creates an OdysseyViewAttributor object. This should be used
+     * to extend an existing constructor's prototype.
+     * @constructor
+     */
     function OdysseyViewAttributor() {}
+
     /**
      * Sets the view. This object should contain all information required
      * for rendering the map, given a reference to the model able to reconstruct

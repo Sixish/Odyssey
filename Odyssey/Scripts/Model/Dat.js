@@ -188,19 +188,25 @@ var Dat = (function ($) {
     Dat.load = function load(url) {
         var dat = new Dat();
         dat.setLoading(true);
+        /**
+         * Handles the successful loading of the Dat.
+         * @param {Object} the response from the AJAX request
+         * containing the Dat's data.
+         */
+        function handleLoadSuccess(obj) {
+            // Tibia Dat JSON loaded.
+            // Save data for future use.
+            dat.setData(obj);
+
+            // Assign state variables.
+            dat.setLoaded(true);
+            dat.setLoading(false);
+        }        
         // Load the Tibia Dat JSON file.
         $.ajax({
             'url': url,
             'dataType': 'json',
-            'success': function (obj) {
-                // Tibia Dat JSON loaded.
-                // Save data for future use.
-                dat.setData(obj);
-
-                // Assign state variables.
-                dat.setLoaded(true);
-                dat.setLoading(false);
-            }
+            'success': handleLoadSuccess
         });
         return dat;
     };
