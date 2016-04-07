@@ -5,6 +5,7 @@
     width: 100%;
     height: 100%;
     display: none;
+    z-index: 1;
 }
 body.state-search-active #OdysseySearchContainer {
     display: block;/* IE does not understand 'initial' */
@@ -13,7 +14,6 @@ body.state-search-active #OdysseySearchContainer {
 
 #OdysseySearch {
     position: relative;
-    z-index: 99999;
     margin: 0 auto;
     border-width: 0.1em;
     border-style: solid;
