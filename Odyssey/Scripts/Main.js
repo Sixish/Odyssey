@@ -140,6 +140,11 @@ var o = (function () {
             return spriteIndex;
         }()));
 
+        view.setToolRow((function () {
+            var toolRow = new OdysseyToolRow();
+            toolRow.setToggleElement(document.getElementById("OdysseyOpenToolRow"));
+            return toolRow;
+        }()));
         // Minimap.
         view.setMinimap((function () {
             var minimap = new OdysseyMinimap();
@@ -297,6 +302,10 @@ var o = (function () {
             m.setView(odyssey.getView());
             m.setModel(odyssey.getModel());
 
+            m.addControl((function () {
+                var control = new OdysseyToolRowControl();
+                return control;
+            }()));
             // Odyssey link clicks.
             m.addControl((function () {
                 var control = new OdysseyLinkClickControl();

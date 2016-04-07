@@ -32,6 +32,8 @@
   <script type="text/javascript" src="Odyssey/Scripts/Events/OdysseyWorldMapCloseLinkClickEvent.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Events/OdysseySearchFindEvent.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Events/OdysseySearchCompleteEvent.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Events/OdysseyToolRowShowEvent.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Events/OdysseyToolRowHideEvent.js"></script>
   
   
   <!-- Internal -->

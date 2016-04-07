@@ -895,20 +895,20 @@ Expect valid jsdoc-block definition at Scripts/Main.js :
    129 |            }
 
 Expect valid jsdoc-block definition at Scripts/Main.js :
-   253 |
-   254 |            // TODO implement
-   255 |            function updateProgressBarLoadingCore() {
+   258 |
+   259 |            // TODO implement
+   260 |            function updateProgressBarLoadingCore() {
 --------------------^
-   256 |                var loading = 0, loaded = 0;
-   257 |                loading += view.getModel().getResourceManager().getLoadingCount();
+   261 |                var loading = 0, loaded = 0;
+   262 |                loading += view.getModel().getResourceManager().getLoadingCount();
 
 Expect valid jsdoc-block definition at Scripts/Main.js :
-   260 |                status.setProgress(Math.floor(100 * (loaded || 0) / ((loading || 0) + (loaded || 1))) / 100);
-   261 |            }
-   262 |            function updateProgressBarLoadingSprites() {
+   265 |                status.setProgress(Math.floor(100 * (loaded || 0) / ((loading || 0) + (loaded || 1))) / 100);
+   266 |            }
+   267 |            function updateProgressBarLoadingSprites() {
 --------------------^
-   263 |                var loading = 0, loaded = 0;
-   264 |                // Loading.
+   268 |                var loading = 0, loaded = 0;
+   269 |                // Loading.
 
 Expect valid jsdoc-block definition at Scripts/Model/Dat.js :
    193 |            'url': url,
@@ -1254,29 +1254,13 @@ Expect valid jsdoc-block definition at Scripts/View/OdysseyViewAttributor.js :
      4 |    /**
      5 |     * Sets the view. This object should contain all information required
 
-Expect valid jsdoc-block definition at Scripts/View/ToolRow.js :
-     6 |        $linkToggleIcons = $("#OdysseyOpenToolRow"),
-     7 |        $body = $(document.body);
-     8 |    function toggleToolRow() {
+Illegal trailing whitespace at Scripts/View/ToolRow.js :
+    25 |        this.ui.open = element;
+    26 |    };
+    27 |    
 ------------^
-     9 |        if (active) {
-    10 |            $body.removeClass("state-tools-active");
-
-Expect valid jsdoc-block definition at Scripts/View/Tooltip.js :
-     6 |    var $tooltip = $("#OdysseyToolTipHeader"),
-     7 |        focusPosition = new Matrix3D(0, 0, 0);
-     8 |    function setTooltipPosition(x, y, z) {
-------------^
-     9 |    }
-    10 |    function updateTooltipPosition(x, y, z) {
-
-Expect valid jsdoc-block definition at Scripts/View/Tooltip.js :
-     8 |    function setTooltipPosition(x, y, z) {
-     9 |    }
-    10 |    function updateTooltipPosition(x, y, z) {
-------------^
-    11 |    }
-    12 |    // On each grid tile hover, set the focus position
+    28 |    /**
+    29 |     * Gets the element used to toggle this view component's visibility.
 
 
-160 code style errors found.
+158 code style errors found.

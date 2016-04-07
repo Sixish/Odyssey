@@ -183,6 +183,22 @@ var OdysseyView = (function () {
     };
 
     /**
+     * Sets the tool row view component.
+     * @param {OdysseyToolRow} toolRow the tool row view component.
+     */
+    OdysseyView.prototype.setToolRow = function (toolRow) {
+        this.toolRow = toolRow;
+    };
+
+    /**
+     * Gets the tool row view component.
+     * @returns {OdysseyToolRow} the tool row view component.
+     */
+    OdysseyView.prototype.getToolRow = function () {
+        return this.toolRow;
+    };
+
+    /**
      * Updates the view.
      */
     OdysseyView.prototype.update = function () {

@@ -25,6 +25,7 @@
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyLinkClickControl.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseySearchControl.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyNavigationControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyToolRowControl.js"></script>
   
   <script type="text/javascript" src="Odyssey/Scripts/Odyssey.js"></script>
   
