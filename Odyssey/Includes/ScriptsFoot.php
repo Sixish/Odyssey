@@ -3,32 +3,36 @@
   <script type="text/javascript" src="Odyssey/Scripts/Model/MapFileParserResult.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/MapFileParser.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Model/MapFile.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Model/OdysseyMapIndex.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Model/MapIndex.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Model/Model.js"></script>
   
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyStatus.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyTileMap.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyMinimap.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/View.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/CanvasSection.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/TileMap.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/Status.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/Minimap.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/Zoom.js"></script>
   <!--<script type="text/javascript" src="Odyssey/Scripts/View/Tooltip.js"></script>-->
   <script type="text/javascript" src="Odyssey/Scripts/View/ToolRow.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyNavigationList.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyWorldMap.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseyTileInfo.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/View/OdysseySpriteIndex.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/NavigationList.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/WorldMap.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/TileInfo.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/SpriteIndex.js"></script>
   
   
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyController.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyMapSearch.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyOverlayControl.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyControlManager.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyWorldMapControl.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyLinkClickControl.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseySearchControl.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyNavigationControl.js"></script>
-  <script type="text/javascript" src="Odyssey/Scripts/Controller/OdysseyToolRowControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/Controller.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/MapSearch.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/OverlayControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/ControlManager.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/WorldMapControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/LinkClickControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/SearchControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/NavigationControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/ToolRowControl.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Controller/NavigationMenuControl.js"></script>
   
   <script type="text/javascript" src="Odyssey/Scripts/Odyssey.js"></script>
   
-  <script type="text/javascript" src="Odyssey/Scripts/Main.js"></script>
-  
   <script type="text/javascript" src="Odyssey/Scripts/View/DelayLoad.js"></script>
+  
+  <script type="text/javascript" src="Odyssey/Scripts/Main.js"></script>

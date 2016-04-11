@@ -1,6 +1,4 @@
 //jscs:disable
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser */
 (function () {
     "use strict";
     var lastTime = 0, vendors = ['webkit', 'moz'], x;

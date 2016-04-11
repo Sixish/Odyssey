@@ -1,13 +1,37 @@
-/*global Odyssey, OdysseyStatus, OdysseyNavigationControl, OdysseyWorldMapControl, OdysseySearchControl, OdysseyLinkClickControl, OdysseyView, OdysseyModel, OdysseyMinimap, OdysseyWorldMap, OdysseyTileMap, OdysseyWorld, OdysseyGeography, OdysseyWorldSpawns, OdysseyController, OdysseyControlManager, Dat, OdysseyTileInfo, OdysseyOverlay, ResourceManager, document, OdysseySpriteIndex, OdysseyMapIndex, OdysseyInitializedEvent*/
-/** Main.js.
- *
+/* Main.js.
  * Main entry point for the TibiaOdyssey web application.
  * Creates an Odyssey instance, which represents the state
  * of the web application.
  */
-var o = (function () {
+goog.require('Odyssey.Events.InitializedEvent');
+goog.require('Odyssey.Model.Model');
+goog.require('Odyssey.Model.Dat');
+goog.require('Odyssey.Generics.ResourceManager');
+goog.require('Odyssey.Model.MapIndex');
+goog.require('Odyssey.Model.World');
+goog.require('Odyssey.Model.Geography');
+goog.require('Odyssey.Model.WorldSpawns');
+goog.require('Odyssey.View.View');
+goog.require('Odyssey.View.SpriteIndex');
+goog.require('Odyssey.View.ToolRow');
+goog.require('Odyssey.View.Minimap');
+goog.require('Odyssey.View.TileMap');
+goog.require('Odyssey.View.TileInfo');
+goog.require('Odyssey.Controller.OverlayControl');
+goog.require('Odyssey.View.Status');
+goog.require('Odyssey.Controller.Controller');
+goog.require('Odyssey.Controller.ControlManager');
+goog.require('Odyssey.Controller.ToolRowControl');
+goog.require('Odyssey.Controller.LinkClickControl');
+goog.require('Odyssey.Controller.WorldMapControl');
+goog.require('Odyssey.Controller.SearchControl');
+goog.require('Odyssey.Controller.NavigationControl');
+goog.require('Odyssey.Odyssey');
+goog.require('Odyssey.View.DelayLoad');
+goog.provide('Odyssey.main');
+Odyssey.main = (function () {
     "use strict";
-    var odyssey = new Odyssey(),
+    var odyssey = new Odyssey.Odyssey(),
         /** The number of dependencies before we can start the core features. */
         dependencies = 2,// dat, sprite index,
         /** The number of dependencies that have already loaded. */
@@ -44,32 +68,32 @@ var o = (function () {
     function dependencyLoaded() {
         dependenciesLoaded += 1;
         if (dependenciesLoaded >= dependencies) {
-            odyssey.dispatchEvent(new OdysseyInitializedEvent());
+            odyssey.dispatchEvent(new Odyssey.Events.InitializedEvent());
         }
     }
 
     // Model.
     odyssey.setModel((function () {
-        var model = new OdysseyModel();
+        var model = new Odyssey.Model.Model();
         model.setParentEventHandler(odyssey.eventDispatcher);
 
         // Dat.
         model.setDat((function () {
-            var dat = Dat.load("Odyssey/Data/dat.json");
+            var dat = Odyssey.Model.Dat.load("Odyssey/Data/dat.json");
             dat.addEventListener("OdysseyDatLoaded", dependencyLoaded);
             return dat;
         }()));
 
         // Resource Manager (maps)
         model.setResourceManager((function () {
-            var resourceManager = new ResourceManager();
+            var resourceManager = new Odyssey.Generics.ResourceManager();
             resourceManager.setFilepathPrefix("Odyssey/Maps/");
             return resourceManager;
         }()));
 
         // Map Index.
         model.setMapIndex((function () {
-            var mapIndex = new OdysseyMapIndex();
+            var mapIndex = new Odyssey.Model.MapIndex();
             mapIndex.setStartPosition(POS_MIN_X, POS_MIN_Y, POS_MIN_Z);
             mapIndex.setEndPosition(POS_MAX_X, POS_MAX_Y, POS_MAX_Z);
             mapIndex.addToResourceManager(model.getResourceManager());
@@ -78,21 +102,21 @@ var o = (function () {
 
         // World.
         model.setWorld((function () {
-            var world = new OdysseyWorld();
+            var world = new Odyssey.Model.World();
             world.setParentEventHandler(model.eventDispatcher);
             return world;
         }()));
 
         // Geography.
         model.setGeography((function () {
-            var geo = new OdysseyGeography();
+            var geo = new Odyssey.Model.Geography();
             geo.setParentEventHandler(model.eventDispatcher);
             return geo;
         }()));
 
         // World Spawns.
         model.setWorldSpawns((function () {
-            var spawns = new OdysseyWorldSpawns();
+            var spawns = new Odyssey.Model.WorldSpawns();
             spawns.setParentEventHandler(model.eventDispatcher);
             return spawns;
         }()));
@@ -102,32 +126,32 @@ var o = (function () {
 
     // View.
     odyssey.setView((function () {
-        var view = new OdysseyView();
+        var view = new Odyssey.View.View();
         view.setParentEventHandler(odyssey.eventDispatcher);
         // View needs a reference to the model.
         view.setModel(odyssey.getModel());
         // Global event listeners.
-        odyssey.addEventListener("OdysseyInitialized", OdysseyView.updateProxy(view));
-        odyssey.addEventListener("OdysseyBinaryFileLoaded", OdysseyView.updateProxy(view));
-        odyssey.addEventListener("OdysseyMapZoomChange", OdysseyView.updateProxy(view));
-        odyssey.addEventListener("OdysseyMapPositionChange", OdysseyView.updateProxy(view));
+        odyssey.addEventListener("OdysseyInitialized", Odyssey.View.View.updateProxy(view));
+        odyssey.addEventListener("OdysseyBinaryFileLoaded", Odyssey.View.View.updateProxy(view));
+        odyssey.addEventListener("OdysseyMapZoomChange", Odyssey.View.View.updateProxy(view));
+        odyssey.addEventListener("OdysseyMapPositionChange", Odyssey.View.View.updateProxy(view));
 
         // Resource Manager (sprites).
         view.setResourceManager((function () {
-            var resourceManager = new ResourceManager();
+            var resourceManager = new Odyssey.Generics.ResourceManager();
             resourceManager.setFilepathPrefix("Odyssey/Sprites/");
             return resourceManager;
         }()));
 
         // Sprite Index.
         view.setSpriteIndex((function () {
-            var spriteIndex = OdysseySpriteIndex.load("Odyssey/Data/SpriteSheetIndex.json");
+            var spriteIndex = Odyssey.View.SpriteIndex.load("Odyssey/Data/SpriteSheetIndex.json");
 
             /**
              * Populates the resource manager.
              */
             function populate() {
-                OdysseySpriteIndex.populateResourceManager(spriteIndex, view.getResourceManager());
+                Odyssey.View.SpriteIndex.populateResourceManager(spriteIndex, view.getResourceManager());
             }
 
             // Attach the event listeners.
@@ -143,13 +167,13 @@ var o = (function () {
         }()));
 
         view.setToolRow((function () {
-            var toolRow = new OdysseyToolRow();
+            var toolRow = new Odyssey.View.ToolRow();
             toolRow.setToggleElement(document.getElementById("OdysseyOpenToolRow"));
             return toolRow;
         }()));
         // Minimap.
         view.setMinimap((function () {
-            var minimap = new OdysseyMinimap();
+            var minimap = new Odyssey.View.Minimap();
             minimap.setParentEventHandler(view.eventDispatcher);
             minimap.setCanvas(document.getElementById("OdysseyMinimapCanvas"));
 
@@ -158,7 +182,7 @@ var o = (function () {
 
         // World Map.
         view.setWorldMap((function () {
-            var wm = new OdysseyWorldMap(), z, maxZ;
+            var wm = new Odyssey.View.WorldMap(), z, maxZ;
             wm.setParentEventHandler(view.eventDispatcher);
             // Set the WorldMap's DOM structure.
             wm.setWrapperElement(document.getElementById("OdysseyLargeMinimap"));
@@ -173,7 +197,7 @@ var o = (function () {
 
         // Tile Map.
         view.setTileMap((function () {
-            var tileMap = new OdysseyTileMap();
+            var tileMap = new Odyssey.View.TileMap();
             tileMap.setParentEventHandler(view.eventDispatcher);
             // tile map needs a reference to the view.
             tileMap.setView(view);
@@ -187,25 +211,25 @@ var o = (function () {
             tileMap.setSize(23, 23);
             //tileMap.setSize(3, 3);
             // Canvases.
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvas-N"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvas-NE"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvas-W"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvas-P"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvas-E"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvas-SW"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvas-S"));
-            tileMap.setCanvas(OdysseyTileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvas-SE"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvas-N"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvas-NE"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvas-W"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvas-P"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvas-E"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvas-SW"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvas-S"));
+            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvas-SE"));
             // Overlay Canvas.
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-NW"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvasOverlay-N"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-NE"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvasOverlay-W"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvasOverlay-P"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvasOverlay-E"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-SW"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvasOverlay-S"));
-            tileMap.setOverlayCanvas(OdysseyTileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-NW"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvasOverlay-N"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-NE"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvasOverlay-W"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvasOverlay-P"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvasOverlay-E"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-SW"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvasOverlay-S"));
+            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
 
             //tileMap.setPosition(32255, 32648, 13);
             tileMap.setPosition(32367, 32615, 7);
@@ -219,7 +243,7 @@ var o = (function () {
 
         // Tile Info.
         view.setTileInfo((function () {
-            var tileInfo = new OdysseyTileInfo();
+            var tileInfo = new Odyssey.View.TileInfo();
 
             /**
              * Responds to the map click event to update the TileInfo object.
@@ -237,7 +261,7 @@ var o = (function () {
         // Overlay.
         view.setOverlay((function () {
             // TODO FIX - this is not a View but a Control.
-            var overlay = new OdysseyOverlayControl();
+            var overlay = new Odyssey.Controller.OverlayControl();
 
             /**
              * Handles selection (i.e. mouse clicks) of the overlay.
@@ -253,7 +277,7 @@ var o = (function () {
         }()));
 
         view.setStatus((function () {
-            var status = new OdysseyStatus();
+            var status = new Odyssey.View.Status();
             status.setContainer(document.getElementById("OdysseyStatus"));
             status.setStatusTextField(document.getElementById("ProgressText"));
             status.setProgressBar(document.getElementById("ProgressBar"));
@@ -288,16 +312,21 @@ var o = (function () {
             return status;
         }()));
 
+        view.setNavigationMenu((function () {
+            var navList = new Odyssey.View.NavigationList();
+            return navList;
+        }()));
+
         return view;
     }()));
 
     // Controller.
     odyssey.setController((function () {
-        var controller = new OdysseyController();
+        var controller = new Odyssey.Controller.Controller();
         controller.setParentEventHandler(odyssey.eventDispatcher);
 
         controller.setControlManager((function () {
-            var m = new OdysseyControlManager();
+            var m = new Odyssey.Controller.ControlManager();
             m.setParentEventHandler(controller.eventDispatcher);
             // Controls will have a reference to the Model and View,
             // the control manager will provide these to them.
@@ -312,29 +341,34 @@ var o = (function () {
             m.setModel(odyssey.getModel());
 
             m.addControl((function () {
-                var control = new OdysseyToolRowControl();
+                var control = new Odyssey.Controller.ToolRowControl();
                 return control;
             }()));
             // Odyssey link clicks.
             m.addControl((function () {
-                var control = new OdysseyLinkClickControl();
+                var control = new Odyssey.Controller.LinkClickControl();
                 return control;
             }()));
 
             // World Map controls.
             m.addControl((function () {
-                var control = new OdysseyWorldMapControl();
+                var control = new Odyssey.Controller.WorldMapControl();
                 return control;
             }()));
 
             // Search controls.
             m.addControl((function () {
-                var control = new OdysseySearchControl();
+                var control = new Odyssey.Controller.SearchControl();
                 return control;
             }()));
 
             m.addControl((function () {
-                var control = new OdysseyNavigationControl();
+                var control = new Odyssey.Controller.NavigationControl();
+                return control;
+            }()));
+
+            m.addControl((function () {
+                var control = new Odyssey.Controller.NavigationMenuControl();
                 return control;
             }()));
 

@@ -1,786 +1,864 @@
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    59 |    extend(OdysseyController.prototype, new OdysseyEventDispatchInterface());
-    60 |    OdysseyController.CONTROL_OVERLAY_CLICK = 0;
-    61 |    OdysseyController.prototype.handleControlOverlayClick = function (e) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    66 |    extend(OdysseyController.prototype, new Odyssey.Events.EventDispatchInterface());
+    67 |    OdysseyController.CONTROL_OVERLAY_CLICK = 0;
+    68 |    OdysseyController.prototype.handleControlOverlayClick = function (e) {
 --------------------------------------------------------------------^
-    62 |        var Odyssey = this.context,
-    63 |            xOffset = getX(e.target, Odyssey.overlayCanvases) * Odyssey.sizeX,
+    69 |        var Odyssey = this.context,
+    70 |            xOffset = getX(e.target, Odyssey.overlayCanvases) * Odyssey.sizeX,
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    72 |    };
-    73 |
-    74 |    OdysseyController.prototype.setControlManager = function (controlManager) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    79 |    };
+    80 |
+    81 |    OdysseyController.prototype.setControlManager = function (controlManager) {
 ------------------------------------------------------------^
-    75 |        this.controlManager = controlManager;
-    76 |    };
+    82 |        this.controlManager = controlManager;
+    83 |    };
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    75 |        this.controlManager = controlManager;
-    76 |    };
-    77 |    OdysseyController.prototype.setContext = function (Odyssey) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    82 |        this.controlManager = controlManager;
+    83 |    };
+    84 |    OdysseyController.prototype.setContext = function (Odyssey) {
 -----------------------------------------------------^
-    78 |        this.context = Odyssey;
-    79 |    };
+    85 |        this.context = Odyssey;
+    86 |    };
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    78 |        this.context = Odyssey;
-    79 |    };
-    80 |    OdysseyController.prototype.disable = function (controlID) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    85 |        this.context = Odyssey;
+    86 |    };
+    87 |    OdysseyController.prototype.disable = function (controlID) {
 --------------------------------------------------^
-    81 |        this.controlStates[controlID] = false;
-    82 |    };
+    88 |        this.controlStates[controlID] = false;
+    89 |    };
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    81 |        this.controlStates[controlID] = false;
-    82 |    };
-    83 |    OdysseyController.prototype.enable = function (controlID) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    88 |        this.controlStates[controlID] = false;
+    89 |    };
+    90 |    OdysseyController.prototype.enable = function (controlID) {
 -------------------------------------------------^
-    84 |        this.controlStates[controlID] = true;
-    85 |    };
+    91 |        this.controlStates[controlID] = true;
+    92 |    };
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    84 |        this.controlStates[controlID] = true;
-    85 |    };
-    86 |    OdysseyController.prototype.isDisabled = function (controlID) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    91 |        this.controlStates[controlID] = true;
+    92 |    };
+    93 |    OdysseyController.prototype.isDisabled = function (controlID) {
 -----------------------------------------------------^
-    87 |        return (this.controlStates[controlID] === false);
-    88 |    };
+    94 |        return (this.controlStates[controlID] === false);
+    95 |    };
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    87 |        return (this.controlStates[controlID] === false);
-    88 |    };
-    89 |    OdysseyController.prototype.isEnabled = function (controlID) {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    94 |        return (this.controlStates[controlID] === false);
+    95 |    };
+    96 |    OdysseyController.prototype.isEnabled = function (controlID) {
 ----------------------------------------------------^
-    90 |        // Controls are enabled by default.
-    91 |        return (!this.isDisabled(controlID));
+    97 |        // Controls are enabled by default.
+    98 |        return (!this.isDisabled(controlID));
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    91 |        return (!this.isDisabled(controlID));
-    92 |    };
-    93 |    OdysseyController.prototype.initialize = function () {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+    98 |        return (!this.isDisabled(controlID));
+    99 |    };
+   100 |    OdysseyController.prototype.initialize = function () {
 -----------------------------------------------------^
-    94 |        var ctx = this;
-    95 |        // Initialize the canvas selection.
+   101 |        var ctx = this;
+   102 |        // Initialize the canvas selection.
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyController.js :
-    94 |        var ctx = this;
-    95 |        // Initialize the canvas selection.
-    96 |        function dispatchControl() {
+Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
+   101 |        var ctx = this;
+   102 |        // Initialize the canvas selection.
+   103 |        function dispatchControl() {
 ----------------^
-    97 |            ctx.handleControlOverlayClick();
-    98 |        }
+   104 |            ctx.handleControlOverlayClick();
+   105 |        }
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyControllerAttributor.js :
-     1 |var OdysseyControllerAttributor = (function () {
-     2 |    "use strict";
-     3 |    function OdysseyControllerAttributor() {}
-------------^
-     4 |    /**
-     5 |     * Sets the controller. This object should contain methods to bind controls.
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyControlManager.js :
-     2 |var OdysseyControlManager = (function () {
+Expect valid jsdoc-block definition at Scripts/Controller/ControllerAttributor.js :
+     2 |Odyssey.Controller.ControllerAttributor = (function () {
      3 |    "use strict";
-     4 |    function OdysseyControlManager() {
+     4 |    function OdysseyControllerAttributor() {}
 ------------^
-     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     6 |        this.controls = [];
+     5 |    /**
+     6 |     * Sets the controller. This object should contain methods to bind controls.
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyControlManager.js :
-    11 |    extend(OdysseyControlManager.prototype, new OdysseyControllerAttributor());
-    12 |
-    13 |    OdysseyControlManager.prototype.addControl = function (control) {
+Expect valid jsdoc-block definition at Scripts/Controller/ControlManager.js :
+     8 |Odyssey.Controller.ControlManager = (function () {
+     9 |    "use strict";
+    10 |    function OdysseyControlManager() {
+------------^
+    11 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    12 |        this.controls = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/ControlManager.js :
+    17 |    extend(OdysseyControlManager.prototype, new Odyssey.Controller.ControllerAttributor());
+    18 |
+    19 |    OdysseyControlManager.prototype.addControl = function (control) {
 ---------------------------------------------------------^
-    14 |        this.controls.push(control);
-    15 |        control.setParentEventHandler(this.eventDispatcher);
+    20 |        this.controls.push(control);
+    21 |        control.setParentEventHandler(this.eventDispatcher);
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyLinkClickControl.js :
-    63 |    };
-    64 |
-    65 |    OdysseyLinkClickControl.handleClickProxy = function (ctx) {
--------------------------------------------------------^
-    66 |        return function (e) {
-    67 |            if (!ctx.processClick(e.target)) {
+Illegal trailing whitespace at Scripts/Controller/LinkClickControl.js :
+    72 |     * Creates a proxy to handle clicks.
+    73 |     * @param {OdysseyLinkClickControl} ctx the link control.
+    74 |     * @returns {Function} the 
+---------------------------------------^
+    75 |     */
+    76 |    OdysseyLinkClickControl.handleClickProxy = function (ctx) {
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    15 |    // TODO CLEANUP : do we use this method or OdysseyMapSearch.worker.onmessage ?
-    16 |    // does not seem to be used.
-    17 |    window.onmessage = function handleMessage(e) {
--------------------------------^
-    18 |        var id, type, data;
-    19 |        if (e.hasOwnProperty('id')) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    49 |    */
-    50 |
-    51 |    function OdysseyMapSearchRequest(action) {
-------------^
-    52 |        this.eventDispatcher = new OdysseyEventDispatcher();
-    53 |        this.action = action;
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    55 |    }
-    56 |    extend(OdysseyMapSearchRequest.prototype, new OdysseyEventDispatchInterface());
-    57 |    OdysseyMapSearchRequest.prototype.setData = function (data) {
---------------------------------------------------------^
-    58 |        this.data = data;
-    59 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    58 |        this.data = data;
-    59 |    };
-    60 |    OdysseyMapSearchRequest.prototype.setID = function (id) {
-------------------------------------------------------^
-    61 |        this.id = id;
-    62 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    62 |    };
-    63 |
-    64 |    function OdysseyMapSearch() {
-------------^
-    65 |        var ctx = this;
-    66 |        this.worker = new Worker("Odyssey/Scripts/Controller/Search.Worker.js");
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    68 |        this.messages = [];
-    69 |
-    70 |        this.worker.onmessage = function (e) {
-----------------------------------------^
-    71 |            var msg = JSON.parse(e.data), id = msg.id, handler;
-    72 |            // Request handler for this message ID.
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    83 |    extend(OdysseyMapSearch.prototype, new OdysseyEventDispatchInterface());
-    84 |
-    85 |    OdysseyMapSearch.prototype.createRequest = function (type, data) {
--------------------------------------------------------^
-    86 |        var req = new OdysseyMapSearchRequest(type);
-    87 |        req.setParentEventHandler(this.eventDispatcher);
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    92 |    };
-    93 |
-    94 |    OdysseyMapSearch.prototype.sendRequest = function (req) {
------------------------------------------------------^
-    95 |        this.worker.postMessage(JSON.stringify(req));
-    96 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-    96 |    };
-    97 |
-    98 |    OdysseyMapSearch.prototype.find = function (o, fnFind, fnComplete) {
-----------------------------------------------^
-    99 |        var data, req;
-   100 |        data = {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyMapSearch.js :
-   113 |    };
-   114 |
-   115 |    OdysseyMapSearch.prototype.sendData = function (maps) {
---------------------------------------------------^
-   116 |        var req = this.createRequest("send", maps);
-   117 |        this.sendRequest(req);
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyNavigationControl.js :
-   122 |    };
-   123 |
-   124 |    OdysseyNavigationControl.prototype.initialize = function () {
-------------------------------------------------------------^
-   125 |        var ctx = this,
-   126 |            $body = $(document.body),
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-     2 |var OdysseyOverlayControl = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyOverlayControl() {
-------------^
-     5 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     6 |    }
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-     7 |    extend(OdysseyOverlayControl.prototype, new OdysseyEventDispatchInterface());
-     8 |
-     9 |    OdysseyOverlayControl.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
-------------------------------------------------^
-    10 |        cvs.getContext('2d').clearRect(xStart, yStart, width, height);
-    11 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-    11 |    };
-    12 |
-    13 |    OdysseyOverlayControl.unpaintAll = function unpaintAll() {
------------------------------------------------^
-    14 |        var canvases = this.context.overlayCanvases, i, len = canvases.length;
-    15 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-    18 |    };
+Expected indentation of 4 characters at Scripts/Controller/MapSearch.js :
+    18 |    var handlers = {};
     19 |
-    20 |    OdysseyOverlayControl.prototype.select = function select(pos) {
+    20 | /**
+------------^
+    21 |  * Listens to messages from the server.
+    22 |     * @TODO does not seem to be used.
+
+Unavailable tag TODO at Scripts/Controller/MapSearch.js :
+    20 | /**
+    21 |  * Listens to messages from the server.
+    22 |     * @TODO does not seem to be used.
+------------^
+    23 |     * @TODO : CLEANUP : do we use this method or OdysseyMapSearch.worker.onmessage ?
+    24 |     * @param {Object} e the message event.
+
+Unavailable tag TODO at Scripts/Controller/MapSearch.js :
+    21 |  * Listens to messages from the server.
+    22 |     * @TODO does not seem to be used.
+    23 |     * @TODO : CLEANUP : do we use this method or OdysseyMapSearch.worker.onmessage ?
+------------^
+    24 |     * @param {Object} e the message event.
+    25 |  */
+
+Expect valid jsdoc-block definition at Scripts/Controller/MapSearch.js :
+    24 |     * @param {Object} e the message event.
+    25 |  */
+    26 |    window.onmessage = function handleMessage(e) {
+-------------------------------^
+    27 |        var id, type, data;
+    28 |        if (e.hasOwnProperty('id')) {
+
+Expected o but got the at Scripts/Controller/MapSearch.js :
+   140 |    /**
+   141 |     * Creates a find request.
+   142 |     * @param {Object} the data to use.
+-------------------------------^
+   143 |     * @param {Function} fnFind the callback to use when an item is found.
+   144 |     * @param {Function} fnComplete the callback to use when the search is complete.
+
+Expect valid jsdoc-block definition at Scripts/Controller/NavigationControl.js :
+   128 |    };
+   129 |
+   130 |    OdysseyNavigationControl.prototype.initialize = function () {
+------------------------------------------------------------^
+   131 |        var ctx = this,
+   132 |            $body = $(document.body),
+
+Expect valid jsdoc-block definition at Scripts/Controller/NavigationMenuControl.js :
+     7 |Odyssey.Controller.NavigationMenuControl = (function ($) {
+     8 |    "use strict";
+     9 |    function OdysseyNavigationMenuControl() {
+------------^
+    10 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    11 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/NavigationMenuControl.js :
+    14 |    extend(OdysseyNavigationMenuControl.prototype, new Odyssey.Model.ModelAttributor());
+    15 |
+    16 |    OdysseyNavigationMenuControl.prototype.initialize = function () {
+----------------------------------------------------------------^
+    17 |        // TODO REPLACE
+    18 |        var ctx = this;
+
+Missing line feed at file end at Scripts/Controller/NavigationMenuControl.js :
+    23 |
+    24 |    return OdysseyNavigationMenuControl;
+    25 |}(jQuery));
+-------------------^
+
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+     8 |Odyssey.Controller.OverlayControl = (function () {
+     9 |    "use strict";
+    10 |    function OdysseyOverlayControl() {
+------------^
+    11 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    12 |    }
+
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    13 |    extend(OdysseyOverlayControl.prototype, new Odyssey.Events.EventDispatchInterface());
+    14 |
+    15 |    OdysseyOverlayControl.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
+------------------------------------------------^
+    16 |        cvs.getContext('2d').clearRect(xStart, yStart, width, height);
+    17 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    17 |    };
+    18 |
+    19 |    OdysseyOverlayControl.unpaintAll = function unpaintAll() {
+-----------------------------------------------^
+    20 |        var canvases = this.context.overlayCanvases, i, len = canvases.length;
+    21 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    24 |    };
+    25 |
+    26 |    OdysseyOverlayControl.prototype.select = function select(pos) {
 -----------------------------------------------------^
-    21 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
-    22 |        if (index !== -1) {
+    27 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
+    28 |        if (index !== -1) {
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-    28 |    };
-    29 |
-    30 |    OdysseyOverlayControl.prototype.unselect = function unselect(pos) {
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    34 |    };
+    35 |
+    36 |    OdysseyOverlayControl.prototype.unselect = function unselect(pos) {
 -------------------------------------------------------^
-    31 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
-    32 |        if (index !== -1) {
+    37 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
+    38 |        if (index !== -1) {
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    42 |    };
+    43 |
+    44 |    OdysseyOverlayControl.prototype.setContext = function (Odyssey) {
+---------------------------------------------------------^
+    45 |        this.context = Odyssey;
+    46 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
+    46 |    };
+    47 |
+    48 |    OdysseyOverlayControl.prototype.update = function () {
+-----------------------------------------------------^
+    49 |        // TODO. Need access to position.
+    50 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+     9 |
+    10 |    /* Utility functions */
+    11 |    function extend(a, b) {
+------------^
+    12 |        var p;
+    13 |        for (p in b) {
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    19 |    }
+    20 |
+    21 |    function OdysseySearchResult() {
+------------^
+    22 |        this.position = {};
+    23 |        this.items = [];
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    24 |        this.creatures = [];
+    25 |    }
+    26 |    OdysseySearchResult.prototype.setPosition = function (o) {
+--------------------------------------------------------^
+    27 |        this.position.x = o.x;
+    28 |        this.position.y = o.y;
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    29 |        this.position.z = o.z;
+    30 |    };
+    31 |    OdysseySearchResult.prototype.setItems = function (items) {
+-----------------------------------------------------^
+    32 |        Array.prototype.push.apply(this.items, items);
+    33 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    32 |        Array.prototype.push.apply(this.items, items);
+    33 |    };
+    34 |    OdysseySearchResult.prototype.setCreatures = function (creatures) {
+---------------------------------------------------------^
+    35 |        Array.prototype.push.apply(this.creatures, creatures);
+    36 |    };
+
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
     36 |    };
     37 |
-    38 |    OdysseyOverlayControl.prototype.setContext = function (Odyssey) {
----------------------------------------------------------^
-    39 |        this.context = Odyssey;
-    40 |    };
+    38 |    function setData(msg) {
+------------^
+    39 |        extend(savedMaps, msg.data);
+    40 |    }
 
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyOverlayControl.js :
-    40 |    };
+Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
+    40 |    }
     41 |
-    42 |    OdysseyOverlayControl.prototype.update = function () {
------------------------------------------------------^
-    43 |        // TODO. Need access to position.
-    44 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyWorldMapControl.js :
-     3 |var OdysseyWorldMapControl = (function ($) {
-     4 |    "use strict";
-     5 |    function OdysseyWorldMapControl() {
+    42 |    function resolveOffset(x, y) {
 ------------^
-     6 |        this.eventDispatcher = new OdysseyEventDispatcher();
-     7 |        this.mouseIsDown = false;
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyWorldMapControl.js :
-    11 |    extend(OdysseyWorldMapControl.prototype, new OdysseyModelAttributor());
-    12 |
-    13 |    OdysseyWorldMapControl.prototype.processShowClick = function () {
-----------------------------------------------------------------^
-    14 |        this.getView().getWorldMap().show();
-    15 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyWorldMapControl.js :
-    15 |    };
-    16 |
-    17 |    OdysseyWorldMapControl.prototype.processHideClick = function () {
-----------------------------------------------------------------^
-    18 |        this.getView().getWorldMap().hide();
-    19 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyWorldMapControl.js :
-    19 |    };
-    20 |
-    21 |    OdysseyWorldMapControl.prototype.setPosition = function (x, y, z) {
------------------------------------------------------------^
-    22 |        this.getView().getWorldMap().setMapPosition(x, y, z);
-    23 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OdysseyWorldMapControl.js :
-    23 |    };
-    24 |
-    25 |    OdysseyWorldMapControl.prototype.initialize = function () {
-----------------------------------------------------------^
-    26 |        var ctx = this;
-    27 |        $("#OdysseyOpenMinimap").click(function () {
+    43 |        return (x + (y << 8));
+    44 |    }
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    11 |
-    12 |    /* Utility functions */
-    13 |    function extend(a, b) {
+    44 |    }
+    45 |
+    46 |    function getTile(map, x, y) {
 ------------^
-    14 |        var p;
-    15 |        for (p in b) {
+    47 |        var offset = resolveOffset(x, y);
+    48 |
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    21 |    }
-    22 |
-    23 |    function OdysseySearchResult() {
+    50 |    }
+    51 |
+    52 |    function mapContainsItem(map, itemID) {
 ------------^
-    24 |        this.position = {};
-    25 |        this.items = [];
+    53 |        return map.Items.indexOf(itemID) !== -1;
+    54 |    }
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    26 |        this.creatures = [];
-    27 |    }
-    28 |    OdysseySearchResult.prototype.setPosition = function (o) {
---------------------------------------------------------^
-    29 |        this.position.x = o.x;
-    30 |        this.position.y = o.y;
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    31 |        this.position.z = o.z;
-    32 |    };
-    33 |    OdysseySearchResult.prototype.setItems = function (items) {
------------------------------------------------------^
-    34 |        Array.prototype.push.apply(this.items, items);
-    35 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    34 |        Array.prototype.push.apply(this.items, items);
-    35 |    };
-    36 |    OdysseySearchResult.prototype.setCreatures = function (creatures) {
----------------------------------------------------------^
-    37 |        Array.prototype.push.apply(this.creatures, creatures);
-    38 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    38 |    };
-    39 |
-    40 |    function setData(msg) {
+    54 |    }
+    55 |
+    56 |    function mapContainsOneOfItem(map, itemIDs) {
 ------------^
-    41 |        extend(savedMaps, msg.data);
-    42 |    }
+    57 |        var i, len = itemIDs.length;
+    58 |        for (i = 0; i < len; i += 1) {
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    42 |    }
-    43 |
-    44 |    function resolveOffset(x, y) {
+    64 |    }
+    65 |
+    66 |    function tileContainsItem(tile, itemID) {
 ------------^
-    45 |        return (x + (y << 8));
-    46 |    }
+    67 |        var i, len;
+    68 |        if (tile.hasOwnProperty('Items')) {
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    46 |    }
-    47 |
-    48 |    function getTile(map, x, y) {
+    78 |    }
+    79 |
+    80 |    function getTileAbsolutePosition(map, x, y) {
 ------------^
-    49 |        var offset = resolveOffset(x, y);
-    50 |
+    81 |        return {
+    82 |            x: map.BaseX + x,
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    52 |    }
-    53 |
-    54 |    function mapContainsItem(map, itemID) {
+    86 |    }
+    87 |
+    88 |    function tileContainsCreature(tile, creature) {
 ------------^
-    55 |        return map.Items.indexOf(itemID) !== -1;
-    56 |    }
+    89 |        if (tile.hasOwnProperty('creatures')) {
+    90 |            return tile.creatures.indexOf(creature) !== -1;
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    56 |    }
-    57 |
-    58 |    function mapContainsOneOfItem(map, itemIDs) {
+    93 |    }
+    94 |
+    95 |    function searchMap(map, o) {
 ------------^
-    59 |        var i, len = itemIDs.length;
-    60 |        for (i = 0; i < len; i += 1) {
+    96 |        var mapX, mapY, i, len, searchItems, searchCreatures, tile, results = [], itemsFound = [], creaturesFound = [], r;
+    97 |        searchItems = (o && o.data && o.data.items) || [];
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    66 |    }
-    67 |
-    68 |    function tileContainsItem(tile, itemID) {
+   142 |        }
+   143 |    }
+   144 |    function searchData(o) {
 ------------^
-    69 |        var i, len;
-    70 |        if (tile.hasOwnProperty('Items')) {
+   145 |        var map, globalResultSet = [], result;
+   146 |        for (map in savedMaps) {
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    80 |    }
-    81 |
-    82 |    function getTileAbsolutePosition(map, x, y) {
-------------^
-    83 |        return {
-    84 |            x: map.BaseX + x,
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    88 |    }
-    89 |
-    90 |    function tileContainsCreature(tile, creature) {
-------------^
-    91 |        if (tile.hasOwnProperty('creatures')) {
-    92 |            return tile.creatures.indexOf(creature) !== -1;
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-    95 |    }
-    96 |
-    97 |    function searchMap(map, o) {
-------------^
-    98 |        var mapX, mapY, i, len, searchItems, searchCreatures, tile, results = [], itemsFound = [], creaturesFound = [], r;
-    99 |        searchItems = (o && o.data && o.data.items) || [];
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-   144 |        }
-   145 |    }
-   146 |    function searchData(o) {
-------------^
-   147 |        var map, globalResultSet = [], result;
-   148 |        for (map in savedMaps) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-   161 |    }
-   162 |
-   163 |    onmessage = function (e) {
+   159 |    }
+   160 |
+   161 |    onmessage = function (e) {
 ------------------------^
-   164 |        var msg = JSON.parse(e.data);
-   165 |
+   162 |        var msg = JSON.parse(e.data);
+   163 |
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-   167 |        if (msg.action === 'search') {
-   168 |            searchData(extend(msg, {
-   169 |                onfind: function (result) {
+   165 |        if (msg.action === 'search') {
+   166 |            searchData(extend(msg, {
+   167 |                onfind: function (result) {
 --------------------------------^
-   170 |                    var request = {
-   171 |                        result: result,
+   168 |                    var request = {
+   169 |                        result: result,
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
-   175 |                    postMessage(JSON.stringify(request));
-   176 |                },
-   177 |                oncomplete: function (results) {
+   173 |                    postMessage(JSON.stringify(request));
+   174 |                },
+   175 |                oncomplete: function (results) {
 ------------------------------------^
-   178 |                    var request = {
-   179 |                        results: results,
+   176 |                    var request = {
+   177 |                        results: results,
 
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyBinaryFileErrorEvent.js :
-     2 |var OdysseyBinaryFileErrorEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyBinaryFileErrorEvent(context) {
+Expect valid jsdoc-block definition at Scripts/Controller/WorldMapControl.js :
+    12 |Odyssey.Controller.WorldMapControl = (function ($) {
+    13 |    "use strict";
+    14 |    function OdysseyWorldMapControl() {
 ------------^
-     5 |        this.file = context;
-     6 |    }
+    15 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    16 |        this.mouseIsDown = false;
 
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyBinaryFileLoadedEvent.js :
-     2 |var OdysseyBinaryFileLoadedEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyBinaryFileLoadedEvent(context) {
-------------^
-     5 |        this.file = context;
-     6 |    }
+Expect valid jsdoc-block definition at Scripts/Controller/WorldMapControl.js :
+    20 |    extend(OdysseyWorldMapControl.prototype, new Odyssey.Model.ModelAttributor());
+    21 |
+    22 |    OdysseyWorldMapControl.prototype.processShowClick = function () {
+----------------------------------------------------------------^
+    23 |        this.getView().getWorldMap().show();
+    24 |    };
 
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEvent.js :
-    11 |    }
-    12 |    OdysseyEvent.prototype.propagationStopped = false;
-    13 |    OdysseyEvent.prototype.stopPropagation = function () {
------------------------------------------------------^
-    14 |        this.propagationStopped = true;
-    15 |    };
+Expect valid jsdoc-block definition at Scripts/Controller/WorldMapControl.js :
+    24 |    };
+    25 |
+    26 |    OdysseyWorldMapControl.prototype.processHideClick = function () {
+----------------------------------------------------------------^
+    27 |        this.getView().getWorldMap().hide();
+    28 |    };
 
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEvent.js :
-    15 |    };
-    16 |    OdysseyEvent.prototype.defaultPrevented = false;
-    17 |    OdysseyEvent.prototype.preventDefault = function () {
-----------------------------------------------------^
-    18 |        this.defaultPrevented = true;
-    19 |    };
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-     8 |        this.events = {};
-     9 |    }
-    10 |    OdysseyEventDispatcher.prototype.toJSON = function () {
-------------------------------------------------------^
-    11 |        // Do not serialize this object, as it is a container for functions.
-    12 |        return;
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    13 |    };
-    14 |    OdysseyEventDispatcher.prototype.parent = null;
-    15 |    OdysseyEventDispatcher.prototype.getParentEventHandler = function () {
----------------------------------------------------------------------^
-    16 |        return this.parent;
-    17 |    };
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    16 |        return this.parent;
-    17 |    };
-    18 |    OdysseyEventDispatcher.prototype.setParentEventHandler = function (parent) {
----------------------------------------------------------------------^
-    19 |        this.parent = parent;
-    20 |    };
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    19 |        this.parent = parent;
-    20 |    };
-    21 |    OdysseyEventDispatcher.prototype.getEventHandler = function (type) {
----------------------------------------------------------------^
-    22 |        if (!this.events.hasOwnProperty(type)) {
-    23 |            this.events[type] = new OdysseyEventHandler(type);
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    26 |    };
-    27 |
-    28 |    OdysseyEventDispatcher.prototype.dispatch = function (ctx, e) {
---------------------------------------------------------^
-    29 |        var handler = this.getEventHandler(e.type), parent;
-    30 |        handler.fire(ctx, e);
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    38 |    };
-    39 |
-    40 |    OdysseyEventDispatcher.prototype.addListener = function (type, fn) {
------------------------------------------------------------^
-    41 |        var handler = this.getEventHandler(type);
-    42 |        handler.addListener(fn);
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventDispatcher.js :
-    43 |    };
-    44 |
-    45 |    OdysseyEventDispatcher.prototype.removeListener = function (type, fn) {
---------------------------------------------------------------^
-    46 |        var handler = this.getEventHandler(type);
-    47 |        handler.removeListener(fn);
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
-     1 |var OdysseyEventHandler = (function () {
-     2 |    "use strict";
-     3 |    function OdysseyEventHandler(type) {
-------------^
-     4 |        this.type = type;
-     5 |        this.listeners = [];
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
-     5 |        this.listeners = [];
-     6 |    }
-     7 |    OdysseyEventHandler.prototype.fire = function (ctx, e) {
--------------------------------------------------^
-     8 |        var i, len = this.listeners.length;
-     9 |        for (i = 0; (i < len && !e.propagationStopped); i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
-    12 |    };
-    13 |
-    14 |    OdysseyEventHandler.prototype.addListener = function (fn) {
---------------------------------------------------------^
-    15 |        this.listeners.push(fn);
-    16 |    };
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyEventHandler.js :
-    16 |    };
-    17 |
-    18 |    OdysseyEventHandler.prototype.removeListener = function (fn) {
------------------------------------------------------------^
-    19 |        var index = this.listeners.indexOf(fn), len;
-    20 |        if (index !== -1) {
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyLinkClickEvent.js :
-     2 |var OdysseyLinkClickEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyLinkClickEvent(x, y, z) {
-------------^
-     5 |        this.x = x;
-     6 |        this.y = y;
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyResourceManagerCompleteEvent.js :
-     2 |var OdysseyResourceManagerCompleteEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyResourceManagerCompleteEvent() {}
-------------^
-     5 |    extend(OdysseyResourceManagerCompleteEvent.prototype, new OdysseyEvent("OdysseyResourceManagerComplete"));
-     6 |
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseySpriteIndexLoadedEvent.js :
-     2 |var OdysseySpriteIndexLoadedEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseySpriteIndexLoadedEvent() {}
-------------^
-     5 |    extend(OdysseySpriteIndexLoadedEvent.prototype, new OdysseyEvent('OdysseySpriteIndexLoaded'));
-     6 |
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapHideEvent.js :
-     2 |var OdysseyWorldMapHideEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyWorldMapHideEvent() {}
-------------^
-     5 |    extend(OdysseyWorldMapHideEvent.prototype, new OdysseyEvent('OdysseyWorldMapHide'));
-     6 |
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapShowEvent.js :
-     2 |var OdysseyWorldMapShowEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyWorldMapShowEvent() {}
-------------^
-     5 |    extend(OdysseyWorldMapShowEvent.prototype, new OdysseyEvent('OdysseyWorldMapShow'));
-     6 |
-
-Expect valid jsdoc-block definition at Scripts/Events/OdysseyWorldMapToggleEvent.js :
-     2 |var OdysseyWorldMapToggleEvent = (function () {
-     3 |    "use strict";
-     4 |    function OdysseyWorldMapToggleEvent() {}
-------------^
-     5 |    extend(OdysseyWorldMapToggleEvent.prototype, new OdysseyEvent('OdysseyWorldMapToggle'));
-     6 |
-
-Expect valid jsdoc-block definition at Scripts/Generics/Helper.js :
-    18 |    };
-    19 |
-    20 |    ctx.count = function count(arr, val) {
-------------------------^
-    21 |        var cnt = 0, i, len = arr.length;
-    22 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Generics/Helper.js :
+Expect valid jsdoc-block definition at Scripts/Controller/WorldMapControl.js :
     28 |    };
     29 |
-    30 |    ctx.extend = function (proto) {
--------------------------^
-    31 |        var k, i, o;
-    32 |        for (i = arguments.length - 1; i > 0; i -= 1) {
+    30 |    OdysseyWorldMapControl.prototype.setPosition = function (x, y, z) {
+-----------------------------------------------------------^
+    31 |        this.getView().getWorldMap().setMapPosition(x, y, z);
+    32 |    };
 
-Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
-    22 |
-    23 |        // Getter for private fileUID.
-    24 |        this.getUniqueFileID = function () {
----------------------------------------^
-    25 |            var id = fileUID;
-    26 |            fileUID += 1;
-
-Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
-   135 |     * Gets the resource with the given ID.
-   136 |     * @param {Number} index the resource's ID.
-   137 |     * @TODO what does this return? ResourceManagerFile?
----------------^
-   138 |     */
-   139 |    ResourceManager.prototype.getResource = function (index) {
-
-Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
-   240 |     * @param {Number} id the resource ID to check.
-   241 |     * @returns {Boolean} true if the resource is awaiting load; false otherwise.
-   242 |     * @TODO this is not true, returns true if it's already loaded.
----------------^
-   243 |     */
-   244 |    ResourceManager.prototype.isAwaitingLoad = function (id) {
-
-Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
-   260 |    /**
-   261 |     * Filters out resources not awaiting load.
-   262 |     * @TODO
----------------^
-   263 |     */
-   264 |    ResourceManager.prototype.filterAwaiting = function () {
-
-Function is missing documentation for parameter `a`. at Scripts/Generics/ResourceManager.js :
-   294 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
-   295 |         */
-   296 |        function sorter(a, b) {
-----------------^
-   297 |            return (map[a] || 0) - (map[b] || 0);
-   298 |        }
-
-Function is missing documentation for parameter `b`. at Scripts/Generics/ResourceManager.js :
-   294 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
-   295 |         */
-   296 |        function sorter(a, b) {
-----------------^
-   297 |            return (map[a] || 0) - (map[b] || 0);
-   298 |        }
-
-Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
-   451 |     * @returns {Number} the resource ID of the resource identified by the filename.
-   452 |     */
-   453 |    ResourceManager.prototype.getResourceIDByFilename = function (filename) {
-----------------------------------------------------------------^
-   454 |        return this.getResourceIDByFilenameWithPrefix(this.prefix + filename);
-   455 |    };
-
-Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
-   459 |     * @returns {Number} the resource ID of the resource identified by the filename.
-   460 |     */
-   461 |    ResourceManager.prototype.getResourceIDByFilenameWithPrefix = function (filename) {
---------------------------------------------------------------------------^
-   462 |        if (!this.hasFileWithPrefix(filename)) {
-   463 |            throw new Error("Resource " + filename + " does not exist.");
-
-Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
-   470 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
-   471 |     */
-   472 |    ResourceManager.prototype.hasFile = function (filename) {
-------------------------------------------------^
-   473 |        return this.hasFileWithPrefix(this.prefix + filename);
-   474 |    };
-
-Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
-   478 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
-   479 |     */
-   480 |    ResourceManager.prototype.hasFileWithPrefix = function (filename) {
+Expect valid jsdoc-block definition at Scripts/Controller/WorldMapControl.js :
+    32 |    };
+    33 |
+    34 |    OdysseyWorldMapControl.prototype.initialize = function () {
 ----------------------------------------------------------^
-   481 |        return this.srcs.hasOwnProperty(filename);
-   482 |    };
+    35 |        var ctx = this;
+    36 |        $("#OdysseyOpenMinimap").click(function () {
 
-Unavailable tag TODO at Scripts/Main.js :
-   261 |            /**
-   262 |             * Updates the progress bar in response to core files being loaded.
-   263 |             * @TODO implement
------------------------^
-   264 |             */
-   265 |            function updateProgressBarLoadingCore() {
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   105 |        }
+   106 |
+   107 |  // DOM events.
+----------------^
+   108 |  $(document.body).mouseup(handleDocumentMouseUpEvent);
+   109 |  $(this.getView().getWorldMap().getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
 
-Expected obj but got the at Scripts/Model/Dat.js :
-   191 |        /**
-   192 |         * Handles the successful loading of the Dat.
-   193 |         * @param {Object} the response from the AJAX request
------------------------------------^
-   194 |         * containing the Dat's data.
-   195 |         */
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   106 |
+   107 |  // DOM events.
+   108 |  $(document.body).mouseup(handleDocumentMouseUpEvent);
+----------------^
+   109 |  $(this.getView().getWorldMap().getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
+   110 |  $(this.getView().getWorldMap().getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
 
-Illegal trailing whitespace at Scripts/Model/Dat.js :
-   202 |            dat.setLoaded(true);
-   203 |            dat.setLoading(false);
-   204 |        }        
--------------------------^
-   205 |        // Load the Tibia Dat JSON file.
-   206 |        $.ajax({
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   107 |  // DOM events.
+   108 |  $(document.body).mouseup(handleDocumentMouseUpEvent);
+   109 |  $(this.getView().getWorldMap().getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
+----------------^
+   110 |  $(this.getView().getWorldMap().getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
+   111 |  $(this.getView().getWorldMap().getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
 
-Expected resourceManager but got the at Scripts/Model/OdysseyMapIndex.js :
-    36 |     * Adds the map index data to the resource manager so that
-    37 |     * the resource manager knows which resources are valid.
-    38 |     * @param {ResourceManager} the resource manager to add to.
-----------------------------------------^
-    39 |     */
-    40 |    OdysseyMapIndex.prototype.addToResourceManager = function (resourceManager) {
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   108 |  $(document.body).mouseup(handleDocumentMouseUpEvent);
+   109 |  $(this.getView().getWorldMap().getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
+   110 |  $(this.getView().getWorldMap().getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
+----------------^
+   111 |  $(this.getView().getWorldMap().getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
+   112 |  this.getView().getWorldMap().addEventListener('OdysseyWorldMapClose', function () {
 
-Unavailable tag constructor. at Scripts/Model/OdysseyModel.js :
-    10 |    /**
-    11 |     * Creates a model for the web application.
-    12 |     * @constructor.
----------------^
-    13 |     */
-    14 |    function OdysseyModel() {
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   109 |  $(this.getView().getWorldMap().getMapViewportElement()).mousedown(handleViewportMouseDownEvent);
+   110 |  $(this.getView().getWorldMap().getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
+   111 |  $(this.getView().getWorldMap().getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
+----------------^
+   112 |  this.getView().getWorldMap().addEventListener('OdysseyWorldMapClose', function () {
+   113 |   // Update the map position to reflect the WorldMap position.
 
-Wrong returns value at Scripts/Model/OdysseyWorld.js :
-    37 |            return this[x][y][z];
-    38 |        }
-    39 |        return null;
------------------------^
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   110 |  $(this.getView().getWorldMap().getMapViewportElement()).mousemove(handleViewportMouseMoveEvent);
+   111 |  $(this.getView().getWorldMap().getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
+   112 |  this.getView().getWorldMap().addEventListener('OdysseyWorldMapClose', function () {
+----------------^
+   113 |   // Update the map position to reflect the WorldMap position.
+   114 |   var pos = this.getView().getWorldMap().getMapPosition();
+
+Expected indentation of 12 characters at Scripts/Controller/WorldMapControl.js :
+   111 |  $(this.getView().getWorldMap().getMapViewportElement()).on('touch', handleViewportTouchMoveEvent);
+   112 |  this.getView().getWorldMap().addEventListener('OdysseyWorldMapClose', function () {
+   113 |   // Update the map position to reflect the WorldMap position.
+--------------------^
+   114 |   var pos = this.getView().getWorldMap().getMapPosition();
+   115 |   this.getView().getTileMap().setPosition(pos.x, pos.y, pos.z);
+
+Expected indentation of 12 characters at Scripts/Controller/WorldMapControl.js :
+   112 |  this.getView().getWorldMap().addEventListener('OdysseyWorldMapClose', function () {
+   113 |   // Update the map position to reflect the WorldMap position.
+   114 |   var pos = this.getView().getWorldMap().getMapPosition();
+--------------------^
+   115 |   this.getView().getTileMap().setPosition(pos.x, pos.y, pos.z);
+   116 |  });
+
+Expected indentation of 12 characters at Scripts/Controller/WorldMapControl.js :
+   113 |   // Update the map position to reflect the WorldMap position.
+   114 |   var pos = this.getView().getWorldMap().getMapPosition();
+   115 |   this.getView().getTileMap().setPosition(pos.x, pos.y, pos.z);
+--------------------^
+   116 |  });
+   117 |    };
+
+Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
+   114 |   var pos = this.getView().getWorldMap().getMapPosition();
+   115 |   this.getView().getTileMap().setPosition(pos.x, pos.y, pos.z);
+   116 |  });
+----------------^
+   117 |    };
+   118 |
+
+Expect valid jsdoc-block definition at Scripts/Events/BinaryFileErrorEvent.js :
+     5 |Odyssey.Events.BinaryFileErrorEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyBinaryFileErrorEvent(context) {
+------------^
+     8 |        this.file = context;
+     9 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/BinaryFileLoadedEvent.js :
+     5 |Odyssey.Events.BinaryFileLoadedEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyBinaryFileLoadedEvent(context) {
+------------^
+     8 |        this.file = context;
+     9 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/Event.js :
+    12 |    }
+    13 |    OdysseyEvent.prototype.propagationStopped = false;
+    14 |    OdysseyEvent.prototype.stopPropagation = function () {
+-----------------------------------------------------^
+    15 |        this.propagationStopped = true;
+    16 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/Event.js :
+    16 |    };
+    17 |    OdysseyEvent.prototype.defaultPrevented = false;
+    18 |    OdysseyEvent.prototype.preventDefault = function () {
+----------------------------------------------------^
+    19 |        this.defaultPrevented = true;
+    20 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    10 |        this.events = {};
+    11 |    }
+    12 |    OdysseyEventDispatcher.prototype.toJSON = function () {
+------------------------------------------------------^
+    13 |        // Do not serialize this object, as it is a container for functions.
+    14 |        return;
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    15 |    };
+    16 |    OdysseyEventDispatcher.prototype.parent = null;
+    17 |    OdysseyEventDispatcher.prototype.getParentEventHandler = function () {
+---------------------------------------------------------------------^
+    18 |        return this.parent;
+    19 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    18 |        return this.parent;
+    19 |    };
+    20 |    OdysseyEventDispatcher.prototype.setParentEventHandler = function (parent) {
+---------------------------------------------------------------------^
+    21 |        this.parent = parent;
+    22 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    21 |        this.parent = parent;
+    22 |    };
+    23 |    OdysseyEventDispatcher.prototype.getEventHandler = function (type) {
+---------------------------------------------------------------^
+    24 |        if (!this.events.hasOwnProperty(type)) {
+    25 |            this.events[type] = new Odyssey.Events.EventHandler(type);
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    28 |    };
+    29 |
+    30 |    OdysseyEventDispatcher.prototype.dispatch = function (ctx, e) {
+--------------------------------------------------------^
+    31 |        var handler = this.getEventHandler(e.type), parent;
+    32 |        handler.fire(ctx, e);
+
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
     40 |    };
     41 |
+    42 |    OdysseyEventDispatcher.prototype.addListener = function (type, fn) {
+-----------------------------------------------------------^
+    43 |        var handler = this.getEventHandler(type);
+    44 |        handler.addListener(fn);
 
-Variable declarations must be the first statements of a function scope. at Scripts/View/OdysseyMinimap.js :
-    61 |    OdysseyMinimap.prototype.update = function () {
-    62 |        return;
-    63 |        var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
-----------------^
-    64 |        xs = this.position.x - 63;
-    65 |        ys = this.position.y - 63;
+Expect valid jsdoc-block definition at Scripts/Events/EventDispatcher.js :
+    45 |    };
+    46 |
+    47 |    OdysseyEventDispatcher.prototype.removeListener = function (type, fn) {
+--------------------------------------------------------------^
+    48 |        var handler = this.getEventHandler(type);
+    49 |        handler.removeListener(fn);
 
-Illegal trailing whitespace at Scripts/View/OdysseySpriteIndex.js :
-    67 |        var spriteIndex = new OdysseySpriteIndex();
-    68 |        spriteIndex.setLoading(true);
-    69 |        
-----------------^
-    70 |        /**
-    71 |         * Handles the successful load of the sprite index.
-
-Unavailable tag TODO at Scripts/View/OdysseyTileInfo.js :
-    17 |    /**
-    18 |     * Sets the context.
-    19 |     * @TODO remove
----------------^
-    20 |     * @param {Odyssey} Odyssey the Odyssey context to use.
-    21 |     */
-
-Unavailable tag TODO at Scripts/View/OdysseyTileMap.js :
-   566 |    /**
-   567 |     * Starts loading all maps required to render the full viewport.
-   568 |     * @TODO find return value
----------------^
-   569 |     */
-   570 |    OdysseyTileMap.prototype.loadMaps = function () {
-
-Expect valid jsdoc-block definition at Scripts/View/OdysseyView.js :
-     8 |var OdysseyView = (function () {
-     9 |    "use strict";
-    10 |    function OdysseyView() {
+Expect valid jsdoc-block definition at Scripts/Events/EventHandler.js :
+     2 |Odyssey.Events.EventHandler = (function () {
+     3 |    "use strict";
+     4 |    function OdysseyEventHandler(type) {
 ------------^
-    11 |        this.eventDispatcher = new OdysseyEventDispatcher();
-    12 |        this.minimap = null;
+     5 |        this.type = type;
+     6 |        this.listeners = [];
+
+Expect valid jsdoc-block definition at Scripts/Events/EventHandler.js :
+     6 |        this.listeners = [];
+     7 |    }
+     8 |    OdysseyEventHandler.prototype.fire = function (ctx, e) {
+-------------------------------------------------^
+     9 |        var i, len = this.listeners.length;
+    10 |        for (i = 0; (i < len && !e.propagationStopped); i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Events/EventHandler.js :
+    13 |    };
+    14 |
+    15 |    OdysseyEventHandler.prototype.addListener = function (fn) {
+--------------------------------------------------------^
+    16 |        this.listeners.push(fn);
+    17 |    };
+
+Expect valid jsdoc-block definition at Scripts/Events/EventHandler.js :
+    17 |    };
+    18 |
+    19 |    OdysseyEventHandler.prototype.removeListener = function (fn) {
+-----------------------------------------------------------^
+    20 |        var index = this.listeners.indexOf(fn), len;
+    21 |        if (index !== -1) {
+
+Expect valid jsdoc-block definition at Scripts/Events/LinkClickEvent.js :
+     5 |Odyssey.Events.LinkClickEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyLinkClickEvent(x, y, z) {
+------------^
+     8 |        this.x = x;
+     9 |        this.y = y;
+
+Expect valid jsdoc-block definition at Scripts/Events/ResourceManagerCompleteEvent.js :
+     5 |Odyssey.Events.ResourceManagerCompleteEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyResourceManagerCompleteEvent() {}
+------------^
+     8 |    extend(OdysseyResourceManagerCompleteEvent.prototype, new Odyssey.Events.Event("OdysseyResourceManagerComplete"));
+     9 |
+
+Expect valid jsdoc-block definition at Scripts/Events/SpriteIndexLoadedEvent.js :
+     5 |Odyssey.Events.SpriteIndexLoadedEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseySpriteIndexLoadedEvent() {}
+------------^
+     8 |    extend(OdysseySpriteIndexLoadedEvent.prototype, new Odyssey.Events.Event('OdysseySpriteIndexLoaded'));
+     9 |
+
+Expect valid jsdoc-block definition at Scripts/Events/WorldMapHideEvent.js :
+     5 |Odyssey.Events.WorldMapHideEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyWorldMapHideEvent() {}
+------------^
+     8 |    extend(OdysseyWorldMapHideEvent.prototype, new Odyssey.Events.Event('OdysseyWorldMapHide'));
+     9 |
+
+Expect valid jsdoc-block definition at Scripts/Events/WorldMapShowEvent.js :
+     5 |Odyssey.Events.WorldMapShowEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyWorldMapShowEvent() {}
+------------^
+     8 |    extend(OdysseyWorldMapShowEvent.prototype, new Odyssey.Events.Event('OdysseyWorldMapShow'));
+     9 |
+
+Expect valid jsdoc-block definition at Scripts/Events/WorldMapToggleEvent.js :
+     5 |Odyssey.Events.WorldMapToggleEvent = (function () {
+     6 |    "use strict";
+     7 |    function OdysseyWorldMapToggleEvent() {}
+------------^
+     8 |    extend(OdysseyWorldMapToggleEvent.prototype, new Odyssey.Events.Event('OdysseyWorldMapToggle'));
+     9 |
+
+Expect valid jsdoc-block definition at Scripts/Generics/Helper.js :
+    22 |    };
+    23 |
+    24 |    ctx.count = window.count = function count(arr, val) {
+---------------------------------------^
+    25 |        var cnt = 0, i, len = arr.length;
+    26 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/Helper.js :
+    32 |    };
+    33 |
+    34 |    ctx.extend = window.extend = function (proto) {
+-----------------------------------------^
+    35 |        var k, i, o;
+    36 |        for (i = arguments.length - 1; i > 0; i -= 1) {
+
+Expect valid jsdoc-block definition at Scripts/Generics/ResourceManager.js :
+    26 |
+    27 |        // Getter for private fileUID.
+    28 |        this.getUniqueFileID = function () {
+---------------------------------------^
+    29 |            var id = fileUID;
+    30 |            fileUID += 1;
+
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   139 |     * Gets the resource with the given ID.
+   140 |     * @param {Number} index the resource's ID.
+   141 |     * @TODO what does this return? ResourceManagerFile?
+---------------^
+   142 |     */
+   143 |    ResourceManager.prototype.getResource = function (index) {
+
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   244 |     * @param {Number} id the resource ID to check.
+   245 |     * @returns {Boolean} true if the resource is awaiting load; false otherwise.
+   246 |     * @TODO this is not true, returns true if it's already loaded.
+---------------^
+   247 |     */
+   248 |    ResourceManager.prototype.isAwaitingLoad = function (id) {
+
+Unavailable tag TODO at Scripts/Generics/ResourceManager.js :
+   264 |    /**
+   265 |     * Filters out resources not awaiting load.
+   266 |     * @TODO
+---------------^
+   267 |     */
+   268 |    ResourceManager.prototype.filterAwaiting = function () {
+
+Function is missing documentation for parameter `a`. at Scripts/Generics/ResourceManager.js :
+   298 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
+   299 |         */
+   300 |        function sorter(a, b) {
+----------------^
+   301 |            return (map[a] || 0) - (map[b] || 0);
+   302 |        }
+
+Function is missing documentation for parameter `b`. at Scripts/Generics/ResourceManager.js :
+   298 |         * @returns {Number} negative if the two items should be swapped; positive otherwise.
+   299 |         */
+   300 |        function sorter(a, b) {
+----------------^
+   301 |            return (map[a] || 0) - (map[b] || 0);
+   302 |        }
+
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   455 |     * @returns {Number} the resource ID of the resource identified by the filename.
+   456 |     */
+   457 |    ResourceManager.prototype.getResourceIDByFilename = function (filename) {
+----------------------------------------------------------------^
+   458 |        return this.getResourceIDByFilenameWithPrefix(this.prefix + filename);
+   459 |    };
+
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   463 |     * @returns {Number} the resource ID of the resource identified by the filename.
+   464 |     */
+   465 |    ResourceManager.prototype.getResourceIDByFilenameWithPrefix = function (filename) {
+--------------------------------------------------------------------------^
+   466 |        if (!this.hasFileWithPrefix(filename)) {
+   467 |            throw new Error("Resource " + filename + " does not exist.");
+
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   474 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
+   475 |     */
+   476 |    ResourceManager.prototype.hasFile = function (filename) {
+------------------------------------------------^
+   477 |        return this.hasFileWithPrefix(this.prefix + filename);
+   478 |    };
+
+Function is missing documentation for parameter `filename`. at Scripts/Generics/ResourceManager.js :
+   482 |     * @returns {Boolean} true if the file with this name exists; false otherwise.
+   483 |     */
+   484 |    ResourceManager.prototype.hasFileWithPrefix = function (filename) {
+----------------------------------------------------------^
+   485 |        return this.srcs.hasOwnProperty(filename);
+   486 |    };
+
+Unavailable tag TODO at Scripts/Main.js :
+   285 |            /**
+   286 |             * Updates the progress bar in response to core files being loaded.
+   287 |             * @TODO implement
+-----------------------^
+   288 |             */
+   289 |            function updateProgressBarLoadingCore() {
+
+Expected obj but got the at Scripts/Model/Dat.js :
+   195 |        /**
+   196 |         * Handles the successful loading of the Dat.
+   197 |         * @param {Object} the response from the AJAX request
+-----------------------------------^
+   198 |         * containing the Dat's data.
+   199 |         */
+
+Illegal trailing whitespace at Scripts/Model/Dat.js :
+   206 |            dat.setLoaded(true);
+   207 |            dat.setLoading(false);
+   208 |        }        
+-------------------------^
+   209 |        // Load the Tibia Dat JSON file.
+   210 |        $.ajax({
+
+Expected resourceManager but got the at Scripts/Model/MapIndex.js :
+    43 |     * Adds the map index data to the resource manager so that
+    44 |     * the resource manager knows which resources are valid.
+    45 |     * @param {ResourceManager} the resource manager to add to.
+----------------------------------------^
+    46 |     */
+    47 |    OdysseyMapIndex.prototype.addToResourceManager = function (resourceManager) {
+
+Unavailable tag constructor. at Scripts/Model/Model.js :
+    15 |    /**
+    16 |     * Creates a model for the web application.
+    17 |     * @constructor.
+---------------^
+    18 |     */
+    19 |    function OdysseyModel() {
+
+Wrong returns value at Scripts/Model/World.js :
+    41 |            return this[x][y][z];
+    42 |        }
+    43 |        return null;
+-----------------------^
+    44 |    };
+    45 |
+
+Variable declarations must be the first statements of a function scope. at Scripts/View/Minimap.js :
+    67 |    OdysseyMinimap.prototype.update = function () {
+    68 |        return;
+    69 |        var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
+----------------^
+    70 |        xs = this.position.x - 63;
+    71 |        ys = this.position.y - 63;
+
+Expect valid jsdoc-block definition at Scripts/View/NavigationList.js :
+     9 |    "use strict";
+    10 |    var $body = $(document.body);
+    11 |    function OdysseyNavigationList() {
+------------^
+    12 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    13 |    }
+
+Illegal trailing whitespace at Scripts/View/SpriteIndex.js :
+    72 |        var spriteIndex = new OdysseySpriteIndex();
+    73 |        spriteIndex.setLoading(true);
+    74 |        
+----------------^
+    75 |        /**
+    76 |         * Handles the successful load of the sprite index.
+
+Unavailable tag TODO at Scripts/View/TileInfo.js :
+    21 |    /**
+    22 |     * Sets the context.
+    23 |     * @TODO remove
+---------------^
+    24 |     * @param {Odyssey} Odyssey the Odyssey context to use.
+    25 |     */
+
+Expected dat but got Dat at Scripts/View/TileMap.js :
+   486 |     * Creates a new array of items, sorted according to the provided Dat context.
+   487 |     * @param {Array<Object>} items the array of map items to sort.
+   488 |     * @param {Dat} Dat the Dat context to sort according to.
+-----------------------^
+   489 |     * @returns {Array<Object>} a copy of the items array sorted according to render order.
+   490 |     * @static
+
+Unavailable tag TODO at Scripts/View/TileMap.js :
+   572 |    /**
+   573 |     * Starts loading all maps required to render the full viewport.
+   574 |     * @TODO find return value
+---------------^
+   575 |     */
+   576 |    OdysseyTileMap.prototype.loadMaps = function () {
+
+Expect valid jsdoc-block definition at Scripts/View/View.js :
+    12 |Odyssey.View.View = (function () {
+    13 |    "use strict";
+    14 |    function OdysseyView() {
+------------^
+    15 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    16 |        this.minimap = null;
 
 
-98 code style errors found.
+108 code style errors found.

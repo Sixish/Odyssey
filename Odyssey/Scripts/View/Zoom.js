@@ -1,6 +1,9 @@
 // jscs:disable
-/*global jQuery, document, OdysseyEvent*/
-var OdysseyZoom = (function ($) {
+///*global jQuery, document*/
+goog.require('Odyssey.Generics.extend');
+goog.require('Odyssey.Events.Event');
+goog.provide('Odyssey.View.Zoom');
+Odyssey.View.Zoom = (function ($) {
     "use strict";
     var $body = $(document.body),
         $viewport = $("#map-viewport"),
@@ -18,7 +21,7 @@ var OdysseyZoom = (function ($) {
     function OdysseyZoomEvent(zoom) {
         this.zoom = zoom;
     }
-    extend(OdysseyZoomEvent.prototype, new OdysseyEvent('OdysseyZoom'));
+    extend(OdysseyZoomEvent.prototype, new Odyssey.Events.Event('OdysseyZoom'));
 
     function fireZoomEvent(e) {
         var i, len = onZoomListeners.length;

@@ -1,5 +1,6 @@
 /*jslint devel:true */
-var Matrix3D = (function () {
+goog.provide('Odyssey.Model.Matrix3D');
+Odyssey.Model.Matrix3D = (function () {
     "use strict";
     /**
      * Creates a new Matrix3D. Generic matrix of 3 dimensions.

@@ -1,6 +1,12 @@
 /*jslint browser:true*/
 /*global jQuery*/
-var OdysseyToolRow = (function ($) {
+goog.require('Odyssey.Generics.extend');
+goog.require('Odyssey.Events.EventDispatcher');
+goog.require('Odyssey.Events.EventDispatchInterface');
+goog.require('Odyssey.Events.ToolRowShowEvent');
+goog.require('Odyssey.Events.ToolRowHideEvent');
+goog.provide('Odyssey.View.ToolRow');
+Odyssey.View.ToolRow = (function ($) {
     "use strict";
     var /** @const */
         ACTIVE_CLASS = "state-tools-active";
@@ -10,11 +16,11 @@ var OdysseyToolRow = (function ($) {
      * @constructor
      */
     function OdysseyToolRow() {
-        this.eventDispatcher = new OdysseyEventDispatcher();
+        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
         this.active = false;
         this.ui = {};
     }
-    extend(OdysseyToolRow.prototype, new OdysseyEventDispatchInterface());
+    extend(OdysseyToolRow.prototype, new Odyssey.Events.EventDispatchInterface());
 
     /**
      * Sets the element used to toggle this view component's visibility.
@@ -40,7 +46,7 @@ var OdysseyToolRow = (function ($) {
     OdysseyToolRow.prototype.show = function () {
         $(document.body).addClass(ACTIVE_CLASS);
         this.active = true;
-        this.dispatchEvent(new OdysseyToolRowShowEvent());
+        this.dispatchEvent(new Odyssey.Events.ToolRowShowEvent());
     };
 
     /**
@@ -49,7 +55,7 @@ var OdysseyToolRow = (function ($) {
     OdysseyToolRow.prototype.hide = function () {
         $(document.body).removeClass(ACTIVE_CLASS);
         this.active = false;
-        this.dispatchEvent(new OdysseyToolRowHideEvent());
+        this.dispatchEvent(new Odyssey.Events.ToolRowHideEvent());
     };
 
     /**

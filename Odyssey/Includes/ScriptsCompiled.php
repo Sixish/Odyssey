@@ -1,1 +1,1 @@
-  <script type="text/javascript" src="Odyssey/Scripts-Release/Compiled.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  <script type="text/javascript" src="Odyssey/Scripts/Release/Scripts.js"></script>

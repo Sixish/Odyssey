@@ -2,7 +2,8 @@
  *
  * Class to store a single item on a map.
  */
-var MapItem = (function () {
+goog.provide('Odyssey.Model.MapItem');
+Odyssey.Model.MapItem = (function () {
     "use strict";
     /**
      * Creates a new MapItem.

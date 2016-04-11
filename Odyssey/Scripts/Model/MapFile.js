@@ -1,6 +1,7 @@
 /*jslint bitwise: true */
 /*global console*/
-var MapFile = (function () {
+goog.provide('Odyssey.Model.MapFile');
+Odyssey.Model.MapFile = (function () {
     "use strict";
 
     /**

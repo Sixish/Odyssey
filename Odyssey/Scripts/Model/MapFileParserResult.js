@@ -1,5 +1,6 @@
 /*jslint bitwise: true*/
-var MapFileParserResult = (function () {
+goog.provide('Odyssey.Model.MapFileParserResult');
+Odyssey.Model.MapFileParserResult = (function () {
     "use strict";
     /**
      * Creates a new MapFileParserResult. The result of parsing a map file.

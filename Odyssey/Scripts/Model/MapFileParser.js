@@ -1,13 +1,14 @@
 /*jslint bitwise: true*/
-/*global Matrix3D*/
-var MapFileParser = (function () {
+goog.require('Odyssey.Model.Matrix3D');
+goog.provide('Odyssey.Model.MapFileParser');
+Odyssey.Model.MapFileParser = (function () {
     "use strict";
     /**
      * Creates a new MapFileParser. A parser to parse Odyssey MapFiles.
      * @constructor
      */
     function MapFileParser() {
-        this.tilePosition = new Matrix3D(0, 0, 0);
+        this.tilePosition = new Odyssey.Model.Matrix3D(0, 0, 0);
     }
 
     /**

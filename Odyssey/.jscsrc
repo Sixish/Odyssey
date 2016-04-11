@@ -1,6 +1,7 @@
 {
     "preset": "crockford",
     "disallowKeywordsInComments": false,
+    "excludeFiles": ["Scripts/Release/*"],
     "jsDoc": {
         "checkAnnotations": {
             "preset": "closurecompiler",

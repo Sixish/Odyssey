@@ -1,4 +1,6 @@
-var BinaryFile = (function () {
+goog.provide('Odyssey.Model.BinaryFile');
+// TODO CHECK IF THIS IS USED
+Odyssey.Model.BinaryFile = (function () {
     "use strict";
     /**
      * Constructor for binary files.

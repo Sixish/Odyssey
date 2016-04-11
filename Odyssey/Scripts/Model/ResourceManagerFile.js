@@ -1,15 +1,18 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global extend, ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyBinaryFileErrorEvent, OdysseyBinaryFileLoadedEvent*/
-/** ResourceManagerFile.js
- *
+/* ResourceManagerFile.js
  * Represents a resource managed binary file.
  */
+goog.require('Odyssey.Generics.extend');
+goog.require('Odyssey.Events.EventDispatcher');
+goog.require('Odyssey.Events.EventDispatchInterface');
+goog.require('Odyssey.Events.BinaryFileLoadedEvent');
+goog.require('Odyssey.Events.BinaryFileErrorEvent');
+goog.provide('Odyssey.Model.ResourceManagerFile');
 /**
  * Creates a closure for the ResourceManagerFile class.
  * @param {jQuery} $ the jQuery instance.
  * @return {Function} the class constructor.
  */
-var ResourceManagerFile = (function ($) {
+Odyssey.Model.ResourceManagerFile = ResourceManagerFile = (function ($) {
     "use strict";
     /**
      * Constructor for resource managers.
@@ -17,13 +20,13 @@ var ResourceManagerFile = (function ($) {
      * @constructor
      */
     function ResourceManagerFile(src) {
-        this.eventDispatcher = new OdysseyEventDispatcher();
+        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
         this.src = src;
         this.resource = null;
         this.state = 0;
         this.contents = null;
     }
-    extend(ResourceManagerFile.prototype, new OdysseyEventDispatchInterface());
+    extend(ResourceManagerFile.prototype, new Odyssey.Events.EventDispatchInterface());
     ResourceManagerFile.imageFormats = [".png"];
     /** Loaded flag. @const */
     ResourceManagerFile.FLAG_LOADED = 1;
@@ -192,7 +195,7 @@ var ResourceManagerFile = (function ($) {
                 ctx.setIsLoading(false);
                 if (!ctx.isLoaded()) {
                     ctx.setIsLoaded(true);
-                    ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
+                    ctx.dispatchEvent(new Odyssey.Events.BinaryFileLoadedEvent(ctx));
                 }
             };
 
@@ -202,7 +205,7 @@ var ResourceManagerFile = (function ($) {
             this.resource.onerror = function () {
                 ctx.setIsLoading(false);
                 ctx.setLoadFailed(true);
-                ctx.dispatchEvent(new OdysseyBinaryFileErrorEvent(ctx));
+                ctx.dispatchEvent(new Odyssey.Events.BinaryFileErrorEvent(ctx));
             };
             this.resource.src = src;
         }
@@ -212,7 +215,7 @@ var ResourceManagerFile = (function ($) {
             ctx.setIsLoading(false);
             if (!ctx.isLoaded()) {
                 ctx.setIsLoaded(true);
-                ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
+                ctx.dispatchEvent(new Odyssey.Events.BinaryFileLoadedEvent(ctx));
             }
         }
     };
@@ -234,7 +237,7 @@ var ResourceManagerFile = (function ($) {
             ctx.setIsLoading(false);
             if (!ctx.isLoaded()) {
                 ctx.setIsLoaded(true);
-                ctx.dispatchEvent(new OdysseyBinaryFileLoadedEvent(ctx));
+                ctx.dispatchEvent(new Odyssey.Events.BinaryFileLoadedEvent(ctx));
             }
         }
 
@@ -244,7 +247,7 @@ var ResourceManagerFile = (function ($) {
         function handleLoadError() {
             ctx.setIsLoading(false);
             ctx.setLoadFailed(true);
-            ctx.dispatchEvent(new OdysseyBinaryFileErrorEvent(ctx));
+            ctx.dispatchEvent(new Odyssey.Events.BinaryFileErrorEvent(ctx));
         }
 
         $.ajax({

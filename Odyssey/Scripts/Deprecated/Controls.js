@@ -1,6 +1,6 @@
 //jscs: disable
 /*jslint browser: true, devel:true */
-/*globals jQuery, extend, OdysseyWorldMap, OdysseyMapSearch, OdysseyEventDispatchInterface*/
+/*globals jQuery, extend, OdysseyMapSearch*/
 // TODO move from Controls.js to more specialized classes.
 (function ($) {
     "use strict";
@@ -13,7 +13,7 @@
     function OdysseyController() {
         this.context = null;
     }
-    extend(OdysseyController.prototype, new OdysseyEventDispatchInterface());
+    extend(OdysseyController.prototype, new Odyssey.Event.EventDispatchInterface());
 
     // Keys that affect map position.
     /** @const */

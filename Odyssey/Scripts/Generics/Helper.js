@@ -1,5 +1,9 @@
 /*jslint browser: true*/
 /* Helper functions */
+goog.provide('Odyssey.Generics.extend');
+// remove:
+goog.provide('Odyssey.Generics.proxy');
+goog.provide('Odyssey.Generics.count');
 (function (ctx) {
     "use strict";
 
@@ -11,13 +15,13 @@
      * @returns {Function} a proxy function to call the provided function
      * with the specified context and arguments.
      */
-    ctx.proxy = function proxy(fn, ctx, args) {
+    ctx.proxy = window.proxy = function proxy(fn, ctx, args) {
         return function () {
             fn.apply(ctx, args);
         };
     };
 
-    ctx.count = function count(arr, val) {
+    ctx.count = window.count = function count(arr, val) {
         var cnt = 0, i, len = arr.length;
         for (i = 0; i < len; i += 1) {
             if (arr[i] === val) {
@@ -27,7 +31,7 @@
         return cnt;
     };
 
-    ctx.extend = function (proto) {
+    ctx.extend = window.extend = function (proto) {
         var k, i, o;
         for (i = arguments.length - 1; i > 0; i -= 1) {
             o = arguments[i];
@@ -40,4 +44,4 @@
         }
         return proto;
     };
-}(window));
+}(Odyssey.Generics));

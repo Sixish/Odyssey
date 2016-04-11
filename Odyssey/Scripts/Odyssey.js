@@ -1,4 +1,3 @@
-/*global extend, OdysseyEventDispatcher, OdysseyEventDispatchInterface, OdysseyControllerAttributor, OdysseyViewAttributor, OdysseyModelAttributor*/
 /** Odyssey.js
  * Initializes the Odyssey Map Renderer.
  * Tasks:
@@ -30,23 +29,30 @@
  * - Holds a reference to the Model.
  * - Holds a reference to the View.
  */
-var Odyssey = (function () {
+goog.require('Odyssey.Generics.extend');
+goog.require('Odyssey.Events.EventDispatcher');
+goog.require('Odyssey.Events.EventDispatchInterface');
+goog.require('Odyssey.Model.ModelAttributor');
+goog.require('Odyssey.View.ViewAttributor');
+goog.require('Odyssey.Controller.ControllerAttributor');
+goog.provide('Odyssey.Odyssey');
+Odyssey.Odyssey = (function () {
     "use strict";
 
     /**
      * Constructor for the web application.
      * @constructor
      */
-    function Odyssey() {
-        this.eventDispatcher = new OdysseyEventDispatcher();
+    function O() {
+        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
         this.model = null;
         this.view = null;
         this.controller = null;
     }
-    extend(Odyssey.prototype, new OdysseyEventDispatchInterface());
-    extend(Odyssey.prototype, new OdysseyModelAttributor());
-    extend(Odyssey.prototype, new OdysseyViewAttributor());
-    extend(Odyssey.prototype, new OdysseyControllerAttributor());
+    extend(O.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(O.prototype, new Odyssey.Model.ModelAttributor());
+    extend(O.prototype, new Odyssey.View.ViewAttributor());
+    extend(O.prototype, new Odyssey.Controller.ControllerAttributor());
 
-    return Odyssey;
+    return O;
 }());

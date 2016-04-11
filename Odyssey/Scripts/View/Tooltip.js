@@ -1,11 +1,11 @@
 //jscs: disable
 //TODO FIX
-/*jslint browser: true, bitwise: true, devel:true */
-/*global ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerFile, ResourceManagerPromise, BinaryFile, OdysseyMapSearchEvent, Worker */
-(function (Odyssey, $) {
+goog.require('Odyssey.Model.Matrix3D');
+goog.provide('Odyssey.View.Tooltip');
+Odyssey.View.Tooltip = (function (Odyssey, $) {
     "use strict";
     var $tooltip = $("#OdysseyToolTipHeader"),
-        focusPosition = new Matrix3D(0, 0, 0);
+        focusPosition = new Odyssey.Model.Matrix3D(0, 0, 0);
     function setTooltipPosition(x, y, z) {
     }
     function updateTooltipPosition(x, y, z) {

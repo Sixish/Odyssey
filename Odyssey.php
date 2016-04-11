@@ -8,21 +8,14 @@ $debug_mode = isset($_REQUEST['debug']);
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="Odyssey/Images/Favicon128.ico" />
   <title>Odyssey</title>
-<?php if (!$debug_mode) { include "Odyssey/Includes/ScriptsHead.php"; } ?>
+<?php
+if (!$debug_mode) {
+    include "Odyssey/Includes/ScriptsHead.php";
+} else {
+    include "Odyssey/Includes/ScriptsHeadRelease.php";
+}
+?>
   <!-- CSS -->
-  <link rel="stylesheet" href="Odyssey/Styles/Odyssey.css">
-  <link rel="stylesheet" href="Odyssey/Styles/OdysseyViewport.css">
-  <link rel="stylesheet" href="Odyssey/Styles/OdysseySearch.css">
-  <link rel="stylesheet" href="Odyssey/Styles/ToolRow.css">
-  <link rel="stylesheet" href="Odyssey/Styles/Experimental.css">
-  <link rel="stylesheet" href="Odyssey/Styles/ToolTip.css">
-  <link rel="stylesheet" href="Odyssey/Styles/Minimap.css">
-  <link rel="stylesheet" href="Odyssey/Styles/Navigator.css">
-  <link rel="stylesheet" href="Odyssey/Styles/Demonstration.css">
-  <link rel="stylesheet" href="Odyssey/Styles/NavigationList.css">
-  <link rel="stylesheet" href="Odyssey/Styles/OdysseyZoom.css">
-  <link rel="stylesheet" href="Odyssey/Styles/State.css">
-  <link rel="stylesheet" href="Odyssey/Styles/Status.css">
  </head>
  <body>
   <h1 id="ContentHeader">Odyssey</h1>
@@ -88,7 +81,7 @@ $debug_mode = isset($_REQUEST['debug']);
 <?php include "Odyssey/Includes/OdysseyMapViewport.php"; ?>
 
     <!-- Odyssey Map Grid -->
-<?php include "Odyssey/Includes/MapGrid.php"; ?>
+<?php #include "Odyssey/Includes/MapGrid.php"; ?>
    </div>
   </div>
 

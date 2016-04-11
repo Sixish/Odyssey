@@ -1,6 +1,10 @@
-/*jslint browser: true, bitwise: true, devel:true */
-/*global extend, proxy, OdysseyEventDispatchInterface, OdysseyEventDispatcher, ResourceManager, Matrix3D, OdysseyCanvasSection, Dat, jQuery, MapFile, MapFileParserResult, MapFileParser, ResourceManagerFile, ResourceManagerPromise */
-var ResourceManager = (function () {
+goog.require('Odyssey.Generics.extend');
+goog.require('Odyssey.Events.EventDispatcher');
+goog.require('Odyssey.Events.EventDispatchInterface');
+goog.require('Odyssey.Model.ResourceManagerFile');
+goog.require('Odyssey.Generics.proxy');
+goog.provide('Odyssey.Generics.ResourceManager');
+Odyssey.Generics.ResourceManager = (function () {
     "use strict";
     /**
      * Creates a resource manager.
@@ -8,7 +12,7 @@ var ResourceManager = (function () {
      */
     function ResourceManager() {
         var fileUID = 0;
-        this.eventDispatcher = new OdysseyEventDispatcher();
+        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
 
         this.spritesheets = [];
 
@@ -42,7 +46,7 @@ var ResourceManager = (function () {
         // The number of active loaders.
         this.activeLoaders = 0;
     }
-    extend(ResourceManager.prototype, new OdysseyEventDispatchInterface());
+    extend(ResourceManager.prototype, new Odyssey.Events.EventDispatchInterface());
     ResourceManager.MAX_CONNECTIONS = 1;
 
     /**
@@ -88,7 +92,7 @@ var ResourceManager = (function () {
         filename = this.prefix + src;
 
         // ResourceManagerFile will manage this file.
-        rmFile = new ResourceManagerFile(filename);
+        rmFile = new Odyssey.Model.ResourceManagerFile(filename);
         rmFile.setParentEventHandler(this.eventDispatcher);
 
         // Bitmask ID for the file.

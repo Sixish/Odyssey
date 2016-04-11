@@ -1,17 +1,21 @@
-/*global extend, OdysseyEventDispatchInterface, OdysseyEventDispatcher, OdysseyDatLoadedEvent, jQuery*/
+/*global extend, OdysseyDatLoadedEvent, jQuery*/
 /* Dat.js
  * Loads Tibia Dat JSON files.
  * Handles requests for item information.
  */
-var Dat = (function ($) {
+goog.require('Odyssey.Events.EventDispatchInterface');
+goog.require('Odyssey.Events.EventDispatcher');
+goog.require('Odyssey.Events.DatLoadedEvent');
+goog.provide('Odyssey.Model.Dat');
+Odyssey.Model.Dat = (function ($) {
     "use strict";
     /**
      * Creates a Dat context containing Tibia item data.
      */
     function Dat() {
-        this.eventDispatcher = new OdysseyEventDispatcher();
+        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     }
-    extend(Dat.prototype, new OdysseyEventDispatchInterface());
+    extend(Dat.prototype, new Odyssey.Events.EventDispatchInterface());
     /** @const */
     Dat.ATTRIBUTE_ID_GROUND          = 0;
     /** @const */
@@ -146,7 +150,7 @@ var Dat = (function ($) {
      */
     Dat.prototype.setLoaded = function (val) {
         this.isLoaded = val;
-        this.dispatchEvent(new OdysseyDatLoadedEvent());
+        this.dispatchEvent(new Odyssey.Events.DatLoadedEvent());
     };
 
     /**
