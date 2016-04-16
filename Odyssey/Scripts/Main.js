@@ -171,6 +171,7 @@ Odyssey.main = (function () {
             toolRow.setToggleElement(document.getElementById("OdysseyOpenToolRow"));
             return toolRow;
         }()));
+
         // Minimap.
         view.setMinimap((function () {
             var minimap = new Odyssey.View.Minimap();
@@ -211,28 +212,19 @@ Odyssey.main = (function () {
             tileMap.setSize(23, 23);
             //tileMap.setSize(3, 3);
             // Canvases.
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvas-N"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvas-NE"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvas-W"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvas-P"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvas-E"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvas-SW"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvas-S"));
-            tileMap.setCanvas(Odyssey.View.TileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvas-SE"));
-            // Overlay Canvas.
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-NW"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvasOverlay-N"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-NE"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvasOverlay-W"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvasOverlay-P"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvasOverlay-E"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-SW"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvasOverlay-S"));
-            tileMap.setOverlayCanvas(Odyssey.View.TileMap.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvas-N"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvas-NE"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvas-W"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvas-P"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvas-E"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvas-SW"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvas-S"));
+            tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvas-SE"));
 
             //tileMap.setPosition(32255, 32648, 13);
             tileMap.setPosition(32367, 32615, 7);
+            
             view.addEventListener("OdysseyWorldMapHide", function () {
                 var pos = this.getMapPosition();
                 tileMap.setPosition(pos.x, pos.y, pos.z);
@@ -241,9 +233,46 @@ Odyssey.main = (function () {
             return tileMap;
         }()));
 
+        // Overlay. Needs to be applied before the tile map has
+        // its initial position / size.
+        view.setOverlay((function () {
+            var overlay = new Odyssey.View.Overlay(),
+                tileMap = view.getTileMap();
+            overlay.setParentEventHandler(view.eventDispatcher);
+
+            // Set the initial position and size to match that of the tile map.
+            overlay.setPosition(tileMap.getPosition().x, tileMap.getPosition().y, tileMap.getPosition().z);
+            overlay.setSize(tileMap.sizeX, tileMap.sizeY);
+
+            // Overlay Canvas.
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-NW"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTH_ID, document.getElementById("OdysseyMapCanvasOverlay-N"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-NE"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_WEST_ID, document.getElementById("OdysseyMapCanvasOverlay-W"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_PIVOT_ID, document.getElementById("OdysseyMapCanvasOverlay-P"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_EAST_ID, document.getElementById("OdysseyMapCanvasOverlay-E"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTHWEST_ID, document.getElementById("OdysseyMapCanvasOverlay-SW"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTH_ID, document.getElementById("OdysseyMapCanvasOverlay-S"));
+            overlay.setCanvas(Odyssey.View.CanvasInterface.CANVAS_SOUTHEAST_ID, document.getElementById("OdysseyMapCanvasOverlay-SE"));
+
+            /**
+             * Updates the overlay's position when the TileMap position changes.
+             */
+            function handlePositionChange(e) {
+                overlay.setPosition(e.position.x, e.position.y, e.position.z);
+                overlay.translate();
+                //overlay.refresh();
+            }
+            //odyssey.addEventListener("OdysseyMapClick", handleOverlaySelect);
+            //overlay.setParentEventHandler(view.eventDispatcher);
+            view.getTileMap().addEventListener("OdysseyMapPositionChange", handlePositionChange);
+            return overlay;
+        }()));
+
         // Tile Info.
         view.setTileInfo((function () {
             var tileInfo = new Odyssey.View.TileInfo();
+            tileInfo.setView(view);
 
             /**
              * Responds to the map click event to update the TileInfo object.
@@ -256,24 +285,6 @@ Odyssey.main = (function () {
             odyssey.addEventListener("OdysseyMapClick", handleTileSelect);
             tileInfo.setParentEventHandler(view.eventDispatcher);
             return tileInfo;
-        }()));
-
-        // Overlay.
-        view.setOverlay((function () {
-            // TODO FIX - this is not a View but a Control.
-            var overlay = new Odyssey.Controller.OverlayControl();
-
-            /**
-             * Handles selection (i.e. mouse clicks) of the overlay.
-             * @param {OdysseyMapClickEvent} e the event to use.
-             */
-            function handleOverlaySelect(e) {
-                overlay.select(e.position);
-            }
-
-            odyssey.addEventListener("OdysseyMapClick", handleOverlaySelect);
-            overlay.setParentEventHandler(view.eventDispatcher);
-            return overlay;
         }()));
 
         view.setStatus((function () {
@@ -340,10 +351,12 @@ Odyssey.main = (function () {
             m.setView(odyssey.getView());
             m.setModel(odyssey.getModel());
 
+            // Tool row control.
             m.addControl((function () {
                 var control = new Odyssey.Controller.ToolRowControl();
                 return control;
             }()));
+
             // Odyssey link clicks.
             m.addControl((function () {
                 var control = new Odyssey.Controller.LinkClickControl();
@@ -369,6 +382,11 @@ Odyssey.main = (function () {
 
             m.addControl((function () {
                 var control = new Odyssey.Controller.NavigationMenuControl();
+                return control;
+            }()));
+
+            m.addControl((function () {
+                var control = new Odyssey.Controller.OverlayControl();
                 return control;
             }()));
 

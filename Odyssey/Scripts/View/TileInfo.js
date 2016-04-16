@@ -17,15 +17,7 @@ Odyssey.View.TileInfo = (function ($) {
         this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     }
     extend(OdysseyTileInfo.prototype, new Odyssey.Events.EventDispatchInterface());
-
-    /**
-     * Sets the context.
-     * @TODO remove
-     * @param {Odyssey} Odyssey the Odyssey context to use.
-     */
-    OdysseyTileInfo.prototype.setContext = function (Odyssey) {
-        this.context = Odyssey;
-    };
+    extend(OdysseyTileInfo.prototype, new Odyssey.View.ViewAttributor());
 
     /**
      * Shows the tile information for the tile at (x, y, z).
@@ -34,7 +26,7 @@ Odyssey.View.TileInfo = (function ($) {
      * @param {Number} z the z-coordinate of the tile to show information for.
      */
     OdysseyTileInfo.prototype.showInfo = function (x, y, z) {
-        var items = this.context.getTileItems(x, y, z), i, len;
+        var items = this.getView().getModel().getTileItems(x, y, z), i, len;
 
         if (items === null || items === undefined) {
             items = [];

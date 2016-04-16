@@ -231,11 +231,11 @@ Odyssey.View.View = (function () {
         if (this.tileMap !== null) {
             this.tileMap.update(this.model, this);
         }
-        if (this.tileInfo !== null) {
-            this.tileInfo.update(this.model, this);
-        }
         if (this.overlay !== null) {
             this.overlay.update(this.model, this);
+        }
+        if (this.tileInfo !== null) {
+            this.tileInfo.update(this.model, this);
         }
     };
 

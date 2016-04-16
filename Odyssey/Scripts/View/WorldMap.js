@@ -36,6 +36,7 @@ Odyssey.View.WorldMap = (function ($) {
         this.mapPosition = new Odyssey.Model.Matrix3D(33053, 31013, 7);
     }
     extend(OdysseyWorldMap.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyWorldMap.prototype, new Odyssey.View.ViewAttributor());
 
     /** @const */
     OdysseyWorldMap.MIN_POSITION_X = (124 * 256);
@@ -90,7 +91,8 @@ Odyssey.View.WorldMap = (function ($) {
      */
     OdysseyWorldMap.prototype.setPosition = function (x, y, z) {
         this.position.set(x, y, z);
-        this.dispatchEvent(new OdysseyWorldMapPositionChangeEvent(this.position));
+        // TODO check: does this event exist?
+        this.dispatchEvent(new Odyssey.Events.WorldMapPositionChangeEvent(this.position));
     };
 
     /**

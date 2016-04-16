@@ -1,5 +1,3 @@
-/*jslint browser:true*/
-/*globals jQuery*/
 // TODO
 goog.require('Odyssey.Generics.extend');
 goog.require('Odyssey.Events.EventDispatcher');
@@ -12,6 +10,7 @@ Odyssey.View.NavigationList = (function ($) {
         this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     }
     extend(OdysseyNavigationList.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyNavigationList.prototype, new Odyssey.View.ViewAttributor());
 
     // Hidden by default.
     OdysseyNavigationList.prototype.hidden = true;

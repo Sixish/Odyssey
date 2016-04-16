@@ -24,6 +24,7 @@ Odyssey.View.Status = (function ($) {
         this.ui = {};
     }
     extend(OdysseyStatus.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyStatus.prototype, new Odyssey.View.ViewAttributor());
 
     /**
      * Gets the status text field DOM element.

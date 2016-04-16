@@ -33,6 +33,7 @@
   <script type="text/javascript" src="Odyssey/Scripts/Events/SearchCompleteEvent.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Events/ToolRowShowEvent.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/Events/ToolRowHideEvent.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/Events/CanvasTranslatedEvent.js"></script>
   
   <!-- Internal -->
   <script type="text/javascript" src="Odyssey/Scripts/Model/ResourceManagerFile.js"></script>

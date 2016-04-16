@@ -1,4 +1,3 @@
-/*jslint bitwise: true */
 ///*global Odyssey, OdysseyMinimapRenderedEvent*/
 goog.require('Odyssey.Generics.extend');
 goog.require('Odyssey.Events.EventDispatcher');
@@ -35,6 +34,7 @@ Odyssey.View.Minimap = (function () {
         this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     }
     extend(OdysseyMinimap.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyMinimap.prototype, new Odyssey.View.ViewAttributor());
 
     /**
      * Draws a pixel of a color at position on the canvas.
@@ -65,6 +65,7 @@ Odyssey.View.Minimap = (function () {
      * Re-renders the minimap.
      */
     OdysseyMinimap.prototype.update = function () {
+        // TODO fix
         return;
         var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
         xs = this.position.x - 63;

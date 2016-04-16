@@ -7,46 +7,73 @@ goog.require('Odyssey.View.ViewAttributor');
 goog.provide('Odyssey.Controller.OverlayControl');
 Odyssey.Controller.OverlayControl = (function () {
     "use strict";
+    var NORTHWEST = Odyssey.View.CanvasInterface.CANVAS_NORTHWEST_ID,
+        NORTH = Odyssey.View.CanvasInterface.CANVAS_NORTH_ID,
+        NORTHEAST = Odyssey.View.CanvasInterface.CANVAS_NORTHEAST_ID,
+        WEST = Odyssey.View.CanvasInterface.CANVAS_WEST_ID,
+        PIVOT = Odyssey.View.CanvasInterface.CANVAS_PIVOT_ID,
+        EAST = Odyssey.View.CanvasInterface.CANVAS_EAST_ID,
+        SOUTHWEST = Odyssey.View.CanvasInterface.CANVAS_SOUTHWEST_ID,
+        SOUTH = Odyssey.View.CanvasInterface.CANVAS_SOUTH_ID,
+        SOUTHEAST = Odyssey.View.CanvasInterface.CANVAS_SOUTHEAST_ID;
+
     function OdysseyOverlayControl() {
         this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     }
     extend(OdysseyOverlayControl.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyOverlayControl.prototype, new Odyssey.View.ViewAttributor());
+    extend(OdysseyOverlayControl.prototype, new Odyssey.Model.ModelAttributor());
 
-    OdysseyOverlayControl.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
-        cvs.getContext('2d').clearRect(xStart, yStart, width, height);
-    };
-
-    OdysseyOverlayControl.unpaintAll = function unpaintAll() {
-        var canvases = this.context.overlayCanvases, i, len = canvases.length;
-        for (i = 0; i < len; i += 1) {
-            OdysseyOverlayControl.clearCanvas(canvases[i], 0, 0, canvases[i].width, canvases[i].height);
+    /**
+     * Gets the x-offset of the canvas.
+     * @param {Element} c the canvas.
+     * @param {Array<Element>} canvases the array of canvases.
+     * @returns {Number} the x-offset of the canvas according to the
+     * position in the array.
+     * @static
+     */
+    OdysseyOverlayControl.getX = function getX(c, canvases) {
+        if (c === canvases[EAST] || c === canvases[NORTHEAST] || c === canvases[SOUTHEAST]) {
+            return 1;
         }
-    };
-
-    OdysseyOverlayControl.prototype.select = function select(pos) {
-        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
-        if (index !== -1) {
-            cvs = this.context.overlayCanvases[index];
-            ctx = cvs.getContext('2d');
-            ctx.strokeStyle = "#35ff60";
-            ctx.strokeRect(32 * (1 + (pos.x % this.context.sizeX)), 32 * (1 + (pos.y % this.context.sizeY)), 32, 32);
+        if (c === canvases[WEST] || c === canvases[NORTHWEST] || c === canvases[SOUTHWEST]) {
+            return -1;
         }
+        return 0;
     };
 
-    OdysseyOverlayControl.prototype.unselect = function unselect(pos) {
-        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
-        if (index !== -1) {
-            cvs = this.context.overlayCanvases[index];
-            OdysseyOverlayControl.clearCanvas(cvs, 32 * (1 + (pos.x % this.context.sizeX)), 32 * (1 + (pos.y % this.context.sizeY)), 32, 32);
+    /**
+     * Gets the x-offset of the canvas.
+     * @param {Element} c the canvas.
+     * @param {Array<Element>} canvases the array of canvases.
+     * @returns {Number} the x-offset of the canvas according to the
+     * position in the array.
+     * @static
+     */
+    OdysseyOverlayControl.getY = function getY(c, canvases) {
+        if (c === canvases[SOUTH] || c === canvases[SOUTHWEST] || c === canvases[SOUTHEAST]) {
+            return 1;
         }
-    };
+        if (c === canvases[NORTH] || c === canvases[NORTHWEST] || c === canvases[NORTHEAST]) {
+            return -1;
+        }
+        return 0;
+    }
 
-    OdysseyOverlayControl.prototype.setContext = function (Odyssey) {
-        this.context = Odyssey;
-    };
-
-    OdysseyOverlayControl.prototype.update = function () {
-        // TODO. Need access to position.
+    OdysseyOverlayControl.prototype.initialize = function () {
+        var tileMap = this.getView().getTileMap(),
+            overlay = this.getView().getOverlay();
+        $(overlay.getCanvases()).click(function (e) {
+            // Determine the coordinates the click event fired on.
+            var xOffset = OdysseyOverlayControl.getX(e.target, overlay.canvases) * tileMap.sizeX,
+                yOffset = OdysseyOverlayControl.getY(e.target, overlay.canvases) * tileMap.sizeY,
+                x = (tileMap.position.x - (tileMap.position.x % tileMap.sizeX)) + xOffset + (Math.floor(e.offsetX / 32) - 1),
+                y = (tileMap.position.y - (tileMap.position.y % tileMap.sizeY)) + yOffset + (Math.floor(e.offsetY / 32) - 1),
+                z = tileMap.position.z;
+            // Select the tile.
+            console.log(xOffset, yOffset);
+            overlay.select(x, y, z);
+        });
     };
 
     return OdysseyOverlayControl;

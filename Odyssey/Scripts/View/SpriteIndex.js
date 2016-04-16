@@ -4,7 +4,7 @@ goog.require('Odyssey.Events.EventDispatcher');
 goog.require('Odyssey.Events.EventDispatchInterface');
 goog.require('Odyssey.Events.SpriteIndexLoadedEvent');
 goog.provide('Odyssey.View.SpriteIndex');
-Odyssey.View.SpriteIndex = OdysseySpriteIndex = (function ($) {
+Odyssey.View.SpriteIndex = (function ($) {
     "use strict";
     /**
      * Creates an OdysseySpriteIndex context containing spritesheet data.

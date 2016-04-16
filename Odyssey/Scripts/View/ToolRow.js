@@ -21,6 +21,7 @@ Odyssey.View.ToolRow = (function ($) {
         this.ui = {};
     }
     extend(OdysseyToolRow.prototype, new Odyssey.Events.EventDispatchInterface());
+    extend(OdysseyToolRow.prototype, new Odyssey.View.ViewAttributor());
 
     /**
      * Sets the element used to toggle this view component's visibility.

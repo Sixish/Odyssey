@@ -7,8 +7,10 @@
   <script type="text/javascript" src="Odyssey/Scripts/Model/Model.js"></script>
   
   <script type="text/javascript" src="Odyssey/Scripts/View/View.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/CanvasInterface.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/CanvasSection.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/TileMap.js"></script>
+  <script type="text/javascript" src="Odyssey/Scripts/View/Overlay.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/Status.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/Minimap.js"></script>
   <script type="text/javascript" src="Odyssey/Scripts/View/Zoom.js"></script>
