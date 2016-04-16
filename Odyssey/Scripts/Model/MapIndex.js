@@ -6,7 +6,7 @@ goog.require('Odyssey.Model.Matrix3D');
 goog.require('Odyssey.Model.MapFile');
 goog.require('Odyssey.Model.MapFileParserResult');
 goog.provide('Odyssey.Model.MapIndex');
-Odyssey.Model.MapIndex = OdysseyMapIndex = (function () {
+Odyssey.Model.MapIndex = (function () {
     "use strict";
     /**
      * Creates a map index.

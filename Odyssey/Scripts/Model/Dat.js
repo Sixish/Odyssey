@@ -205,7 +205,7 @@ Odyssey.Model.Dat = (function ($) {
             // Assign state variables.
             dat.setLoaded(true);
             dat.setLoading(false);
-        }        
+        }
         // Load the Tibia Dat JSON file.
         $.ajax({
             'url': url,

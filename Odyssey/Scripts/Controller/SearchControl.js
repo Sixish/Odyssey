@@ -67,7 +67,7 @@ Odyssey.Controller.SearchControl = (function ($) {
              * Handles the search on complete event.
              * @param {Object} e the search event that fired.
              */
-            function handleSearchComplete(e) {
+            function handleSearchComplete() {
                 // Completed search.
             }
 

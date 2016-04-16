@@ -5,7 +5,7 @@ goog.require('Odyssey.Events.EventDispatchInterface');
 goog.require('Odyssey.Model.ModelAttributor');
 goog.require('Odyssey.View.ViewAttributor');
 goog.provide('Odyssey.Controller.OverlayControl');
-Odyssey.Controller.OverlayControl = (function () {
+Odyssey.Controller.OverlayControl = (function ($) {
     "use strict";
     var NORTHWEST = Odyssey.View.CanvasInterface.CANVAS_NORTHWEST_ID,
         NORTH = Odyssey.View.CanvasInterface.CANVAS_NORTH_ID,
@@ -58,7 +58,7 @@ Odyssey.Controller.OverlayControl = (function () {
             return -1;
         }
         return 0;
-    }
+    };
 
     OdysseyOverlayControl.prototype.initialize = function () {
         var tileMap = this.getView().getTileMap(),
@@ -71,10 +71,9 @@ Odyssey.Controller.OverlayControl = (function () {
                 y = (tileMap.position.y - (tileMap.position.y % tileMap.sizeY)) + yOffset + (Math.floor(e.offsetY / 32) - 1),
                 z = tileMap.position.z;
             // Select the tile.
-            console.log(xOffset, yOffset);
             overlay.select(x, y, z);
         });
     };
 
     return OdysseyOverlayControl;
-}());
+}(jQuery));

@@ -4,6 +4,7 @@ goog.require('Odyssey.Events.EventDispatchInterface');
 goog.require('Odyssey.Events.MapPositionChangedEvent');
 goog.require('Odyssey.View.ViewAttributor');
 goog.require('Odyssey.Model.MapFile');
+goog.require('Odyssey.Events.CanvasTranslatedEvent');
 goog.provide('Odyssey.View.CanvasInterface');
 Odyssey.View.CanvasInterface = (function () {
     "use strict";

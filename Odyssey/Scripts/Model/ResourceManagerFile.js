@@ -12,7 +12,7 @@ goog.provide('Odyssey.Model.ResourceManagerFile');
  * @param {jQuery} $ the jQuery instance.
  * @return {Function} the class constructor.
  */
-Odyssey.Model.ResourceManagerFile = ResourceManagerFile = (function ($) {
+Odyssey.Model.ResourceManagerFile = (function ($) {
     "use strict";
     /**
      * Constructor for resource managers.

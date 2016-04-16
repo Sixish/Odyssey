@@ -71,7 +71,7 @@ Odyssey.View.SpriteIndex = (function ($) {
     OdysseySpriteIndex.load = function (src) {
         var spriteIndex = new OdysseySpriteIndex();
         spriteIndex.setLoading(true);
-        
+
         /**
          * Handles the successful load of the sprite index.
          * @param {Object} data the JSON data returned by the server.

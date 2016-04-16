@@ -39,7 +39,7 @@ Odyssey.Controller.WorldMapControl = (function ($) {
             return false;
         });
 
-        $("#OdysseyMinimapCloseLink").click(function (e) {
+        $("#OdysseyMinimapCloseLink").click(function () {
             ctx.dispatchEvent(new Odyssey.Events.WorldMapCloseLinkClickEvent(), ctx.processHideClick);
             // Stop propagation.
             return false;
