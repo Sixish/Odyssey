@@ -213,6 +213,7 @@ Odyssey.main = (function () {
             // meaning faster load times.
             // Note that this does not adjust the size of the canvases.
             tileMap.setSize(23, 23);
+            //tileMap.setSize(5, 23);
             //tileMap.setSize(3, 3);
             // Canvases.
             tileMap.setCanvas(Odyssey.View.CanvasInterface.CANVAS_NORTHWEST_ID, document.getElementById("OdysseyMapCanvas-NW"));
@@ -233,6 +234,11 @@ Odyssey.main = (function () {
                 tileMap.setPosition(pos.x, pos.y, pos.z);
             });
 
+            // Resize the canvases to fit the viewport.
+            tileMap.resize(
+                Math.ceil(Math.max($(document.body).width(), $(document.body).height()) / 32),
+                Math.ceil(Math.max($(document.body).width(), $(document.body).height()) / 32)
+            );
             return tileMap;
         }()));
 
@@ -269,6 +275,12 @@ Odyssey.main = (function () {
             //odyssey.addEventListener("OdysseyMapClick", handleOverlaySelect);
             //overlay.setParentEventHandler(view.eventDispatcher);
             view.getTileMap().addEventListener("OdysseyMapPositionChange", handlePositionChange);
+
+            // Resize the canvases to fit the viewport.
+            overlay.resize(
+                Math.ceil(Math.max($(document.body).width(), $(document.body).height()) / 32),
+                Math.ceil(Math.max($(document.body).width(), $(document.body).height()) / 32)
+            );
             return overlay;
         }()));
 

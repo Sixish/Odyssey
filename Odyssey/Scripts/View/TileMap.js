@@ -81,6 +81,7 @@ Odyssey.View.TileMap = (function ($) {
      * @param {OdysseyTileMap} instance the view to stop updating.
      * @returns {Function} a function that can safely be passed as event listeners
      * without losing the provided context.
+     * @static
      */
     OdysseyTileMap.stopUpdateProxy = function (instance) {
         // TODO check: does this get used?
@@ -93,6 +94,14 @@ Odyssey.View.TileMap = (function ($) {
     extend(OdysseyTileMap.prototype, new Odyssey.Events.EventDispatchInterface());
     extend(OdysseyTileMap.prototype, new Odyssey.View.ViewAttributor());
     extend(OdysseyTileMap.prototype, new Odyssey.View.CanvasInterface());
+
+    OdysseyTileMap.prototype.resize = function (dimens) {
+        $(this.getCanvases())
+            .attr('width', 32 * (dimens + 1))
+            .attr('height', 32 * (dimens + 1));
+        $(this.getViewport()).css({ 'fontSize': (32 * (dimens)) + 'px' });
+        this.setSize(dimens, dimens);
+    };
 
     /**
      * Repeats the rendering process until the map has been fully rendered.
@@ -147,6 +156,14 @@ Odyssey.View.TileMap = (function ($) {
      */
     OdysseyTileMap.prototype.setViewport = function (element) {
         this.viewport = element;
+    };
+
+    /**
+     * Gets the Odyssey viewport.
+     * @param {Object} the viewport used for the tile map.
+     */
+    OdysseyTileMap.prototype.getViewport = function () {
+        return this.viewport;
     };
 
     /**

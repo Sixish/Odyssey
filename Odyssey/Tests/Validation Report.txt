@@ -1,74 +1,66 @@
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    66 |    extend(OdysseyController.prototype, new Odyssey.Events.EventDispatchInterface());
-    67 |    OdysseyController.CONTROL_OVERLAY_CLICK = 0;
-    68 |    OdysseyController.prototype.handleControlOverlayClick = function (e) {
---------------------------------------------------------------------^
-    69 |        var Odyssey = this.context,
-    70 |            xOffset = getX(e.target, Odyssey.overlayCanvases) * Odyssey.sizeX,
-
-Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    79 |    };
-    80 |
-    81 |    OdysseyController.prototype.setControlManager = function (controlManager) {
+    23 |    OdysseyController.CONTROL_OVERLAY_CLICK = 0;
+    24 |
+    25 |    OdysseyController.prototype.setControlManager = function (controlManager) {
 ------------------------------------------------------------^
-    82 |        this.controlManager = controlManager;
-    83 |    };
+    26 |        this.controlManager = controlManager;
+    27 |    };
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    82 |        this.controlManager = controlManager;
-    83 |    };
-    84 |    OdysseyController.prototype.setContext = function (Odyssey) {
+    26 |        this.controlManager = controlManager;
+    27 |    };
+    28 |    OdysseyController.prototype.setContext = function (Odyssey) {
 -----------------------------------------------------^
-    85 |        this.context = Odyssey;
-    86 |    };
+    29 |        this.context = Odyssey;
+    30 |    };
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    85 |        this.context = Odyssey;
-    86 |    };
-    87 |    OdysseyController.prototype.disable = function (controlID) {
+    29 |        this.context = Odyssey;
+    30 |    };
+    31 |    OdysseyController.prototype.disable = function (controlID) {
 --------------------------------------------------^
-    88 |        this.controlStates[controlID] = false;
-    89 |    };
+    32 |        this.controlStates[controlID] = false;
+    33 |    };
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    88 |        this.controlStates[controlID] = false;
-    89 |    };
-    90 |    OdysseyController.prototype.enable = function (controlID) {
+    32 |        this.controlStates[controlID] = false;
+    33 |    };
+    34 |    OdysseyController.prototype.enable = function (controlID) {
 -------------------------------------------------^
-    91 |        this.controlStates[controlID] = true;
-    92 |    };
+    35 |        this.controlStates[controlID] = true;
+    36 |    };
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    91 |        this.controlStates[controlID] = true;
-    92 |    };
-    93 |    OdysseyController.prototype.isDisabled = function (controlID) {
+    35 |        this.controlStates[controlID] = true;
+    36 |    };
+    37 |    OdysseyController.prototype.isDisabled = function (controlID) {
 -----------------------------------------------------^
-    94 |        return (this.controlStates[controlID] === false);
-    95 |    };
+    38 |        return (this.controlStates[controlID] === false);
+    39 |    };
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    94 |        return (this.controlStates[controlID] === false);
-    95 |    };
-    96 |    OdysseyController.prototype.isEnabled = function (controlID) {
+    38 |        return (this.controlStates[controlID] === false);
+    39 |    };
+    40 |    OdysseyController.prototype.isEnabled = function (controlID) {
 ----------------------------------------------------^
-    97 |        // Controls are enabled by default.
-    98 |        return (!this.isDisabled(controlID));
+    41 |        // Controls are enabled by default.
+    42 |        return (!this.isDisabled(controlID));
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-    98 |        return (!this.isDisabled(controlID));
-    99 |    };
-   100 |    OdysseyController.prototype.initialize = function () {
+    42 |        return (!this.isDisabled(controlID));
+    43 |    };
+    44 |    OdysseyController.prototype.initialize = function () {
 -----------------------------------------------------^
-   101 |        var ctx = this;
-   102 |        // Initialize the canvas selection.
+    45 |        var ctx = this;
+    46 |        // Initialize the canvas selection.
 
 Expect valid jsdoc-block definition at Scripts/Controller/Controller.js :
-   101 |        var ctx = this;
-   102 |        // Initialize the canvas selection.
-   103 |        function dispatchControl() {
+    45 |        var ctx = this;
+    46 |        // Initialize the canvas selection.
+    47 |        function dispatchControl() {
 ----------------^
-   104 |            ctx.handleControlOverlayClick();
-   105 |        }
+    48 |            ctx.handleControlOverlayClick();
+    49 |        }
 
 Expect valid jsdoc-block definition at Scripts/Controller/ControllerAttributor.js :
      2 |Odyssey.Controller.ControllerAttributor = (function () {
@@ -173,60 +165,20 @@ Missing line feed at file end at Scripts/Controller/NavigationMenuControl.js :
 -------------------^
 
 Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-     8 |Odyssey.Controller.OverlayControl = (function () {
-     9 |    "use strict";
-    10 |    function OdysseyOverlayControl() {
+    18 |        SOUTHEAST = Odyssey.View.CanvasInterface.CANVAS_SOUTHEAST_ID;
+    19 |
+    20 |    function OdysseyOverlayControl() {
 ------------^
-    11 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
-    12 |    }
+    21 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    22 |    }
 
 Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    13 |    extend(OdysseyOverlayControl.prototype, new Odyssey.Events.EventDispatchInterface());
-    14 |
-    15 |    OdysseyOverlayControl.clearCanvas = function clearCanvas(cvs, xStart, yStart, width, height) {
-------------------------------------------------^
-    16 |        cvs.getContext('2d').clearRect(xStart, yStart, width, height);
-    17 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    17 |    };
-    18 |
-    19 |    OdysseyOverlayControl.unpaintAll = function unpaintAll() {
------------------------------------------------^
-    20 |        var canvases = this.context.overlayCanvases, i, len = canvases.length;
-    21 |        for (i = 0; i < len; i += 1) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    24 |    };
-    25 |
-    26 |    OdysseyOverlayControl.prototype.select = function select(pos) {
------------------------------------------------------^
-    27 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs, ctx;
-    28 |        if (index !== -1) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    34 |    };
-    35 |
-    36 |    OdysseyOverlayControl.prototype.unselect = function unselect(pos) {
--------------------------------------------------------^
-    37 |        var index = this.context.getCanvasSectionIndex(pos.x, pos.y), cvs;
-    38 |        if (index !== -1) {
-
-Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    42 |    };
-    43 |
-    44 |    OdysseyOverlayControl.prototype.setContext = function (Odyssey) {
+    61 |    };
+    62 |
+    63 |    OdysseyOverlayControl.prototype.initialize = function () {
 ---------------------------------------------------------^
-    45 |        this.context = Odyssey;
-    46 |    };
-
-Expect valid jsdoc-block definition at Scripts/Controller/OverlayControl.js :
-    46 |    };
-    47 |
-    48 |    OdysseyOverlayControl.prototype.update = function () {
------------------------------------------------------^
-    49 |        // TODO. Need access to position.
-    50 |    };
+    64 |        var tileMap = this.getView().getTileMap(),
+    65 |            overlay = this.getView().getOverlay();
 
 Expect valid jsdoc-block definition at Scripts/Controller/Search.Worker.js :
      9 |
@@ -493,12 +445,12 @@ Expected indentation of 8 characters at Scripts/Controller/WorldMapControl.js :
    118 |
 
 Expect valid jsdoc-block definition at Scripts/Events/BinaryFileErrorEvent.js :
-     5 |Odyssey.Events.BinaryFileErrorEvent = (function () {
-     6 |    "use strict";
-     7 |    function OdysseyBinaryFileErrorEvent(context) {
+     4 |Odyssey.Events.BinaryFileErrorEvent = (function () {
+     5 |    "use strict";
+     6 |    function OdysseyBinaryFileErrorEvent(context) {
 ------------^
-     8 |        this.file = context;
-     9 |    }
+     7 |        this.file = context;
+     8 |    }
 
 Expect valid jsdoc-block definition at Scripts/Events/BinaryFileLoadedEvent.js :
      5 |Odyssey.Events.BinaryFileLoadedEvent = (function () {
@@ -507,6 +459,20 @@ Expect valid jsdoc-block definition at Scripts/Events/BinaryFileLoadedEvent.js :
 ------------^
      8 |        this.file = context;
      9 |    }
+
+Expect valid jsdoc-block definition at Scripts/Events/CanvasTranslatedEvent.js :
+     4 |Odyssey.Events.CanvasTranslatedEvent = (function () {
+     5 |    "use strict";
+     6 |    function OdysseyCanvasTranslatedEvent() {}
+------------^
+     7 |    extend(OdysseyCanvasTranslatedEvent.prototype, new Odyssey.Events.Event("CanvasTranslatedEvent"));
+     8 |
+
+Missing line feed at file end at Scripts/Events/CanvasTranslatedEvent.js :
+     8 |
+     9 |    return OdysseyCanvasTranslatedEvent;
+    10 |}());
+-------------^
 
 Expect valid jsdoc-block definition at Scripts/Events/Event.js :
     12 |    }
@@ -756,13 +722,29 @@ Function is missing documentation for parameter `filename`. at Scripts/Generics/
    485 |        return this.srcs.hasOwnProperty(filename);
    486 |    };
 
+Illegal trailing whitespace at Scripts/Main.js :
+   229 |            //tileMap.setPosition(32255, 32648, 13);
+   230 |            tileMap.setPosition(32367, 32615, 7);
+   231 |            
+--------------------^
+   232 |            view.addEventListener("OdysseyWorldMapHide", function () {
+   233 |                var pos = this.getMapPosition();
+
+Function is missing documentation for parameter `e`. at Scripts/Main.js :
+   268 |             * Updates the overlay's position when the TileMap position changes.
+   269 |             */
+   270 |            function handlePositionChange(e) {
+--------------------^
+   271 |                overlay.setPosition(e.position.x, e.position.y, e.position.z);
+   272 |                overlay.translate();
+
 Unavailable tag TODO at Scripts/Main.js :
-   285 |            /**
-   286 |             * Updates the progress bar in response to core files being loaded.
-   287 |             * @TODO implement
+   311 |            /**
+   312 |             * Updates the progress bar in response to core files being loaded.
+   313 |             * @TODO implement
 -----------------------^
-   288 |             */
-   289 |            function updateProgressBarLoadingCore() {
+   314 |             */
+   315 |            function updateProgressBarLoadingCore() {
 
 Expected obj but got the at Scripts/Model/Dat.js :
    195 |        /**
@@ -771,14 +753,6 @@ Expected obj but got the at Scripts/Model/Dat.js :
 -----------------------------------^
    198 |         * containing the Dat's data.
    199 |         */
-
-Illegal trailing whitespace at Scripts/Model/Dat.js :
-   206 |            dat.setLoaded(true);
-   207 |            dat.setLoading(false);
-   208 |        }        
--------------------------^
-   209 |        // Load the Tibia Dat JSON file.
-   210 |        $.ajax({
 
 Expected resourceManager but got the at Scripts/Model/MapIndex.js :
     43 |     * Adds the map index data to the resource manager so that
@@ -804,53 +778,203 @@ Wrong returns value at Scripts/Model/World.js :
     44 |    };
     45 |
 
+Expect valid jsdoc-block definition at Scripts/View/CanvasInterface.js :
+     9 |Odyssey.View.CanvasInterface = (function () {
+    10 |    "use strict";
+    11 |    function OdysseyCanvasInterface() {
+------------^
+    12 |        // This should NOT provide its own event dispatcher. Child classes MUST.
+    13 |        this.eventDispatcher = null;
+
+Expected x but got sx at Scripts/View/CanvasInterface.js :
+   113 |     * corresponding to 32 times the size of the tile map,
+   114 |     * plus 32x32 to resolve clipping for 64x64px sprites.
+   115 |     * @param {Number} sx the amount of tiles in the X direction on the viewport and each canvas.
+-------------------------------^
+   116 |     * @param {Number} sy the amount of tiles in the Y direction on the viewport and each canvas.
+   117 |     */
+
+Expected y but got sy at Scripts/View/CanvasInterface.js :
+   114 |     * plus 32x32 to resolve clipping for 64x64px sprites.
+   115 |     * @param {Number} sx the amount of tiles in the X direction on the viewport and each canvas.
+   116 |     * @param {Number} sy the amount of tiles in the Y direction on the viewport and each canvas.
+-------------------------------^
+   117 |     */
+   118 |    OdysseyCanvasInterface.prototype.setSize = function (x, y) {
+
+Expected id but got index at Scripts/View/CanvasInterface.js :
+   123 |    /**
+   124 |     * Sets a canvas for rendering the map.
+   125 |     * @param {Number} index the index of the canvas.
+-------------------------------^
+   126 |     * @param {Object} canvas the DOM canvas element.
+   127 |     */
+
+Expected id but got index at Scripts/View/CanvasInterface.js :
+   132 |    /**
+   133 |     * Gets the canvas at the specified index.
+   134 |     * @param {Number} index the index of the canvas to get.
+-------------------------------^
+   135 |     * @returns {Object} the canvas corresponding to the name.
+   136 |     */
+
+Function is missing documentation for parameter `canvases`. at Scripts/View/CanvasInterface.js :
+   248 |     * have correct IDs after performing translations.
+   249 |     */
+   250 |    OdysseyCanvasInterface.prototype.updateCanvasIDs = function (canvases) {
+---------------------------------------------------------------^
+   251 |        canvases[OdysseyCanvasInterface.CANVAS_NORTHWEST_ID].setAttribute('id', 'OdysseyMapCanvas-NW');
+   252 |        canvases[OdysseyCanvasInterface.CANVAS_NORTH_ID].setAttribute('id', 'OdysseyMapCanvas-N');
+
+Missing line feed at file end at Scripts/View/CanvasInterface.js :
+   261 |
+   262 |    return OdysseyCanvasInterface;
+   263 |}());
+-------------^
+
 Variable declarations must be the first statements of a function scope. at Scripts/View/Minimap.js :
-    67 |    OdysseyMinimap.prototype.update = function () {
-    68 |        return;
-    69 |        var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
+    68 |        // TODO fix
+    69 |        return;
+    70 |        var xs, ys, zs, items, i, itemCount, itemMapColor, dx, dy;
 ----------------^
-    70 |        xs = this.position.x - 63;
-    71 |        ys = this.position.y - 63;
+    71 |        xs = this.position.x - 63;
+    72 |        ys = this.position.y - 63;
 
 Expect valid jsdoc-block definition at Scripts/View/NavigationList.js :
-     9 |    "use strict";
-    10 |    var $body = $(document.body);
-    11 |    function OdysseyNavigationList() {
+     7 |    "use strict";
+     8 |    var $body = $(document.body);
+     9 |    function OdysseyNavigationList() {
 ------------^
-    12 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
-    13 |    }
+    10 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    11 |    }
 
-Illegal trailing whitespace at Scripts/View/SpriteIndex.js :
-    72 |        var spriteIndex = new OdysseySpriteIndex();
-    73 |        spriteIndex.setLoading(true);
-    74 |        
-----------------^
-    75 |        /**
-    76 |         * Handles the successful load of the sprite index.
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    10 |Odyssey.View.Overlay = (function ($) {
+    11 |    "use strict";
+    12 |    function OdysseyOverlay() {
+------------^
+    13 |        var z = 0;
+    14 |
 
-Unavailable tag TODO at Scripts/View/TileInfo.js :
-    21 |    /**
-    22 |     * Sets the context.
-    23 |     * @TODO remove
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    54 |    extend(OdysseyOverlay.prototype, new Odyssey.View.CanvasInterface());
+    55 |
+    56 |    OdysseyOverlay.prototype.resize = function (dimens) {
+----------------------------------------------^
+    57 |        $(this.getCanvases())
+    58 |            .attr('width', 32 * (dimens + 1))
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    62 |    };
+    63 |
+    64 |    OdysseyOverlay.prototype.isPainted = function (cvsID, offsetX, offsetY) {
+-------------------------------------------------^
+    65 |        //return (this.painted[z] && this.painted[z][y] && this.painted[z][y][x]) || false;
+    66 |        return (this.painted[cvsID] && this.painted[cvsID][offsetY] && this.painted[cvsID][offsetY][offsetX]) || false;
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    67 |    };
+    68 |
+    69 |    OdysseyOverlay.prototype.setPainted = function (index, rx, ry, val) {
+--------------------------------------------------^
+    70 |        if (!this.painted.hasOwnProperty(index)) {
+    71 |            this.painted[index] = {};
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    79 |    };
+    80 |
+    81 |    OdysseyOverlay.prototype.clear = function () {
+---------------------------------------------^
+    82 |        var i, len = this.canvases.length;
+    83 |        for (i = 0; i < len; i += 1) {
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+    88 |    };
+    89 |
+    90 |    OdysseyOverlay.prototype.drawSelected = function (x, y, z, isSelected) {
+----------------------------------------------------^
+    91 |        var index = this.getCanvasSectionIndex(x, y, z), cvs, ctx, offsetX, offsetY;
+    92 |        if (index === -1) {
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   112 |    };
+   113 |
+   114 |    OdysseyOverlay.prototype.isSelected = function (x, y, z) {
+--------------------------------------------------^
+   115 |        return Boolean(this.selected[z] && this.selected[z][y] && this.selected[z][y][x]);
+   116 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   116 |    };
+   117 |
+   118 |    OdysseyOverlay.prototype.setSelectedStatus = function (x, y, z, val) {
+---------------------------------------------------------^
+   119 |        if (!this.selected.hasOwnProperty(z)) {
+   120 |            this.selected[z] = {};
+
+Unavailable tag TODO at Scripts/View/Overlay.js :
+   131 |     * Refreshes the whole viewport. This is used when the sprites are known to be loaded.
+   132 |     * @returns {Boolean} true if the refresh was successful; false otherwise.
+   133 |     * @TODO generalize and move to interface. Derived from TileMap.
 ---------------^
-    24 |     * @param {Odyssey} Odyssey the Odyssey context to use.
-    25 |     */
+   134 |     */
+   135 |    OdysseyOverlay.prototype.refresh = function () {
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   158 |    };
+   159 |
+   160 |    OdysseyOverlay.prototype.render = function () {
+----------------------------------------------^
+   161 |        if (this.translate()) {
+   162 |            this.refresh();
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   165 |    };
+   166 |
+   167 |    OdysseyOverlay.prototype.select = function select(x, y, z) {
+----------------------------------------------^
+   168 |        if (!this.isSelected(x, y, z)) {
+   169 |            this.setSelectedStatus(x, y, z, true);
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   173 |    };
+   174 |
+   175 |    OdysseyOverlay.prototype.unselect = function unselect(x, y, z) {
+------------------------------------------------^
+   176 |        if (this.isSelected(x, y, z)) {
+   177 |            this.setSelectedStatus(x, y, z, false);
+
+Expect valid jsdoc-block definition at Scripts/View/Overlay.js :
+   180 |    };
+   181 |
+   182 |    OdysseyOverlay.prototype.update = function () {
+----------------------------------------------^
+   183 |        this.render();
+   184 |    };
+
+Expect valid jsdoc-block definition at Scripts/View/TileMap.js :
+    96 |    extend(OdysseyTileMap.prototype, new Odyssey.View.CanvasInterface());
+    97 |
+    98 |    OdysseyTileMap.prototype.resize = function (dimens) {
+----------------------------------------------^
+    99 |        $(this.getCanvases())
+   100 |            .attr('width', 32 * (dimens + 1))
 
 Expected dat but got Dat at Scripts/View/TileMap.js :
-   486 |     * Creates a new array of items, sorted according to the provided Dat context.
-   487 |     * @param {Array<Object>} items the array of map items to sort.
-   488 |     * @param {Dat} Dat the Dat context to sort according to.
+   375 |     * Creates a new array of items, sorted according to the provided Dat context.
+   376 |     * @param {Array<Object>} items the array of map items to sort.
+   377 |     * @param {Dat} Dat the Dat context to sort according to.
 -----------------------^
-   489 |     * @returns {Array<Object>} a copy of the items array sorted according to render order.
-   490 |     * @static
+   378 |     * @returns {Array<Object>} a copy of the items array sorted according to render order.
+   379 |     * @static
 
 Unavailable tag TODO at Scripts/View/TileMap.js :
-   572 |    /**
-   573 |     * Starts loading all maps required to render the full viewport.
-   574 |     * @TODO find return value
+   461 |    /**
+   462 |     * Starts loading all maps required to render the full viewport.
+   463 |     * @TODO find return value
 ---------------^
-   575 |     */
-   576 |    OdysseyTileMap.prototype.loadMaps = function () {
+   464 |     */
+   465 |    OdysseyTileMap.prototype.loadMaps = function () {
 
 Expect valid jsdoc-block definition at Scripts/View/View.js :
     12 |Odyssey.View.View = (function () {
@@ -860,5 +984,13 @@ Expect valid jsdoc-block definition at Scripts/View/View.js :
     15 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
     16 |        this.minimap = null;
 
+Expect valid jsdoc-block definition at Scripts/View/ViewPositionAttributor.js :
+     7 |Odyssey.View.ViewPositionAttributor = (function () {
+     8 |    "use strict";
+     9 |    function OdysseyViewPositionAttributor() {
+------------^
+    10 |        this.eventDispatcher = new Odyssey.Events.EventDispatcher();
+    11 |    }
 
-108 code style errors found.
+
+125 code style errors found.

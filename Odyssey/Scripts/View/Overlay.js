@@ -7,7 +7,7 @@ goog.require('Odyssey.Events.MapClickEvent');
 goog.require('Odyssey.Model.Matrix3D');
 goog.require('Odyssey.View.CanvasInterface');
 goog.provide('Odyssey.View.Overlay');
-Odyssey.View.Overlay = (function () {
+Odyssey.View.Overlay = (function ($) {
     "use strict";
     function OdysseyOverlay() {
         var z = 0;
@@ -52,6 +52,14 @@ Odyssey.View.Overlay = (function () {
     extend(OdysseyOverlay.prototype, new Odyssey.Events.EventDispatchInterface());
     extend(OdysseyOverlay.prototype, new Odyssey.View.ViewAttributor());
     extend(OdysseyOverlay.prototype, new Odyssey.View.CanvasInterface());
+
+    OdysseyOverlay.prototype.resize = function (dimens) {
+        $(this.getCanvases())
+            .attr('width', 32 * (dimens + 1))
+            .attr('height', 32 * (dimens + 1));
+        //$(this.getViewport()).css({ 'fontSize': (32 * (dimens - 1)) + 'px' });
+        this.setSize(dimens, dimens);
+    };
 
     OdysseyOverlay.prototype.isPainted = function (cvsID, offsetX, offsetY) {
         //return (this.painted[z] && this.painted[z][y] && this.painted[z][y][x]) || false;
@@ -176,4 +184,4 @@ Odyssey.View.Overlay = (function () {
     };
 
     return OdysseyOverlay;
-}());
+}(jQuery));
